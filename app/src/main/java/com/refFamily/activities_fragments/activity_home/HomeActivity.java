@@ -27,13 +27,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.refFamily.R;
-import com.refFamily.activities_fragments.activity_cart.CartActivity;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Add;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Main;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Comments;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Profile;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Store;
-import com.refFamily.activities_fragments.activity_notification.NotificationActivity;
 import com.refFamily.databinding.ActivityHomeBinding;
 import com.refFamily.language.Language_Helper;
 import com.refFamily.models.UserModel;
@@ -108,21 +106,6 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
-binding.flSearch.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        Intent intent=new Intent(HomeActivity.this, CartActivity.class);
-        startActivity(intent);
-    }
-});
-        binding.flNotification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(HomeActivity.this, NotificationActivity.class);
-                startActivity(intent);
-            }
-        });
-        //  setUpBottomNavigation();
 
 
     }
@@ -444,24 +427,8 @@ binding.flSearch.setOnClickListener(new View.OnClickListener() {
     private void back() {
         if (fragment_main != null && fragment_main.isAdded() && fragment_main.isVisible()) {
 
-            if (userModel != null) {
-                if (fragment_main.behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
 
-                    fragment_main.behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
-                else {
-                finish();}
-            }
-            else {
-                if (fragment_main.behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-
-                    fragment_main.behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
-                else {
-                    finish();
-              //  navigateToSignInActivity();}
-            }
-        }}
+        }
         else {
             displayFragmentMain();
         }

@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.refFamily.R;
-import com.refFamily.activities_fragments.activity_chat.ChatActivity;
 import com.refFamily.activities_fragments.activity_home.HomeActivity;
 import com.refFamily.adapters.StarComments_Adapter;
 import com.refFamily.databinding.FragmentCommentsBinding;
@@ -81,9 +80,4 @@ public class Fragment_Comments extends Fragment {
 
     }
 
-
-    public void showchat() {
-        Intent intent = new Intent(activity, ChatActivity.class);
-        startActivity(intent);
-    }
 }

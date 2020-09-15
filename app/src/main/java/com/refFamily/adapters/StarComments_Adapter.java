@@ -56,13 +56,7 @@ public class StarComments_Adapter extends RecyclerView.Adapter<RecyclerView.View
 
 
             EventHolder msgLeftHolder = (EventHolder) holder;
-msgLeftHolder.itemView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        Fragment_Comments fragment_comments=(Fragment_Comments)fragment;
-        fragment_comments.showchat();
-    }
-});
+
 
 
 

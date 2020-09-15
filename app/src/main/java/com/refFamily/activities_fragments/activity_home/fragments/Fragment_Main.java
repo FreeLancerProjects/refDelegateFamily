@@ -20,8 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.refFamily.R;
 import com.refFamily.activities_fragments.activity_home.HomeActivity;
-import com.refFamily.activities_fragments.activity_places.PlacesActivity;
-import com.refFamily.adapters.Comments_Adapter;
 import com.refFamily.adapters.Post_Adapter;
 import com.refFamily.adapters.Categorys_Adapter;
 import com.refFamily.databinding.FragmentMainBinding;
@@ -49,14 +47,7 @@ public class Fragment_Main extends Fragment {
 
 
     private String lang;
-    private Post_Adapter post_adapter;
-    private List<MarketCatogryModel.Data> dataList;
-    private Categorys_Adapter categorys_adapter;
-    public BottomSheetBehavior behavior;
-    private RecyclerView recViewcomments;
-    private List<ReviewModels.Reviews> reviewsList;
-    private ImageView imclose;
-    private Comments_Adapter comments_adapter;
+
 
     public static Fragment_Main newInstance() {
         return new Fragment_Main();
@@ -73,108 +64,16 @@ public class Fragment_Main extends Fragment {
 
     private void initView() {
 
-        dataList = new ArrayList<>();
-        reviewsList = new ArrayList<>();
+
         activity = (HomeActivity) getActivity();
         preferences = Preferences.getInstance();
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
 
-        recViewcomments = binding.getRoot().findViewById(R.id.recViewcomments);
-        imclose = binding.getRoot().findViewById(R.id.imclose);
-        post_adapter = new Post_Adapter(dataList, activity, this);
-        categorys_adapter = new Categorys_Adapter(dataList, activity);
 
-        binding.recViewFavoriteOffers.setLayoutManager(new LinearLayoutManager(activity));
-        binding.recViewFavoriteOffers.setAdapter(post_adapter);
-        binding.recViewStatus.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
-        binding.recViewStatus.setAdapter(categorys_adapter);
-        comments_adapter = new Comments_Adapter(reviewsList, activity);
-        recViewcomments.setLayoutManager(new LinearLayoutManager(activity));
-        recViewcomments.setAdapter(comments_adapter);
-        Adddata();
-        if (lang.equals("ar")) {
-            imclose.setRotation(180);
-        }
-        setUpBottomSheet();
-
-    }
-
-    private void setUpBottomSheet() {
-
-        behavior = BottomSheetBehavior.from(binding.getRoot().findViewById(R.id.root));
-
-    }
-
-    private void Adddata() {
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        post_adapter.notifyDataSetChanged();
-        categorys_adapter.notifyDataSetChanged();
 
     }
 
 
-    public void showcomments() {
-        Intent intent = new Intent(activity, PlacesActivity.class);
-        startActivityForResult(intent, 1);
-
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            getPlaceDetails((NearbyModel) data.getSerializableExtra("data"));
-        }
-    }
-
-    private void getPlaceDetails(NearbyModel nearbyModel) {
-
-        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-
-        Api.getService("https://maps.googleapis.com/maps/api/")
-                .getPlaceReview(nearbyModel.getPlace_id(), getString(R.string.map_api_key))
-                .enqueue(new Callback<NearbyStoreDataModel>() {
-                    @Override
-                    public void onResponse(Call<NearbyStoreDataModel> call, Response<NearbyStoreDataModel> response) {
-                        if (response.isSuccessful() && response.body() != null && response.body().getResult().getReviews() != null) {
-Log.e(";;;",response.body().getResult().getReviews().get(0).getAuthor_name());
-                            reviewsList.addAll(response.body().getResult().getReviews());
-                            comments_adapter.notifyDataSetChanged();
-
-                        } else {
-                            Log.e("dddddata",response.code()+"");
-
-                        }
-
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<NearbyStoreDataModel> call, Throwable t) {
-                        try {
-
-                            Log.e("Error", t.getMessage());
-                        } catch (Exception e) {
-
-                        }
-                    }
-                });
-    }
 
 }

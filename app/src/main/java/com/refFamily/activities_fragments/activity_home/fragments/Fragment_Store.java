@@ -19,10 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.refFamily.R;
-import com.refFamily.activities_fragments.activity_coffee_detials.CoffeeDetialsActivity;
 import com.refFamily.activities_fragments.activity_home.HomeActivity;
 import com.refFamily.adapters.Department_Adapter;
-import com.refFamily.adapters.Food_Adapter;
 import com.refFamily.adapters.Slider_Adapter;
 import com.refFamily.databinding.FragmentStoreBinding;
 import com.refFamily.models.MarketCatogryModel;
@@ -49,7 +47,6 @@ public class Fragment_Store extends Fragment {
     private UserModel userModel;
     private List<MarketCatogryModel.Data> dataList;
     private Department_Adapter categorys_adapter;
-    private Food_Adapter food_adapter;
     private int current_page = 0, NUM_PAGES;
 
     public static Fragment_Store newInstance() {
@@ -106,34 +103,9 @@ public class Fragment_Store extends Fragment {
 
         categorys_adapter = new Department_Adapter(dataList, activity, this);
 
-        food_adapter = new Food_Adapter(dataList, activity, this);
-        binding.recViewStatus.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
-        binding.recViewStatus.setAdapter(categorys_adapter);
-        binding.recViewFavoriteOffers.setLayoutManager(new LinearLayoutManager(activity));
-        binding.recViewFavoriteOffers.setAdapter(food_adapter);
-        Adddata();
+
     }
 
-    private void Adddata() {
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        categorys_adapter.notifyDataSetChanged();
-        food_adapter.notifyDataSetChanged();
-    }
 
 
     private void initView() {
@@ -180,8 +152,4 @@ public class Fragment_Store extends Fragment {
     }
 
 
-    public void showdetials() {
-        Intent intent = new Intent(activity, CoffeeDetialsActivity.class);
-        startActivity(intent);
-    }
 }

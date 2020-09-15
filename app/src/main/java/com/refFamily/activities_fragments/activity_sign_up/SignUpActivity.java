@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.refFamily.R;
 import com.refFamily.activities_fragments.activity_home.HomeActivity;
 import com.refFamily.databinding.ActivitySignUpBinding;
-import com.refFamily.databinding.DialogYearBinding;
 import com.refFamily.interfaces.Listeners;
 import com.refFamily.language.Language_Helper;
 import com.refFamily.models.SignUpModel;
@@ -225,45 +224,6 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
         return Uri.parse(MediaStore.Images.Media.insertImage(this.getContentResolver(), bitmap, "", ""));
     }
 
-
-    private void createDialogAlert() {
-        final AlertDialog dialog = new AlertDialog.Builder(this)
-                .create();
-
-        DialogYearBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_year, null, false);
-        List<String> years = new ArrayList<>();
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int start = year - 50;
-        int end = year - 18;
-        for (int y = start; y <= end; y++) {
-            years.add(String.valueOf(y));
-        }
-
-
-        String[] values = new String[years.size()];
-
-        binding.picker.setMinValue(0);
-        binding.picker.setMaxValue(years.size() - 1);
-        binding.picker.setWrapSelectorWheel(true);
-        binding.picker.setDisplayedValues(years.toArray(values));
-        binding.picker.setValue(1);
-        binding.imageUp.setOnClickListener(v -> {
-            binding.picker.setValue(binding.picker.getValue() - 1);
-        });
-
-        binding.imageDown.setOnClickListener(v -> {
-            binding.picker.setValue(binding.picker.getValue() + 1);
-        });
-
-        binding.btnCancel.setOnClickListener(v -> dialog.dismiss()
-
-        );
-        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setView(binding.getRoot());
-        dialog.show();
-    }
 
     private void signUp() {
         if (uri == null) {

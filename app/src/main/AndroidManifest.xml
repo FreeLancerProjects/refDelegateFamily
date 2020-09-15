@@ -23,30 +23,7 @@
             android:name="com.refFamily.activities_fragments.activity_language.LanguageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name="com.refFamily.activities_fragments.activity_cart.CartActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name="com.refFamily.activities_fragments.activity_places.PlacesActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name="com.refFamily.activities_fragments.activity_notification.NotificationActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name="com.refFamily.activities_fragments.activity_about_app.AboutAppActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name="com.refFamily.activities_fragments.activity_chat.ChatActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name="com.refFamily.activities_fragments.activity_coffee_detials.CoffeeDetialsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
         <activity
             android:name="com.refFamily.activities_fragments.activity_login.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
