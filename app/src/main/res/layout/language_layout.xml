@@ -8,18 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activities_fragments.activity_splash.SplashActivity"
-        android:background="@color/white"
+        android:background="@drawable/back"
         >
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:src="@drawable/language_bottom"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
 
-            />
 
         <ImageView
             android:id="@+id/imageLogo"

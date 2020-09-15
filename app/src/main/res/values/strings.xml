@@ -106,4 +106,7 @@
     <string name="type_message">Type message</string>
     <string name="light">: Light</string>
     <string name="g">: 20 g</string>
+    <string name="select_location_on_map">Select location on map</string>
+    <string name="address">Address</string>
+
 </resources>
