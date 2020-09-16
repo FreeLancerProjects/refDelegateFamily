@@ -47,11 +47,11 @@ public class LanguageActivity extends AppCompatActivity {
         if (lang.equals("ar")) {
             binding.tvAr.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
             binding.imageAr.setVisibility(View.VISIBLE);
-            binding.tvEn.setTextColor(ContextCompat.getColor(this, R.color.color4));
+            binding.tvEn.setTextColor(ContextCompat.getColor(this, R.color.gray6));
             binding.imageEn.setVisibility(View.GONE);
 
         } else {
-            binding.tvAr.setTextColor(ContextCompat.getColor(this, R.color.color4));
+            binding.tvAr.setTextColor(ContextCompat.getColor(this, R.color.gray6));
             binding.imageAr.setVisibility(View.GONE);
             binding.tvEn.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
             binding.imageEn.setVisibility(View.VISIBLE);
@@ -61,7 +61,7 @@ public class LanguageActivity extends AppCompatActivity {
 
             binding.tvAr.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
             binding.imageAr.setVisibility(View.VISIBLE);
-            binding.tvEn.setTextColor(ContextCompat.getColor(this, R.color.color4));
+            binding.tvEn.setTextColor(ContextCompat.getColor(this, R.color.gray6));
             binding.imageEn.setVisibility(View.GONE);
 
             if (lang.equals("ar")) {
@@ -81,7 +81,7 @@ public class LanguageActivity extends AppCompatActivity {
 
 
         binding.consEn.setOnClickListener(v -> {
-            binding.tvAr.setTextColor(ContextCompat.getColor(this, R.color.color4));
+            binding.tvAr.setTextColor(ContextCompat.getColor(this, R.color.gray6));
             binding.imageAr.setVisibility(View.GONE);
             binding.tvEn.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
             binding.imageEn.setVisibility(View.VISIBLE);
