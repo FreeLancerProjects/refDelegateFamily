@@ -109,6 +109,8 @@
     <string name="select_location_on_map">حدد موقعك على الخريطة</string>
     <string name="address">العنوان</string>
     <string name="offers">العروض</string>
+    <string name="meal_title">وجبة مندي</string>
+    <string name="meal_description">وجبة مكرونه من ميندي مضاف اليه توابل خاصة بالاضافه الي ارو بسمتي</string>
     <string name="subscriptions">الأشتراكات</string>
 
 </resources>
