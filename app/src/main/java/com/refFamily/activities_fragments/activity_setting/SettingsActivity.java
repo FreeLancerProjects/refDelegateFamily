@@ -74,7 +74,15 @@ public class SettingsActivity extends AppCompatActivity implements Listeners.Set
     }
 
 
+    @Override
+    public void onSubscriptions() {
 
+    }
+
+    @Override
+    public void onProfile() {
+
+    }
 
     @Override
     public void onEditProfile() {

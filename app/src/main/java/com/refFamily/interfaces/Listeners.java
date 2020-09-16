@@ -36,6 +36,8 @@ public interface Listeners {
 
 
     interface SettingAction{
+        void onSubscriptions();
+        void onProfile();
         void onEditProfile();
         void onLanguageSetting();
         void onTerms();

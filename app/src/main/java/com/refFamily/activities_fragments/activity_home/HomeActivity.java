@@ -1,35 +1,19 @@
 package com.refFamily.activities_fragments.activity_home;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.refFamily.R;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Add;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Main;
-import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Comments;
+import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Setting;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Profile;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Store;
 import com.refFamily.databinding.ActivityHomeBinding;
@@ -49,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment_Main fragment_main;
     private Fragment_Store fragment_store;
     private Fragment_Add fragment_add;
-    private Fragment_Comments fragment_comments;
+    private Fragment_Setting fragment_setting;
     private Fragment_Profile fragment_profile;
     private UserModel userModel;
     private String lang;
@@ -161,8 +145,8 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentManager.beginTransaction().hide(fragment_add).commit();
             }
 
-            if (fragment_comments != null && fragment_comments.isAdded()) {
-                fragmentManager.beginTransaction().hide(fragment_comments).commit();
+            if (fragment_setting != null && fragment_setting.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_setting).commit();
             }
             if (fragment_profile != null && fragment_profile.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_profile).commit();
@@ -195,8 +179,8 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentManager.beginTransaction().hide(fragment_main).commit();
             }
 
-            if (fragment_comments != null && fragment_comments.isAdded()) {
-                fragmentManager.beginTransaction().hide(fragment_comments).commit();
+            if (fragment_setting != null && fragment_setting.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_setting).commit();
             }
             if (fragment_profile != null && fragment_profile.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_profile).commit();
@@ -216,8 +200,8 @@ public class HomeActivity extends AppCompatActivity {
 
     public void displayFragmentComments() {
         try {
-            if (fragment_comments == null) {
-                fragment_comments = Fragment_Comments.newInstance();
+            if (fragment_setting == null) {
+                fragment_setting = Fragment_Setting.newInstance();
             }
 
 
@@ -234,11 +218,11 @@ public class HomeActivity extends AppCompatActivity {
             if (fragment_profile != null && fragment_profile.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_profile).commit();
             }
-            if (fragment_comments.isAdded()) {
-                fragmentManager.beginTransaction().show(fragment_comments).commit();
+            if (fragment_setting.isAdded()) {
+                fragmentManager.beginTransaction().show(fragment_setting).commit();
 
             } else {
-                fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_comments, "fragment_comments").addToBackStack("fragment_comments").commit();
+                fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_setting, "fragment_setting").addToBackStack("fragment_setting").commit();
 
             }
 
@@ -264,8 +248,8 @@ public class HomeActivity extends AppCompatActivity {
             if (fragment_store != null && fragment_store.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_store).commit();
             }
-            if (fragment_comments != null && fragment_comments.isAdded()) {
-                fragmentManager.beginTransaction().hide(fragment_comments).commit();
+            if (fragment_setting != null && fragment_setting.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_setting).commit();
             }
             if (fragment_profile.isAdded()) {
                 fragmentManager.beginTransaction().show(fragment_profile).commit();
@@ -297,8 +281,8 @@ public class HomeActivity extends AppCompatActivity {
             if (fragment_store != null && fragment_store.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_store).commit();
             }
-            if (fragment_comments != null && fragment_comments.isAdded()) {
-                fragmentManager.beginTransaction().hide(fragment_comments).commit();
+            if (fragment_setting != null && fragment_setting.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_setting).commit();
             }
             if (fragment_add.isAdded()) {
                 fragmentManager.beginTransaction().show(fragment_add).commit();
