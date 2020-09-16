@@ -14,13 +14,12 @@ import com.refFamily.R;
 
 public class SignUpModel extends BaseObservable {
     private Uri logo;
-    private Uri banner;
     private String name;
     private String email;
     private String address;
-
     private String phone_code;
     private String phone;
+
     
     public ObservableField<String> error_name = new ObservableField<>();
     public ObservableField<String> error_email = new ObservableField<>();
@@ -32,7 +31,6 @@ public class SignUpModel extends BaseObservable {
         if (!name.trim().isEmpty()&&
                 !email.trim().isEmpty()&&
                 !address.trim().isEmpty()&&
-
                 Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches()
         ){
             error_name.set(null);
@@ -76,7 +74,6 @@ public class SignUpModel extends BaseObservable {
         setName("");
         setEmail("");
         setLogo(null);
-        setBanner(null);
 
     }
 
@@ -124,13 +121,6 @@ public class SignUpModel extends BaseObservable {
         this.logo = logo;
     }
 
-    public Uri getBanner() {
-        return banner;
-    }
-
-    public void setBanner(Uri banner) {
-        this.banner = banner;
-    }
 
     public String getPhone_code() {
         return phone_code;

@@ -41,7 +41,7 @@ public class Categorys_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        preferences = Preferences.getInstance();
+        preferences = Preferences.newInstance();
         userModel = preferences.getUserData(context);
     }
 

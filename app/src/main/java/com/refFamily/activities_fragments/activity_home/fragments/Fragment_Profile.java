@@ -19,7 +19,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.refFamily.R;
 import com.refFamily.activities_fragments.activity_home.HomeActivity;
 import com.refFamily.activities_fragments.activity_setting.SettingsActivity;
-import com.refFamily.adapters.Post_Adapter;
 import com.refFamily.databinding.FragmentProfileBinding;
 import com.refFamily.models.MarketCatogryModel;
 import com.refFamily.models.UserModel;
@@ -42,7 +41,6 @@ public class Fragment_Profile extends Fragment  {
     public BottomSheetBehavior behavior;
     private RecyclerView recViewcomments;
     private ImageView imclose;
-    private Post_Adapter post_adapter;
 
     public static Fragment_Profile newInstance() {
 
@@ -67,20 +65,11 @@ public class Fragment_Profile extends Fragment  {
         dataList = new ArrayList<>();
 
         activity = (HomeActivity) getActivity();
-        preferences = Preferences.getInstance();
+        preferences = Preferences.newInstance();
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
 
-        recViewcomments = binding.getRoot().findViewById(R.id.recViewcomments);
-        imclose = binding.getRoot().findViewById(R.id.imclose);
-        post_adapter = new Post_Adapter(dataList, activity, this);
 
-        binding.recViewFavoriteOffers.setLayoutManager(new LinearLayoutManager(activity));
-        binding.recViewFavoriteOffers.setAdapter(post_adapter);
-//        Comments_Adapter comments_adapter = new Comments_Adapter(dataList, activity);
-//        recViewcomments.setLayoutManager(new LinearLayoutManager(activity));
-//        recViewcomments.setAdapter(comments_adapter);
-        Adddata();
         binding.imgSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,41 +80,9 @@ public class Fragment_Profile extends Fragment  {
         if(lang.equals("ar")){
             imclose.setRotation(180);
         }
-        setUpBottomSheet();
-
-    }
-
-    private void setUpBottomSheet() {
-
-        behavior = BottomSheetBehavior.from(binding.getRoot().findViewById(R.id.root));
-
-    }
-
-    private void Adddata() {
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        post_adapter.notifyDataSetChanged();
 
     }
 
 
-    public void showcomments() {
-        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-
-    }
 
 }

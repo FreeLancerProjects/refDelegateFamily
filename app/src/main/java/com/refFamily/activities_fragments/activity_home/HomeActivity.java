@@ -67,7 +67,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         initView();
-        setimage();
         if (savedInstanceState == null) {
             displayFragmentMain();
         }
@@ -76,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initView() {
         fragmentManager = getSupportFragmentManager();
-        preferences = Preferences.getInstance();
+        preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
@@ -89,18 +88,16 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.home:
                         displayFragmentMain();
                         break;
-                    case R.id.store:
+                    case R.id.orders:
                         displayFragmentStore();
                         break;
                     case R.id.add:
                         displayFragmentAddPost();
                         break;
-                    case R.id.comments:
+                    case R.id.setting:
                         displayFragmentComments();
                         break;
-                    case R.id.profile:
-                        displayFragmentProfile();
-                        break;
+
                 }
 
                 return true;
@@ -111,94 +108,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    public void setimage() {
-        userModel = preferences.getUserData(this);
-
-        if (userModel != null) {
-            binding.bottomNav.setItemIconTintList(null);
-
-            // this is important
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                binding.bottomNav.getMenu().getItem(4).setIconTintList(null);
-                binding.bottomNav.getMenu().getItem(4).setIconTintMode(null);
-            }
-            Glide.with(getApplicationContext()).asBitmap().load(R.drawable.user)
-                    .apply(RequestOptions.circleCropTransform()).into(new SimpleTarget<Bitmap>() {
-
-                @Override
-                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                    // Log.e("lflgllg,";fllflf");
-
-                    Drawable profileImage = new BitmapDrawable(getResources(), resource);
-                    binding.bottomNav.getMenu().findItem(R.id.profile).setIcon(profileImage);
-                }
-
-                @Override
-                public void onLoadCleared(@Nullable Drawable placeholder) {
-
-
-                    binding.bottomNav.getMenu().findItem(R.id.profile).setIcon(R.drawable.user);
-
-
-                }
-
-                @Override
-                public void onLoadFailed(@Nullable Drawable errorDrawable) {
-                    super.onLoadFailed(errorDrawable);
-                    binding.bottomNav.getMenu().findItem(R.id.profile).setIcon(R.drawable.user);
-
-                }
-            });
-        } else {
-            binding.bottomNav.setItemIconTintList(null); // this is important
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                binding.bottomNav.getMenu().getItem(4).setIconTintList(null);
-                binding.bottomNav.getMenu().getItem(4).setIconTintMode(null);
-            }
-            Glide.with(getApplicationContext()).asBitmap().load(R.drawable.user)
-                    .apply(RequestOptions.circleCropTransform()).into(new SimpleTarget<Bitmap>() {
-
-                @Override
-                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                    // Log.e("lflgllg,";fllflf");
-
-                    Drawable profileImage = new BitmapDrawable(getResources(), resource);
-                    binding.bottomNav.getMenu().findItem(R.id.profile).setIcon(profileImage);
-                }
-
-                @Override
-                public void onLoadCleared(@Nullable Drawable placeholder) {
-
-
-                    binding.bottomNav.getMenu().findItem(R.id.profile).setIcon(R.drawable.user);
-
-
-                }
-
-                @Override
-                public void onLoadFailed(@Nullable Drawable errorDrawable) {
-                    super.onLoadFailed(errorDrawable);
-                    binding.bottomNav.getMenu().findItem(R.id.profile).setIcon(R.drawable.user);
-
-                }
-            });
-        }
-        BottomNavigationMenuView menuView = (BottomNavigationMenuView) binding.bottomNav.getChildAt(0);
-
-        final View iconView =
-                menuView.getChildAt(4).findViewById(com.google.android.material.R.id.icon);
-        final ViewGroup.LayoutParams layoutParams =
-                iconView.getLayoutParams();
-        final DisplayMetrics displayMetrics =
-                getResources().getDisplayMetrics();
-        layoutParams.height = (int)
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 45,
-                        displayMetrics);
-        layoutParams.width = (int)
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 45,
-                        displayMetrics);
-        iconView.setLayoutParams(layoutParams);
-    }
 
     //    private void setUpBottomNavigation() {
 //
@@ -235,23 +144,7 @@ public class HomeActivity extends AppCompatActivity {
 //        binding.ahBottomNav.setCurrentItem(pos, false);
 //
 //    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        setimage();
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        setimage();
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        setimage();
-    }
 
 
     public void displayFragmentMain() {

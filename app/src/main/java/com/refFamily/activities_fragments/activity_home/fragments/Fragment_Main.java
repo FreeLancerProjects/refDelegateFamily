@@ -20,13 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.refFamily.R;
 import com.refFamily.activities_fragments.activity_home.HomeActivity;
-import com.refFamily.adapters.Post_Adapter;
 import com.refFamily.adapters.Categorys_Adapter;
 import com.refFamily.databinding.FragmentMainBinding;
-import com.refFamily.models.MarketCatogryModel;
-import com.refFamily.models.NearbyModel;
-import com.refFamily.models.NearbyStoreDataModel;
-import com.refFamily.models.ReviewModels;
 import com.refFamily.preferences.Preferences;
 import com.refFamily.remote.Api;
 
@@ -66,7 +61,7 @@ public class Fragment_Main extends Fragment {
 
 
         activity = (HomeActivity) getActivity();
-        preferences = Preferences.getInstance();
+        preferences = Preferences.newInstance();
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
 

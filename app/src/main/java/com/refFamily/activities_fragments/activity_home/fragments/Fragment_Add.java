@@ -70,7 +70,7 @@ public class Fragment_Add extends Fragment {
 
     private void initView() {
         activity = (HomeActivity) getActivity();
-        preferences = Preferences.getInstance();
+        preferences = Preferences.newInstance();
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
 

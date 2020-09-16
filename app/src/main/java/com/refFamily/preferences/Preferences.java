@@ -3,10 +3,8 @@ package com.refFamily.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-
 import com.refFamily.models.DefaultSettings;
 import com.refFamily.models.UserModel;
-import com.refFamily.tags.Tags;
 import com.google.gson.Gson;
 
 public class Preferences {
@@ -16,22 +14,53 @@ public class Preferences {
     private Preferences() {
     }
 
-    public static Preferences getInstance() {
-        if (instance == null) {
+    public static synchronized Preferences newInstance()
+    {
+        if (instance==null)
+        {
             instance = new Preferences();
         }
+
         return instance;
     }
+    public Boolean isLangSelected(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("langPref",Context.MODE_PRIVATE);
+        return preferences.getBoolean("selected",false);
 
+    }
+    public void selectedLanguage(Context context,String lang)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("langSelectedPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor. putString("lang",lang);
+        editor.apply();
+    }
+    public void create_update_userData(Context context , UserModel userModel)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("userPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String userDataGson = gson.toJson(userModel);
+        editor.putString("user_data",userDataGson);
+        editor.apply();
+    }
 
-       public void createUpdateAppSetting(Context context, DefaultSettings settings) {
-           SharedPreferences preferences = context.getSharedPreferences("settingsRef", Context.MODE_PRIVATE);
-           Gson gson = new Gson();
-           String data = gson.toJson(settings);
-           SharedPreferences.Editor editor = preferences.edit();
-           editor.putString("settings", data);
-           editor.apply();
-       }
+    public UserModel getUserData(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("userPref",Context.MODE_PRIVATE);
+        String userDataGson = preferences.getString("user_data","");
+        return new Gson().fromJson(userDataGson,UserModel.class);
+    }
+
+    public void createUpdateAppSetting(Context context, DefaultSettings settings) {
+        SharedPreferences preferences = context.getSharedPreferences("settingsRef", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String data = gson.toJson(settings);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("settings", data);
+        editor.apply();
+    }
     public DefaultSettings getAppSetting(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("settingsRef", Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -39,62 +68,66 @@ public class Preferences {
     }
 
 
-    public void create_update_userdata(Context context, UserModel userModel) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String user_data = gson.toJson(userModel);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("user_data", user_data);
-        editor.apply();
-        create_update_session(context, Tags.session_login);
-
-    }
-
-    public UserModel getUserData(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String user_data = preferences.getString("user_data", "");
-        UserModel userModel = gson.fromJson(user_data, UserModel.class);
-        return userModel;
-    }
-
-    public void create_update_session(Context context, String session) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("session", Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("state", session);
-        editor.apply();
-
-
-    }
-
-
-    public String getSession(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("session", Context.MODE_PRIVATE);
-        String session = preferences.getString("state", Tags.session_logout);
-        return session;
-    }
-
-
-    public void clear(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences("user", Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = preferences.edit();
-        edit.clear();
-        edit.apply();
-        create_update_session(context, Tags.session_logout);
-    }
-    public void saveLoginFragmentState(Context context,int state)
+    public void clearChatUserData(Context context)
     {
-        SharedPreferences preferences = context.getSharedPreferences("fragment_state",Context.MODE_PRIVATE);
+        SharedPreferences preferences = context.getSharedPreferences("chatUserPref",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("state",state);
+        editor.clear();
         editor.apply();
     }
-    public int getFragmentState(Context context)
+    public void createSession(Context context,String session)
     {
-        SharedPreferences preferences = context.getSharedPreferences("fragment_state",Context.MODE_PRIVATE);
-        return preferences.getInt("state",0);
+        SharedPreferences preferences = context.getSharedPreferences("sessionPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("session",session);
+        editor.apply();
     }
 
+    public String getSession(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("sessionPref",Context.MODE_PRIVATE);
+        return preferences.getString("session","");
+    }
+
+    public void saveSelectedLanguage(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("langPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor. putBoolean("selected",true);
+        editor.apply();
+    }
+
+
+
+
+
+
+    public void setLastVisit(Context context,String date)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("visit",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("lastVisit",date);
+        editor.apply();
+
+    }
+    public String getLastVisit(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("visit",Context.MODE_PRIVATE);
+        return preferences.getString("lastVisit","0");
+    }
+
+    public void clear(Context context)
+    {
+        SharedPreferences preferences1 = context.getSharedPreferences("userPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor1 = preferences1.edit();
+        editor1.clear();
+        editor1.apply();
+
+        SharedPreferences preferences2 = context.getSharedPreferences("sessionPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = preferences2.edit();
+        editor2.clear();
+        editor2.apply();
+
+    }
 
 }

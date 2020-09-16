@@ -1,154 +1,98 @@
 package com.refFamily.activities_fragments.activity_splash;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.core.content.ContextCompat;
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.transition.ChangeBounds;
-import android.transition.Transition;
-import android.transition.TransitionManager;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.refFamily.R;
 import com.refFamily.activities_fragments.activity_home.HomeActivity;
 import com.refFamily.activities_fragments.activity_login.LoginActivity;
 import com.refFamily.databinding.ActivitySplashBinding;
 import com.refFamily.language.Language_Helper;
-import com.refFamily.models.DefaultSettings;
 import com.refFamily.preferences.Preferences;
 import com.refFamily.tags.Tags;
+
+import java.util.List;
+import java.util.Locale;
 
 import io.paperdb.Paper;
 
 public class SplashActivity extends AppCompatActivity {
     private ActivitySplashBinding binding;
-    private ConstraintSet constraintSetOld = new ConstraintSet();
-    private ConstraintSet constraintSetNew = new ConstraintSet();
-    private ConstraintLayout constraintLayout;
-    private LinearLayout llLang;
-    private boolean status;
-    private CardView cardAr, cardEn;
-    private TextView tvAr, tvEn;
-    private Button btnNext;
-    private String lang = "ar";
+    private Animation animation;
     private Preferences preferences;
-
+    private int ad_id;
 
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(Language_Helper.updateResources(newBase, Language_Helper.getLanguage(newBase)));
+        super.attachBaseContext(Language_Helper.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
-        initView();
-    }
+        getDataFromIntent();
+        preferences = Preferences.newInstance();
 
-    private void initView() {
-        preferences = Preferences.getInstance();
-        constraintLayout = findViewById(R.id.layout);
-        btnNext = findViewById(R.id.btnNext);
-        llLang = findViewById(R.id.llLang);
-        cardAr = findViewById(R.id.cardAr);
-        cardEn = findViewById(R.id.cardEn);
-        tvAr = findViewById(R.id.tvAr);
-        tvEn = findViewById(R.id.tvEn);
+        animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.lanuch);
+        binding.cons.startAnimation(animation);
 
-
-        if (preferences.getAppSetting(this) != null && preferences.getAppSetting(this).isLanguageSelected()) {
-
-            if (preferences.getSession(this).equals(Tags.session_login)) {
-                Intent intent = new Intent(this, HomeActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
-
-                new Handler().postDelayed(() -> {
-                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                }, 1500);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
 
             }
 
-
-        } else {
-            constraintSetOld.clone(constraintLayout);
-            constraintSetNew.clone(this, R.layout.language_layout);
-            new Handler().postDelayed(() -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    Transition transition = new ChangeBounds();
-                    transition.setDuration(400);
-                    transition.setInterpolator(new AccelerateDecelerateInterpolator());
-                    TransitionManager.beginDelayedTransition(constraintLayout, transition);
-
-                }
-
-                if (!status) {
-                    constraintSetNew.applyTo(constraintLayout);
-                } else {
-                    constraintSetOld.applyTo(constraintLayout);
-
-                }
-                status = !status;
+            @Override
+            public void onAnimationEnd(Animation animation) {
 
 
-                Animation animation = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.lanuch);
-                constraintLayout.startAnimation(animation);
+                new Handler().postDelayed(()->{
 
-            }, 1000);
-        }
+                    String session = preferences.getSession(SplashActivity.this);
+                    if (session.equals(Tags.session_login)) {
+                        Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                        startActivity(intent);
+
+                        finish();
+                    } else {
+                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                },3000);
 
 
-        cardAr.setOnClickListener(v -> {
-            cardAr.setCardElevation(5f);
-            cardEn.setCardElevation(0f);
-            tvAr.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
-            tvEn.setTextColor(ContextCompat.getColor(this, R.color.color2));
-            lang = "ar";
+            }
 
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
         });
-        cardEn.setOnClickListener(v -> {
-            cardAr.setCardElevation(0f);
-            cardEn.setCardElevation(5f);
-            tvAr.setTextColor(ContextCompat.getColor(this, R.color.color2));
-            tvEn.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
-            lang = "en";
-        });
-        btnNext.setOnClickListener(v -> {
-            refreshActivity();
-        });
-
     }
 
-    private void refreshActivity() {
-        Paper.init(this);
-        Paper.book().write("lang", lang);
-        DefaultSettings defaultSettings = new DefaultSettings();
-        defaultSettings.setLanguageSelected(true);
-        preferences.createUpdateAppSetting(this, defaultSettings);
+    private void getDataFromIntent() {
         Intent intent = getIntent();
-        finish();
-        startActivity(intent);
+        if (intent != null) {
+            if (intent.getData() != null) {
+                List<String> segment = intent.getData().getPathSegments();
 
+                ad_id = Integer.parseInt(segment.get(segment.size()- 1));
+
+
+            }
+
+        }
     }
-
-
 }

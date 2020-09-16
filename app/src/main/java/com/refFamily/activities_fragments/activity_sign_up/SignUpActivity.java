@@ -61,7 +61,7 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
     }
 
     private void initView() {
-        preferences = Preferences.getInstance();
+        preferences = Preferences.newInstance();
         signUpModel = new SignUpModel();
         binding.setModel(signUpModel);
         binding.setListener(this);

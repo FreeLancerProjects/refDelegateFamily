@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.refFamily.R;
 import com.refFamily.activities_fragments.activity_home.HomeActivity;
-import com.refFamily.adapters.StarComments_Adapter;
 import com.refFamily.databinding.FragmentCommentsBinding;
 import com.refFamily.models.MarketCatogryModel;
 
@@ -26,7 +25,6 @@ public class Fragment_Comments extends Fragment {
     private HomeActivity activity;
     private FragmentCommentsBinding binding;
     private List<MarketCatogryModel.Data> dataList;
-    private StarComments_Adapter starComments_adapter;
 
 
     public static Fragment_Comments newInstance() {
@@ -46,32 +44,9 @@ public class Fragment_Comments extends Fragment {
     private void initView() {
         dataList = new ArrayList<>();
         activity = (HomeActivity) getActivity();
-        starComments_adapter = new StarComments_Adapter(dataList, activity,this);
-        binding.recViewFavoriteOffers.setLayoutManager(new LinearLayoutManager(activity));
-        binding.recViewFavoriteOffers.setAdapter(starComments_adapter);
-        Adddata();
-    }
-
-    private void Adddata() {
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        dataList.add(new MarketCatogryModel.Data());
-        starComments_adapter.notifyDataSetChanged();
 
     }
+
 
 
     @Override

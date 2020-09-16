@@ -52,25 +52,24 @@
 
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:orientation="vertical"
                             android:padding="5dp">
 
                             <TextView
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginEnd="10dp"
-                                android:gravity="center"
+                                android:layout_gravity="center"
                                 android:singleLine="true"
                                 android:text="@string/profile_image"
                                 android:textColor="@color/gray11"
                                 android:textSize="13sp" />
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="120dp"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginTop="5dp"

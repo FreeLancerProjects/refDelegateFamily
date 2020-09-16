@@ -50,7 +50,7 @@ public class SettingsActivity extends AppCompatActivity implements Listeners.Set
     }
 
     private void initView() {
-        preferences = Preferences.getInstance();
+        preferences = Preferences.newInstance();
         defaultSettings = preferences.getAppSetting(this);
 
         Paper.init(this);
