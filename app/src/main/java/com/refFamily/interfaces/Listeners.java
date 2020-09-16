@@ -12,7 +12,19 @@ public interface Listeners {
         void checkCameraPermission();
 
     }
+    interface SkipListener
+    {
+        void skip();
+    }
+    interface CreateAccountListener
+    {
+        void createNewAccount();
+    }
 
+    interface ShowCountryDialogListener
+    {
+        void showDialog();
+    }
     interface BackListener
     {
         void back();

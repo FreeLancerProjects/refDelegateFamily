@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.refFamily.R;
+import com.refFamily.activities_fragments.activity_login.Fragment_Sign_In;
 import com.refFamily.activities_fragments.activity_login.LoginActivity;
 import com.refFamily.databinding.CountriesRowBinding;
 import com.refFamily.models.CountryModel;
@@ -22,6 +23,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private Context context;
     private LayoutInflater inflater;
     private LoginActivity activity;
+    private Fragment_Sign_In fragment_sign_in;
     public CountriesAdapter(List<CountryModel> list, Context context) {
         this.list = list;
         this.context = context;
@@ -34,7 +36,6 @@ public class CountriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
 
         CountriesRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.countries_row, parent, false);
         return new MyHolder(binding);
@@ -49,7 +50,7 @@ public class CountriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         myHolder.binding.setModel(list.get(position));
 
         myHolder.itemView.setOnClickListener(view -> {
-            activity.setItemData(list.get(myHolder.getAdapterPosition()));
+         fragment_sign_in.setItemData(list.get(myHolder.getAdapterPosition()));
 
         });
     }
