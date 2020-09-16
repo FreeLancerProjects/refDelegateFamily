@@ -20,24 +20,12 @@ import com.refFamily.R;
 import com.refFamily.databinding.FragmentCodeVerificationBinding;
 import com.refFamily.models.UserModel;
 import com.refFamily.preferences.Preferences;
-import com.refFamily.remote.Api;
-import com.refFamily.share.Common;
-import com.refFamily.tags.Tags;
-import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthProvider;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import io.paperdb.Paper;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
 
 public class Fragment_Code_Verification extends Fragment {
     private static final String TAG = "DATA";

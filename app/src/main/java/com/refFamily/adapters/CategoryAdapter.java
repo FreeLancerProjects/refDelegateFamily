@@ -66,6 +66,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             @Override
             public void onClick(View view) {
                 i = position;
+                notifyDataSetChanged();
+
             }
         });
 
