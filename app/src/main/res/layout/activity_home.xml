@@ -58,29 +58,28 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"
-                    >
+                    android:layout_gravity="center_vertical|end">
+
                     <FrameLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|end"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        >
+                        android:layout_marginRight="10dp">
+
                         <com.suke.widget.SwitchButton
+                            android:id="@+id/switch_btn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:sb_show_indicator="false"
-                            android:id="@+id/switch_btn"
-                            app:sb_checkline_color="@color/colorAccent"
                             app:sb_checked_color="@color/colorAccent"
-                            />
+                            app:sb_checkline_color="@color/colorAccent"
+                            app:sb_show_indicator="false" />
                     </FrameLayout>
+
                     <FrameLayout
                         android:id="@+id/flNotification"
                         android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        >
+                        android:layout_height="40dp">
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="40dp"
@@ -119,8 +118,6 @@
                 </LinearLayout>
 
 
-
-
             </androidx.appcompat.widget.Toolbar>
 
             <View
@@ -137,10 +134,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 app:layout_constraintBottom_toTopOf="@id/bottom_nav"
-                app:layout_constraintTop_toBottomOf="@id/view"
-
-
-                >
+                app:layout_constraintTop_toBottomOf="@id/view">
 
             </FrameLayout>
 
@@ -154,7 +148,6 @@
                 app:menu="@menu/my_navigation_item">
 
             </com.google.android.material.bottomnavigation.BottomNavigationView>
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

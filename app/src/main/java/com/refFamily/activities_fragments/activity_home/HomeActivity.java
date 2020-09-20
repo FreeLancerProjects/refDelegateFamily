@@ -13,9 +13,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.refFamily.R;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Add;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Main;
+import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Orders;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Setting;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Profile;
-import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Store;
 import com.refFamily.databinding.ActivityHomeBinding;
 import com.refFamily.language.Language_Helper;
 import com.refFamily.models.UserModel;
@@ -31,7 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     private Preferences preferences;
     private FragmentManager fragmentManager;
     private Fragment_Main fragment_main;
-    private Fragment_Store fragment_store;
+    private Fragment_Orders fragment_orders;
     private Fragment_Add fragment_add;
     private Fragment_Setting fragment_setting;
     private Fragment_Profile fragment_profile;
@@ -138,8 +138,8 @@ public class HomeActivity extends AppCompatActivity {
             }
 
 
-            if (fragment_store != null && fragment_store.isAdded()) {
-                fragmentManager.beginTransaction().hide(fragment_store).commit();
+            if (fragment_orders != null && fragment_orders.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_orders).commit();
             }
             if (fragment_add != null && fragment_add.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_add).commit();
@@ -167,8 +167,8 @@ public class HomeActivity extends AppCompatActivity {
 
     public void displayFragmentStore() {
         try {
-            if (fragment_store == null) {
-                fragment_store = Fragment_Store.newInstance();
+            if (fragment_orders == null) {
+                fragment_orders = Fragment_Orders.newInstance();
             }
 
 
@@ -185,11 +185,11 @@ public class HomeActivity extends AppCompatActivity {
             if (fragment_profile != null && fragment_profile.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_profile).commit();
             }
-            if (fragment_store.isAdded()) {
-                fragmentManager.beginTransaction().show(fragment_store).commit();
+            if (fragment_orders.isAdded()) {
+                fragmentManager.beginTransaction().show(fragment_orders).commit();
 
             } else {
-                fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_store, "fragment_store").addToBackStack("fragment_store").commit();
+                fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_orders, "fragment_orders").addToBackStack("fragment_orders").commit();
 
             }
 
@@ -212,8 +212,8 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentManager.beginTransaction().hide(fragment_main).commit();
             }
 
-            if (fragment_store != null && fragment_store.isAdded()) {
-                fragmentManager.beginTransaction().hide(fragment_store).commit();
+            if (fragment_orders != null && fragment_orders.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_orders).commit();
             }
             if (fragment_profile != null && fragment_profile.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_profile).commit();
@@ -245,8 +245,8 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentManager.beginTransaction().hide(fragment_main).commit();
             }
 
-            if (fragment_store != null && fragment_store.isAdded()) {
-                fragmentManager.beginTransaction().hide(fragment_store).commit();
+            if (fragment_orders != null && fragment_orders.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_orders).commit();
             }
             if (fragment_setting != null && fragment_setting.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_setting).commit();
@@ -278,8 +278,8 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentManager.beginTransaction().hide(fragment_main).commit();
             }
 
-            if (fragment_store != null && fragment_store.isAdded()) {
-                fragmentManager.beginTransaction().hide(fragment_store).commit();
+            if (fragment_orders != null && fragment_orders.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_orders).commit();
             }
             if (fragment_setting != null && fragment_setting.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_setting).commit();

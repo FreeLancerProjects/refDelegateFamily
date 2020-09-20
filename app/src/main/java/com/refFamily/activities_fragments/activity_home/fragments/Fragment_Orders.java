@@ -1,56 +1,42 @@
 package com.refFamily.activities_fragments.activity_home.fragments;
 
-import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.refFamily.R;
 import com.refFamily.activities_fragments.activity_home.HomeActivity;
-import com.refFamily.adapters.Department_Adapter;
-import com.refFamily.adapters.Slider_Adapter;
-import com.refFamily.databinding.FragmentStoreBinding;
-import com.refFamily.models.MarketCatogryModel;
-import com.refFamily.models.SliderModel;
-import com.refFamily.models.UserModel;
+import com.refFamily.adapters.CategoryAdapter;
+import com.refFamily.adapters.OrderAdapter;
+import com.refFamily.databinding.FragmentOrdersBinding;
 import com.refFamily.preferences.Preferences;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import io.paperdb.Paper;
 
-public class Fragment_Store extends Fragment {
+public class Fragment_Orders extends Fragment {
 
     private HomeActivity activity;
-    private FragmentStoreBinding binding;
+    private FragmentOrdersBinding binding;
     private Preferences preferences;
     private String lang;
-
-    public static Fragment_Store newInstance() {
-        return new Fragment_Store();
+    private OrderAdapter orderAdapter;
+    public static Fragment_Orders newInstance() {
+        return new Fragment_Orders();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_store, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_orders, container, false);
         initView();
         return binding.getRoot();
     }
@@ -66,7 +52,8 @@ public class Fragment_Store extends Fragment {
         preferences = Preferences.newInstance();
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
+        binding.recViewOrders.setAdapter(new OrderAdapter(this.getContext()));
+        binding.recViewOrders.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
     }
 

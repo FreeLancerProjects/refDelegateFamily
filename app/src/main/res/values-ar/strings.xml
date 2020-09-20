@@ -112,5 +112,23 @@
     <string name="meal_title">وجبة مندي</string>
     <string name="meal_description">وجبة مكرونه من ميندي مضاف اليه توابل خاصة بالاضافه الي ارو بسمتي</string>
     <string name="subscriptions">الأشتراكات</string>
+    <string name="add_offer">اضافة منتج</string>
+    <string name="offer_images">صور المنتج</string>
+    <string name="offer_name">اسم المنتج</string>
+    <string name="offer_description">مواصفات المنتج</string>
+    <string name="department">القسم</string>
+    <string name="price">السعر</string>
+    <string name="discount">الخصم</string>
+    <string name="not_found">لا يوجد</string>
+    <string name="found">يوجد</string>
+    <string name="discount_percentage">نسبة الخصم</string>
+    <string name="price_after_discount">السعر بعد الخصم</string>
+    <string name="date_from">من تاريخ</string>
+    <string name="date_to">تاريخ الي</string>
+    <string name="_200">200ريال</string>
+    <string name="details">التفاصيل</string>
+    <string name="user_name_test">احمد المصيلحى</string>
+    <string name="order_details">تفاصيل الطلب</string>
+    <string name="there_is_new_notification">There is new notification</string>
 
 </resources>

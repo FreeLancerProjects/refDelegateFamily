@@ -112,5 +112,23 @@
     <string name="meal_title">Fried Chicken</string>
     <string name="meal_description">Fried chicken very good and nice fried chicken very good and nice</string>
     <string name="subscriptions">Subscriptions</string>
+    <string name="add_offer">Add Offer</string>
+    <string name="offer_images">Offer Images</string>
+    <string name="offer_name">Offer Name</string>
+    <string name="offer_description">Offer Description</string>
+    <string name="department">Department</string>
+    <string name="price">Price</string>
+    <string name="discount">Discount</string>
+    <string name="not_found">Not Found</string>
+    <string name="found">Found</string>
+    <string name="discount_percentage">Discount Percentage</string>
+    <string name="price_after_discount">Price After Discount</string>
+    <string name="date_from">Date From</string>
+    <string name="date_to">Date To</string>
+    <string name="_200">200 SAR</string>
+    <string name="details">Details</string>
+    <string name="user_name_test">Ahmed Elmoselhy</string>
+    <string name="order_details">Order Details</string>
+    <string name="there_is_new_notification">There is new notification</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.refFamily.activities_fragments.activity_home.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.refFamily.R;
+import com.refFamily.activities_fragments.activity_add_offer.AddOfferActivity;
 import com.refFamily.activities_fragments.activity_home.HomeActivity;
 import com.refFamily.adapters.CategoryAdapter;
 import com.refFamily.adapters.OfferAdapter;
@@ -29,8 +31,6 @@ public class Fragment_Main extends Fragment {
     private FragmentMainBinding binding;
     private LinearLayoutManager manager, manager2;
     private Preferences preferences;
-
-
     private String lang;
 
 
@@ -49,20 +49,30 @@ public class Fragment_Main extends Fragment {
 
 
     private void initView() {
-
-
         activity = (HomeActivity) getActivity();
         preferences = Preferences.newInstance();
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.recViewCategory.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL,false));
+        binding.recViewCategory.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
         binding.recViewCategory.setAdapter(new CategoryAdapter(this.getContext()));
-
         binding.recViewOffers.setLayoutManager(new LinearLayoutManager(this.getContext()));
         binding.recViewOffers.setAdapter(new OfferAdapter(this.getContext()));
+
+
+        binding.addBtn.setOnClickListener(View -> {
+
+            NavigateToAddOfferACtivity();
+        });
 
     }
 
 
+
+    private void NavigateToAddOfferACtivity(){
+
+        Intent intent = new Intent(this.getContext(), AddOfferActivity.class);
+        startActivity(intent);
+
+    }
 
 }
