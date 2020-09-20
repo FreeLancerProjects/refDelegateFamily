@@ -1,6 +1,7 @@
 package com.refFamily.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -9,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.refFamily.R;
+import com.refFamily.activities_fragments.activity_update_product.UpdateProductActivity;
 import com.refFamily.databinding.ItemMainOffersBinding;
 import com.refFamily.models.MarketCatogryModel;
 import com.refFamily.models.UserModel;
@@ -19,7 +21,7 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferAdapterVH> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.OfferAdapterVH> {
 
     private List<MarketCatogryModel.Data> orderlist;
     private Context context;
@@ -29,11 +31,11 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferAdapter
     UserModel userModel;
 
 
-    public OfferAdapter(Context context) {
+    public ProductAdapter(Context context) {
         this.context = context;
     }
 
-    public OfferAdapter(List<MarketCatogryModel.Data> orderlist, Context context) {
+    public ProductAdapter(List<MarketCatogryModel.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -45,7 +47,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferAdapter
     @NonNull
     @Override
     public OfferAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemMainOffersBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_offers, parent, false);
+        ItemMainOffersBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_main_offers, parent, false);
         return new OfferAdapterVH(binding);
     }
 
@@ -53,6 +55,12 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferAdapter
     public void onBindViewHolder(@NonNull OfferAdapterVH holder, int position) {
 
 
+        holder.itemView.setOnClickListener(view -> {
+
+            Intent intent = new Intent(context, UpdateProductActivity.class);
+            context.startActivity(intent);
+
+        });
 
     }
 

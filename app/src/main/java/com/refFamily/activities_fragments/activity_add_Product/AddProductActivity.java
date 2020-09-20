@@ -1,35 +1,35 @@
-package com.refFamily.activities_fragments.activity_add_offer;
+package com.refFamily.activities_fragments.activity_add_Product;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.BounceInterpolator;
 
 import com.refFamily.R;
-import com.refFamily.activities_fragments.activity_add_offer.fragments.Fragment_AddOfferStep1;
-import com.refFamily.activities_fragments.activity_add_offer.fragments.Fragment_AddOfferStep2;
-import com.refFamily.activities_fragments.activity_add_offer.fragments.Fragment_AddOfferStep3;
+import com.refFamily.activities_fragments.activity_add_Product.fragments.Fragment_AddProductStep1;
+import com.refFamily.activities_fragments.activity_add_Product.fragments.Fragment_AddProductStep2;
+import com.refFamily.activities_fragments.activity_add_Product.fragments.Fragment_AddProductStep3;
+import com.refFamily.activities_fragments.activity_home.HomeActivity;
 import com.refFamily.databinding.ActivityAddOfferBinding;
 import com.refFamily.language.Language_Helper;
 import com.refFamily.models.AddProductModel;
-import com.refFamily.preferences.Preferences;
 
 import io.paperdb.Paper;
 
-public class AddOfferActivity extends AppCompatActivity {
+public class AddProductActivity extends AppCompatActivity {
 
     private ActivityAddOfferBinding binding;
     private FragmentManager fragmentManager;
     private String lang;
     private int step = 1;
     private AddProductModel addProductModel = null;
-    private Fragment_AddOfferStep1 fragment_addOfferStep1;
-    private Fragment_AddOfferStep2 fragment_addOfferStep2;
-    private Fragment_AddOfferStep3 fragment_addOfferStep3;
+    private Fragment_AddProductStep1 fragment_addProductStep1;
+    private Fragment_AddProductStep2 fragment_addProductStep2;
+    private Fragment_AddProductStep3 fragment_addProductStep3;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -71,8 +71,8 @@ public class AddOfferActivity extends AppCompatActivity {
                 }
             } else if (step == 3) {
                 if (addProductModel.step1(this)){
-
-
+                    Intent intent =  new Intent(this, HomeActivity.class);
+                    startActivity(intent);
                 }
             }
 
@@ -117,20 +117,20 @@ public class AddOfferActivity extends AppCompatActivity {
     private void displayFragmentStep1(AddProductModel addProductModel) {
         updateStep1UI();
         step = 1;
-        if (fragment_addOfferStep1 == null) {
-            fragment_addOfferStep1 = Fragment_AddOfferStep1.newInstance(addProductModel);
+        if (fragment_addProductStep1 == null) {
+            fragment_addProductStep1 = Fragment_AddProductStep1.newInstance(addProductModel);
         }
-        if (fragment_addOfferStep2 != null && fragment_addOfferStep2.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_addOfferStep2).commit();
+        if (fragment_addProductStep2 != null && fragment_addProductStep2.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_addProductStep2).commit();
         }
 
-        if (fragment_addOfferStep3 != null && fragment_addOfferStep3.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_addOfferStep3).commit();
+        if (fragment_addProductStep3 != null && fragment_addProductStep3.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_addProductStep3).commit();
         }
-        if (fragment_addOfferStep1.isAdded()) {
-            fragmentManager.beginTransaction().show(fragment_addOfferStep1).commit();
+        if (fragment_addProductStep1.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_addProductStep1).commit();
         } else {
-            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_addOfferStep1, "fragment_addOfferStep1").addToBackStack("fragment_addOfferStep1").commit();
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_addProductStep1, "fragment_addProductStep1").addToBackStack("fragment_addProductStep1").commit();
         }
 
     }
@@ -139,20 +139,20 @@ public class AddOfferActivity extends AppCompatActivity {
     private void displayFragmentStep2(AddProductModel addProductModel) {
         updateStep2UI();
         step = 2;
-        if (fragment_addOfferStep2 == null) {
-            fragment_addOfferStep2 = Fragment_AddOfferStep2.newInstance(addProductModel);
+        if (fragment_addProductStep2 == null) {
+            fragment_addProductStep2 = Fragment_AddProductStep2.newInstance(addProductModel);
         }
-        if (fragment_addOfferStep1 != null && fragment_addOfferStep1.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_addOfferStep1).commit();
+        if (fragment_addProductStep1 != null && fragment_addProductStep1.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_addProductStep1).commit();
         }
 
-        if (fragment_addOfferStep3 != null && fragment_addOfferStep3.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_addOfferStep3).commit();
+        if (fragment_addProductStep3 != null && fragment_addProductStep3.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_addProductStep3).commit();
         }
-        if (fragment_addOfferStep2.isAdded()) {
-            fragmentManager.beginTransaction().show(fragment_addOfferStep2).commit();
+        if (fragment_addProductStep2.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_addProductStep2).commit();
         } else {
-            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_addOfferStep2, "fragment_addOfferStep2").addToBackStack("fragment_addOfferStep2").commit();
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_addProductStep2, "fragment_addProductStep2").addToBackStack("fragment_addProductStep2").commit();
         }
 
     }
@@ -160,20 +160,20 @@ public class AddOfferActivity extends AppCompatActivity {
     private void displayFragmentStep3(AddProductModel addProductModel) {
         updateStep3UI();
         step = 3;
-        if (fragment_addOfferStep3 == null) {
-            fragment_addOfferStep3 = Fragment_AddOfferStep3.newInstance(addProductModel);
+        if (fragment_addProductStep3 == null) {
+            fragment_addProductStep3 = Fragment_AddProductStep3.newInstance(addProductModel);
         }
-        if (fragment_addOfferStep1 != null && fragment_addOfferStep1.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_addOfferStep1).commit();
+        if (fragment_addProductStep1 != null && fragment_addProductStep1.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_addProductStep1).commit();
         }
 
-        if (fragment_addOfferStep2 != null && fragment_addOfferStep2.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_addOfferStep2).commit();
+        if (fragment_addProductStep2 != null && fragment_addProductStep2.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_addProductStep2).commit();
         }
-        if (fragment_addOfferStep3.isAdded()) {
-            fragmentManager.beginTransaction().show(fragment_addOfferStep3).commit();
+        if (fragment_addProductStep3.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_addProductStep3).commit();
         } else {
-            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_addOfferStep3, "fragment_addOfferStep3").addToBackStack("fragment_addOfferStep3").commit();
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_addProductStep3, "fragment_addProductStep3").addToBackStack("fragment_addProductStep3").commit();
         }
 
     }

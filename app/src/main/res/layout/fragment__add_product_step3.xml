@@ -12,7 +12,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities_fragments.activity_add_offer.fragments.Fragment_AddOfferStep3">
+        tools:context=".activities_fragments.activity_add_Product.fragments.Fragment_AddProductStep3">
 
 
         <androidx.core.widget.NestedScrollView

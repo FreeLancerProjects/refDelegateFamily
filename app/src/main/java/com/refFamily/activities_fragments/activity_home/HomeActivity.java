@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.refFamily.R;
-import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Add;
+import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Offers;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Main;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Orders;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Setting;
@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private Fragment_Main fragment_main;
     private Fragment_Orders fragment_orders;
-    private Fragment_Add fragment_add;
+    private Fragment_Offers fragment_offers;
     private Fragment_Setting fragment_setting;
     private Fragment_Profile fragment_profile;
     private UserModel userModel;
@@ -73,13 +73,13 @@ public class HomeActivity extends AppCompatActivity {
                         displayFragmentMain();
                         break;
                     case R.id.orders:
-                        displayFragmentStore();
+                        displayFragmentOrder();
                         break;
-                    case R.id.add:
-                        displayFragmentAddPost();
+                    case R.id.offers:
+                        displayFragmentOffers();
                         break;
                     case R.id.setting:
-                        displayFragmentComments();
+                        displayFragmentSettings();
                         break;
 
                 }
@@ -90,7 +90,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
-
 
 
     //    private void setUpBottomNavigation() {
@@ -130,7 +129,6 @@ public class HomeActivity extends AppCompatActivity {
 //    }
 
 
-
     public void displayFragmentMain() {
         try {
             if (fragment_main == null) {
@@ -141,8 +139,8 @@ public class HomeActivity extends AppCompatActivity {
             if (fragment_orders != null && fragment_orders.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_orders).commit();
             }
-            if (fragment_add != null && fragment_add.isAdded()) {
-                fragmentManager.beginTransaction().hide(fragment_add).commit();
+            if (fragment_offers != null && fragment_offers.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_offers).commit();
             }
 
             if (fragment_setting != null && fragment_setting.isAdded()) {
@@ -165,15 +163,15 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void displayFragmentStore() {
+    public void displayFragmentOrder() {
         try {
             if (fragment_orders == null) {
                 fragment_orders = Fragment_Orders.newInstance();
             }
 
 
-            if (fragment_add != null && fragment_add.isAdded()) {
-                fragmentManager.beginTransaction().hide(fragment_add).commit();
+            if (fragment_offers != null && fragment_offers.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_offers).commit();
             }
             if (fragment_main != null && fragment_main.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_main).commit();
@@ -198,15 +196,15 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void displayFragmentComments() {
+    public void displayFragmentSettings() {
         try {
             if (fragment_setting == null) {
                 fragment_setting = Fragment_Setting.newInstance();
             }
 
 
-            if (fragment_add != null && fragment_add.isAdded()) {
-                fragmentManager.beginTransaction().hide(fragment_add).commit();
+            if (fragment_offers != null && fragment_offers.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_offers).commit();
             }
             if (fragment_main != null && fragment_main.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_main).commit();
@@ -238,8 +236,8 @@ public class HomeActivity extends AppCompatActivity {
             }
 
 
-            if (fragment_add != null && fragment_add.isAdded()) {
-                fragmentManager.beginTransaction().hide(fragment_add).commit();
+            if (fragment_offers != null && fragment_offers.isAdded()) {
+                fragmentManager.beginTransaction().hide(fragment_offers).commit();
             }
             if (fragment_main != null && fragment_main.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_main).commit();
@@ -264,10 +262,10 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void displayFragmentAddPost() {
+    public void displayFragmentOffers() {
         try {
-            if (fragment_add== null) {
-                fragment_add = Fragment_Add.newInstance();
+            if (fragment_offers == null) {
+                fragment_offers = Fragment_Offers.newInstance();
             }
 
 
@@ -284,11 +282,11 @@ public class HomeActivity extends AppCompatActivity {
             if (fragment_setting != null && fragment_setting.isAdded()) {
                 fragmentManager.beginTransaction().hide(fragment_setting).commit();
             }
-            if (fragment_add.isAdded()) {
-                fragmentManager.beginTransaction().show(fragment_add).commit();
+            if (fragment_offers.isAdded()) {
+                fragmentManager.beginTransaction().show(fragment_offers).commit();
 
             } else {
-                fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_add, "fragment_add").addToBackStack("fragment_add").commit();
+                fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_offers, "fragment_offers").addToBackStack("fragment_offers").commit();
 
             }
 
@@ -296,17 +294,17 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
+
     @Override
     public void onBackPressed() {
+
         back();
     }
 
     private void back() {
         if (fragment_main != null && fragment_main.isAdded() && fragment_main.isVisible()) {
-
-
-        }
-        else {
+            finish();
+        } else {
             displayFragmentMain();
         }
     }

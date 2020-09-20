@@ -129,6 +129,12 @@
     <string name="details">التفاصيل</string>
     <string name="user_name_test">احمد المصيلحى</string>
     <string name="order_details">تفاصيل الطلب</string>
-    <string name="there_is_new_notification">There is new notification</string>
+    <string name="there_is_new_notification">لديك اشعار جديد</string>
+    <string name="expire_date">تاريخ الانتهاء:</string>
+    <string name="before_discount">قبل الخصم</string>
+    <string name="after_discount">بعد الخصم</string>
+    <string name="delete">حذف</string>
+    <string name="update">تعديل</string>
+    <string name="product_update">تعديل المنتج</string>
 
 </resources>

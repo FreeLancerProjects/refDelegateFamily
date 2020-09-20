@@ -30,7 +30,7 @@
                 android:layout_height="80dp"
                 android:layout_marginStart="5dp"
                 android:elevation="5dp"
-                android:src="@drawable/user_avatar"
+                android:src="@drawable/chef"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -80,18 +80,27 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="15dp"
+                        android:layout_marginBottom="20dp"
                         android:background="@color/white" />
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:cardCornerRadius="20dp"
                         android:layout_gravity="center|bottom"
-                        android:background="@drawable/circle_bg_white"
-                        android:elevation="5dp"
                         android:layout_marginBottom="5dp"
-                        android:src="@drawable/ic_arrow_down_2"
-                        android:tint="@color/colorPrimary" />
+
+                        >
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_arrow_down_2"
+                            android:tint="@color/colorPrimary"
+                            />
+                    </androidx.cardview.widget.CardView>
+
                 </FrameLayout>
             </FrameLayout>
 

@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.refFamily.R;
-import com.refFamily.activities_fragments.activity_add_offer.AddOfferActivity;
+import com.refFamily.activities_fragments.activity_add_Product.AddProductActivity;
 import com.refFamily.activities_fragments.activity_home.HomeActivity;
 import com.refFamily.adapters.CategoryAdapter;
-import com.refFamily.adapters.OfferAdapter;
+import com.refFamily.adapters.ProductAdapter;
 import com.refFamily.databinding.FragmentMainBinding;
 import com.refFamily.preferences.Preferences;
 
@@ -56,7 +56,7 @@ public class Fragment_Main extends Fragment {
         binding.recViewCategory.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
         binding.recViewCategory.setAdapter(new CategoryAdapter(this.getContext()));
         binding.recViewOffers.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        binding.recViewOffers.setAdapter(new OfferAdapter(this.getContext()));
+        binding.recViewOffers.setAdapter(new ProductAdapter(this.getContext()));
 
 
         binding.addBtn.setOnClickListener(View -> {
@@ -70,7 +70,7 @@ public class Fragment_Main extends Fragment {
 
     private void NavigateToAddOfferACtivity(){
 
-        Intent intent = new Intent(this.getContext(), AddOfferActivity.class);
+        Intent intent = new Intent(this.getContext(), AddProductActivity.class);
         startActivity(intent);
 
     }

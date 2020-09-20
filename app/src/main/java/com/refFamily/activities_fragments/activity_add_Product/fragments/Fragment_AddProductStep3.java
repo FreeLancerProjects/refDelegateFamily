@@ -1,4 +1,4 @@
-package com.refFamily.activities_fragments.activity_add_offer.fragments;
+package com.refFamily.activities_fragments.activity_add_Product.fragments;
 
 import android.os.Bundle;
 
@@ -10,26 +10,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.refFamily.R;
-import com.refFamily.databinding.FragmentAddOfferStep3Binding;
+import com.refFamily.databinding.FragmentAddProductStep3Binding;
 import com.refFamily.models.AddProductModel;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Fragment_AddOfferStep3#newInstance} factory method to
+ * Use the {@link Fragment_AddProductStep3#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_AddOfferStep3 extends Fragment {
+public class Fragment_AddProductStep3 extends Fragment {
     private static final String TAG = "DATA";
 
-    private FragmentAddOfferStep3Binding binding;
+    private FragmentAddProductStep3Binding binding;
     private AddProductModel addProductModel;
 
-    public static Fragment_AddOfferStep3 newInstance(AddProductModel addProductModel) {
+    public static Fragment_AddProductStep3 newInstance(AddProductModel addProductModel) {
         Bundle bundle = new Bundle();
-        Fragment_AddOfferStep3 fragment_addOfferStep3 = new Fragment_AddOfferStep3();
+        Fragment_AddProductStep3 fragment_addProductStep3 = new Fragment_AddProductStep3();
         bundle.putSerializable(TAG, addProductModel);
-        fragment_addOfferStep3.setArguments(bundle);
-        return new Fragment_AddOfferStep3();
+        fragment_addProductStep3.setArguments(bundle);
+        return new Fragment_AddProductStep3();
     }
 
 
@@ -37,7 +37,7 @@ public class Fragment_AddOfferStep3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment__add_offer_step3, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment__add_product_step3, container, false);
 
         initView();
         return binding.getRoot();

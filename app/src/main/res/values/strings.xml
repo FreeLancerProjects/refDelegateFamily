@@ -130,5 +130,11 @@
     <string name="user_name_test">Ahmed Elmoselhy</string>
     <string name="order_details">Order Details</string>
     <string name="there_is_new_notification">There is new notification</string>
+    <string name="expire_date">Expire date:</string>
+    <string name="before_discount">Before discount</string>
+    <string name="after_discount">After Discount</string>
+    <string name="delete">Delete</string>
+    <string name="update">Update</string>
+    <string name="product_update">Product update</string>
 
 </resources>

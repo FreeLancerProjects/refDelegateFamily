@@ -13,6 +13,7 @@ import com.refFamily.R;
 import com.refFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
 import com.refFamily.databinding.ItemMainOffersBinding;
 import com.refFamily.databinding.ItemOrderBinding;
+import com.refFamily.language.Language_Helper;
 import com.refFamily.models.MarketCatogryModel;
 import com.refFamily.models.OrderModel;
 import com.refFamily.models.UserModel;
@@ -55,7 +56,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
 
     @Override
     public void onBindViewHolder(@NonNull OrderAdapterVH holder, int position) {
-
+        holder.binding.setLang(Language_Helper.getLanguage(context));
         holder.itemView.setOnClickListener(view -> {
 
             Intent intent = new Intent(context, OrderDetailActivity.class);

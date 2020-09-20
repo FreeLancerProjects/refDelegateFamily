@@ -1,4 +1,4 @@
-package com.refFamily.activities_fragments.activity_add_offer.fragments;
+package com.refFamily.activities_fragments.activity_add_Product.fragments;
 
 import android.os.Bundle;
 
@@ -10,28 +10,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.refFamily.R;
-import com.refFamily.databinding.FragmentAddOfferStep1Binding;
-import com.refFamily.databinding.FragmentAddOfferStep2Binding;
+import com.refFamily.databinding.FragmentAddProductStep2Binding;
 import com.refFamily.models.AddProductModel;
 
-public class Fragment_AddOfferStep2 extends Fragment {
+public class Fragment_AddProductStep2 extends Fragment {
     private static final String TAG = "DATA";
-    private FragmentAddOfferStep2Binding binding;
+    private FragmentAddProductStep2Binding binding;
     private AddProductModel addProductModel = null;
 
-    public static Fragment_AddOfferStep2 newInstance(AddProductModel addProductModel) {
+    public static Fragment_AddProductStep2 newInstance(AddProductModel addProductModel) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(TAG, addProductModel);
-        Fragment_AddOfferStep2 fragment_addOfferStep2 = new Fragment_AddOfferStep2();
-        fragment_addOfferStep2.setArguments(bundle);
-        return fragment_addOfferStep2;
+        Fragment_AddProductStep2 fragment_addProductStep2 = new Fragment_AddProductStep2();
+        fragment_addProductStep2.setArguments(bundle);
+        return fragment_addProductStep2;
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment__add_offer_step2, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment__add_product_step2, container, false);
         initView();
         return binding.getRoot();
     }
