@@ -38,14 +38,12 @@ public class UpdateProductActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_update_product);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_update_product);
         initView();
 
 
         getSliderData();
     }
-
-
 
 
     private void initView() {
@@ -55,12 +53,21 @@ public class UpdateProductActivity extends AppCompatActivity {
         binding.setLang(lang);
         sliderModelList = new ArrayList<>();
 
+        binding.back.setOnClickListener(view -> {
+
+            back();
+        });
 
     }
+
+    private void back() {
+        finish();
+    }
+
     //initiate slider ui
     private void sliderInit() {
         //top slider
-        sliderAdapter = new SliderAdapter(this,sliderModelList);
+        sliderAdapter = new SliderAdapter(this, sliderModelList);
         binding.imageSliderTop.setSliderAdapter(sliderAdapter);
         binding.imageSliderTop.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
         binding.imageSliderTop.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
@@ -72,7 +79,6 @@ public class UpdateProductActivity extends AppCompatActivity {
         binding.imageSliderTop.startAutoCycle();
 
     }
-
 
 
     // get data slider from API

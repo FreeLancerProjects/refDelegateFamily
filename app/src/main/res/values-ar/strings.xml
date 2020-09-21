@@ -94,7 +94,7 @@
     <string name="add_to_cart">اضف للسلة</string>
     <string name="quantity">الكمية</string>
     <string name="cart">السلة</string>
-    <string name="total">الاجمالى</string>
+    <string name="total">الاجمالى :</string>
     <string name="add_post">أضافة منشور</string>
     <string name="post">نشر</string>
     <string name="add_place">أضف المكان</string>
@@ -125,7 +125,7 @@
     <string name="price_after_discount">السعر بعد الخصم</string>
     <string name="date_from">من تاريخ</string>
     <string name="date_to">تاريخ الي</string>
-    <string name="_200">200ريال</string>
+    <string name="_200">200 ريال</string>
     <string name="details">التفاصيل</string>
     <string name="user_name_test">احمد المصيلحى</string>
     <string name="order_details">تفاصيل الطلب</string>
@@ -138,5 +138,8 @@
     <string name="product_update">تعديل المنتج</string>
     <string name="download_customer_app">حمل تطبيق العميل</string>
     <string name="download_delegate_app">حمل تطبيق المندوب</string>
+    <string name="time">الوقت</string>
+    <string name="cash">كاش</string>
+    <string name="payment">الدفع :</string>
 
 </resources>

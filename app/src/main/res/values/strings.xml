@@ -94,7 +94,7 @@
     <string name="add_to_cart">Add To Cart</string>
     <string name="quantity">Quantity</string>
     <string name="cart">Cart</string>
-    <string name="total">Total</string>
+    <string name="total">Total :</string>
     <string name="add_post">Add Post</string>
     <string name="post">post</string>
     <string name="add_place">Add Place</string>
@@ -138,5 +138,8 @@
     <string name="product_update">Product update</string>
     <string name="download_customer_app">Download customer app</string>
     <string name="download_delegate_app">Download Delegate app</string>
+    <string name="time">Time</string>
+    <string name="cash">Cash</string>
+    <string name="payment">Payment :</string>
 
 </resources>

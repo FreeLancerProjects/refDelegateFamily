@@ -7,15 +7,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.refFamily.R;
 import com.refFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
-import com.refFamily.databinding.ItemMainOffersBinding;
 import com.refFamily.databinding.ItemOrderBinding;
+import com.refFamily.databinding.ItemOrderDetailBinding;
 import com.refFamily.language.Language_Helper;
-import com.refFamily.models.MarketCatogryModel;
 import com.refFamily.models.OrderModel;
 import com.refFamily.models.UserModel;
 import com.refFamily.preferences.Preferences;
@@ -25,7 +23,7 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapterVH> {
+public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.OrderDetailAdapterVH> {
 
     private List<OrderModel> orderlist;
     private Context context;
@@ -33,14 +31,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
     private String lang;
     Preferences preferences;
     UserModel userModel;
-    private OrderDetailAdapter orderDetailAdapter;
 
 
-    public OrderAdapter(Context context) {
+    public OrderDetailAdapter(Context context) {
         this.context = context;
     }
 
-    public OrderAdapter(List<OrderModel> orderlist, Context context) {
+    public OrderDetailAdapter(List<OrderModel> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -51,24 +48,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
 
     @NonNull
     @Override
-    public OrderAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemOrderBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_order, parent, false);
-        return new OrderAdapterVH(binding);
+    public OrderDetailAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemOrderDetailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_order_detail, parent, false);
+        return new OrderDetailAdapterVH(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrderAdapterVH holder, int position) {
+    public void onBindViewHolder(@NonNull OrderDetailAdapterVH holder, int position) {
         holder.binding.setLang(Language_Helper.getLanguage(context));
-        orderDetailAdapter = new OrderDetailAdapter(context);
-        holder.binding.recViewOrderDetail.setLayoutManager(new LinearLayoutManager(context));
-        holder.binding.recViewOrderDetail.setAdapter(orderDetailAdapter );
 
-        holder.itemView.setOnClickListener(view -> {
-
-            Intent intent = new Intent(context, OrderDetailActivity.class);
-            context.startActivity(intent);
-
-        });
 
 
     }
@@ -78,10 +66,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         return 15;
     }
 
-    public class OrderAdapterVH extends RecyclerView.ViewHolder {
-        public ItemOrderBinding binding;
+    public class OrderDetailAdapterVH extends RecyclerView.ViewHolder {
+        public ItemOrderDetailBinding binding;
 
-        public OrderAdapterVH(@NonNull ItemOrderBinding binding) {
+        public OrderDetailAdapterVH(@NonNull ItemOrderDetailBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
