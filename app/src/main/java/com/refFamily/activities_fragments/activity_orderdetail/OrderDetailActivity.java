@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import com.refFamily.R;
 import com.refFamily.databinding.ActivityOrderDetailBinding;
+import com.refFamily.language.Language_Helper;
 
 import java.util.Locale;
 
@@ -17,6 +19,12 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     private ActivityOrderDetailBinding binding;
     private String lang;
+
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(Language_Helper.updateResources(base, Language_Helper.getLanguage(base)));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -136,5 +136,7 @@
     <string name="delete">حذف</string>
     <string name="update">تعديل</string>
     <string name="product_update">تعديل المنتج</string>
+    <string name="download_customer_app">حمل تطبيق العميل</string>
+    <string name="download_delegate_app">حمل تطبيق المندوب</string>
 
 </resources>

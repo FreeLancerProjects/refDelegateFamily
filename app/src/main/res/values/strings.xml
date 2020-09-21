@@ -136,5 +136,7 @@
     <string name="delete">Delete</string>
     <string name="update">Update</string>
     <string name="product_update">Product update</string>
+    <string name="download_customer_app">Download customer app</string>
+    <string name="download_delegate_app">Download Delegate app</string>
 
 </resources>
