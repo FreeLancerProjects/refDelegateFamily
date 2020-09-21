@@ -22,19 +22,18 @@ import com.refFamily.activities_fragments.activity_about_app.AboutAppActivity;
 import com.refFamily.activities_fragments.activity_home.HomeActivity;
 import com.refFamily.activities_fragments.activity_language.LanguageActivity;
 import com.refFamily.activities_fragments.activity_login.LoginActivity;
-import com.refFamily.activities_fragments.activity_setting.SettingsActivity;
 import com.refFamily.activities_fragments.activity_sign_up.SignUpActivity;
 import com.refFamily.databinding.FragmentSettingBinding;
 import com.refFamily.interfaces.Listeners;
 import com.refFamily.models.DefaultSettings;
 import com.refFamily.models.MarketCatogryModel;
 import com.refFamily.preferences.Preferences;
+import com.refFamily.activities_fragments.activity_profile.ProfileActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import io.paperdb.BuildConfig;
 import io.paperdb.Paper;
 
 import static android.app.Activity.RESULT_OK;
@@ -101,7 +100,9 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
 
     @Override
     public void onProfile() {
-
+        Intent intent = new Intent(activity, ProfileActivity.class);
+        intent.putExtra("data",preferences.getUserData(activity));
+        startActivity(intent);
     }
 
     @Override

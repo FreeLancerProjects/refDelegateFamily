@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.refFamily.R;
 import com.refFamily.databinding.ItemMainOffersBinding;
+import com.refFamily.databinding.ItemOffersBinding;
 import com.refFamily.models.MarketCatogryModel;
+import com.refFamily.models.OfferModel;
 import com.refFamily.models.UserModel;
 import com.refFamily.preferences.Preferences;
 
@@ -21,7 +23,7 @@ import io.paperdb.Paper;
 
 public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferAdapterVH> {
 
-    private List<MarketCatogryModel.Data> orderlist;
+    private List<OfferModel> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
@@ -33,7 +35,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferAdapter
         this.context = context;
     }
 
-    public OfferAdapter(List<MarketCatogryModel.Data> orderlist, Context context) {
+    public OfferAdapter(List<OfferModel> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -45,7 +47,7 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferAdapter
     @NonNull
     @Override
     public OfferAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemMainOffersBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_offers, parent, false);
+        ItemOffersBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_offers, parent, false);
         return new OfferAdapterVH(binding);
     }
 
@@ -62,9 +64,9 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferAdapter
     }
 
     public class OfferAdapterVH extends RecyclerView.ViewHolder {
-        public ItemMainOffersBinding binding;
+        public ItemOffersBinding binding;
 
-        public OfferAdapterVH(@NonNull ItemMainOffersBinding binding) {
+        public OfferAdapterVH(@NonNull ItemOffersBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

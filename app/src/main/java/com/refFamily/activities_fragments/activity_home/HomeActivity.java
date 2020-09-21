@@ -1,6 +1,7 @@
 package com.refFamily.activities_fragments.activity_home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -16,6 +17,7 @@ import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Main;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Orders;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Setting;
 import com.refFamily.activities_fragments.activity_home.fragments.Fragment_Profile;
+import com.refFamily.activities_fragments.activity_notification.NotificationActivity;
 import com.refFamily.databinding.ActivityHomeBinding;
 import com.refFamily.language.Language_Helper;
 import com.refFamily.models.UserModel;
@@ -88,6 +90,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+
+
+        binding.flNotification.setOnClickListener(view -> {
+
+
+            Intent intent = new Intent(HomeActivity.this, NotificationActivity.class);
+            startActivity(intent);
+        });
 
     }
 

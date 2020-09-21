@@ -122,7 +122,7 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_marginEnd="5dp"
-                            android:src="@drawable/ic_chat"
+                            android:src="@drawable/ic_comment_1"
                             android:tint="@color/green"
                             app:layout_constraintBottom_toBottomOf="@id/user_image"
                             app:layout_constraintEnd_toEndOf="parent"
