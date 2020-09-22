@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.refFamily.R;
+import com.refFamily.activities_fragments.activity_chat.ChatActivity;
 import com.refFamily.adapters.OrderDetailAdapter;
 import com.refFamily.databinding.ActivityOrderDetailBinding;
 import com.refFamily.language.Language_Helper;
@@ -50,6 +53,15 @@ public class OrderDetailActivity extends AppCompatActivity {
         binding.back.setOnClickListener(view -> {
 
             back();
+        });
+        binding.imgChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent=new Intent(OrderDetailActivity.this, ChatActivity.class);
+                startActivity(intent);
+                finish();
+            }
         });
 
     }
