@@ -59,8 +59,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
     public void onBindViewHolder(@NonNull OrderAdapterVH holder, int position) {
         holder.binding.setLang(Language_Helper.getLanguage(context));
         orderDetailAdapter = new OrderDetailAdapter(context);
-        holder.binding.recViewOrderDetail.setLayoutManager(new LinearLayoutManager(context));
-        holder.binding.recViewOrderDetail.setAdapter(orderDetailAdapter );
 
         holder.itemView.setOnClickListener(view -> {
 

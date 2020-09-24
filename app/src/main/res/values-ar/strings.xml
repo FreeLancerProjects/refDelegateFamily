@@ -165,4 +165,18 @@
     <string name="profile_1">البروفايل</string>
     <string name="delivery_is_within_an_hour">يتم التوصيل خلال ساعه</string>
     <string name="delivery_price">سعر التوصيل :</string>
+    <string name="download_family_app">حمل تطبيق الاسرة</string>
+    <string name="nationality">الجنسيه</string>
+    <string name="national_identity_number">رقم الهوية الوطنية</string>
+    <string name="identity_card_image">صورة من بطاقة الهوية</string>
+    <string name="bank_account_number_24_digit">رقم الحساب البنكي الايبان والمكون من 24 خانة</string>
+    <string name="address_of_account_owner">عنوان صاحب الحساب - الرجاء كتابة العنوان كاملا</string>
+    <string name="car_type">نوع السيارة</string>
+    <string name="car_model">موديل السيارة</string>
+    <string name="manufacturing_year">سنة الصنع</string>
+    <string name="driving_license">صورة من رخصة القيادة</string>
+    <string name="car_image_from_front">صورة السيارة من الامام</string>
+    <string name="car_image_from_back">صورة السيارة من الخلف</string>
+    <string name="i_acknowledge_that_i_have_read_the_aforementioned_conditions_and_agree_to_them_completely"> اقر بانني قد قرأت الشروط المذكورة ووافقت عليها كاملا</string>
+
 </resources>

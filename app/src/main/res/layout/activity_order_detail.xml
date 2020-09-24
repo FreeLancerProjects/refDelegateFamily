@@ -208,7 +208,7 @@
                         android:layout_height="40dp"
                         android:layout_marginBottom="30dp"
                         android:background="@color/gray2"
-                        app:layout_constraintBottom_toTopOf="@id/linear_btn">
+                        app:layout_constraintBottom_toTopOf="@id/linear_location">
 
                         <View
                             android:layout_width="5dp"
@@ -226,6 +226,59 @@
                     </LinearLayout>
 
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/linear_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@color/gray2"
+                        app:layout_constraintBottom_toTopOf="@id/linear_btn">
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/start_loc_img"-->
+<!--                            android:layout_width="30dp"-->
+<!--                            android:layout_height="30dp"-->
+<!--                            android:src="@drawable/ic_pin3"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            android:layout_marginStart="16dp"-->
+<!--                            android:tint="@color/colorPrimary"-->
+<!--                            />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:layout_constraintTop_toBottomOf=""-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            android:text="الرياض / شارع الجماعه"-->
+<!--                            android:textColor="@color/gray12"-->
+<!--                            android:textSize="16sp"-->
+<!--                            app:layout_constraintStart_toStartOf="@id/start_loc_img"-->
+<!--                            android:layout_marginStart="10dp"/>-->
+<!--                        <ImageView-->
+<!--                            android:id="@+id/end_loc_img"-->
+<!--                            android:layout_width="30dp"-->
+<!--                            android:layout_height="30dp"-->
+<!--                            android:src="@drawable/ic_flag"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            app:layout_constraintStart_toEndOf="@id/start_loc_img"-->
+<!--                            android:layout_marginStart="16dp"-->
+<!--                            android:tint="@color/colorPrimary"-->
+<!--                            />-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:layout_constraintTop_toTopOf="@id/end_loc_img"-->
+<!--                            app:layout_constraintBottom_toBottomOf="@id/end_loc_img"-->
+<!--                            android:text="جدة / شارع المدينة"-->
+<!--                            android:textColor="@color/gray12"-->
+<!--                            android:textSize="16sp"-->
+<!--                            app:layout_constraintStart_toEndOf="@id/end_loc_img"-->
+<!--                            android:layout_marginStart="10dp"/>-->
+                        />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                     <LinearLayout

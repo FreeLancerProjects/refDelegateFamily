@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="com.refDelegateFamily.models.AddProductModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activities_fragments.activity_add_Product.fragments.Fragment_SignUpStep2">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray0"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_app_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+
+
+                <TextView
+                    android:id="@+id/tv_identity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textSize="15sp"
+                    android:textColor="@color/gray12"
+                    android:text="@string/identity_card_image"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"/>
+
+
+                <ImageView
+                    android:id="@+id/img_identity"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/ic_gallery"
+                    android:tint="@color/gray6"
+                    android:background="@drawable/small_stroke_primary"
+                    app:layout_constraintTop_toBottomOf="@id/tv_identity"
+                    />
+
+
+
+                <TextView
+                    android:id="@+id/tv_bank_account_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_identity"
+                    android:textSize="15sp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/gray12"
+                    android:text="@string/bank_account_number_24_digit"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    />
+
+
+                <EditText
+                    android:id="@+id/et_account_number"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/small_stroke_primary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="16dp"
+                    android:padding="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="13dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_bank_account_number"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_account_number"
+                    android:textSize="15sp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/gray12"
+                    android:text="@string/address_of_account_owner"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    />
+
+
+                <EditText
+                    android:id="@+id/et_address"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/small_stroke_primary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="13dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_address"
+                    />
+
+                <EditText
+                    android:id="@+id/et_car_type"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/small_stroke_primary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/car_type"
+                    android:padding="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="13dp"
+                    app:layout_constraintTop_toBottomOf="@id/et_address"
+                    />
+
+                <EditText
+                    android:id="@+id/et_car_model"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/small_stroke_primary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/car_model"
+                    android:padding="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="13dp"
+                    app:layout_constraintTop_toBottomOf="@id/et_car_type"
+                    />
+
+
+                <EditText
+                    android:id="@+id/et_manufacturing_year"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/small_stroke_primary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/manufacturing_year"
+                    android:padding="5dp"
+                    android:textAlignment="viewStart"
+                    android:textSize="13dp"
+                    app:layout_constraintTop_toBottomOf="@id/et_car_model"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
+</layout>

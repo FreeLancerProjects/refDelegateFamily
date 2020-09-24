@@ -227,7 +227,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/download_delegate_app"
+                    android:text="@string/download_family_app"
                     />
             </LinearLayout>
             

@@ -10,38 +10,31 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.databinding.FragmentAddProductStep3Binding;
+import com.refDelegateFamily.databinding.FragmentSignupStep2Binding;
 import com.refDelegateFamily.models.AddProductModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Fragment_AddProductStep3#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Fragment_AddProductStep3 extends Fragment {
+public class Fragment_SignUpStep2 extends Fragment {
     private static final String TAG = "DATA";
+    private FragmentSignupStep2Binding binding;
+    private AddProductModel addProductModel = null;
 
-    private FragmentAddProductStep3Binding binding;
-    private AddProductModel addProductModel;
-
-    public static Fragment_AddProductStep3 newInstance(AddProductModel addProductModel) {
+    public static Fragment_SignUpStep2 newInstance(AddProductModel addProductModel) {
         Bundle bundle = new Bundle();
-        Fragment_AddProductStep3 fragment_addProductStep3 = new Fragment_AddProductStep3();
         bundle.putSerializable(TAG, addProductModel);
-        fragment_addProductStep3.setArguments(bundle);
-        return new Fragment_AddProductStep3();
-    }
+        Fragment_SignUpStep2 fragment_signUpStep2 = new Fragment_SignUpStep2();
+        fragment_signUpStep2.setArguments(bundle);
+        return fragment_signUpStep2;
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment__add_product_step3, container, false);
-
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment__signup_step2, container, false);
         initView();
         return binding.getRoot();
     }
+
 
     private void initView() {
         Bundle bundle = getArguments();
@@ -50,5 +43,10 @@ public class Fragment_AddProductStep3 extends Fragment {
         }
         binding.setModel(addProductModel);
 
+
+
+
     }
+
+
 }

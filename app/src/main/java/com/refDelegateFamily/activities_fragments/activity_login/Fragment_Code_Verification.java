@@ -1,5 +1,6 @@
 package com.refDelegateFamily.activities_fragments.activity_login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.refDelegateFamily.R;
+import com.refDelegateFamily.activities_fragments.activity_add_Product.AddProductActivity;
+import com.refDelegateFamily.activities_fragments.activity_verification_code.VerificationCodeActivity;
 import com.refDelegateFamily.databinding.FragmentCodeVerificationBinding;
 import com.refDelegateFamily.models.UserModel;
 import com.refDelegateFamily.preferences.Preferences;
@@ -59,6 +62,11 @@ public class Fragment_Code_Verification extends Fragment {
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
 
+        binding.btnConfirm.setOnClickListener(view -> {
+            Intent intent = new Intent(this.getContext(), AddProductActivity.class);
+            startActivity(intent);
+            this.getActivity().finish();
+        });
 
     }
 

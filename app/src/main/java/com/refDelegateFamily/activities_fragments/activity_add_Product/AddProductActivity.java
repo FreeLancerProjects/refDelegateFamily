@@ -10,9 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.fragments.Fragment_AddProductStep1;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.fragments.Fragment_AddProductStep2;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.fragments.Fragment_AddProductStep3;
+import com.refDelegateFamily.activities_fragments.activity_add_Product.fragments.Fragment_SignUpStep1;
+import com.refDelegateFamily.activities_fragments.activity_add_Product.fragments.Fragment_SignUpStep2;
+import com.refDelegateFamily.activities_fragments.activity_add_Product.fragments.Fragment_SignUpStep3;
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
 import com.refDelegateFamily.databinding.ActivityAddOfferBinding;
 import com.refDelegateFamily.language.Language_Helper;
@@ -28,9 +28,9 @@ public class AddProductActivity extends AppCompatActivity {
     private String lang;
     private int step = 1;
     private AddProductModel addProductModel = null;
-    private Fragment_AddProductStep1 fragment_addProductStep1;
-    private Fragment_AddProductStep2 fragment_addProductStep2;
-    private Fragment_AddProductStep3 fragment_addProductStep3;
+    private Fragment_SignUpStep1 fragment_signUpStep1;
+    private Fragment_SignUpStep2 fragment_signUpStep2;
+    private Fragment_SignUpStep3 fragment_signUpStep3;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -123,20 +123,20 @@ public class AddProductActivity extends AppCompatActivity {
     private void displayFragmentStep1(AddProductModel addProductModel) {
         updateStep1UI();
         step = 1;
-        if (fragment_addProductStep1 == null) {
-            fragment_addProductStep1 = Fragment_AddProductStep1.newInstance(addProductModel);
+        if (fragment_signUpStep1 == null) {
+            fragment_signUpStep1 = Fragment_SignUpStep1.newInstance(addProductModel);
         }
-        if (fragment_addProductStep2 != null && fragment_addProductStep2.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_addProductStep2).commit();
+        if (fragment_signUpStep2 != null && fragment_signUpStep2.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_signUpStep2).commit();
         }
 
-        if (fragment_addProductStep3 != null && fragment_addProductStep3.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_addProductStep3).commit();
+        if (fragment_signUpStep3 != null && fragment_signUpStep3.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_signUpStep3).commit();
         }
-        if (fragment_addProductStep1.isAdded()) {
-            fragmentManager.beginTransaction().show(fragment_addProductStep1).commit();
+        if (fragment_signUpStep1.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_signUpStep1).commit();
         } else {
-            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_addProductStep1, "fragment_addProductStep1").addToBackStack("fragment_addProductStep1").commit();
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_signUpStep1, "fragment_signUpStep1").addToBackStack("fragment_signUpStep1").commit();
         }
 
     }
@@ -145,20 +145,20 @@ public class AddProductActivity extends AppCompatActivity {
     private void displayFragmentStep2(AddProductModel addProductModel) {
         updateStep2UI();
         step = 2;
-        if (fragment_addProductStep2 == null) {
-            fragment_addProductStep2 = Fragment_AddProductStep2.newInstance(addProductModel);
+        if (fragment_signUpStep2 == null) {
+            fragment_signUpStep2 = Fragment_SignUpStep2.newInstance(addProductModel);
         }
-        if (fragment_addProductStep1 != null && fragment_addProductStep1.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_addProductStep1).commit();
+        if (fragment_signUpStep1 != null && fragment_signUpStep1.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_signUpStep1).commit();
         }
 
-        if (fragment_addProductStep3 != null && fragment_addProductStep3.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_addProductStep3).commit();
+        if (fragment_signUpStep3 != null && fragment_signUpStep3.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_signUpStep3).commit();
         }
-        if (fragment_addProductStep2.isAdded()) {
-            fragmentManager.beginTransaction().show(fragment_addProductStep2).commit();
+        if (fragment_signUpStep2.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_signUpStep2).commit();
         } else {
-            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_addProductStep2, "fragment_addProductStep2").addToBackStack("fragment_addProductStep2").commit();
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_signUpStep2, "fragment_signUpStep2").addToBackStack("fragment_signUpStep2").commit();
         }
 
     }
@@ -166,20 +166,20 @@ public class AddProductActivity extends AppCompatActivity {
     private void displayFragmentStep3(AddProductModel addProductModel) {
         updateStep3UI();
         step = 3;
-        if (fragment_addProductStep3 == null) {
-            fragment_addProductStep3 = Fragment_AddProductStep3.newInstance(addProductModel);
+        if (fragment_signUpStep3 == null) {
+            fragment_signUpStep3 = Fragment_SignUpStep3.newInstance(addProductModel);
         }
-        if (fragment_addProductStep1 != null && fragment_addProductStep1.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_addProductStep1).commit();
+        if (fragment_signUpStep1 != null && fragment_signUpStep1.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_signUpStep1).commit();
         }
 
-        if (fragment_addProductStep2 != null && fragment_addProductStep2.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_addProductStep2).commit();
+        if (fragment_signUpStep2 != null && fragment_signUpStep2.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_signUpStep2).commit();
         }
-        if (fragment_addProductStep3.isAdded()) {
-            fragmentManager.beginTransaction().show(fragment_addProductStep3).commit();
+        if (fragment_signUpStep3.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_signUpStep3).commit();
         } else {
-            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_addProductStep3, "fragment_addProductStep3").addToBackStack("fragment_addProductStep3").commit();
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_signUpStep3, "fragment_signUpStep3").addToBackStack("fragment_signUpStep3").commit();
         }
 
     }

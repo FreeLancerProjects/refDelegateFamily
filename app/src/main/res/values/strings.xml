@@ -165,4 +165,17 @@
     <string name="profile_1">Profile</string>
     <string name="delivery_is_within_an_hour">Delivery is within an hour</string>
     <string name="delivery_price">Delivery price :</string>
+    <string name="download_family_app">Download Family App</string>
+    <string name="nationality">Nationality</string>
+    <string name="national_identity_number">National Identity Number</string>
+    <string name="identity_card_image">Identity Card Image</string>
+    <string name="bank_account_number_24_digit">Bank Account Number (24 digit)</string>
+    <string name="address_of_account_owner">Address of account owner</string>
+    <string name="car_type">Car Type</string>
+    <string name="car_model">Car model</string>
+    <string name="manufacturing_year">Manufacturing year</string>
+    <string name="driving_license">Driving license</string>
+    <string name="car_image_from_front">Car image from front</string>
+    <string name="car_image_from_back">Car image from back</string>
+    <string name="i_acknowledge_that_i_have_read_the_aforementioned_conditions_and_agree_to_them_completely">I acknowledge that I have read the aforementioned conditions and agree to them completely</string>
 </resources>

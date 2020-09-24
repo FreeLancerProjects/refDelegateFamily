@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.refDelegateFamily.models.AddProductModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activities_fragments.activity_add_Product.fragments.Fragment_SignUpStep3">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray0"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_app_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+
+                <TextView
+                    android:id="@+id/tv_driving_license"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/driving_license"
+                    android:textColor="@color/gray12"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/img_driving_license"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/small_stroke_primary"
+                    android:src="@drawable/ic_gallery"
+                    android:tint="@color/gray6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_driving_license" />
+
+                <TextView
+                    android:id="@+id/tv_front_car"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/car_image_from_front"
+                    android:textColor="@color/gray12"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_driving_license" />
+
+
+                <ImageView
+                    android:id="@+id/img_front_car"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/small_stroke_primary"
+                    android:src="@drawable/ic_gallery"
+                    android:tint="@color/gray6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_front_car" />
+
+                <TextView
+                    android:id="@+id/tv_back_car"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/car_image_from_back"
+                    android:textColor="@color/gray12"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_front_car" />
+
+
+                <ImageView
+                    android:id="@+id/img_back_car"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/small_stroke_primary"
+                    android:src="@drawable/ic_gallery"
+                    android:tint="@color/gray6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_back_car" />
+
+                <LinearLayout
+                    android:id="@+id/linear_terms_and_conditions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/img_back_car"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/tv_terms_and_conditions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/terms_and_conditions"
+                        />
+                    <view
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray12"/>
+                </LinearLayout>
+
+
+                <CheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/i_acknowledge_that_i_have_read_the_aforementioned_conditions_and_agree_to_them_completely"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linear_terms_and_conditions"
+                    />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
+</layout>

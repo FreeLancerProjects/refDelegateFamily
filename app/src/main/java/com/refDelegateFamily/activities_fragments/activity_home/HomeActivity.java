@@ -54,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         initView();
         if (savedInstanceState == null) {
-            displayFragmentMain();
+            displayFragmentOrder();
         }
 
     }
@@ -72,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.home:
-                        displayFragmentMain();
+                        displayFragmentOrder();
                         break;
                     case R.id.profile:
                         displayFragmentProfile();
@@ -309,10 +309,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void back() {
-        if (fragment_main != null && fragment_main.isAdded() && fragment_main.isVisible()) {
+        if (fragment_orders != null && fragment_orders.isAdded() && fragment_orders.isVisible()) {
             finish();
         } else {
-            displayFragmentMain();
+            displayFragmentOrder();
         }
     }
 

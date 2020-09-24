@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 
 import com.refDelegateFamily.R;
+import com.refDelegateFamily.activities_fragments.activity_add_Product.AddProductActivity;
 import com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpActivity;
 import com.refDelegateFamily.databinding.ActivityVerificationCodeBinding;
 import com.refDelegateFamily.language.Language_Helper;
@@ -81,7 +82,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
                 binding.btnResendCode.setTextColor(ContextCompat.getColor(VerificationCodeActivity.this, R.color.colorPrimary));
                 binding.btnResendCode.setBackgroundResource(R.color.white);
 
-                Intent intent = new Intent(VerificationCodeActivity.this, SignUpActivity.class);
+                Intent intent = new Intent(VerificationCodeActivity.this, AddProductActivity.class);
                 startActivity(intent);
                 finish();
                 stopTimer();

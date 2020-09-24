@@ -10,39 +10,45 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.AddProductActivity;
-import com.refDelegateFamily.databinding.FragmentAddProductStep1Binding;
+import com.refDelegateFamily.databinding.FragmentSignupStep3Binding;
 import com.refDelegateFamily.models.AddProductModel;
 
-public class Fragment_AddProductStep1 extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link Fragment_SignUpStep3#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class Fragment_SignUpStep3 extends Fragment {
     private static final String TAG = "DATA";
-    private AddProductActivity activity;
-    private FragmentAddProductStep1Binding binding;
+
+    private FragmentSignupStep3Binding binding;
     private AddProductModel addProductModel;
 
-
-    public static Fragment_AddProductStep1 newInstance(AddProductModel addProductModel) {
+    public static Fragment_SignUpStep3 newInstance(AddProductModel addProductModel) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(TAG,addProductModel);
-        Fragment_AddProductStep1 fragment_addProductStep1 =  new Fragment_AddProductStep1();
-        fragment_addProductStep1.setArguments(bundle);
-        return fragment_addProductStep1;
+        Fragment_SignUpStep3 fragment_signUpStep3 = new Fragment_SignUpStep3();
+        bundle.putSerializable(TAG, addProductModel);
+        fragment_signUpStep3.setArguments(bundle);
+        return new Fragment_SignUpStep3();
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment__add_product_step1, container, false);
+        // Inflate the layout for this fragment
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment__signup_step3, container, false);
+
         initView();
         return binding.getRoot();
     }
 
     private void initView() {
-
         Bundle bundle = getArguments();
-        if (bundle!=null){
+        if (bundle != null) {
             addProductModel = (AddProductModel) bundle.getSerializable(TAG);
         }
         binding.setModel(addProductModel);
+
     }
 }
