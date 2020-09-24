@@ -141,5 +141,24 @@
     <string name="time">الوقت</string>
     <string name="cash">كاش</string>
     <string name="payment">الدفع :</string>
+    <string name="order_accepted">تم الموافقة علي الطلب</string>
+    <string name="order_id">رقم الطلب</string>
+    <string name="order_will_be_ready">جار تجهيز الطلب</string>
+    <string name="family_make_order_ready">تقوم الاسره بتجهيز الطلب</string>
+    <string name="the_request_is_being_submitted">جار تسليم الطلب</string>
+    <string name="we_deliver_your_request_to_a_delegate">نقوم بتسليم طلبك للمندوب</string>
+    <string name="the_delivery_was_successful">تم التسليم بنجاح</string>
+    <string name="order_steps">خطوات الطلب</string>
+    <string name="payment_1">الدفع</string>
+    <string name="name_on_card_optional">الاسم علي الكارت(اختياري)</string>
+    <string name="mm">MM</string>
+    <string name="card_number">رقم الكارت</string>
+    <string name="yy">YY</string>
+    <string name="refuse_reasons">اسباب الرفض</string>
+    <string name="vacation">عدم التفرغ</string>
+    <string name="short_time">الوقت قليل</string>
+    <string name="quantity_not_available">الكمية غير متوفرة</string>
+    <string name="another_reason">سبب اخر</string>
+    <string name="refuse_confirm">تأكيد الرفض</string>
 
 </resources>

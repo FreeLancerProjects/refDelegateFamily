@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.refFamily.R;
 import com.refFamily.activities_fragments.activity_chat.ChatActivity;
+import com.refFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
 import com.refFamily.adapters.OrderDetailAdapter;
 import com.refFamily.databinding.ActivityOrderDetailBinding;
 import com.refFamily.language.Language_Helper;
@@ -34,7 +35,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_order_detail);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_order_detail);
 
         initView();
     }
@@ -47,7 +48,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
         adapter = new OrderDetailAdapter(this);
         binding.recViewOrderDetail.setLayoutManager(new LinearLayoutManager(this));
-        binding.recViewOrderDetail.setAdapter(adapter );
+        binding.recViewOrderDetail.setAdapter(adapter);
 
 
         binding.back.setOnClickListener(view -> {
@@ -58,10 +59,18 @@ public class OrderDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent=new Intent(OrderDetailActivity.this, ChatActivity.class);
+                Intent intent = new Intent(OrderDetailActivity.this, ChatActivity.class);
                 startActivity(intent);
                 finish();
             }
+        });
+
+
+        binding.acceptBtn.setOnClickListener(view -> {
+
+            Intent intent = new Intent(OrderDetailActivity.this, OrderStepsActivity.class);
+            startActivity(intent);
+
         });
 
     }

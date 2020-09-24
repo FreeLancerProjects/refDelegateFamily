@@ -1,5 +1,6 @@
 package com.refFamily.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.refFamily.R;
+import com.refFamily.databinding.DialogUpdatePriceBinding;
 import com.refFamily.databinding.ItemMainOffersBinding;
 import com.refFamily.databinding.ItemOffersBinding;
 import com.refFamily.models.MarketCatogryModel;
@@ -54,7 +56,17 @@ public class OfferAdapter extends RecyclerView.Adapter<OfferAdapter.OfferAdapter
     @Override
     public void onBindViewHolder(@NonNull OfferAdapterVH holder, int position) {
 
+        holder.binding.updateBtn.setOnClickListener(view -> {
 
+            Dialog dialog = new Dialog(context);
+            DialogUpdatePriceBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_update_price, null, false);
+            dialog.getWindow().setBackgroundDrawableResource(R.drawable.custom_bg_white_1);
+            dialog.setContentView(binding.getRoot());
+            dialog.show();
+            dialog.setCancelable(true);
+
+
+        });
 
     }
 

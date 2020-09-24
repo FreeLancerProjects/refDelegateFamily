@@ -22,6 +22,7 @@ import io.paperdb.Paper;
 
 public class AddProductActivity extends AppCompatActivity {
 
+    private static final String TAG = "DATA";
     private ActivityAddOfferBinding binding;
     private FragmentManager fragmentManager;
     private String lang;
@@ -52,6 +53,11 @@ public class AddProductActivity extends AppCompatActivity {
         Paper.init(this);
         lang = Paper.book().read("lang", "ar");
         binding.setLang(lang);
+        Intent intent1 = getIntent();
+        if (intent1 !=null){
+            addProductModel = (AddProductModel) intent1.getSerializableExtra(TAG);
+        }
+
         if (addProductModel == null) {
             addProductModel = new AddProductModel();
 

@@ -141,5 +141,24 @@
     <string name="time">Time</string>
     <string name="cash">Cash</string>
     <string name="payment">Payment :</string>
+    <string name="order_accepted">Order accepted</string>
+    <string name="order_id">Order id</string>
+    <string name="order_will_be_ready">Order will be ready</string>
+    <string name="family_make_order_ready">Family make order ready</string>
+    <string name="the_request_is_being_submitted">The request is being submitted</string>
+    <string name="we_deliver_your_request_to_a_delegate">We deliver your request to a delegate</string>
+    <string name="the_delivery_was_successful">The delivery was successful</string>
+    <string name="order_steps">Order steps</string>
+    <string name="payment_1">Payment</string>
+    <string name="name_on_card_optional">Name on card(optional)</string>
+    <string name="mm">MM</string>
+    <string name="card_number">Card number</string>
+    <string name="yy">YY</string>
+    <string name="refuse_reasons">Refuse Reasons</string>
+    <string name="vacation">Vacation</string>
+    <string name="short_time">Short Time</string>
+    <string name="quantity_not_available">Quantity not available</string>
+    <string name="another_reason">Another reason</string>
+    <string name="refuse_confirm">Refuse Confirm</string>
 
 </resources>

@@ -10,15 +10,13 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="15dp"
         android:layout_margin="16dp"
-        >
+        app:cardCornerRadius="15dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            >
+            android:padding="10dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardImage"
@@ -120,7 +118,7 @@
                 android:id="@+id/img_money1"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="10dp"
                 android:src="@drawable/ic_calendar"
                 android:tint="@color/gray6"
                 app:layout_constraintStart_toEndOf="@id/tv_before_discount_value"
@@ -133,9 +131,9 @@
                 android:layout_marginStart="5dp"
                 android:text="@string/after_discount"
                 android:textSize="10sp"
+                app:layout_constraintEnd_toStartOf="@id/tv_after_discount_value"
                 app:layout_constraintStart_toEndOf="@id/img_money1"
                 app:layout_constraintTop_toTopOf="@id/img_money1"
-                app:layout_constraintEnd_toStartOf="@id/tv_after_discount_value"
 
                 />
 
@@ -147,9 +145,9 @@
                 android:text="@string/_200"
                 android:textColor="@color/colorPrimary"
                 android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_after_discount"
-                app:layout_constraintTop_toTopOf="@id/tv_before_discount"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="@id/tv_before_discount" />
 
 
             <LinearLayout
@@ -192,6 +190,7 @@
                 app:layout_constraintTop_toBottomOf="@id/cardImage">
 
                 <Button
+                    android:id="@+id/update_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginEnd="16dp"
@@ -199,6 +198,7 @@
                     android:text="@string/update" />
 
                 <Button
+                    android:id="@+id/delete_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:background="@color/color_red"
@@ -212,8 +212,6 @@
 
 
     </androidx.cardview.widget.CardView>
-
-
 
 
 </layout>

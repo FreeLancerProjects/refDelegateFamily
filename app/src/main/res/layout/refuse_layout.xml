@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="lang"
+            type="String" />
+        
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        >
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:src='@{lang.equals("ar")?@drawable/ic_right_arrow:@drawable/ic_left_arrow}'
+            android:tint="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/refuse_reasons"
+            android:textSize="18sp"
+            android:textColor="@color/gray12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/res1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vacation"
+            android:textColor="@color/gray12"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/back"
+            app:layout_constraintTop_toBottomOf="@id/back"
+            android:layout_marginTop="16dp"
+            />
+    
+        <View
+            android:id="@+id/v1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray6"
+            app:layout_constraintTop_toBottomOf="@id/res1"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:id="@+id/res2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/short_time"
+            android:textColor="@color/gray12"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/back"
+            app:layout_constraintTop_toBottomOf="@id/v1"
+            android:layout_marginTop="10dp"
+            />
+
+        <View
+            android:id="@+id/v2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray6"
+            app:layout_constraintTop_toBottomOf="@id/res2"
+            android:layout_marginTop="10dp"
+            />
+
+
+        <TextView
+            android:id="@+id/res3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/quantity_not_available"
+            android:textColor="@color/gray12"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/back"
+            app:layout_constraintTop_toBottomOf="@id/v2"
+            android:layout_marginTop="10dp"
+            />
+
+        <View
+            android:id="@+id/v3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray6"
+            app:layout_constraintTop_toBottomOf="@id/res3"
+            android:layout_marginTop="10dp"
+            />
+
+
+        <TextView
+            android:id="@+id/res4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/another_reason"
+            android:textColor="@color/gray12"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/back"
+            app:layout_constraintTop_toBottomOf="@id/v3"
+            android:layout_marginTop="10dp"
+            />
+
+        <View
+            android:id="@+id/v4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray6"
+            app:layout_constraintTop_toBottomOf="@id/res4"
+            android:layout_marginTop="10dp"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/v4"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+            <Button
+                android:id="@+id/back_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/back"
+                android:background="@color/colorPrimary"
+                />
+            <Button
+                android:id="@+id/confirm_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/white"
+                android:text="@string/refuse_confirm"
+                android:layout_marginStart="10dp"
+                android:background="@color/color_red"
+                />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

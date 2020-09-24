@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import com.refFamily.R;
+import com.refFamily.activities_fragments.activity_add_Product.AddProductActivity;
 import com.refFamily.adapters.SliderAdapter;
 import com.refFamily.databinding.ActivityUpdateProductBinding;
 import com.refFamily.language.Language_Helper;
+import com.refFamily.models.AddProductModel;
 import com.refFamily.models.SliderModel;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -24,7 +27,7 @@ import io.paperdb.Paper;
 
 public class UpdateProductActivity extends AppCompatActivity {
 
-
+    private static final String TAG = "DATA";
     private ActivityUpdateProductBinding binding;
     private String lang;
     private SliderAdapter sliderAdapter;
@@ -57,6 +60,16 @@ public class UpdateProductActivity extends AppCompatActivity {
 
             back();
         });
+
+        binding.updateBtn.setOnClickListener(view -> {
+
+
+            Intent intent = new Intent(this, AddProductActivity.class);
+            intent.putExtra(TAG,new AddProductModel());
+            startActivity(intent);
+
+        });
+
 
     }
 

@@ -71,10 +71,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             }
         });
 
-        if (i == position){
+        if (position == 0) {
             holder.binding.name.setBackground(context.getResources().getDrawable(R.drawable.main_category_bg_1));
             holder.binding.name.setTextColor(context.getResources().getColor(R.color.white));
-        }else {
+
+        }
+        if (i == position) {
+            holder.binding.name.setBackground(context.getResources().getDrawable(R.drawable.main_category_bg_1));
+            holder.binding.name.setTextColor(context.getResources().getColor(R.color.white));
+        } else {
             holder.binding.name.setBackground(context.getResources().getDrawable(R.drawable.main_category_bg));
             holder.binding.name.setTextColor(context.getResources().getColor(R.color.gray12));
         }

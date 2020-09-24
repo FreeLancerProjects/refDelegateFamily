@@ -29,7 +29,7 @@
             android:id="@+id/cons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/back"
+            android:background='@{lang.equals("ar")?@drawable/back:@drawable/back_en}'
             >
 
 

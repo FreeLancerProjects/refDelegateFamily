@@ -1,7 +1,6 @@
 package com.refFamily.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -10,11 +9,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.refFamily.R;
-import com.refFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
 import com.refFamily.databinding.ItemNotificationBinding;
-import com.refFamily.databinding.ItemOrderBinding;
+import com.refFamily.databinding.ItemSubscritionBinding;
 import com.refFamily.models.NotificationModel;
-import com.refFamily.models.OrderModel;
+import com.refFamily.models.SubscriptionModel;
 import com.refFamily.models.UserModel;
 import com.refFamily.preferences.Preferences;
 
@@ -23,22 +21,21 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationAdapterVH> {
+public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapter.SubscriptionAdapterVH> {
 
-    private List<NotificationModel> notificationList;
+    private List<SubscriptionModel> subscriptionList;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
     Preferences preferences;
     UserModel userModel;
 
-
-    public NotificationAdapter(Context context) {
+    public SubscriptionAdapter(Context context) {
         this.context = context;
     }
 
-    public NotificationAdapter(List<NotificationModel> notificationList, Context context) {
-        this.notificationList = notificationList;
+    public SubscriptionAdapter(List<SubscriptionModel> subscriptionList, Context context) {
+        this.subscriptionList = subscriptionList;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
@@ -48,13 +45,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @NonNull
     @Override
-    public NotificationAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemNotificationBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_notification, parent, false);
-        return new NotificationAdapterVH(binding);
+    public SubscriptionAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemSubscritionBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_subscrition, parent, false);
+        return new SubscriptionAdapterVH(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NotificationAdapterVH holder, int position) {
+    public void onBindViewHolder(@NonNull SubscriptionAdapterVH holder, int position) {
+
         holder.binding.setLang(lang);
 //        holder.binding.setModel(notificationList.get(position));
     }
@@ -64,15 +62,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         return 15;
     }
 
-    public class NotificationAdapterVH extends RecyclerView.ViewHolder {
-        public ItemNotificationBinding binding;
+    public class SubscriptionAdapterVH extends RecyclerView.ViewHolder {
+        public ItemSubscritionBinding binding;
 
-        public NotificationAdapterVH(@NonNull ItemNotificationBinding binding) {
+        public SubscriptionAdapterVH(@NonNull ItemSubscritionBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
         }
     }
-
 
 }
