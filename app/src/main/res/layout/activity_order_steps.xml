@@ -97,8 +97,9 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@drawable/circle_not_bg"
+                            android:background="@drawable/circle_bg"
                             android:padding="13dp"
+                            android:tint="@color/white"
                             android:src="@drawable/ic_check" />
 
                         <View
@@ -210,6 +211,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="تم التجهيز"
+                                android:visibility="gone"
                                 android:textColor="@color/colorPrimary" />
 
                         </LinearLayout>
@@ -217,10 +219,40 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="@string/family_make_order_ready"
+                            android:text="@string/delegate_make_order_ready"
                             android:textColor="@color/gray4"
                             android:textSize="13sp"
                             android:textStyle="bold" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:padding="7dp"
+                                android:tint="@color/white"
+                                android:src="@drawable/ic_comment_1"
+                                android:layout_gravity="center_vertical"
+                                android:background="@drawable/circle_bg_green"
+                                />
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:padding="7dp"
+                                android:layout_marginStart="10dp"
+                                android:tint="@color/white"
+                                android:src="@drawable/ic_phone_1"
+                                android:layout_gravity="center_vertical"
+                                android:background="@drawable/circle_bg_blue"
+                                />
+
+
+                        </LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -243,7 +275,7 @@
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/circle_not_bg"
                             android:padding="13dp"
-                            android:src="@drawable/ic_pin3"
+                            android:src="@drawable/ic_delivery"
                             android:tint="@color/colorPrimary" />
 
                         <View

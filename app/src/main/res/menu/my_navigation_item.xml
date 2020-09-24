@@ -6,19 +6,13 @@
 
         android:title="@string/home" />
     <item
-        android:id="@+id/orders"
-        android:icon="@drawable/ic_orders"
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_user"
         android:iconTint="@color/color1"
-        android:title="@string/orders"
+        android:title="@string/profile_1"
 
         />
-    <item
-        android:id="@+id/offers"
-        android:icon="@drawable/ic_offers"
-        android:iconTint="@color/color1"
-        android:title="@string/offers"
 
-        />
     <item
         android:id="@+id/setting"
         android:icon="@drawable/ic_setting"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">رف أسر منتجة</string>
+    <string name="app_name">رف المندوب</string>
     <string name="map_api_key">AIzaSyA6QI378BHt9eqBbiJKtqWHTSAZxcSwN3Q</string>
     <string name="search_key">AIzaSyAeyMUJgKAhnNXbILHONb1um72CNzELFRY</string>
 
@@ -141,13 +141,13 @@
     <string name="time">الوقت</string>
     <string name="cash">كاش</string>
     <string name="payment">الدفع :</string>
-    <string name="order_accepted">تم الموافقة علي الطلب</string>
+    <string name="order_accepted">تم القبول</string>
     <string name="order_id">رقم الطلب</string>
-    <string name="order_will_be_ready">جار تجهيز الطلب</string>
-    <string name="family_make_order_ready">تقوم الاسره بتجهيز الطلب</string>
-    <string name="the_request_is_being_submitted">جار تسليم الطلب</string>
+    <string name="order_will_be_ready">جار التجميع</string>
+    <string name="delegate_make_order_ready">يقوم المندوب بتجميع طلباتك</string>
+    <string name="the_request_is_being_submitted">المندوب ف الطريق</string>
     <string name="we_deliver_your_request_to_a_delegate">نقوم بتسليم طلبك للمندوب</string>
-    <string name="the_delivery_was_successful">تم التسليم بنجاح</string>
+    <string name="the_delivery_was_successful">تم التوصيل بنجاح</string>
     <string name="order_steps">خطوات الطلب</string>
     <string name="payment_1">الدفع</string>
     <string name="name_on_card_optional">الاسم علي الكارت(اختياري)</string>
@@ -160,5 +160,9 @@
     <string name="quantity_not_available">الكمية غير متوفرة</string>
     <string name="another_reason">سبب اخر</string>
     <string name="refuse_confirm">تأكيد الرفض</string>
-
+    <string name="update_confirm">تأكيد التعديل</string>
+    <string name="update_profile">تعديل البروفايل</string>
+    <string name="profile_1">البروفايل</string>
+    <string name="delivery_is_within_an_hour">يتم التوصيل خلال ساعه</string>
+    <string name="delivery_price">سعر التوصيل :</string>
 </resources>

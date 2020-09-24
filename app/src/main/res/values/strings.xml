@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ref Family</string>
+    <string name="app_name">Ref Delegate Family</string>
     <string name="map_api_key">AIzaSyA6QI378BHt9eqBbiJKtqWHTSAZxcSwN3Q</string>
     <string name="search_key">AIzaSyAeyMUJgKAhnNXbILHONb1um72CNzELFRY</string>
     <string name="field_req">Field required</string>
@@ -144,7 +144,7 @@
     <string name="order_accepted">Order accepted</string>
     <string name="order_id">Order id</string>
     <string name="order_will_be_ready">Order will be ready</string>
-    <string name="family_make_order_ready">Family make order ready</string>
+    <string name="delegate_make_order_ready">Delegate make order ready</string>
     <string name="the_request_is_being_submitted">The request is being submitted</string>
     <string name="we_deliver_your_request_to_a_delegate">We deliver your request to a delegate</string>
     <string name="the_delivery_was_successful">The delivery was successful</string>
@@ -160,5 +160,9 @@
     <string name="quantity_not_available">Quantity not available</string>
     <string name="another_reason">Another reason</string>
     <string name="refuse_confirm">Refuse Confirm</string>
-
+    <string name="update_confirm">Update Confirm</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="profile_1">Profile</string>
+    <string name="delivery_is_within_an_hour">Delivery is within an hour</string>
+    <string name="delivery_price">Delivery price :</string>
 </resources>
