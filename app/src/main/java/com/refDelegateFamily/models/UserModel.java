@@ -24,15 +24,23 @@ public class UserModel implements Serializable {
         private String phone;
         private String image;
         private String logo;
+        private String identity_card_image;
+        private String license_image;
+        private String car_front_image;
+        private String car_back_image;
+        private String account_bank_number;
+        private String ipad_number;
+        private String nationality;
+        private String car_type;
+        private String car_model;
+        private String car_date;
+        private String identity_card;
+        private String address;
         private String token;
         private String latitude;
         private String longitude;
-        private String address;
         private String user_type;
         private String details;
-        private List<Stage> stage_fk;
-        private List<Stage_CLASS> class_fk;
-        private List<SkillModel> skills_fk;
         private String fireBaseToken;
 
         public User() {
@@ -107,97 +115,56 @@ public class UserModel implements Serializable {
             this.fireBaseToken = fireBaseToken;
         }
 
-        public List<SkillModel> getSkills_fk() {
-            return skills_fk;
+        public String getIdentity_card_image() {
+            return identity_card_image;
+        }
+
+        public String getLicense_image() {
+            return license_image;
+        }
+
+        public String getCar_front_image() {
+            return car_front_image;
+        }
+
+        public String getCar_back_image() {
+            return car_back_image;
+        }
+
+        public String getAccount_bank_number() {
+            return account_bank_number;
+        }
+
+        public String getIpad_number() {
+            return ipad_number;
+        }
+
+        public String getNationality() {
+            return nationality;
+        }
+
+        public String getCar_type() {
+            return car_type;
+        }
+
+        public String getCar_model() {
+            return car_model;
+        }
+
+        public String getCar_date() {
+            return car_date;
+        }
+
+        public String getIdentity_card() {
+            return identity_card;
+        }
+
+        public String getUser_type() {
+            return user_type;
         }
 
         public String getDetails() {
             return details;
-        }
-
-        public List<Stage> getStage_fk() {
-            return stage_fk;
-        }
-
-
-        public List<Stage_CLASS> getClass_fk() {
-            return class_fk;
-        }
-
-        public static class Stage implements Serializable {
-            private int id;
-            private int stage_id;
-            private StageClassName stage_class_name;
-
-            public int getId() {
-                return id;
-            }
-
-            public int getStage_id() {
-                return stage_id;
-            }
-
-            public StageClassName getStage_class_name() {
-                return stage_class_name;
-            }
-
-            public class StageClassName implements Serializable {
-                private int id;
-                private String title;
-
-                public int getId() {
-                    return id;
-                }
-
-                public String getTitle() {
-                    return title;
-                }
-            }
-        }
-
-        public static class Stage_CLASS implements Serializable {
-            private int id;
-            private int class_id;
-            private StageClassName stage_class_name;
-
-            public int getId() {
-                return id;
-            }
-
-            public int getClass_id() {
-                return class_id;
-            }
-
-            public StageClassName getStage_class_name() {
-                return stage_class_name;
-            }
-
-            public class StageClassName implements Serializable {
-                private int id;
-                private String title;
-
-                public int getId() {
-                    return id;
-                }
-
-                public String getTitle() {
-                    return title;
-                }
-            }
-        }
-
-
-        public static class SkillModel implements Serializable{
-            private int id;
-            private String skill_type;
-
-            public int getId() {
-                return id;
-            }
-
-            public String getSkill_type() {
-                return skill_type;
-            }
         }
     }
 }

@@ -15,8 +15,8 @@ import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
 import com.refDelegateFamily.activities_fragments.activity_login.LoginActivity;
 import com.refDelegateFamily.databinding.ActivitySplashBinding;
 import com.refDelegateFamily.language.Language_Helper;
+import com.refDelegateFamily.models.UserModel;
 import com.refDelegateFamily.preferences.Preferences;
-import com.refDelegateFamily.tags.Tags;
 
 import java.util.List;
 import java.util.Locale;
@@ -28,7 +28,7 @@ public class SplashActivity extends AppCompatActivity {
     private Animation animation;
     private Preferences preferences;
     private int ad_id;
-
+    private UserModel userModel;
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -42,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
         getDataFromIntent();
         preferences = Preferences.newInstance();
-
+        userModel = preferences.getUserData(this);
         animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.lanuch);
         binding.cons.startAnimation(animation);
 
@@ -58,11 +58,10 @@ public class SplashActivity extends AppCompatActivity {
 
                 new Handler().postDelayed(()->{
 
-                    String session = preferences.getSession(SplashActivity.this);
-                    if (session.equals(Tags.session_login)) {
+
+                    if (userModel!=null) {
                         Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
                         startActivity(intent);
-
                         finish();
                     } else {
                         Intent intent = new Intent(SplashActivity.this, LoginActivity.class);

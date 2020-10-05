@@ -17,6 +17,9 @@ import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
 import com.refDelegateFamily.databinding.ActivityAddOfferBinding;
 import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.AddProductModel;
+import com.refDelegateFamily.models.SignUpModel;
+import com.refDelegateFamily.models.UserModel;
+import com.refDelegateFamily.preferences.Preferences;
 
 import io.paperdb.Paper;
 
@@ -27,7 +30,9 @@ public class AddProductActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private String lang;
     private int step = 1;
-    private AddProductModel addProductModel = null;
+    Preferences preferences;
+    UserModel userModel;
+    private SignUpModel signUpModel = null;
     private Fragment_SignUpStep1 fragment_signUpStep1;
     private Fragment_SignUpStep2 fragment_signUpStep2;
     private Fragment_SignUpStep3 fragment_signUpStep3;
@@ -36,13 +41,16 @@ public class AddProductActivity extends AppCompatActivity {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(Language_Helper.updateResources(base, Language_Helper.getLanguage(base)));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         initView();
+        getDataFromIntent();
+
         if (savedInstanceState == null) {
-            displayFragmentStep1(addProductModel);
+            displayFragmentStep1(signUpModel);
         }
 
     }
@@ -54,30 +62,39 @@ public class AddProductActivity extends AppCompatActivity {
         lang = Paper.book().read("lang", "ar");
         binding.setLang(lang);
         Intent intent1 = getIntent();
-        if (intent1 !=null){
-            addProductModel = (AddProductModel) intent1.getSerializableExtra(TAG);
+        if (intent1 != null) {
+            signUpModel = (SignUpModel) intent1.getSerializableExtra(TAG);
         }
 
-        if (addProductModel == null) {
-            addProductModel = new AddProductModel();
+        if (signUpModel == null) {
+            signUpModel = new SignUpModel();
 
         }
 
 
         binding.nextBtn.setOnClickListener(view -> {
             if (step == 1) {
-                if (addProductModel.step1(this)){
-                    displayFragmentStep2(addProductModel);
+                if (fragment_signUpStep1 != null && fragment_signUpStep1.isAdded()) {
+                    signUpModel = fragment_signUpStep1.signUpModel;
+                }
 
+                if (signUpModel.step1(this)) {
+                    displayFragmentStep2(signUpModel);
                 }
             } else if (step == 2) {
-                if (addProductModel.step1(this)){
-                    displayFragmentStep3(addProductModel);
+                if (fragment_signUpStep2 != null && fragment_signUpStep2.isAdded()) {
+                    signUpModel = fragment_signUpStep2.signUpModel;
+                }
+                if (signUpModel.step2(this)) {
+                    displayFragmentStep3(signUpModel);
 
                 }
             } else if (step == 3) {
-                if (addProductModel.step1(this)){
-                    Intent intent =  new Intent(this, HomeActivity.class);
+                if (fragment_signUpStep3 != null && fragment_signUpStep3.isAdded()) {
+                    signUpModel = fragment_signUpStep3.signUpModel;
+                }
+                if (signUpModel.step1(this)) {
+                    Intent intent = new Intent(this, HomeActivity.class);
                     startActivity(intent);
                 }
             }
@@ -88,9 +105,9 @@ public class AddProductActivity extends AppCompatActivity {
 
         binding.prevBtn.setOnClickListener(view -> {
             if (step == 2) {
-                displayFragmentStep1(addProductModel);
+                displayFragmentStep1(signUpModel);
             } else if (step == 3) {
-                displayFragmentStep2(addProductModel);
+                displayFragmentStep2(signUpModel);
 
             }
 
@@ -103,28 +120,41 @@ public class AddProductActivity extends AppCompatActivity {
 
     }
 
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            if (intent.getStringExtra("phone_code") != null) {
+                String phone_code = intent.getStringExtra("phone_code");
+                String phone = intent.getStringExtra("phone");
+
+                signUpModel.setPhone_code(phone_code);
+                signUpModel.setPhone(phone);
+            }
+        }
+    }
+
     private void back() {
         finish();
     }
 
     @Override
     public void onBackPressed() {
-        if (step == 1){
+        if (step == 1) {
             finish();
-        }else if (step == 2) {
-            displayFragmentStep1(addProductModel);
+        } else if (step == 2) {
+            displayFragmentStep1(signUpModel);
         } else if (step == 3) {
-            displayFragmentStep2(addProductModel);
+            displayFragmentStep2(signUpModel);
 
         }
 
     }
 
-    private void displayFragmentStep1(AddProductModel addProductModel) {
+    private void displayFragmentStep1(SignUpModel signUpModel) {
         updateStep1UI();
         step = 1;
         if (fragment_signUpStep1 == null) {
-            fragment_signUpStep1 = Fragment_SignUpStep1.newInstance(addProductModel);
+            fragment_signUpStep1 = Fragment_SignUpStep1.newInstance(signUpModel);
         }
         if (fragment_signUpStep2 != null && fragment_signUpStep2.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_signUpStep2).commit();
@@ -142,11 +172,11 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
 
-    private void displayFragmentStep2(AddProductModel addProductModel) {
+    private void displayFragmentStep2(SignUpModel signUpModel) {
         updateStep2UI();
         step = 2;
         if (fragment_signUpStep2 == null) {
-            fragment_signUpStep2 = Fragment_SignUpStep2.newInstance(addProductModel);
+            fragment_signUpStep2 = Fragment_SignUpStep2.newInstance(signUpModel);
         }
         if (fragment_signUpStep1 != null && fragment_signUpStep1.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_signUpStep1).commit();
@@ -163,11 +193,11 @@ public class AddProductActivity extends AppCompatActivity {
 
     }
 
-    private void displayFragmentStep3(AddProductModel addProductModel) {
+    private void displayFragmentStep3(SignUpModel signUpModel) {
         updateStep3UI();
         step = 3;
         if (fragment_signUpStep3 == null) {
-            fragment_signUpStep3 = Fragment_SignUpStep3.newInstance(addProductModel);
+            fragment_signUpStep3 = Fragment_SignUpStep3.newInstance(signUpModel);
         }
         if (fragment_signUpStep1 != null && fragment_signUpStep1.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_signUpStep1).commit();
@@ -203,7 +233,7 @@ public class AddProductActivity extends AppCompatActivity {
 
     private void updateStep3UI() {
         binding.prevBtn.setVisibility(View.VISIBLE);
-        binding.nextBtn.setText(getResources().getString(R.string.add_offer));
+        binding.nextBtn.setText(getResources().getString(R.string.sign_up));
         binding.step3.setBackground(getResources().getDrawable(R.drawable.circle_bg));
         binding.step1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
         binding.step2.setBackground(getResources().getDrawable(R.drawable.circle_bg));

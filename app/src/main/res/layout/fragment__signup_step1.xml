@@ -6,7 +6,7 @@
     <data>
         <variable
             name="model"
-            type="com.refDelegateFamily.models.AddProductModel" />
+            type="com.refDelegateFamily.models.SignUpModel" />
     </data>
 
     <FrameLayout
@@ -81,6 +81,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="16dp"
+                    android:text="@={model.name}"
                     android:hint="@string/name"
                     android:padding="5dp"
                     android:textAlignment="viewStart"
@@ -100,6 +101,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="16dp"
                     android:hint="@string/nationality"
+                    android:text="@={model.nationality}"
                     android:padding="5dp"
                     android:textAlignment="viewStart"
                     android:textSize="13dp"
@@ -117,6 +119,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="16dp"
                     android:hint="@string/email"
+                    android:text="@={model.email}"
                     android:padding="5dp"
                     android:textAlignment="viewStart"
                     android:textSize="13dp"
@@ -134,6 +137,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="16dp"
                     android:hint="@string/national_identity_number"
+                    android:text="@={model.identity_card}"
                     android:padding="5dp"
                     android:textAlignment="viewStart"
                     android:textSize="13dp"
@@ -177,6 +181,7 @@
                             android:background="@color/white"
                             android:gravity="center_vertical"
                             android:hint="@string/address"
+                            android:text="@={model.address}"
                             android:paddingLeft="15dp"
                             android:paddingRight="15dp"
                             android:singleLine="true"

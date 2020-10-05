@@ -178,4 +178,6 @@
     <string name="car_image_from_front">Car image from front</string>
     <string name="car_image_from_back">Car image from back</string>
     <string name="i_acknowledge_that_i_have_read_the_aforementioned_conditions_and_agree_to_them_completely">I acknowledge that I have read the aforementioned conditions and agree to them completely</string>
+    <string name="something">Check internet connection</string>
+
 </resources>
