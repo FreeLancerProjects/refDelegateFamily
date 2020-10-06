@@ -9,7 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.AddProductActivity;
+import com.refDelegateFamily.activities_fragments.activity_add_Product.SignUpActivity;
 import com.refDelegateFamily.adapters.SliderAdapter;
 import com.refDelegateFamily.databinding.ActivityUpdateProductBinding;
 import com.refDelegateFamily.language.Language_Helper;
@@ -64,7 +64,7 @@ public class UpdateProductActivity extends AppCompatActivity {
         binding.updateBtn.setOnClickListener(view -> {
 
 
-            Intent intent = new Intent(this, AddProductActivity.class);
+            Intent intent = new Intent(this, SignUpActivity.class);
             intent.putExtra(TAG,new AddProductModel());
             startActivity(intent);
 

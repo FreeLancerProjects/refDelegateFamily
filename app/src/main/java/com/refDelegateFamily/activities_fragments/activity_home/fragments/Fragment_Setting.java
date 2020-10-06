@@ -22,7 +22,7 @@ import com.refDelegateFamily.activities_fragments.activity_about_app.AboutAppAct
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
 import com.refDelegateFamily.activities_fragments.activity_language.LanguageActivity;
 import com.refDelegateFamily.activities_fragments.activity_login.LoginActivity;
-import com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpActivity;
+import com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpaaaActivity;
 import com.refDelegateFamily.activities_fragments.activity_subscription.SubscriptionActivity;
 import com.refDelegateFamily.databinding.FragmentSettingBinding;
 import com.refDelegateFamily.interfaces.Listeners;
@@ -110,7 +110,7 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
 
     @Override
     public void onEditProfile() {
-        Intent intent = new Intent(activity, SignUpActivity.class);
+        Intent intent = new Intent(activity, SignUpaaaActivity.class);
         intent.putExtra("data",preferences.getUserData(activity));
         startActivityForResult(intent,2);
     }

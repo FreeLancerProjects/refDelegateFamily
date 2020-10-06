@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.AddProductActivity;
+import com.refDelegateFamily.activities_fragments.activity_add_Product.SignUpActivity;
 import com.refDelegateFamily.databinding.DialogSelectImageBinding;
 import com.refDelegateFamily.databinding.FragmentSignupStep1Binding;
 import com.refDelegateFamily.models.AddProductModel;
@@ -34,7 +34,7 @@ import java.io.ByteArrayOutputStream;
 
 public class Fragment_SignUpStep1 extends Fragment {
     private static final String TAG = "DATA";
-    private AddProductActivity activity;
+    private SignUpActivity activity;
     private FragmentSignupStep1Binding binding;
     private AddProductModel addProductModel;
     public SignUpModel signUpModel;

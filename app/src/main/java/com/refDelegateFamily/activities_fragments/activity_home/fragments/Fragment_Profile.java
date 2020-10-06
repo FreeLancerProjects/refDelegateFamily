@@ -3,6 +3,7 @@ package com.refDelegateFamily.activities_fragments.activity_home.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public class Fragment_Profile extends Fragment  {
     private RecyclerView recViewcomments;
     private ImageView imclose;
 
+
     public static Fragment_Profile newInstance() {
 
         return new Fragment_Profile();
@@ -65,8 +67,15 @@ public class Fragment_Profile extends Fragment  {
 
         activity = (HomeActivity) getActivity();
         preferences = Preferences.newInstance();
+        userModel = preferences.getUserData(this.getActivity());
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        binding.setModel(userModel);
+
+        Log.e("logo",userModel.getData().getLogo());
+        Log.e("address",userModel.getData().getAddress());
+        Log.e("logo",userModel.getData().getLogo());
+
 
     }
 

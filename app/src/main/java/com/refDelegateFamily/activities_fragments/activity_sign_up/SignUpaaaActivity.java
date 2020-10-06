@@ -31,7 +31,7 @@ import com.squareup.picasso.Picasso;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
-public class SignUpActivity extends AppCompatActivity implements Listeners.SignUpListener {
+public class SignUpaaaActivity extends AppCompatActivity implements Listeners.SignUpListener {
     private ActivitySignUpBinding binding;
     private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
     private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -241,7 +241,7 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
                         dialog.dismiss();
                         if (response.isSuccessful()&&response.body()!=null)
                         {
-                            preferences.create_update_userdata(SignUpActivity.this,response.body());
+                            preferences.create_update_userdata(SignUpaaaActivity.this,response.body());
                             navigateToHomeActivity();
                         }else
                         {
@@ -249,28 +249,28 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
                             Log.e("555555",response.message());
                             if (response.code()==500)
                             {
-                                Toast.makeText(SignUpActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpaaaActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
                             }else if (response.code()==422)
                             {
                                 Log.e("2222222",response.errorBody()+"");
 
-                                Toast.makeText(SignUpActivity.this, response.errorBody()+"", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpaaaActivity.this, response.errorBody()+"", Toast.LENGTH_SHORT).show();
                             }else if (response.code()==409)
                             {
 
                                 Log.e("99999999",response.message()+"");
 
-                                Toast.makeText(SignUpActivity.this, response.errorBody()+"", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpaaaActivity.this, response.errorBody()+"", Toast.LENGTH_SHORT).show();
                             }else if (response.code()==406)
                             {
 
                                 Log.e("6666666",response.message()+"");
 
-                                Toast.makeText(SignUpActivity.this, response.errorBody()+"", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpaaaActivity.this, response.errorBody()+"", Toast.LENGTH_SHORT).show();
                             }
                             else
                             {
-                                Toast.makeText(SignUpActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpaaaActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             }
 
                             try {
@@ -289,9 +289,9 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
                                 Log.e("msg_category_error", t.getMessage() + "__");
 
                                 if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                    Toast.makeText(SignUpActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignUpaaaActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(SignUpActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignUpaaaActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }catch (Exception e)
@@ -326,20 +326,20 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
                         dialog.dismiss();
                         if (response.isSuccessful()&&response.body()!=null)
                         {
-                            preferences.create_update_userdata(SignUpActivity.this,response.body());
+                            preferences.create_update_userdata(SignUpaaaActivity.this,response.body());
                             navigateToHomeActivity();
                         }else
                         {
                             if (response.code()==500)
                             {
-                                Toast.makeText(SignUpActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpaaaActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
                             }else if (response.code()==422)
                             {
-                                Toast.makeText(SignUpActivity.this, R.string.user_found, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpaaaActivity.this, R.string.user_found, Toast.LENGTH_SHORT).show();
 
                             }else
                             {
-                                Toast.makeText(SignUpActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpaaaActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -352,9 +352,9 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
                                 Log.e("msg_category_error", t.getMessage() + "__");
 
                                 if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                    Toast.makeText(SignUpActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignUpaaaActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(SignUpActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignUpaaaActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }catch (Exception e)

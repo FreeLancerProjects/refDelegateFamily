@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.AddProductActivity;
+import com.refDelegateFamily.activities_fragments.activity_add_Product.SignUpActivity;
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
 import com.refDelegateFamily.adapters.CategoryAdapter;
 import com.refDelegateFamily.adapters.ProductAdapter;
@@ -70,7 +70,7 @@ public class Fragment_Main extends Fragment {
 
     private void NavigateToAddOfferACtivity(){
 
-        Intent intent = new Intent(this.getContext(), AddProductActivity.class);
+        Intent intent = new Intent(this.getContext(), SignUpActivity.class);
         startActivity(intent);
 
     }

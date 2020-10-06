@@ -72,6 +72,7 @@
 
 
                 <EditText
+                    error="@{model.error_name}"
                     android:id="@+id/et_name"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
@@ -101,7 +102,8 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="16dp"
                     android:hint="@string/nationality"
-                    android:text="@={model.nationality}"
+                    android:text="@={model.nationality_title}"
+                    error="@{model.error_nationality}"
                     android:padding="5dp"
                     android:textAlignment="viewStart"
                     android:textSize="13dp"
@@ -109,6 +111,7 @@
                     />
 
                 <EditText
+                    error="@{model.error_email}"
                     android:id="@+id/et_email"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
@@ -118,6 +121,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginTop="16dp"
+                    android:inputType="textEmailAddress"
                     android:hint="@string/email"
                     android:text="@={model.email}"
                     android:padding="5dp"
@@ -135,9 +139,10 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
+                    error="@{model.error_identity_card}"
                     android:layout_marginTop="16dp"
                     android:hint="@string/national_identity_number"
-                    android:text="@={model.identity_card}"
+                    android:text="@={model.card_id}"
                     android:padding="5dp"
                     android:textAlignment="viewStart"
                     android:textSize="13dp"
@@ -174,6 +179,7 @@
                         >
 
                         <EditText
+                            error="@{model.error_address}"
                             android:id="@+id/edtAddress"
                             android:layout_width="0dp"
                             android:layout_weight=".9"

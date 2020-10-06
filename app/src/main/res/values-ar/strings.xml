@@ -179,5 +179,9 @@
     <string name="car_image_from_back">صورة السيارة من الخلف</string>
     <string name="i_acknowledge_that_i_have_read_the_aforementioned_conditions_and_agree_to_them_completely"> اقر بانني قد قرأت الشروط المذكورة ووافقت عليها كاملا</string>
     <string name="something">تحقق من الاتصال بالانترنت</string>
+    <string name="sar">ريال</string>
+    <string name="account_number">رقم الحساب</string>
+    <string name="ipan_number">رقم الايبان</string>
+    <string name="user_found">المستخدم موجود مسبقا</string>
 
 </resources>

@@ -13,9 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.AddProductActivity;
+import com.refDelegateFamily.activities_fragments.activity_add_Product.SignUpActivity;
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
-import com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpActivity;
 import com.refDelegateFamily.databinding.ActivityVerificationCodeBinding;
 import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.UserModel;
@@ -217,6 +216,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
                                 navigateToSignUpActivity();
                             } else {
                                 Toast.makeText(VerificationCodeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                Log.e("faild",response.message());
                             }
                         }
                     }
@@ -231,6 +231,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
                                 if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
                                     Toast.makeText(VerificationCodeActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                                 } else {
+                                    Log.e("faild",t.getMessage());
                                     Toast.makeText(VerificationCodeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -250,7 +251,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
     }
 
     private void navigateToSignUpActivity() {
-        Intent intent = new Intent(this, AddProductActivity.class);
+        Intent intent = new Intent(this, SignUpActivity.class);
         intent.putExtra("phone", phone);
         intent.putExtra("phone_code", phone_code);
         startActivity(intent);

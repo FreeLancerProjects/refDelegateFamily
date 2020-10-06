@@ -179,5 +179,9 @@
     <string name="car_image_from_back">Car image from back</string>
     <string name="i_acknowledge_that_i_have_read_the_aforementioned_conditions_and_agree_to_them_completely">I acknowledge that I have read the aforementioned conditions and agree to them completely</string>
     <string name="something">Check internet connection</string>
+    <string name="sar">SAR</string>
+    <string name="account_number">Account Number</string>
+    <string name="ipan_number">IPan Number</string>
+    <string name="user_found">User Found</string>
 
 </resources>

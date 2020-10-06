@@ -164,12 +164,12 @@ public class Fragment_SignUpStep2 extends Fragment {
         if (requestCode == IMG_REQ2 && resultCode == Activity.RESULT_OK && data != null) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             url = getUriFromBitmap(bitmap);
-            signUpModel.setIdentity_card_image(url.toString());
+            signUpModel.setCard_image(url.toString());
             Picasso.get().load(url).into(binding.imgIdentity);
 
         } else if (requestCode == IMG_REQ1 && resultCode == Activity.RESULT_OK && data != null) {
             url = data.getData();
-            signUpModel.setIdentity_card_image(url.toString());
+            signUpModel.setCard_image(url.toString());
             Picasso.get().load(url).into(binding.imgIdentity);
         }
     }

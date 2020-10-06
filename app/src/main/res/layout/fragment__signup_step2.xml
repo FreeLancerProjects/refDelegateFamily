@@ -12,7 +12,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities_fragments.activity_add_Product.fragments.Fragment_SignUpStep2">
+        tools:context=".activities_fragments.activity_add_Product.fragments.Fragment_SignUpStep2"
+        >
 
 
         <androidx.core.widget.NestedScrollView
@@ -52,80 +53,80 @@
                     android:id="@+id/img_identity"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:src="@drawable/ic_gallery"
-                    android:tint="@color/gray6"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/small_stroke_primary"
-                    app:layout_constraintTop_toBottomOf="@id/tv_identity"
-                    />
-
-
-
-                <TextView
-                    android:id="@+id/tv_bank_account_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_gallery"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/img_identity"
-                    android:textSize="15sp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/gray12"
-                    android:text="@string/bank_account_number_24_digit"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/tv_identity" />
 
+                <LinearLayout
+                    android:id="@+id/linear_ipan_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/small_stroke_primary"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:layoutDirection="ltr"
+                    app:layout_constraintTop_toBottomOf="@id/img_identity"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="SA"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        />
+
+
+                    <EditText
+                        error="@{model.error_ipad_number}"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/small_stroke_primary"
+                        android:hint="@string/ipan_number"
+                        android:inputType="number"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:singleLine="true"
+                        android:text="@={model.ipad_number}"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/gray6"
+                        android:textSize="15sp" />
+                    <!--                        <EditText-->
+                    <!--                            error="@{model.error_ipad_number}"-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="45dp"-->
+                    <!--                            android:background="@drawable/small_stroke_primary"-->
+                    <!--                            android:hint="@string/ipan_number"-->
+                    <!--                            android:paddingStart="10dp"-->
+                    <!--                            android:paddingEnd="10dp"-->
+                    <!--                            android:text="@={model.ipad_number}"-->
+                    <!--                            android:textColor="@color/black"-->
+                    <!--                            android:textColorHint="@color/gray6"-->
+                    <!--                            android:textSize="15sp" />-->
+
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/et_account_number"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    error="@{model.error_account_bank_number}"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="15dp"
                     android:background="@drawable/small_stroke_primary"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="16dp"
-                    android:padding="5dp"
-                    android:text="@={model.ipad_number}"
-                    android:textAlignment="viewStart"
-                    android:textSize="13dp"
-                    app:layout_constraintTop_toBottomOf="@id/tv_bank_account_number"
-                    />
-
-
-                <TextView
-                    android:id="@+id/tv_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/et_account_number"
+                    android:hint="@string/account_number"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="@={model.account_bank_number}"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray6"
                     android:textSize="15sp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/gray12"
-                    android:text="@string/address_of_account_owner"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    />
-
-
-                <EditText
-                    android:id="@+id/et_address"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/small_stroke_primary"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="10dp"
-                    android:padding="5dp"
-                    android:textAlignment="viewStart"
-                    android:textSize="13dp"
-                    app:layout_constraintTop_toBottomOf="@id/tv_address"
+                    app:layout_constraintTop_toBottomOf="@id/linear_ipan_number"
                     />
 
                 <EditText
@@ -143,7 +144,7 @@
                     android:padding="5dp"
                     android:textAlignment="viewStart"
                     android:textSize="13dp"
-                    app:layout_constraintTop_toBottomOf="@id/et_address"
+                    app:layout_constraintTop_toBottomOf="@id/et_account_number"
                     />
 
                 <EditText
@@ -169,19 +170,20 @@
                     android:id="@+id/et_manufacturing_year"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:background="@drawable/small_stroke_primary"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginLeft="15dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginTop="10dp"
+                    android:background="@drawable/small_stroke_primary"
                     android:hint="@string/manufacturing_year"
                     android:padding="5dp"
-                    android:text="@={model.car_date}"
+                    android:text="@={model.year_of_manufacture}"
+                    error="@{model.error_car_date}"
                     android:textAlignment="viewStart"
                     android:textSize="13dp"
-                    app:layout_constraintTop_toBottomOf="@id/et_car_model"
-                    />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.491"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_car_model" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -24,22 +24,24 @@ public class UserModel implements Serializable {
         private String phone;
         private String image;
         private String logo;
-        private String identity_card_image;
-        private String license_image;
-        private String car_front_image;
-        private String car_back_image;
+        private String card_image;
+        private String licence_image;
+        private String front_car_image;
+        private String back_car_image;
         private String account_bank_number;
         private String ipad_number;
-        private String nationality;
+        private String nationality_title;
         private String car_type;
         private String car_model;
-        private String car_date;
-        private String identity_card;
+        private String year_of_manufacture;
+        private String card_id;
+        private String address_registered_for_bank_account;
         private String address;
         private String token;
         private String latitude;
         private String longitude;
         private String user_type;
+        private String software_type;
         private String details;
         private String fireBaseToken;
 
@@ -115,21 +117,7 @@ public class UserModel implements Serializable {
             this.fireBaseToken = fireBaseToken;
         }
 
-        public String getIdentity_card_image() {
-            return identity_card_image;
-        }
 
-        public String getLicense_image() {
-            return license_image;
-        }
-
-        public String getCar_front_image() {
-            return car_front_image;
-        }
-
-        public String getCar_back_image() {
-            return car_back_image;
-        }
 
         public String getAccount_bank_number() {
             return account_bank_number;
@@ -139,9 +127,6 @@ public class UserModel implements Serializable {
             return ipad_number;
         }
 
-        public String getNationality() {
-            return nationality;
-        }
 
         public String getCar_type() {
             return car_type;
@@ -151,20 +136,48 @@ public class UserModel implements Serializable {
             return car_model;
         }
 
-        public String getCar_date() {
-            return car_date;
-        }
-
-        public String getIdentity_card() {
-            return identity_card;
-        }
-
         public String getUser_type() {
             return user_type;
         }
 
         public String getDetails() {
             return details;
+        }
+
+        public String getCard_image() {
+            return card_image;
+        }
+
+        public String getLicence_image() {
+            return licence_image;
+        }
+
+        public String getFront_car_image() {
+            return front_car_image;
+        }
+
+        public String getBack_car_image() {
+            return back_car_image;
+        }
+
+        public String getNationality_title() {
+            return nationality_title;
+        }
+
+        public String getYear_of_manufacture() {
+            return year_of_manufacture;
+        }
+
+        public String getCard_id() {
+            return card_id;
+        }
+
+        public String getAddress_registered_for_bank_account() {
+            return address_registered_for_bank_account;
+        }
+
+        public String getSoftware_type() {
+            return software_type;
         }
     }
 }

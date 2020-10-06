@@ -22,7 +22,7 @@ public interface Service {
 
     @GET("place/details/json")
     Call<NearbyStoreDataModel> getPlaceReview(@Query(value = "placeid") String placeid,
-                                       @Query(value = "key") String key
+                                              @Query(value = "key") String key
     );
 
     @GET("place/nearbysearch/json")
@@ -43,7 +43,7 @@ public interface Service {
 
 
     @FormUrlEncoded
-    @POST("api/register")
+    @POST("api/drive_register")
     Call<UserModel> signUpWithoutImage(@Field("name") String name,
                                        @Field("email") String email,
                                        @Field("phone_code") String phone_code,
@@ -53,24 +53,41 @@ public interface Service {
                                        @Field("software_type") String software_type,
                                        @Field("account_bank_number") String account_bank_number,
                                        @Field("ipad_number") String ipad_number,
-                                       @Field("category_id[]") List<String> category_id
-
+                                       @Field("nationality_title") String nationality_title,
+                                       @Field("car_model") String car_model,
+                                       @Field("year_of_manufacture") String year_of_manufacture,
+                                       @Field("card_id") String card_id,
+                                       @Field("latitude") String latitude,
+                                       @Field("longitude") String longitude,
+                                       @Field("address_registered_for_bank_account") String address_registered_for_bank_account
 
     );
 
     @Multipart
-    @POST("api/register")
-    Call<UserModel> signUpWithImage(@Part("name") RequestBody name,
+    @POST("api/drive_register")
+    Call<UserModel> signUpWithImage(
+                                    @Part MultipartBody.Part logo,
+                                    @Part MultipartBody.Part licence_image,
+                                    @Part MultipartBody.Part back_car_image,
+                                    @Part MultipartBody.Part front_car_image,
+                                    @Part MultipartBody.Part card_image,
+                                    @Part("name") RequestBody name,
                                     @Part("email") RequestBody email,
                                     @Part("phone_code") RequestBody phone_code,
                                     @Part("phone") RequestBody phone,
                                     @Part("address") RequestBody address,
-                                    @Part MultipartBody.Part logo,
                                     @Part("user_type") RequestBody user_type,
                                     @Part("software_type") RequestBody software_type,
                                     @Part("account_bank_number") RequestBody account_bank_number,
                                     @Part("ipad_number") RequestBody ipad_number,
-                                    @Part("category_id[]") List<RequestBody> category_id
+                                    @Part("nationality_title") RequestBody nationality_title,
+                                    @Part("car_model") RequestBody car_model,
+                                    @Part("car_type_id") RequestBody car_type_id,
+                                    @Part("year_of_manufacture") RequestBody year_of_manufacture,
+                                    @Part("card_id") RequestBody card_id,
+                                    @Part("latitude") RequestBody latitude,
+                                    @Part("longitude") RequestBody longitude,
+                                    @Part("address_registered_for_bank_account") RequestBody address_registered_for_bank_account
     );
 
 

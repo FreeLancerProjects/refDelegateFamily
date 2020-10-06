@@ -1,7 +1,6 @@
 package com.refDelegateFamily.models;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Patterns;
 
 import androidx.databinding.BaseObservable;
@@ -10,30 +9,33 @@ import androidx.databinding.ObservableField;
 
 import com.refDelegateFamily.BR;
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.AddProductActivity;
 
 import java.io.Serializable;
 
 
 public class SignUpModel extends BaseObservable implements Serializable {
     private String logo;
-    private String identity_card_image;
-    private String license_image;
-    private String car_front_image;
-    private String car_back_image;
     private String name;
     private String email;
-    private String account_bank_number;
-    private String ipad_number;
-    private String nationality;
-    private String car_type;
-    private String car_model;
-    private String car_date;
-    private String identity_card;
     private String address;
     private String phone_code;
     private String phone;
-
+    private String user_type;
+    private String software_type;
+    private String card_image;
+    private String licence_image;
+    private String front_car_image;
+    private String back_car_image;
+    private String account_bank_number;
+    private String ipad_number;
+    private String nationality_title;
+    private String car_type;
+    private String car_model;
+    private String year_of_manufacture;
+    private String card_id;
+    private String address_registered_for_bank_account;
+    private String latitude;
+    private String longitude;
 
     public ObservableField<String> error_name = new ObservableField<>();
     public ObservableField<String> error_email = new ObservableField<>();
@@ -90,8 +92,8 @@ public class SignUpModel extends BaseObservable implements Serializable {
         if (!name.trim().isEmpty() &&
                 !email.trim().isEmpty() &&
                 !address.trim().isEmpty() &&
-                !nationality.trim().isEmpty() &&
-                !identity_card.trim().isEmpty() &&
+                !nationality_title.trim().isEmpty() &&
+                !card_id.trim().isEmpty() &&
                 Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches()
         ) {
             error_name.set(null);
@@ -117,14 +119,21 @@ public class SignUpModel extends BaseObservable implements Serializable {
                 error_email.set(null);
 
             }
-            if (identity_card.trim().isEmpty()) {
+            if (card_id.trim().isEmpty()) {
                 error_identity_card.set(context.getString(R.string.field_required));
 
             } else {
                 error_identity_card.set(null);
 
             }
-            if (nationality.trim().isEmpty()) {
+            if (address.trim().isEmpty()) {
+                error_address.set(context.getString(R.string.field_required));
+
+            } else {
+                error_address.set(null);
+
+            }
+            if (nationality_title.trim().isEmpty()) {
                 error_nationality.set(context.getString(R.string.field_required));
 
             } else {
@@ -137,7 +146,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
 
     public boolean step2(Context context) {
 
-        if (!car_date.trim().isEmpty() &&
+        if (!year_of_manufacture.trim().isEmpty() &&
                 !car_model.trim().isEmpty() &&
                 !car_type.trim().isEmpty() &&
                 !account_bank_number.trim().isEmpty() &&
@@ -165,7 +174,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
                 error_car_model.set(null);
 
             }
-            if (car_date.trim().isEmpty()) {
+            if (year_of_manufacture.trim().isEmpty()) {
                 error_car_date.set(context.getString(R.string.field_required));
 
             } else {
@@ -207,12 +216,12 @@ public class SignUpModel extends BaseObservable implements Serializable {
         setAddress("");
         setAccount_bank_number("");
         setIpad_number("");
-        setCar_back_image("");
-        setCar_date("");
-        setCar_type("");
-        setCar_model("");
-        setIdentity_card("");
-        setNationality("");
+        setSoftware_type("android");
+        setUser_type("driver");
+        setLatitude("0.0");
+        setLongitude("0.0");
+        setAddress_registered_for_bank_account("aa");
+
 
     }
 
@@ -259,6 +268,21 @@ public class SignUpModel extends BaseObservable implements Serializable {
         this.logo = logo;
     }
 
+    public String getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
+    }
+
+    public String getSoftware_type() {
+        return software_type;
+    }
+
+    public void setSoftware_type(String software_type) {
+        this.software_type = software_type;
+    }
 
     public String getPhone_code() {
         return phone_code;
@@ -277,37 +301,57 @@ public class SignUpModel extends BaseObservable implements Serializable {
     }
 
 
-    public String getIdentity_card_image() {
-        return identity_card_image;
+    public String getCard_image() {
+        return card_image;
     }
 
-    public void setIdentity_card_image(String identity_card_image) {
-        this.identity_card_image = identity_card_image;
+    public void setCard_image(String card_image) {
+        this.card_image = card_image;
     }
 
-    public String getLicense_image() {
-        return license_image;
+    public String getLicence_image() {
+        return licence_image;
     }
 
-    public void setLicense_image(String license_image) {
-        this.license_image = license_image;
+    public void setLicence_image(String licence_image) {
+        this.licence_image = licence_image;
     }
 
-    public String getCar_front_image() {
-        return car_front_image;
+    public String getFront_car_image() {
+        return front_car_image;
     }
 
-    public void setCar_front_image(String car_front_image) {
-        this.car_front_image = car_front_image;
+    public void setFront_car_image(String front_car_image) {
+        this.front_car_image = front_car_image;
     }
 
-    public String getCar_back_image() {
-        return car_back_image;
+
+    public String getLatitude() {
+        return latitude;
     }
 
-    public void setCar_back_image(String car_back_image) {
-        this.car_back_image = car_back_image;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getBack_car_image() {
+        return back_car_image;
+    }
+
+    public void setBack_car_image(String back_car_image) {
+        this.back_car_image = back_car_image;
+    }
+
+
+
 
     @Bindable
     public String getAccount_bank_number() {
@@ -328,17 +372,15 @@ public class SignUpModel extends BaseObservable implements Serializable {
         this.ipad_number = ipad_number;
         notifyPropertyChanged(BR.ipad_number);
     }
-
     @Bindable
-    public String getNationality() {
-        return nationality;
+    public String getNationality_title() {
+        return nationality_title;
     }
 
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-        notifyPropertyChanged(BR.nationality);
+    public void setNationality_title(String nationality_title) {
+        this.nationality_title = nationality_title;
+        notifyPropertyChanged(BR.nationality_title);
     }
-
     @Bindable
     public String getCar_type() {
         return car_type;
@@ -348,7 +390,6 @@ public class SignUpModel extends BaseObservable implements Serializable {
         this.car_type = car_type;
         notifyPropertyChanged(BR.car_type);
     }
-
     @Bindable
     public String getCar_model() {
         return car_model;
@@ -358,27 +399,32 @@ public class SignUpModel extends BaseObservable implements Serializable {
         this.car_model = car_model;
         notifyPropertyChanged(BR.car_model);
     }
-
     @Bindable
-    public String getCar_date() {
-        return car_date;
+    public String getYear_of_manufacture() {
+        return year_of_manufacture;
     }
 
-    public void setCar_date(String car_date) {
-        this.car_date = car_date;
-        notifyPropertyChanged(BR.car_date);
+    public void setYear_of_manufacture(String year_of_manufacture) {
+        this.year_of_manufacture = year_of_manufacture;
+        notifyPropertyChanged(BR.year_of_manufacture);
     }
-
     @Bindable
-    public String getIdentity_card() {
-        return identity_card;
+    public String getCard_id() {
+        return card_id;
     }
 
-    public void setIdentity_card(String identity_card) {
-        this.identity_card = identity_card;
-        notifyPropertyChanged(BR.identity_card);
+    public void setCard_id(String card_id) {
+        this.card_id = card_id;
+        notifyPropertyChanged(BR.card_id);
+    }
+    @Bindable
+    public String getAddress_registered_for_bank_account() {
+        return address_registered_for_bank_account;
     }
 
-
+    public void setAddress_registered_for_bank_account(String address_registered_for_bank_account) {
+        this.address_registered_for_bank_account = address_registered_for_bank_account;
+        notifyPropertyChanged(BR.address_registered_for_bank_account);
+    }
 }
 

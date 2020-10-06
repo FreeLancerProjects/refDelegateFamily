@@ -186,13 +186,13 @@ public class Fragment_SignUpStep3 extends Fragment {
             url = getUriFromBitmap(bitmap);
 
             if (type == 1){
-            signUpModel.setLicense_image(url.toString());
+            signUpModel.setLicence_image(url.toString());
             Picasso.get().load(url).into(binding.imgDrivingLicense);
             }else if (type == 2){
-                signUpModel.setCar_front_image(url.toString());
+                signUpModel.setFront_car_image(url.toString());
                 Picasso.get().load(url).into(binding.imgFrontCar);
             }else if (type == 3){
-                signUpModel.setCar_back_image(url.toString());
+                signUpModel.setBack_car_image(url.toString());
                 Picasso.get().load(url).into(binding.imgBackCar);
             }
 
@@ -200,13 +200,13 @@ public class Fragment_SignUpStep3 extends Fragment {
         } else if (requestCode == IMG_REQ1 && resultCode == Activity.RESULT_OK && data != null) {
             url = data.getData();
             if (type == 1){
-                signUpModel.setLicense_image(url.toString());
+                signUpModel.setLicence_image(url.toString());
                 Picasso.get().load(url).into(binding.imgDrivingLicense);
             }else if (type == 2){
-                signUpModel.setCar_front_image(url.toString());
+                signUpModel.setFront_car_image(url.toString());
                 Picasso.get().load(url).into(binding.imgFrontCar);
             }else if (type == 3){
-                signUpModel.setCar_back_image(url.toString());
+                signUpModel.setBack_car_image(url.toString());
                 Picasso.get().load(url).into(binding.imgBackCar);
             }
         }
