@@ -190,6 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:onClick="@{()->listener.costumerApp()}"
                 app:layout_constraintBottom_toTopOf="@+id/linear_download_delegate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -215,6 +216,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
                 android:layout_marginBottom="50dp"
+                android:onClick="@{()->listener.familyApp()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -229,7 +231,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/download_delegate_app" />
+                    android:text="@string/download_family_app" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -67,6 +67,7 @@
                         android:rotation='@{lang.equals("ar")?180:0}'
                         />
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
