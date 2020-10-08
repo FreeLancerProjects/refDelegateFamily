@@ -3,7 +3,10 @@ package com.refDelegateFamily.activities_fragments.activity_home;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,14 +21,23 @@ import com.refDelegateFamily.activities_fragments.activity_home.fragments.Fragme
 import com.refDelegateFamily.activities_fragments.activity_home.fragments.Fragment_Setting;
 import com.refDelegateFamily.activities_fragments.activity_home.fragments.Fragment_Profile;
 import com.refDelegateFamily.activities_fragments.activity_notification.NotificationActivity;
+import com.refDelegateFamily.activities_fragments.activity_verification_code.VerificationCodeActivity;
 import com.refDelegateFamily.databinding.ActivityHomeBinding;
 import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.UserModel;
 import com.refDelegateFamily.preferences.Preferences;
+import com.refDelegateFamily.remote.Api;
+import com.refDelegateFamily.tags.Tags;
+import com.suke.widget.SwitchButton;
 
+import java.io.IOException;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -88,6 +100,13 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
+        binding.switchBtn.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+
+                updateStatus();
+            }
+        });
 
         binding.flNotification.setOnClickListener(view -> {
 
@@ -308,6 +327,49 @@ public class HomeActivity extends AppCompatActivity {
         back();
     }
 
+    private void updateStatus(){
+        Api.getService(Tags.base_url)
+                .updateStatus(userModel.getData().getToken(), userModel.getData().getId(),"on")
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            Toast.makeText(HomeActivity.this, "good", Toast.LENGTH_SHORT).show();                        } else {
+                            try {
+                                Log.e("mmmmmmmmmm", response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+
+                            if (response.code() == 500) {
+                                Toast.makeText(HomeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            }  else {
+                                Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                Log.e("faild",response.message());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        try {
+                            if (t.getMessage() != null) {
+                                Log.e("msg_category_error", t.toString() + "__");
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(HomeActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Log.e("faild",t.getMessage());
+                                    Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
+                        }
+                    }
+                });
+    }
     private void back() {
         if (fragment_orders != null && fragment_orders.isAdded() && fragment_orders.isVisible()) {
             finish();
