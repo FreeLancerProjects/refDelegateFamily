@@ -191,6 +191,7 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
     @Override
     public void logout() {
         if(preferences.getUserData(activity)!=null){
+            preferences.create_update_userdata(getActivity(),null);
             Intent intent=new Intent(activity, LoginActivity.class);
             activity.finish();
             startActivity(intent);

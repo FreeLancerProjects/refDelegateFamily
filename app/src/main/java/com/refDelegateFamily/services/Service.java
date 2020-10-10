@@ -2,6 +2,8 @@ package com.refDelegateFamily.services;
 
 
 import com.refDelegateFamily.models.NearbyStoreDataModel;
+import com.refDelegateFamily.models.PlaceGeocodeData;
+import com.refDelegateFamily.models.PlaceMapDetailsData;
 import com.refDelegateFamily.models.UserModel;
 
 import java.util.List;
@@ -33,6 +35,21 @@ public interface Service {
                                                @Query(value = "type") String type,
                                                @Query(value = "language") String language,
                                                @Query(value = "key") String key
+    );
+
+
+
+    @GET("geocode/json")
+    Call<PlaceGeocodeData> getGeoData(@Query(value = "latlng") String latlng,
+                                      @Query(value = "language") String language,
+                                      @Query(value = "key") String key);
+
+    @GET("place/findplacefromtext/json")
+    Call<PlaceMapDetailsData> searchOnMap(@Query(value = "inputtype") String inputtype,
+                                          @Query(value = "input") String input,
+                                          @Query(value = "fields") String fields,
+                                          @Query(value = "language") String language,
+                                          @Query(value = "key") String key
     );
 
 

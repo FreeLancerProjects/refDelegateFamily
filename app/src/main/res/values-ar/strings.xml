@@ -183,5 +183,6 @@
     <string name="account_number">رقم الحساب</string>
     <string name="ipan_number">رقم الايبان</string>
     <string name="user_found">المستخدم موجود مسبقا</string>
+    <string name="ipan_number_length_error">يجب ان يكون 22 رقم</string>
 
 </resources>

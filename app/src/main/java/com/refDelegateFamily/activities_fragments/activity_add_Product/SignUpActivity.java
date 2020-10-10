@@ -335,4 +335,7 @@ public class SignUpActivity extends AppCompatActivity {
         binding.step2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
     }
 
+
+
+
 }

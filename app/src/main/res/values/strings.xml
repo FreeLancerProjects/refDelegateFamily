@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Ref Delegate Family</string>
-    <string name="map_api_key">AIzaSyA6QI378BHt9eqBbiJKtqWHTSAZxcSwN3Q</string>
-    <string name="search_key">AIzaSyAeyMUJgKAhnNXbILHONb1um72CNzELFRY</string>
+    <string name="app_name">Ref Delegate</string>
+    <string name="map_api_key">AIzaSyDWL4T8WERSHrXQ464jk8pKQf_0WLiDbgE</string>
+    <string name="search_key">AIzaSyDWL4T8WERSHrXQ464jk8pKQf_0WLiDbgE</string>
     <string name="field_req">Field required</string>
     <string name="login">Login</string>
     <string name="code">Code</string>
@@ -183,5 +183,6 @@
     <string name="account_number">Account Number</string>
     <string name="ipan_number">IPan Number</string>
     <string name="user_found">User Found</string>
+    <string name="ipan_number_length_error">Must be 22 Number</string>
 
 </resources>

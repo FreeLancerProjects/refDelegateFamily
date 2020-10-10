@@ -172,7 +172,6 @@ public class SignUpModel extends BaseObservable implements Serializable {
 
             } else {
                 error_car_model.set(null);
-
             }
             if (year_of_manufacture.trim().isEmpty()) {
                 error_car_date.set(context.getString(R.string.field_required));
@@ -185,17 +184,17 @@ public class SignUpModel extends BaseObservable implements Serializable {
             if (account_bank_number.trim().isEmpty()) {
                 error_account_bank_number.set(context.getString(R.string.field_required));
 
-            } else {
+            }else {
                 error_account_bank_number.set(null);
-
             }
 
             if (ipad_number.trim().isEmpty()) {
                 error_ipad_number.set(context.getString(R.string.field_required));
 
-            } else {
+            }else if(ipad_number.length() != 22) {
+                error_ipad_number.set(context.getString(R.string.ipan_number_length_error));
+            }else {
                 error_ipad_number.set(null);
-
             }
 
             return false;
@@ -220,6 +219,11 @@ public class SignUpModel extends BaseObservable implements Serializable {
         setUser_type("driver");
         setLatitude("0.0");
         setLongitude("0.0");
+        setYear_of_manufacture("");
+        setCard_id("");
+        setNationality_title("");
+        setCar_model("");
+        setCar_type("");
         setAddress_registered_for_bank_account("aa");
 
 

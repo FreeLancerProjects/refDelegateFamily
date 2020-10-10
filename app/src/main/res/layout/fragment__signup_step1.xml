@@ -2,26 +2,21 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
         <variable
             name="model"
             type="com.refDelegateFamily.models.SignUpModel" />
     </data>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activities_fragments.activity_add_Product.fragments.Fragment_SignUpStep1">
-
-
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nested"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/gray0"
             android:fillViewport="true">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fragment_app_container"
                 android:layout_width="match_parent"
@@ -32,9 +27,6 @@
                 android:padding="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-
-
                 <FrameLayout
                     android:id="@+id/user_image"
                     android:layout_width="wrap_content"
@@ -43,7 +35,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     >
-
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/image"
                         android:layout_width="130dp"
@@ -51,8 +42,6 @@
                         android:elevation="5dp"
                         android:src="@drawable/chef"
                         />
-
-
                     <ImageView
                         android:id="@+id/edit_img"
                         android:layout_width="40dp"
@@ -64,13 +53,7 @@
                         android:layout_gravity="end|bottom"
                         android:elevation="10dp"
                         />
-
                 </FrameLayout>
-
-
-
-
-
                 <EditText
                     error="@{model.error_name}"
                     android:id="@+id/et_name"
@@ -89,8 +72,6 @@
                     android:textSize="13dp"
                     app:layout_constraintTop_toBottomOf="@id/user_image"
                     />
-
-
                 <EditText
                     android:id="@+id/et_nationality"
                     android:layout_width="0dp"
@@ -109,7 +90,6 @@
                     android:textSize="13dp"
                     app:layout_constraintTop_toBottomOf="@id/et_name"
                     />
-
                 <EditText
                     error="@{model.error_email}"
                     android:id="@+id/et_email"
@@ -129,7 +109,6 @@
                     android:textSize="13dp"
                     app:layout_constraintTop_toBottomOf="@id/et_identity_number"
                     />
-
                 <EditText
                     android:id="@+id/et_identity_number"
                     android:layout_width="0dp"
@@ -144,11 +123,11 @@
                     android:hint="@string/national_identity_number"
                     android:text="@={model.card_id}"
                     android:padding="5dp"
+                    android:inputType="number"
                     android:textAlignment="viewStart"
                     android:textSize="13dp"
                     app:layout_constraintTop_toBottomOf="@id/et_nationality"
                     />
-
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -161,9 +140,8 @@
                         android:id="@+id/map"
                         android:name="com.refDelegateFamily.activities_fragments.activity_sign_up.FragmentMapTouchListener"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="match_parent" />
 
-                        />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -177,7 +155,6 @@
                         android:paddingRight="8dp"
                         android:gravity="center_vertical"
                         >
-
                         <EditText
                             error="@{model.error_address}"
                             android:id="@+id/edtAddress"
@@ -194,10 +171,7 @@
                             android:textColor="@color/black"
                             android:textColorHint="@color/gray4"
                             android:textSize="13sp"
-
-
                             />
-
                         <ImageView
                             android:id="@+id/imageSearch"
                             android:layout_width="0dp"
@@ -206,13 +180,8 @@
                             android:src="@drawable/ic_search"
                             android:padding="3dp"
                             />
-
                     </LinearLayout>
-
-
                 </FrameLayout>
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
