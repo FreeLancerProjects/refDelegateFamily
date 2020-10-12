@@ -5,6 +5,7 @@ import com.refDelegateFamily.models.NearbyStoreDataModel;
 import com.refDelegateFamily.models.OrderModel;
 import com.refDelegateFamily.models.PlaceGeocodeData;
 import com.refDelegateFamily.models.PlaceMapDetailsData;
+import com.refDelegateFamily.models.SettingModel;
 import com.refDelegateFamily.models.UserModel;
 
 import java.util.List;
@@ -164,4 +165,7 @@ public interface Service {
             @Field("order_id") int order_id,
             @Field("status") String status
     );
+
+    @GET("api/sttings")
+    Call<SettingModel> getSetting();
 }
