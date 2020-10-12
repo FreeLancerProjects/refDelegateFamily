@@ -63,16 +63,17 @@ public class OrderDetailActivity extends AppCompatActivity {
 
 
         Log.e("statussss:", orderModel.getStatus());
-        if (orderModel.getStatus().equals("driver_accepted_order")) {
-            binding.imgChat.setVisibility(View.GONE);
-            binding.imgCall.setVisibility(View.GONE);
-            binding.linearBtn.setVisibility(View.GONE);
-            binding.viewStatusBtn.setVisibility(View.VISIBLE);
-        } else {
+        if (orderModel.getStatus().equals("new")) {
+
             binding.imgChat.setVisibility(View.VISIBLE);
             binding.imgCall.setVisibility(View.VISIBLE);
             binding.linearBtn.setVisibility(View.VISIBLE);
             binding.viewStatusBtn.setVisibility(View.GONE);
+        } else {
+            binding.imgChat.setVisibility(View.GONE);
+            binding.imgCall.setVisibility(View.GONE);
+            binding.linearBtn.setVisibility(View.GONE);
+            binding.viewStatusBtn.setVisibility(View.VISIBLE);
         }
 
         binding.back.setOnClickListener(view -> {
