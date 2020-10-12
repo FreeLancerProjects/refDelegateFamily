@@ -128,6 +128,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         Log.e("phone:" , signUpModel.getPhone());
         Log.e("phone code:" , signUpModel.getPhone_code());
+        Log.e("Address:" , signUpModel.getAddress());
         ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();

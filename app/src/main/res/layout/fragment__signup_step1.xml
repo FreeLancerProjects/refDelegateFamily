@@ -155,6 +155,7 @@
                         android:paddingRight="8dp"
                         android:gravity="center_vertical"
                         >
+
                         <EditText
                             error="@{model.error_address}"
                             android:id="@+id/edtAddress"
