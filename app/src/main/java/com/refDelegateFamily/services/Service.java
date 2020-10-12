@@ -60,6 +60,11 @@ public interface Service {
 
     );
 
+    @FormUrlEncoded
+    @POST("api/logout")
+    Call<ResponseBody> logout(@Header("Authorization") String user_token,
+                              @Field("phone_token") String phone_token
+    );
 
     @FormUrlEncoded
     @POST("api/drive_register")

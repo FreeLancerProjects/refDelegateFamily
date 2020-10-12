@@ -1,5 +1,6 @@
 package com.refDelegateFamily.activities_fragments.activity_home.fragments;
 
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -8,15 +9,18 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_about_app.AboutAppActivity;
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
@@ -28,14 +32,23 @@ import com.refDelegateFamily.databinding.FragmentSettingBinding;
 import com.refDelegateFamily.interfaces.Listeners;
 import com.refDelegateFamily.models.DefaultSettings;
 import com.refDelegateFamily.models.MarketCatogryModel;
+import com.refDelegateFamily.models.UserModel;
 import com.refDelegateFamily.preferences.Preferences;
 import com.refDelegateFamily.activities_fragments.activity_profile.ProfileActivity;
+import com.refDelegateFamily.remote.Api;
+import com.refDelegateFamily.share.Common;
+import com.refDelegateFamily.tags.Tags;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -47,6 +60,7 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
     private String lang;
     private Preferences preferences;
     private DefaultSettings defaultSettings;
+    private UserModel userModel;
 
 
     public static Fragment_Setting newInstance() {
@@ -68,6 +82,7 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
         activity = (HomeActivity) getActivity();
         preferences = Preferences.newInstance();
         defaultSettings = preferences.getAppSetting(activity);
+        userModel = preferences.getUserData(getActivity());
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
@@ -190,17 +205,67 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
 
     @Override
     public void logout() {
-        if(preferences.getUserData(activity)!=null){
-            preferences.create_update_userdata(getActivity(),null);
-            Intent intent=new Intent(activity, LoginActivity.class);
-            activity.finish();
-            startActivity(intent);
+        if (userModel != null) {
+            ProgressDialog dialog = Common.createProgressDialog(getActivity(), getString(R.string.wait));
+            dialog.show();
+            FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    String phone_token = task.getResult().getToken();
+                    Api.getService(Tags.base_url).logout("Bearer " + userModel.getData().getToken(), phone_token).enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            dialog.dismiss();
+                            if (response.isSuccessful()) {
+                                preferences.clear(getActivity());
+                                navigateToSignInActivity();
+                            } else {
+                                dialog.dismiss();
+                                try {
+                                    Log.e("error", response.code() + "__" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                                if (response.code() == 500) {
+                                    Toast.makeText(getActivity(), "Server Error", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getActivity(), getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                            try {
+                                dialog.dismiss();
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage() + "__");
+
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(getActivity(), getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getActivity(), getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            } catch (Exception e) {
+                                Log.e("Error", e.getMessage() + "__");
+                            }
+
+                        }
+                    });
+                }
+            });
+        } else {
+            navigateToSignInActivity();
         }
-        else {
-            Intent intent=new Intent(activity, LoginActivity.class);
-            activity.finish();
-            startActivity(intent);
-        }
+    }
+
+    private void navigateToSignInActivity() {
+
+        Intent intent = new Intent(activity, LoginActivity.class);
+        activity.finish();
+        startActivity(intent);
     }
 
 
