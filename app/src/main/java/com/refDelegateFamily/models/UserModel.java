@@ -36,14 +36,13 @@ public class UserModel implements Serializable {
         private String year_of_manufacture;
         private String card_id;
         private String address_registered_for_bank_account;
-        private String address;
         private String token;
-        private String latitude;
-        private String longitude;
+
         private String user_type;
         private String software_type;
         private String details;
         private String fireBaseToken;
+        private Tracker tracker_fk;
 
         public User() {
         }
@@ -93,17 +92,8 @@ public class UserModel implements Serializable {
             return token;
         }
 
-        public String getLatitude() {
-            return latitude;
-        }
 
-        public String getLongitude() {
-            return longitude;
-        }
 
-        public String getAddress() {
-            return address;
-        }
 
         public String getType() {
             return user_type;
@@ -116,7 +106,6 @@ public class UserModel implements Serializable {
         public void setFireBaseToken(String fireBaseToken) {
             this.fireBaseToken = fireBaseToken;
         }
-
 
 
         public String getAccount_bank_number() {
@@ -178,6 +167,29 @@ public class UserModel implements Serializable {
 
         public String getSoftware_type() {
             return software_type;
+        }
+
+        public Tracker getTracker_fk() {
+            return tracker_fk;
+        }
+
+        public class Tracker implements Serializable {
+            private String latitude;
+            private String longitude;
+            private String address;
+
+
+            public String getLatitude() {
+                return latitude;
+            }
+
+            public String getLongitude() {
+                return longitude;
+            }
+
+            public String getAddress() {
+                return address;
+            }
         }
     }
 }

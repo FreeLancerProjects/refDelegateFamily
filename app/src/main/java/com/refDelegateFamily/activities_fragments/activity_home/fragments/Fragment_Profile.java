@@ -39,6 +39,7 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
@@ -66,7 +67,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Fragment_Profile extends Fragment {
+public class Fragment_Profile extends Fragment implements OnMapReadyCallback{
 
     private HomeActivity activity;
     private FragmentProfileBinding binding;
@@ -77,23 +78,11 @@ public class Fragment_Profile extends Fragment {
     public BottomSheetBehavior behavior;
     private RecyclerView recViewcomments;
     private ImageView imclose;
-
-    private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
-    private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
-    private final String camera_permission = Manifest.permission.CAMERA;
-    private final int IMG_REQ1 = 3, IMG_REQ2 = 2;
-    private final int READ_REQ = 1, CAMERA_REQ = 2;
-    private Uri url, uri = null;
-    private GoogleApiClient googleApiClient;
-    private LocationRequest locationRequest;
-    private LocationCallback locationCallback;
-    private final String fineLocPerm = Manifest.permission.ACCESS_FINE_LOCATION;
-    private final int loc_req = 1225;
+    private double lat = 0.0, lng = 0.0;
     private GoogleMap mMap;
-    private double lat, lng;
     private Marker marker;
-    private final float zoom = 15.6f;
-    private FragmentMapTouchListener fragmentMapTouchListener;
+    private float zoom = 15.0f;
+
 
     public static Fragment_Profile newInstance() {
 
@@ -119,20 +108,55 @@ public class Fragment_Profile extends Fragment {
 
         activity = (HomeActivity) getActivity();
         preferences = Preferences.newInstance();
-        userModel = preferences.getUserData(this.getActivity());
+        userModel = preferences.getUserData(activity);
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setModel(userModel);
+//Log.e("ldldlll",userModel.getData().getLatitude());
 
-
-//        updateUI();
+       updateUI();
     }
 
-//    private void updateUI() {
-//
-//        fragmentMapTouchListener = (FragmentMapTouchListener) getChildFragmentManager().findFragmentById(R.id.map);
-//        fragmentMapTouchListener.getMapAsync(this);
-//    }
+    private void updateUI() {
+
+        SupportMapFragment fragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        fragment.getMapAsync(this);
+
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        if (googleMap != null) {
+            mMap = googleMap;
+            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(activity, R.raw.maps));
+            mMap.setTrafficEnabled(false);
+            mMap.setBuildingsEnabled(false);
+            mMap.setIndoorEnabled(true);
+            AddMarker(Double.parseDouble(userModel.getData().getTracker_fk().getLatitude()), Double.parseDouble(userModel.getData().getTracker_fk().getLongitude()));
+
+
+        }
+    }
+
+
+    private void AddMarker(double lat, double lng) {
+
+        this.lat = lat;
+        this.lng = lng;
+
+        if (marker == null) {
+            marker = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), zoom));
+        } else {
+            marker.setPosition(new LatLng(lat, lng));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), zoom));
+
+
+        }
+    }
+
 //
 //    private void CheckPermission() {
 //        if (ActivityCompat.checkSelfPermission(getActivity(), fineLocPerm) != PackageManager.PERMISSION_GRANTED) {

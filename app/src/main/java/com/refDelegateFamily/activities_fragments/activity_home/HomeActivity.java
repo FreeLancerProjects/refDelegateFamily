@@ -15,6 +15,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.refDelegateFamily.R;
+import com.refDelegateFamily.activities_fragments.activity_home.NewOrderActivity.NewOrderActivity;
+import com.refDelegateFamily.activities_fragments.activity_home.activity_previous_order.PreviousOrderActivity;
 import com.refDelegateFamily.activities_fragments.activity_home.fragments.Fragment_Offers;
 import com.refDelegateFamily.activities_fragments.activity_home.fragments.Fragment_Main;
 import com.refDelegateFamily.activities_fragments.activity_home.fragments.Fragment_Orders;
@@ -114,7 +116,14 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(HomeActivity.this, NotificationActivity.class);
             startActivity(intent);
         });
-
+        binding.ivPreviousOrder.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, PreviousOrderActivity.class);
+            startActivity(intent);
+        });
+        binding.ivNewOrder.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, NewOrderActivity.class);
+            startActivity(intent);
+        });
     }
 
 
@@ -327,14 +336,15 @@ public class HomeActivity extends AppCompatActivity {
         back();
     }
 
-    private void updateStatus(){
+    private void updateStatus() {
         Api.getService(Tags.base_url)
-                .updateStatus(userModel.getData().getToken(), userModel.getData().getId(),"on")
+                .updateStatus(userModel.getData().getToken(), userModel.getData().getId(), "on")
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            Toast.makeText(HomeActivity.this, "good", Toast.LENGTH_SHORT).show();                        } else {
+                            Toast.makeText(HomeActivity.this, "good", Toast.LENGTH_SHORT).show();
+                        } else {
                             try {
                                 Log.e("mmmmmmmmmm", response.errorBody().string());
                             } catch (IOException e) {
@@ -344,9 +354,9 @@ public class HomeActivity extends AppCompatActivity {
 
                             if (response.code() == 500) {
                                 Toast.makeText(HomeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
-                            }  else {
+                            } else {
                                 Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                                Log.e("faild",response.message());
+                                Log.e("faild", response.message());
                             }
                         }
                     }
@@ -360,7 +370,7 @@ public class HomeActivity extends AppCompatActivity {
                                 if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
                                     Toast.makeText(HomeActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Log.e("faild",t.getMessage());
+                                    Log.e("faild", t.getMessage());
                                     Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -370,6 +380,7 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private void back() {
         if (fragment_orders != null && fragment_orders.isAdded() && fragment_orders.isVisible()) {
             finish();

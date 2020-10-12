@@ -10,6 +10,10 @@
             name="lang"
             type="String" />
 
+        <variable
+            name="model"
+            type="com.refDelegateFamily.models.OrderModel.Data" />
+
     </data>
 
     <androidx.cardview.widget.CardView
@@ -26,6 +30,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_image"
+                image="@{model.client.logo}"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="5dp"
@@ -38,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@string/user_name_test"
+                android:text="@{model.client.name}"
                 android:textColor="@color/gray12"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/user_image"
@@ -70,120 +75,115 @@
                 android:id="@+id/start_loc_img"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_pin3"
-                app:layout_constraintTop_toBottomOf="@id/user_image"
-                app:layout_constraintStart_toStartOf="@id/user_image"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:src="@drawable/ic_pin3"
                 android:tint="@color/colorPrimary"
-                />
+                app:layout_constraintStart_toStartOf="@id/user_image"
+                app:layout_constraintTop_toBottomOf="@id/user_image" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/start_loc_img"
-                app:layout_constraintBottom_toBottomOf="@id/start_loc_img"
-                android:text="الرياض / شارع الجماعه"
+                android:layout_marginStart="10dp"
+                android:text="@{model.from_address}"
                 android:textColor="@color/gray12"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/start_loc_img"
                 app:layout_constraintStart_toEndOf="@id/start_loc_img"
-                android:layout_marginStart="10dp"/>
+                app:layout_constraintTop_toTopOf="@id/start_loc_img" />
+
             <ImageView
                 android:id="@+id/end_loc_img"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_flag"
-                app:layout_constraintTop_toBottomOf="@id/start_loc_img"
-                app:layout_constraintStart_toStartOf="@id/user_image"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:src="@drawable/ic_flag"
                 android:tint="@color/colorPrimary"
-                />
+                app:layout_constraintStart_toStartOf="@id/user_image"
+                app:layout_constraintTop_toBottomOf="@id/start_loc_img" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/end_loc_img"
-                app:layout_constraintBottom_toBottomOf="@id/end_loc_img"
-                android:text="جدة / شارع المدينة"
+                android:layout_marginStart="10dp"
+                android:text="@{model.to_address}"
                 android:textColor="@color/gray12"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/end_loc_img"
                 app:layout_constraintStart_toEndOf="@id/end_loc_img"
-                android:layout_marginStart="10dp"/>
+                app:layout_constraintTop_toTopOf="@id/end_loc_img" />
 
             <View
                 android:id="@+id/v1"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:background="@color/gray6"
-                app:layout_constraintTop_toBottomOf="@id/end_loc_img"
                 android:layout_marginTop="10dp"
+                android:background="@color/gray6"
+                app:layout_constraintEnd_toEndOf="@id/arrow"
                 app:layout_constraintStart_toStartOf="@id/user_image"
-                app:layout_constraintEnd_toEndOf="@id/arrow"/>
-
+                app:layout_constraintTop_toBottomOf="@id/end_loc_img" />
 
 
             <ImageView
                 android:id="@+id/time_img"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/ic_calendar"
-                app:layout_constraintTop_toBottomOf="@id/v1"
-                app:layout_constraintStart_toStartOf="@id/user_image"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
+                android:src="@drawable/ic_calendar"
                 android:tint="@color/colorPrimary"
-                />
+                app:layout_constraintStart_toStartOf="@id/user_image"
+                app:layout_constraintTop_toBottomOf="@id/v1" />
 
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/time_img"
-                app:layout_constraintBottom_toBottomOf="@id/time_img"
-                android:text="جدة / شارع المدينة"
+                android:layout_marginStart="10dp"
+                android:text="@{model.end_shipping_time}"
                 android:textColor="@color/gray12"
                 android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@id/time_img"
                 app:layout_constraintStart_toEndOf="@id/time_img"
-                android:layout_marginStart="10dp"/>
+                app:layout_constraintTop_toTopOf="@id/time_img" />
 
 
             <ImageView
                 android:id="@+id/price_img"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/ic_money"
-                app:layout_constraintTop_toBottomOf="@id/v1"
-                app:layout_constraintStart_toEndOf="@id/tv_time"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
+                android:src="@drawable/ic_money"
                 android:tint="@color/colorPrimary"
-                />
+                app:layout_constraintStart_toEndOf="@id/tv_time"
+                app:layout_constraintTop_toBottomOf="@id/v1" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="@id/price_img"
-                app:layout_constraintBottom_toBottomOf="@id/price_img"
-                android:text="جدة / شارع المدينة"
+                android:layout_marginStart="10dp"
+                android:text="@{model.payment_method}"
                 android:textColor="@color/gray12"
                 android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@id/price_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/price_img"
-                android:layout_marginStart="10dp"/>
-
+                app:layout_constraintTop_toTopOf="@id/price_img" />
 
 
             <View
                 android:id="@+id/v2"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:background="@color/gray6"
-                app:layout_constraintTop_toBottomOf="@id/time_img"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="16dp"
+                android:background="@color/gray6"
+                app:layout_constraintEnd_toEndOf="@id/arrow"
                 app:layout_constraintStart_toStartOf="@id/user_image"
-                app:layout_constraintEnd_toEndOf="@id/arrow"/>
+                app:layout_constraintTop_toBottomOf="@id/time_img" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

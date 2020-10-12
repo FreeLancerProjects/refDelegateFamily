@@ -2,6 +2,7 @@ package com.refDelegateFamily.services;
 
 
 import com.refDelegateFamily.models.NearbyStoreDataModel;
+import com.refDelegateFamily.models.OrderModel;
 import com.refDelegateFamily.models.PlaceGeocodeData;
 import com.refDelegateFamily.models.PlaceMapDetailsData;
 import com.refDelegateFamily.models.UserModel;
@@ -36,7 +37,6 @@ public interface Service {
                                                @Query(value = "language") String language,
                                                @Query(value = "key") String key
     );
-
 
 
     @GET("geocode/json")
@@ -90,28 +90,28 @@ public interface Service {
     @Multipart
     @POST("api/drive_register")
     Call<UserModel> signUpWithImage(
-                                    @Part MultipartBody.Part logo,
-                                    @Part MultipartBody.Part licence_image,
-                                    @Part MultipartBody.Part back_car_image,
-                                    @Part MultipartBody.Part front_car_image,
-                                    @Part MultipartBody.Part card_image,
-                                    @Part("name") RequestBody name,
-                                    @Part("email") RequestBody email,
-                                    @Part("phone_code") RequestBody phone_code,
-                                    @Part("phone") RequestBody phone,
-                                    @Part("address") RequestBody address,
-                                    @Part("user_type") RequestBody user_type,
-                                    @Part("software_type") RequestBody software_type,
-                                    @Part("account_bank_number") RequestBody account_bank_number,
-                                    @Part("ipad_number") RequestBody ipad_number,
-                                    @Part("nationality_title") RequestBody nationality_title,
-                                    @Part("car_model") RequestBody car_model,
-                                    @Part("car_type_id") RequestBody car_type_id,
-                                    @Part("year_of_manufacture") RequestBody year_of_manufacture,
-                                    @Part("card_id") RequestBody card_id,
-                                    @Part("latitude") RequestBody latitude,
-                                    @Part("longitude") RequestBody longitude,
-                                    @Part("address_registered_for_bank_account") RequestBody address_registered_for_bank_account
+            @Part MultipartBody.Part logo,
+            @Part MultipartBody.Part licence_image,
+            @Part MultipartBody.Part back_car_image,
+            @Part MultipartBody.Part front_car_image,
+            @Part MultipartBody.Part card_image,
+            @Part("name") RequestBody name,
+            @Part("email") RequestBody email,
+            @Part("phone_code") RequestBody phone_code,
+            @Part("phone") RequestBody phone,
+            @Part("address") RequestBody address,
+            @Part("user_type") RequestBody user_type,
+            @Part("software_type") RequestBody software_type,
+            @Part("account_bank_number") RequestBody account_bank_number,
+            @Part("ipad_number") RequestBody ipad_number,
+            @Part("nationality_title") RequestBody nationality_title,
+            @Part("car_model") RequestBody car_model,
+            @Part("car_type_id") RequestBody car_type_id,
+            @Part("year_of_manufacture") RequestBody year_of_manufacture,
+            @Part("card_id") RequestBody card_id,
+            @Part("latitude") RequestBody latitude,
+            @Part("longitude") RequestBody longitude,
+            @Part("address_registered_for_bank_account") RequestBody address_registered_for_bank_account
     );
 
     @FormUrlEncoded
@@ -120,5 +120,48 @@ public interface Service {
                                     @Field("user_id") int user_id,
                                     @Field("notification_status") String notification_status
 
+    );
+
+    @GET("api/Get-current-or-previous-order-by-Status")
+    Call<OrderModel> getOrderByStatus(@Header("Authorization") String user_token,
+                                      @Query("user_id") int user_id,
+                                      @Query("user_type") String user_type,
+                                      @Query("status") String status
+    );
+
+    @GET("api/get-driver-new-orders")
+    Call<OrderModel> getOrderByStatus(
+            @Header("Authorization") String user_token,
+            @Query("user_id") int user_id,
+            @Query("pagination") String pagination);
+
+    @FormUrlEncoded
+    @POST("api/driver-accept-order")
+    Call<ResponseBody> familyAcceptOrder(@Header("Authorization") String user_token,
+                                         @Field("client_id") int client_id,
+                                         @Field("order_id") int order_id,
+                                         @Field("driver_id") int driver_id
+    );
+
+    @FormUrlEncoded
+    @POST("api/driver-refuse-order")
+    Call<ResponseBody> familyrefuesOrder(@Header("Authorization") String user_token,
+                                         @Field("client_id") int client_id,
+                                         @Field("order_id") int order_id,
+                                         @Field("driver_id") int driver_id
+    );
+
+
+    @GET("api/get-one-order")
+    Call<OrderModel> getorderdetials(@Header("Authorization") String user_token,
+                                     @Query("order_id") int order_id
+    );
+
+    @FormUrlEncoded
+    @POST("api/driver-change-order-status")
+    Call<ResponseBody> driverchangeOrderstatus(
+            @Header("Authorization") String user_token,
+            @Field("order_id") int order_id,
+            @Field("status") String status
     );
 }

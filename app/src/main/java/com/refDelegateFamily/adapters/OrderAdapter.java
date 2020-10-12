@@ -1,11 +1,14 @@
 package com.refDelegateFamily.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,20 +29,16 @@ import io.paperdb.Paper;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapterVH> {
 
-    private List<OrderModel> orderlist;
+    private List<OrderModel.Data> orderlist;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-    Preferences preferences;
-    UserModel userModel;
-    private OrderDetailAdapter orderDetailAdapter;
+//    Preferences preferences;
+//    UserModel userModel;
+    //private OrderDetailAdapter orderDetailAdapter;
 
 
-    public OrderAdapter(Context context) {
-        this.context = context;
-    }
-
-    public OrderAdapter(List<OrderModel> orderlist, Context context) {
+    public OrderAdapter(List<OrderModel.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -58,12 +57,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
     @Override
     public void onBindViewHolder(@NonNull OrderAdapterVH holder, int position) {
         holder.binding.setLang(Language_Helper.getLanguage(context));
-        orderDetailAdapter = new OrderDetailAdapter(context);
+        holder.binding.setModel(orderlist.get(position));
+        //    orderDetailAdapter = new OrderDetailAdapter(context);
 
         holder.itemView.setOnClickListener(view -> {
 
             Intent intent = new Intent(context, OrderDetailActivity.class);
+            intent.putExtra("DATA", orderlist.get(position));
             context.startActivity(intent);
+          //  ((AppCompatActivity) context).finish();
 
         });
 
@@ -72,7 +74,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
 
     @Override
     public int getItemCount() {
-        return 15;
+        return orderlist.size();
     }
 
     public class OrderAdapterVH extends RecyclerView.ViewHolder {

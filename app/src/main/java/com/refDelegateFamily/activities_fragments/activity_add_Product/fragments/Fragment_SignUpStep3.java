@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.google.gson.internal.$Gson$Preconditions;
 import com.refDelegateFamily.R;
+import com.refDelegateFamily.activities_fragments.activity_about_app.AboutAppActivity;
 import com.refDelegateFamily.databinding.DialogSelectImageBinding;
 import com.refDelegateFamily.databinding.FragmentSignupStep3Binding;
 import com.refDelegateFamily.models.AddProductModel;
@@ -48,6 +49,7 @@ public class Fragment_SignUpStep3 extends Fragment {
     private final int IMG_REQ1 = 3, IMG_REQ2 = 2;
     private Uri url, uri = null;
     private int type;
+    public int terms=0;
 
     public static Fragment_SignUpStep3 newInstance(SignUpModel signUpModel) {
         Bundle bundle = new Bundle();
@@ -95,7 +97,18 @@ public class Fragment_SignUpStep3 extends Fragment {
 
 
         });
+        binding.checkbox.setOnClickListener(view -> {
+            if (binding.checkbox.isChecked()) {
+                 terms = 1;
+                Intent intent = new Intent(getContext(), AboutAppActivity.class);
+                intent.putExtra("type", 1);
+                startActivity(intent);
+            } else {
+                terms=0;
+//                signUpModel.setAccept(false);
 
+            }
+        });
     }
 
     private void CreateImageAlertDialog() {

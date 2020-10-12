@@ -12,15 +12,14 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:icon="@mipmap/ic_launcher"
-        android:theme="@style/AppTheme"
         android:name=".share.App"
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
-        >
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity android:name="com.refDelegateFamily.activities_fragments.activity_subscription.SubscriptionActivity"></activity>
         <activity android:name="com.refDelegateFamily.activities_fragments.activity_order_steps.OrderStepsActivity" />
         <activity android:name="com.refDelegateFamily.activities_fragments.activity_payment.PaymentActivity" />
@@ -52,6 +51,14 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name="com.refDelegateFamily.activities_fragments.activity_verification_code.VerificationCodeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activities_fragments.activity_home.activity_previous_order.PreviousOrderActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activities_fragments.activity_home.NewOrderActivity.NewOrderActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity

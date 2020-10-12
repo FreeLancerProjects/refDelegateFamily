@@ -184,5 +184,15 @@
     <string name="ipan_number">IPan Number</string>
     <string name="user_found">User Found</string>
     <string name="ipan_number_length_error">Must be 22 Number</string>
+    <string name="no_data_to_view">No data to View</string>
+    <string name="previous_orders">Previous Orders</string>
+    <string name="view_status">View Status</string>
+    <string name="ch_logo">Choose Logo</string>
+    <string name="ch_national_image">Choose National Image</string>
+    <string name="ch_licence">Choose Licence Image</string>
+    <string name="ch_car">Chhose Back Car Image</string>
+    <string name="ch_fr">Chhose Front Car Image</string>
+    <string name="accept_terms">Accept Terms And Conditions</string>
+    <string name="new_orders">New Orders</string>
 
 </resources>

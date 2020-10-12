@@ -20,10 +20,10 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:id="@+id/container">
+        android:padding="16dp">
 
         <FrameLayout
             android:id="@+id/user_image"
@@ -73,8 +73,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
             android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/name" />
 
@@ -137,7 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="@{model.data.address}"
+            android:text="@{model.data.tracker_fk.address}"
             android:textColor="@color/gray12"
             app:layout_constraintBottom_toBottomOf="@id/ic_locaiton"
             app:layout_constraintStart_toEndOf="@id/ic_locaiton"
@@ -146,7 +146,7 @@
 
         <fragment
             android:id="@+id/map"
-            android:name="com.refDelegateFamily.activities_fragments.activity_sign_up.FragmentMapTouchListener"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_marginTop="10dp"

@@ -2,6 +2,7 @@ package com.refDelegateFamily.models;
 
 import android.content.Context;
 import android.util.Patterns;
+import android.widget.Toast;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -95,6 +96,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
                 !nationality_title.trim().isEmpty() &&
                 !card_id.trim().isEmpty() &&
                 Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches()
+                && !logo.isEmpty()
         ) {
             error_name.set(null);
             error_email.set(null);
@@ -111,7 +113,9 @@ public class SignUpModel extends BaseObservable implements Serializable {
                 error_name.set(null);
 
             }
-
+            if (logo.isEmpty()) {
+                Toast.makeText(context, context.getResources().getString(R.string.ch_logo), Toast.LENGTH_LONG).show();
+            }
             if (!Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches()) {
                 error_email.set(context.getString(R.string.inv_email));
 
@@ -151,6 +155,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
                 !car_type.trim().isEmpty() &&
                 !account_bank_number.trim().isEmpty() &&
                 !ipad_number.trim().isEmpty()
+                && !card_image.isEmpty()
         ) {
             error_car_date.set(null);
             error_car_model.set(null);
@@ -160,6 +165,9 @@ public class SignUpModel extends BaseObservable implements Serializable {
 
             return true;
         } else {
+            if (card_image.isEmpty()) {
+                Toast.makeText(context, context.getResources().getString(R.string.ch_national_image), Toast.LENGTH_LONG).show();
+            }
             if (car_type.trim().isEmpty()) {
                 error_car_type.set(context.getString(R.string.field_required));
 
@@ -184,16 +192,16 @@ public class SignUpModel extends BaseObservable implements Serializable {
             if (account_bank_number.trim().isEmpty()) {
                 error_account_bank_number.set(context.getString(R.string.field_required));
 
-            }else {
+            } else {
                 error_account_bank_number.set(null);
             }
 
             if (ipad_number.trim().isEmpty()) {
                 error_ipad_number.set(context.getString(R.string.field_required));
 
-            }else if(ipad_number.length() != 22) {
+            } else if (ipad_number.length() != 22) {
                 error_ipad_number.set(context.getString(R.string.ipan_number_length_error));
-            }else {
+            } else {
                 error_ipad_number.set(null);
             }
 
@@ -203,9 +211,31 @@ public class SignUpModel extends BaseObservable implements Serializable {
 
     }
 
-//    public boolean step3(Context context) {
-//        return false;
-//    }
+    public boolean step3(Context context) {
+
+        if (!back_car_image.isEmpty()
+                && !front_car_image.isEmpty()
+                && !licence_image.isEmpty()
+        ) {
+
+
+            return true;
+        } else {
+            if (licence_image.isEmpty()) {
+                Toast.makeText(context, context.getResources().getString(R.string.ch_licence), Toast.LENGTH_LONG).show();
+            }
+            if (back_car_image.isEmpty()) {
+                Toast.makeText(context, context.getResources().getString(R.string.ch_car), Toast.LENGTH_LONG).show();
+            }
+            if (front_car_image.isEmpty()) {
+                Toast.makeText(context, context.getResources().getString(R.string.ch_fr), Toast.LENGTH_LONG).show();
+            }
+
+            return false;
+        }
+
+
+    }
 
 
     public SignUpModel() {
@@ -224,6 +254,10 @@ public class SignUpModel extends BaseObservable implements Serializable {
         setNationality_title("");
         setCar_model("");
         setCar_type("");
+        setCard_image("");
+        setBack_car_image("");
+        setFront_car_image("");
+        setLicence_image("");
         setAddress_registered_for_bank_account("aa");
 
 
@@ -355,8 +389,6 @@ public class SignUpModel extends BaseObservable implements Serializable {
     }
 
 
-
-
     @Bindable
     public String getAccount_bank_number() {
         return account_bank_number;
@@ -376,6 +408,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
         this.ipad_number = ipad_number;
         notifyPropertyChanged(BR.ipad_number);
     }
+
     @Bindable
     public String getNationality_title() {
         return nationality_title;
@@ -385,6 +418,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
         this.nationality_title = nationality_title;
         notifyPropertyChanged(BR.nationality_title);
     }
+
     @Bindable
     public String getCar_type() {
         return car_type;
@@ -394,6 +428,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
         this.car_type = car_type;
         notifyPropertyChanged(BR.car_type);
     }
+
     @Bindable
     public String getCar_model() {
         return car_model;
@@ -403,6 +438,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
         this.car_model = car_model;
         notifyPropertyChanged(BR.car_model);
     }
+
     @Bindable
     public String getYear_of_manufacture() {
         return year_of_manufacture;
@@ -412,6 +448,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
         this.year_of_manufacture = year_of_manufacture;
         notifyPropertyChanged(BR.year_of_manufacture);
     }
+
     @Bindable
     public String getCard_id() {
         return card_id;
@@ -421,6 +458,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
         this.card_id = card_id;
         notifyPropertyChanged(BR.card_id);
     }
+
     @Bindable
     public String getAddress_registered_for_bank_account() {
         return address_registered_for_bank_account;

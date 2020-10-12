@@ -184,5 +184,15 @@
     <string name="ipan_number">رقم الايبان</string>
     <string name="user_found">المستخدم موجود مسبقا</string>
     <string name="ipan_number_length_error">يجب ان يكون 22 رقم</string>
+    <string name="no_data_to_view">لا يوجد بيانات للعرض</string>
+    <string name="previous_orders">الطلبات السابقة</string>
+    <string name="view_status">متايعة الحالة</string>
+    <string name="ch_logo">Choose Logo</string>
+    <string name="ch_national_image">Choose National Image</string>
+    <string name="ch_licence">Choose Licence Image</string>
+    <string name="ch_car">Chhose Back Car Image</string>
+    <string name="ch_fr">Chhose Front Car Image</string>
+    <string name="accept_terms">Accept Terms And Conditions</string>
+    <string name="new_orders">New Orders</string>
 
 </resources>

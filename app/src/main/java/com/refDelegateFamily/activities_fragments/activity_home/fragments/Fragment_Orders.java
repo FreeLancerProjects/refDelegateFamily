@@ -1,6 +1,7 @@
 package com.refDelegateFamily.activities_fragments.activity_home.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,20 @@ import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
 import com.refDelegateFamily.adapters.OrderAdapter;
 import com.refDelegateFamily.databinding.FragmentOrdersBinding;
+import com.refDelegateFamily.models.OrderModel;
+import com.refDelegateFamily.models.UserModel;
 import com.refDelegateFamily.preferences.Preferences;
+import com.refDelegateFamily.remote.Api;
+import com.refDelegateFamily.tags.Tags;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Fragment_Orders extends Fragment {
 
@@ -28,6 +38,8 @@ public class Fragment_Orders extends Fragment {
     private Preferences preferences;
     private String lang;
     private OrderAdapter orderAdapter;
+    private List<OrderModel.Data> oDataList;
+    private UserModel userModel;
     public static Fragment_Orders newInstance() {
         return new Fragment_Orders();
     }
@@ -47,14 +59,49 @@ public class Fragment_Orders extends Fragment {
     }
 
     private void initView() {
+        oDataList=new ArrayList<>();
         activity = (HomeActivity) getActivity();
         preferences = Preferences.newInstance();
+        userModel=preferences.getUserData(activity);
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.recViewOrders.setAdapter(new OrderAdapter(this.getContext()));
+        orderAdapter=new OrderAdapter(oDataList,activity);
+        binding.recViewOrders.setAdapter(orderAdapter);
         binding.recViewOrders.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
+        getOrders();
+    }
+
+    private void getOrders() {
+        oDataList.clear();
+        orderAdapter.notifyDataSetChanged();
+        binding.progBarOrders.setVisibility(View.VISIBLE);
+        Api.getService(Tags.base_url).getOrderByStatus("Bearer " + userModel.getData().getToken(),
+                userModel.getData().getId(), "driver", "current").enqueue(new Callback<OrderModel>() {
+            @Override
+            public void onResponse(Call<OrderModel> call, Response<OrderModel> response) {
+                binding.progBarOrders.setVisibility(View.GONE);
+                if (response.isSuccessful() && response.body() != null) {
+                    oDataList.addAll(response.body().getData());
+                    orderAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OrderModel> call, Throwable t) {
+                binding.progBarOrders.setVisibility(View.GONE);
+                Log.e("Fragment_Orders: ",t.getMessage());
+            }
+        });
+
 
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(activity!=null){
+            getOrders();
+        }
+    }
 }

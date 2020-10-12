@@ -104,9 +104,13 @@ public class SignUpActivity extends AppCompatActivity {
                 if (fragment_signUpStep3 != null && fragment_signUpStep3.isAdded()) {
                     signUpModel = fragment_signUpStep3.signUpModel;
                 }
-                if (signUpModel.step1(this)) {
+                if (signUpModel.step3(this)) {
+                    if (fragment_signUpStep3.terms == 1) {
 
-                    SignUp();
+                        SignUp();
+                    } else {
+                        Toast.makeText(SignUpActivity.this, getResources().getString(R.string.accept_terms), Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -126,15 +130,14 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void SignUp() {
 
-        Log.e("phone:" , signUpModel.getPhone());
-        Log.e("phone code:" , signUpModel.getPhone_code());
-        Log.e("Address:" , signUpModel.getAddress());
+        Log.e("phone:", signUpModel.getPhone());
+        Log.e("phone code:", signUpModel.getPhone_code());
+        Log.e("Address:", signUpModel.getAddress());
 
 
         ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
-
 
 
         RequestBody name = Common.getRequestBodyText(signUpModel.getName());
@@ -155,7 +158,7 @@ public class SignUpActivity extends AppCompatActivity {
         RequestBody longitude = Common.getRequestBodyText(signUpModel.getLongitude());
         RequestBody address_registered_for_bank_account = Common.getRequestBodyText(signUpModel.getAddress_registered_for_bank_account());
 
-        MultipartBody.Part logo = Common.getMultiPart(this, Uri.parse(signUpModel.getLicence_image()), "logo");
+        MultipartBody.Part logo = Common.getMultiPart(this, Uri.parse(signUpModel.getLogo()), "logo");
         MultipartBody.Part lincense_image = Common.getMultiPart(this, Uri.parse(signUpModel.getLicence_image()), "licence_image");
         MultipartBody.Part card_image = Common.getMultiPart(this, Uri.parse(signUpModel.getCard_image()), "card_image");
         MultipartBody.Part front_image = Common.getMultiPart(this, Uri.parse(signUpModel.getFront_car_image()), "front_car_image");
@@ -163,7 +166,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         Api.getService(Tags.base_url).signUpWithImage(logo, lincense_image, back_image, front_image, card_image, name, email, phone_code, phone, address, user_type
-                , software_type, account_bank_number, ipad_number, nationality_title, car_model,car_type, year_of_manufacture, card_id, latitude, longitude, address_registered_for_bank_account)
+                , software_type, account_bank_number, ipad_number, nationality_title, car_model, car_type, year_of_manufacture, card_id, latitude, longitude, address_registered_for_bank_account)
                 .enqueue(new Callback<UserModel>() {
                     @Override
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -179,9 +182,9 @@ public class SignUpActivity extends AppCompatActivity {
                                 Toast.makeText(SignUpActivity.this, R.string.user_found, Toast.LENGTH_SHORT).show();
                             } else if (response.code() == 422) {
                                 try {
-                                    Log.e("msg_category_error", response.errorBody().string()+ "__");
+                                    Log.e("msg_category_error", response.errorBody().string() + "__");
                                 } catch (Exception e) {
-                                    Log.e("aaaaaqqqq", e.toString()+ "__");
+                                    Log.e("aaaaaqqqq", e.toString() + "__");
 
                                 }
 
@@ -337,8 +340,6 @@ public class SignUpActivity extends AppCompatActivity {
         binding.step1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
         binding.step2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
     }
-
-
 
 
 }
