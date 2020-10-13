@@ -39,7 +39,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class HomeActivity extends AppCompatActivity {
     private ActivityHomeBinding binding;
     private Preferences preferences;
@@ -52,7 +51,6 @@ public class HomeActivity extends AppCompatActivity {
     private UserModel userModel;
     private String lang;
     private String token;
-
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -112,8 +110,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         binding.flNotification.setOnClickListener(view -> {
-
-
             Intent intent = new Intent(HomeActivity.this, NotificationActivity.class);
             startActivity(intent);
         });

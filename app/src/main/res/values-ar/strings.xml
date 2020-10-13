@@ -200,5 +200,7 @@
     <string name="compiled">تم التجميع</string>
     <string name="received">تم الاستلام</string>
     <string name="sent_delivered_handed">تم التسليم</string>
-
+    <string name="suc">تم بنجاح</string>
+    <string name="buy">إشترك</string>
+    <string name="canceled">تم الإلغاء</string>
 </resources>

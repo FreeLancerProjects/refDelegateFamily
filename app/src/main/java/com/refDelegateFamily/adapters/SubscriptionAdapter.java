@@ -9,8 +9,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.refDelegateFamily.R;
+import com.refDelegateFamily.activities_fragments.activity_subscription.SubscriptionActivity;
 import com.refDelegateFamily.databinding.ItemNotificationBinding;
 import com.refDelegateFamily.databinding.ItemSubscritionBinding;
+import com.refDelegateFamily.models.NotificationModel;
 import com.refDelegateFamily.models.SubscriptionModel;
 import com.refDelegateFamily.models.UserModel;
 import com.refDelegateFamily.preferences.Preferences;
@@ -22,43 +24,47 @@ import io.paperdb.Paper;
 
 public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapter.SubscriptionAdapterVH> {
 
-    private List<SubscriptionModel> subscriptionList;
+    private List<SubscriptionModel> list;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-    Preferences preferences;
-    UserModel userModel;
+    private SubscriptionActivity activity;
 
-    public SubscriptionAdapter(Context context) {
-        this.context = context;
-    }
 
     public SubscriptionAdapter(List<SubscriptionModel> subscriptionList, Context context) {
-        this.subscriptionList = subscriptionList;
+        this.list = subscriptionList;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        activity = (SubscriptionActivity) context;
 
     }
 
     @NonNull
     @Override
     public SubscriptionAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemSubscritionBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_subscrition, parent, false);
+        ItemSubscritionBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_subscrition, parent, false);
         return new SubscriptionAdapterVH(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SubscriptionAdapterVH holder, int position) {
-
+        SubscriptionModel model = list.get(position);
+        holder.binding.setModel(model);
         holder.binding.setLang(lang);
-//        holder.binding.setModel(notificationList.get(position));
+        holder.binding.btnBuy.setOnClickListener(view -> {
+            SubscriptionModel model2 = list.get(holder.getAdapterPosition());
+
+            activity.buyPackage(model2);
+        });
+
+
     }
 
     @Override
     public int getItemCount() {
-        return 15;
+        return list.size();
     }
 
     public class SubscriptionAdapterVH extends RecyclerView.ViewHolder {

@@ -200,5 +200,8 @@
     <string name="compiled">Compiled</string>
     <string name="received">Received</string>
     <string name="sent_delivered_handed">sent delivered handed</string>
+    <string name="suc">success</string>
+    <string name="buy">Buy</string>
+    <string name="canceled">Canceled</string>
 
 </resources>

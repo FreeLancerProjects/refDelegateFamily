@@ -5,9 +5,11 @@ import com.refDelegateFamily.models.MessageDataModel;
 import com.refDelegateFamily.models.MessageModel;
 import com.refDelegateFamily.models.NearbyStoreDataModel;
 import com.refDelegateFamily.models.OrderModel;
+import com.refDelegateFamily.models.PackageResponse;
 import com.refDelegateFamily.models.PlaceGeocodeData;
 import com.refDelegateFamily.models.PlaceMapDetailsData;
 import com.refDelegateFamily.models.SettingModel;
+import com.refDelegateFamily.models.SubscriptionDataModel;
 import com.refDelegateFamily.models.UserModel;
 
 import java.util.List;
@@ -212,4 +214,17 @@ public interface Service {
 
 //
             );
+
+    @GET("api/Get-Packages")
+    Call<SubscriptionDataModel> getSubscription();
+
+
+    @FormUrlEncoded
+    @POST("api/pay")
+    Call<PackageResponse> buyPackage(@Field("package_id") int package_id,
+                                     @Field("user_id") int user_id,
+                                     @Field("price") String price
+
+
+    );
 }
