@@ -81,7 +81,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.refDelegateFamily.activities_fragments.activity_chat.ChatActivity"
+            android:name="com.refDelegateFamily.activities_fragments.chat_activity.ChatActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 

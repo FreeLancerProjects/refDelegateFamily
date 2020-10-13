@@ -43,10 +43,11 @@ public class OrderModel implements Serializable {
         private String other_phone;
         private String coupon;
         private String cancel_reason;
-        private List<ProductModel.ImageModel> order_images ;
+        private List<ProductModel.ImageModel> order_images;
         private User family;
         private User client;
         private User driver;
+        private DriverChat driver_chat;
 
         public int getId() {
             return id;
@@ -162,6 +163,10 @@ public class OrderModel implements Serializable {
 
         public User getDriver() {
             return driver;
+        }
+
+        public DriverChat getDriver_chat() {
+            return driver_chat;
         }
 
         public static class User implements Serializable {
@@ -303,6 +308,28 @@ public class OrderModel implements Serializable {
             }
         }
 
+        public class DriverChat implements Serializable {
+            private int id;
+            private int order_id;
+            private int first_user_id;
+            private int second_user_id;
+
+            public int getId() {
+                return id;
+            }
+
+            public int getOrder_id() {
+                return order_id;
+            }
+
+            public int getFirst_user_id() {
+                return first_user_id;
+            }
+
+            public int getSecond_user_id() {
+                return second_user_id;
+            }
+        }
     }
 
 

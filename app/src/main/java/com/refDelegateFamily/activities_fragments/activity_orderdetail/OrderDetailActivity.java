@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -22,11 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.activities_fragments.activity_chat.ChatActivity;
 import com.refDelegateFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
+import com.refDelegateFamily.activities_fragments.chat_activity.ChatActivity;
 import com.refDelegateFamily.adapters.Image_Adapter;
 import com.refDelegateFamily.databinding.ActivityOrderDetailBinding;
 import com.refDelegateFamily.language.Language_Helper;
+import com.refDelegateFamily.models.ChatUserModel;
 import com.refDelegateFamily.models.OrderModel;
 import com.refDelegateFamily.models.ProductModel;
 import com.refDelegateFamily.models.UserModel;
@@ -70,6 +70,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_order_detail);
         getDataFromIntent();
         initView();
+        getOrderDetials();
     }
 
     private void initView() {
@@ -84,12 +85,12 @@ public class OrderDetailActivity extends AppCompatActivity {
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
-        binding.setModel(orderModel);
+        //  binding.setModel(orderModel);
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
         if (orderModel.getOrder_images() != null) {
             imageModels.addAll(orderModel.getOrder_images());
-         //   Log.e("lsllsls", orderModel.getOrder_images().get(0).getImage());
+            //   Log.e("lsllsls", orderModel.getOrder_images().get(0).getImage());
         }
         image_adapter = new Image_Adapter(imageModels, this);
 
@@ -97,7 +98,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         binding.recview.setAdapter(image_adapter);
 
         // Log.e("statussss:", orderModel.getStatus());
-        if (orderModel.getStatus().equals("new")) {
+        if (orderModel.getStatus().equals("new") || orderModel.getStatus().equals("family_end_prepare_order")) {
 
             binding.imgChat.setVisibility(View.VISIBLE);
             binding.imgCall.setVisibility(View.VISIBLE);
@@ -110,21 +111,22 @@ public class OrderDetailActivity extends AppCompatActivity {
             binding.viewStatusBtn.setVisibility(View.VISIBLE);
         }
 
-        binding.back.setOnClickListener(view -> {
-
-            back();
-        });
+//        binding.back.setOnClickListener(view -> {
+//
+//            back();
+//        });
         binding.imgChat.setOnClickListener(view -> {
 
-            Intent intent = new Intent(OrderDetailActivity.this, ChatActivity.class);
-            startActivity(intent);
-            finish();
 
+            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(),orderModel.getClient().getLogo(),orderModel.getClient().getId()+"",orderModel.getDriver_chat().getId());
+            Intent intent = new Intent(this, ChatActivity.class);
+            intent.putExtra("chat_user_data",chatUserModel);
+            startActivityForResult(intent,1000);
         });
 
         binding.imgCall.setOnClickListener(view -> {
 
-            intent = new Intent(Intent.ACTION_DIAL,  Uri.fromParts("tel" , orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone(),null));
+            intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone(), null));
             if (intent != null) {
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
@@ -225,9 +227,10 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
     public void showimage(String layoutPosition) {
-        imagePopup.initiatePopupWithPicasso(Tags.IMAGE_URL+layoutPosition);
+        imagePopup.initiatePopupWithPicasso(Tags.IMAGE_URL + layoutPosition);
         imagePopup.viewPopup();
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -256,4 +259,60 @@ public class OrderDetailActivity extends AppCompatActivity {
         }
     }
 
+    public void getOrderDetials() {
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .getorderdetials("Bearer " + userModel.getData().getToken(), orderModel.getId())
+                .enqueue(new Callback<OrderModel>() {
+                    @Override
+                    public void onResponse(Call<OrderModel> call, Response<OrderModel> response) {
+                        //  binding.progBar.setVisibility(View.GONE);
+                        dialog.dismiss();
+                        if (response.isSuccessful() && response.body() != null) {
+                            updatedata(response.body());
+                            // orderDetails.addAll(response.body().getOrderDetails());
+//                            if (response.body().getOrderDetails().size() > 0) {
+//                                // rec_sent.setVisibility(View.VISIBLE);
+//
+//                                binding.llNoStore.setVisibility(View.GONE);
+//                                order_detials_adapter.notifyDataSetChanged();
+//                                // updatestatus(response.body());
+//                                //   total_page = response.body().getMeta().getLast_page();
+//
+//                            } else {
+//                                binding.llNoStore.setVisibility(View.VISIBLE);
+//
+//                            }
+                        } else {
+
+                            Toast.makeText(OrderDetailActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            try {
+                                Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<OrderModel> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+
+                            //     binding.progBar.setVisibility(View.GONE);
+
+                            //    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                            Log.e("error", t.getMessage());
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+
+    }
+
+    private void updatedata(OrderModel body) {
+        this.orderModel=body.getOrder();
+        binding.setModel(body.getOrder());
+    }
 }

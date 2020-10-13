@@ -18,10 +18,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.activities_fragments.activity_chat.ChatActivity;
 import com.refDelegateFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
+import com.refDelegateFamily.activities_fragments.chat_activity.ChatActivity;
 import com.refDelegateFamily.databinding.ActivityOrderStepsBinding;
 import com.refDelegateFamily.language.Language_Helper;
+import com.refDelegateFamily.models.ChatUserModel;
 import com.refDelegateFamily.models.OrderModel;
 import com.refDelegateFamily.models.UserModel;
 import com.refDelegateFamily.preferences.Preferences;
@@ -135,10 +136,10 @@ public class OrderStepsActivity extends AppCompatActivity {
         });
         binding.imgChat.setOnClickListener(view -> {
 
-            Intent intent = new Intent(OrderStepsActivity.this, ChatActivity.class);
-            startActivity(intent);
-            finish();
-
+            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(),orderModel.getClient().getLogo(),orderModel.getClient().getId()+"",orderModel.getDriver_chat().getId());
+            Intent intent = new Intent(this, ChatActivity.class);
+            intent.putExtra("chat_user_data",chatUserModel);
+            startActivityForResult(intent,1000);
         });
 
         binding.imgCall.setOnClickListener(view -> {

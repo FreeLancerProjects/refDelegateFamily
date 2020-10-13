@@ -1,6 +1,8 @@
 package com.refDelegateFamily.services;
 
 
+import com.refDelegateFamily.models.MessageDataModel;
+import com.refDelegateFamily.models.MessageModel;
 import com.refDelegateFamily.models.NearbyStoreDataModel;
 import com.refDelegateFamily.models.OrderModel;
 import com.refDelegateFamily.models.PlaceGeocodeData;
@@ -168,4 +170,46 @@ public interface Service {
 
     @GET("api/sttings")
     Call<SettingModel> getSetting();
+
+    @GET("api/Get-chat-messages-by-roomID")
+    Call<MessageDataModel> getRoomMessages(
+            @Header("Authorization") String user_token,
+
+            @Query("room_id") int room_id,
+            @Query("pagination_status") String pagination_status
+    );
+
+
+    @FormUrlEncoded
+    @POST("api/send-message")
+    Call<MessageModel> sendmessagetext(
+            @Header("Authorization") String user_token,
+
+            @Field("from_user_id") String from_user_id,
+
+            @Field("to_user_id") String to_user_id,
+            @Field("message_kind") String message_kind,
+            @Field("chat_room_id") String chat_room_id,
+            @Field("message") String message
+
+
+    );
+
+
+    @Multipart
+    @POST("api/send-message")
+    Call<MessageModel> sendmessagewithimage
+            (
+                    @Header("Authorization") String user_token,
+
+                    @Part("from_user_id") RequestBody from_user_id,
+
+                    @Part("to_user_id") RequestBody to_user_id,
+                    @Part("message_kind") RequestBody message_kind,
+                    @Part("chat_room_id") RequestBody chat_room_id,
+
+                    @Part MultipartBody.Part imagepart
+
+//
+            );
 }
