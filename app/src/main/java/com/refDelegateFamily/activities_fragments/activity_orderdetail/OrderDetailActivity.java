@@ -62,7 +62,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         userModel = preferences.getUserData(this);
 
 
-        Log.e("statussss:", orderModel.getStatus());
+       // Log.e("statussss:", orderModel.getStatus());
         if (orderModel.getStatus().equals("new")) {
 
             binding.imgChat.setVisibility(View.VISIBLE);

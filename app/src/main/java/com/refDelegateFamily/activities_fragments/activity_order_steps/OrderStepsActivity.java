@@ -60,6 +60,90 @@ public class OrderStepsActivity extends AppCompatActivity {
         binding.setLang(lang);
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
+        binding.tvOrderReady.setOnClickListener(view -> {
+
+
+            Api.getService(Tags.base_url).driverchangeOrderstatus("Bearer " + userModel.getData().getToken(),
+                    orderModel.getId(), "driver_finished_collect_order").enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        //        Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
+                        getOrderDetials();
+                        // finish();
+                    } else {
+                        Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                        try {
+                            Log.e("llllll", response.errorBody().string());
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.e("onFailure:", t.getMessage());
+                }
+            });
+
+
+        });
+        binding.tvOrderReady2.setOnClickListener(view -> {
+
+
+            Api.getService(Tags.base_url).driverchangeOrderstatus("Bearer " + userModel.getData().getToken(),
+                    orderModel.getId(), "driver_in_way").enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        // Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
+                        getOrderDetials();
+                        // finish();
+                    } else {
+                        Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                        try {
+                            Log.e("llllll", response.errorBody().string());
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.e("onFailure:", t.getMessage());
+                }
+            });
+
+
+        });
+        binding.tvOrderReady3.setOnClickListener(view -> {
+
+
+            Api.getService(Tags.base_url).driverchangeOrderstatus("Bearer " + userModel.getData().getToken(),
+                    orderModel.getId(), "driver_give_order_to_client").enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        //    Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
+                        getOrderDetials();
+                        // finish();
+                    } else {
+                        Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                        try {
+                            Log.e("llllll", response.errorBody().string());
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.e("onFailure:", t.getMessage());
+                }
+            });
+
+
+        });
     }
 
     private void getDataFromIntent() {
@@ -167,90 +251,7 @@ public class OrderStepsActivity extends AppCompatActivity {
             binding.image5.setBackground(getResources().getDrawable(R.drawable.circle_bg));
 
         }
-        binding.tvOrderReady.setOnClickListener(view -> {
 
-
-            Api.getService(Tags.base_url).driverchangeOrderstatus("Bearer " + userModel.getData().getToken(),
-                    orderModel.getId(), "driver_finished_collect_order").enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        //        Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
-                        getOrderDetials();
-                        // finish();
-                    } else {
-                        Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                        try {
-                            Log.e("llllll", response.errorBody().string());
-                        } catch (Exception e) {
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Log.e("onFailure:", t.getMessage());
-                }
-            });
-
-
-        });
-        binding.tvOrderReady2.setOnClickListener(view -> {
-
-
-            Api.getService(Tags.base_url).driverchangeOrderstatus("Bearer " + userModel.getData().getToken(),
-                    orderModel.getId(), "driver_in_way").enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        // Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
-                        getOrderDetials();
-                        // finish();
-                    } else {
-                        Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                        try {
-                            Log.e("llllll", response.errorBody().string());
-                        } catch (Exception e) {
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Log.e("onFailure:", t.getMessage());
-                }
-            });
-
-
-        });
-        binding.tvOrderReady3.setOnClickListener(view -> {
-
-
-            Api.getService(Tags.base_url).driverchangeOrderstatus("Bearer " + userModel.getData().getToken(),
-                    orderModel.getId(), "driver_give_order_to_client").enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        //    Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
-                        getOrderDetials();
-                        // finish();
-                    } else {
-                        Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                        try {
-                            Log.e("llllll", response.errorBody().string());
-                        } catch (Exception e) {
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Log.e("onFailure:", t.getMessage());
-                }
-            });
-
-
-        });
 
     }
 

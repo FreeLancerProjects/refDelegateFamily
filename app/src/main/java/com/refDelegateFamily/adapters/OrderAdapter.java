@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.refDelegateFamily.R;
+import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
+import com.refDelegateFamily.activities_fragments.activity_home.NewOrderActivity.NewOrderActivity;
 import com.refDelegateFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
 import com.refDelegateFamily.databinding.ItemMainOffersBinding;
 import com.refDelegateFamily.databinding.ItemOrderBinding;
@@ -61,31 +63,31 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         //    orderDetailAdapter = new OrderDetailAdapter(context);
 
         holder.itemView.setOnClickListener(view -> {
+            if (context instanceof HomeActivity || context instanceof NewOrderActivity) {
+                Intent intent = new Intent(context, OrderDetailActivity.class);
+                intent.putExtra("DATA", orderlist.get(position));
+                context.startActivity(intent);
+                //  ((AppCompatActivity) context).finish();}
+            }
+            });
 
-            Intent intent = new Intent(context, OrderDetailActivity.class);
-            intent.putExtra("DATA", orderlist.get(position));
-            context.startActivity(intent);
-          //  ((AppCompatActivity) context).finish();
-
-        });
-
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return orderlist.size();
-    }
-
-    public class OrderAdapterVH extends RecyclerView.ViewHolder {
-        public ItemOrderBinding binding;
-
-        public OrderAdapterVH(@NonNull ItemOrderBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
 
         }
+
+        @Override
+        public int getItemCount () {
+            return orderlist.size();
+        }
+
+        public class OrderAdapterVH extends RecyclerView.ViewHolder {
+            public ItemOrderBinding binding;
+
+            public OrderAdapterVH(@NonNull ItemOrderBinding binding) {
+                super(binding.getRoot());
+                this.binding = binding;
+
+            }
+        }
+
+
     }
-
-
-}
