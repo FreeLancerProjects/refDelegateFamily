@@ -134,7 +134,8 @@ public class OrderStepsActivity extends AppCompatActivity {
         });
 
         binding.imgCall.setOnClickListener(view -> {
-            intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone()));
+            Log.e("lldldll",orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
+            intent = new Intent(Intent.ACTION_DIAL,  Uri.fromParts("tel" , orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone(),null));
 
             if (intent != null) {
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -246,6 +247,7 @@ public class OrderStepsActivity extends AppCompatActivity {
             binding.tvOrderReady.setVisibility(View.VISIBLE);
             binding.tvOrderReady2.setVisibility(View.GONE);
             binding.tvOrderReady3.setVisibility(View.GONE);
+            binding.tv1.setTextColor(getResources().getColor(R.color.black));
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
 
         } else if (body.getOrder().getStatus().equals("driver_finished_collect_order")) {
@@ -254,8 +256,11 @@ public class OrderStepsActivity extends AppCompatActivity {
             binding.tvOrderReady.setVisibility(View.GONE);
             binding.tvOrderReady2.setVisibility(View.VISIBLE);
             binding.tvOrderReady3.setVisibility(View.GONE);
+
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.tv1.setTextColor(getResources().getColor(R.color.black));
+            binding.tv2.setTextColor(getResources().getColor(R.color.black));
 
 
         } else if (body.getOrder().getStatus().equals("driver_in_way")) {
@@ -268,6 +273,9 @@ public class OrderStepsActivity extends AppCompatActivity {
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image3.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.tv1.setTextColor(getResources().getColor(R.color.black));
+            binding.tv2.setTextColor(getResources().getColor(R.color.black));
+            binding.tv3.setTextColor(getResources().getColor(R.color.black));
 
 
         } else if (body.getOrder().getStatus().equals("driver_give_order_to_client")) {
@@ -282,6 +290,10 @@ public class OrderStepsActivity extends AppCompatActivity {
             binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image3.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image5.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.tv1.setTextColor(getResources().getColor(R.color.black));
+            binding.tv2.setTextColor(getResources().getColor(R.color.black));
+            binding.tv3.setTextColor(getResources().getColor(R.color.black));
+            binding.tv5.setTextColor(getResources().getColor(R.color.black));
 
         }
 

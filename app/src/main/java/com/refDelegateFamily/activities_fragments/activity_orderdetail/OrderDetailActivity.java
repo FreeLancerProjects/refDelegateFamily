@@ -112,8 +112,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
         binding.imgCall.setOnClickListener(view -> {
 
-            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone()));
-            startActivity(intent);
+            intent = new Intent(Intent.ACTION_DIAL,  Uri.fromParts("tel" , orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone(),null));
             if (intent != null) {
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
