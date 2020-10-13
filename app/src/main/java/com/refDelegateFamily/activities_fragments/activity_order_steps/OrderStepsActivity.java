@@ -1,17 +1,24 @@
 package com.refDelegateFamily.activities_fragments.activity_order_steps;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.refDelegateFamily.R;
+import com.refDelegateFamily.activities_fragments.activity_chat.ChatActivity;
 import com.refDelegateFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
 import com.refDelegateFamily.databinding.ActivityOrderStepsBinding;
 import com.refDelegateFamily.language.Language_Helper;
@@ -37,6 +44,8 @@ public class OrderStepsActivity extends AppCompatActivity {
     private OrderModel.Data orderModel;
     private Preferences preferences;
     private UserModel userModel;
+    private Intent intent;
+    private static final int REQUEST_PHONE_CALL = 1;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -114,6 +123,30 @@ public class OrderStepsActivity extends AppCompatActivity {
                 }
             });
 
+
+        });
+        binding.imgChat.setOnClickListener(view -> {
+
+            Intent intent = new Intent(OrderStepsActivity.this, ChatActivity.class);
+            startActivity(intent);
+            finish();
+
+        });
+
+        binding.imgCall.setOnClickListener(view -> {
+            intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone()));
+
+            if (intent != null) {
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+                    } else {
+                        startActivity(intent);
+                    }
+                } else {
+                    startActivity(intent);
+                }
+            }
 
         });
         binding.tvOrderReady3.setOnClickListener(view -> {
@@ -254,5 +287,31 @@ public class OrderStepsActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_PHONE_CALL: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (this.checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            //    Activity#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for Activity#requestPermissions for more details.
+                            return;
+                        }
+                    }
+                    startActivity(intent);
+                } else {
+
+                }
+                return;
+            }
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.refDelegateFamily.activities_fragments.activity_home.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -72,7 +73,8 @@ public class Fragment_Orders extends Fragment {
         getOrders();
     }
 
-    private void getOrders() {
+    public void getOrders() {
+        binding.progBarOrders.setVisibility(View.VISIBLE);
         oDataList.clear();
         orderAdapter.notifyDataSetChanged();
         binding.progBarOrders.setVisibility(View.VISIBLE);
@@ -97,11 +99,5 @@ public class Fragment_Orders extends Fragment {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(activity!=null){
-            getOrders();
-        }
-    }
+
 }

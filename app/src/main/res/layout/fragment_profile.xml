@@ -43,11 +43,12 @@
 
             <ImageView
                 android:id="@+id/edit_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_gravity="end|bottom"
                 android:background="@drawable/circle_bg"
                 android:elevation="10dp"
+
                 android:padding="10dp"
                 android:src="@drawable/ic_edit"
                 android:tint="@color/white" />
@@ -56,7 +57,7 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@{model.data.name}"
@@ -85,17 +86,19 @@
             android:layout_height="35dp"
             android:layout_marginStart="10dp"
             android:src="@drawable/ic_mail"
+            android:padding="5dp"
             android:tint="@color/colorPrimary"
             app:layout_constraintStart_toEndOf="@id/phone"
             app:layout_constraintTop_toTopOf="@id/ic_phone" />
 
         <TextView
             android:id="@+id/email"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="14dp"
             android:text="@{model.data.email}"
             android:textColor="@color/gray12"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/ic_mail"
             app:layout_constraintStart_toEndOf="@id/ic_mail"
             app:layout_constraintTop_toTopOf="@id/ic_mail" />
@@ -106,6 +109,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:src="@drawable/ic_phone_1"
             android:tint="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,9 +117,9 @@
 
         <TextView
             android:id="@+id/phone"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="14dp"
             android:text='@{model.data.phone_code+" "+ model.data.phone}'
             android:textColor="@color/gray12"
             app:layout_constraintBottom_toBottomOf="@id/ic_phone"
@@ -127,6 +131,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="30dp"
+            android:padding="5dp"
             android:src="@drawable/ic_pin3"
             android:tint="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="@id/ic_phone"
@@ -134,11 +139,12 @@
 
         <TextView
             android:id="@+id/location"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@{model.data.tracker_fk.address}"
             android:textColor="@color/gray12"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/ic_locaiton"
             app:layout_constraintStart_toEndOf="@id/ic_locaiton"
             app:layout_constraintTop_toTopOf="@id/ic_locaiton" />

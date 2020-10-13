@@ -69,25 +69,25 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
                 context.startActivity(intent);
                 //  ((AppCompatActivity) context).finish();}
             }
-            });
-
-
-        }
-
-        @Override
-        public int getItemCount () {
-            return orderlist.size();
-        }
-
-        public class OrderAdapterVH extends RecyclerView.ViewHolder {
-            public ItemOrderBinding binding;
-
-            public OrderAdapterVH(@NonNull ItemOrderBinding binding) {
-                super(binding.getRoot());
-                this.binding = binding;
-
-            }
-        }
+        });
 
 
     }
+
+    @Override
+    public int getItemCount() {
+        return orderlist.size();
+    }
+
+    public class OrderAdapterVH extends RecyclerView.ViewHolder {
+        public ItemOrderBinding binding;
+
+        public OrderAdapterVH(@NonNull ItemOrderBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+
+        }
+    }
+
+
+}

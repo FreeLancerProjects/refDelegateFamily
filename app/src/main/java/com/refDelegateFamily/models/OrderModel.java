@@ -38,11 +38,12 @@ public class OrderModel implements Serializable {
         private String order_description;
         private String order_nots;
         private String end_shipping_time;
+        private String hour_arrival_time;
         private String currency;
         private String other_phone;
         private String coupon;
         private String cancel_reason;
-        private List<ProductModel.ImageModel> order_images = new ArrayList<>();
+        private List<ProductModel.ImageModel> order_images ;
         private User family;
         private User client;
         private User driver;
@@ -125,6 +126,10 @@ public class OrderModel implements Serializable {
 
         public String getEnd_shipping_time() {
             return end_shipping_time;
+        }
+
+        public String getHour_arrival_time() {
+            return hour_arrival_time;
         }
 
         public String getCurrency() {
@@ -297,7 +302,6 @@ public class OrderModel implements Serializable {
                 return deleted_at;
             }
         }
-
 
     }
 

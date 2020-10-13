@@ -83,12 +83,13 @@
                 app:layout_constraintTop_toBottomOf="@id/user_image" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="@{model.from_address}"
                 android:textColor="@color/gray12"
-                android:textSize="16sp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/start_loc_img"
                 app:layout_constraintStart_toEndOf="@id/start_loc_img"
                 app:layout_constraintTop_toTopOf="@id/start_loc_img" />
@@ -105,12 +106,13 @@
                 app:layout_constraintTop_toBottomOf="@id/start_loc_img" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="@{model.to_address}"
                 android:textColor="@color/gray12"
-                android:textSize="16sp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/end_loc_img"
                 app:layout_constraintStart_toEndOf="@id/end_loc_img"
                 app:layout_constraintTop_toTopOf="@id/end_loc_img" />

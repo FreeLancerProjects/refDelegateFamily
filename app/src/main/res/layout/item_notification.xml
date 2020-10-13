@@ -63,6 +63,7 @@
                         android:layout_marginStart="35dp"
                         android:text="@string/there_is_new_notification"
                         android:textColor="@color/gray12"
+                        android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -73,6 +74,7 @@
                         android:layout_margin="10dp"
                         android:padding="7dp"
                         android:src="@drawable/ic_closee"
+                        android:visibility="gone"
                         android:tint="@color/gray12"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

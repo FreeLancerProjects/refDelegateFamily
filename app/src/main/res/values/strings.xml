@@ -194,5 +194,11 @@
     <string name="ch_fr">Chhose Front Car Image</string>
     <string name="accept_terms">Accept Terms And Conditions</string>
     <string name="new_orders">New Orders</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
+    <string name="hours_num">Hours Num :</string>
+    <string name="compiled">Compiled</string>
+    <string name="received">Received</string>
+    <string name="sent_delivered_handed">sent delivered handed</string>
 
 </resources>

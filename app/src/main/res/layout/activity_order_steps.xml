@@ -174,7 +174,7 @@
                             android:background="@drawable/circle_not_bg"
                             android:padding="13dp"
                             android:src="@drawable/ic_order_1"
-                            android:tint="@color/colorPrimary" />
+                            />
 
                         <View
                             android:id="@+id/view2"
@@ -214,8 +214,8 @@
                                 <TextView
                                     android:id="@+id/tv_order_ready"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="تم التجهيز"
+                                    android:layout_height="30dp"
+                                    android:text="@string/compiled"
                                     android:textColor="@color/colorPrimary" />
 
                             </LinearLayout>
@@ -237,6 +237,7 @@
                             android:layout_height="match_parent">
 
                             <ImageView
+                                android:id="@+id/imgChat"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_gravity="center_vertical"
@@ -246,6 +247,7 @@
                                 android:tint="@color/white" />
 
                             <ImageView
+                                android:id="@+id/imgCall"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_gravity="center_vertical"
@@ -281,7 +283,7 @@
                             android:background="@drawable/circle_not_bg"
                             android:padding="13dp"
                             android:src="@drawable/ic_delivery"
-                            android:tint="@color/colorPrimary" />
+                           />
 
                         <View
                             android:id="@+id/view3"
@@ -317,8 +319,8 @@
                             <TextView
                                 android:id="@+id/tv_order_ready2"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="تم التجهيز"
+                                android:layout_height="30dp"
+                                android:text="@string/received"
                                 android:textColor="@color/colorPrimary" />
 
                         </LinearLayout>
@@ -356,7 +358,7 @@
                             android:background="@drawable/circle_not_bg"
                             android:padding="13dp"
                             android:src="@drawable/ic_pin3"
-                            android:tint="@color/colorPrimary"
+
 
                             />
 
@@ -383,8 +385,8 @@
                         <TextView
                             android:id="@+id/tv_order_ready3"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="تم التجهيز"
+                            android:layout_height="30dp"
+                            android:text="@string/sent_delivered_handed"
                             android:textColor="@color/colorPrimary" />
 
 

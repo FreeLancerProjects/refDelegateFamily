@@ -10,6 +10,7 @@ import androidx.databinding.BindingAdapter;
 
 import com.refDelegateFamily.R;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.refDelegateFamily.tags.Tags;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -41,7 +42,7 @@ public class GeneralMethod {
             CircleImageView imageView = (CircleImageView) view;
             if (endPoint != null) {
 
-                Picasso.get().load(Uri.parse(endPoint)).placeholder(R.drawable.ic_avatar).into(imageView);
+                Picasso.get().load(Uri.parse(Tags.IMAGE_URL+endPoint)).into(imageView);
             } else {
                 Picasso.get().load(R.drawable.ic_avatar).into(imageView);
 
@@ -51,7 +52,7 @@ public class GeneralMethod {
 
             if (endPoint != null) {
 
-                Picasso.get().load(Uri.parse( endPoint)).placeholder(R.drawable.ic_avatar).fit().into(imageView);
+                Picasso.get().load(Uri.parse( Tags.IMAGE_URL+endPoint)).fit().into(imageView);
             } else {
                 Picasso.get().load(R.drawable.ic_avatar).into(imageView);
 
@@ -61,7 +62,7 @@ public class GeneralMethod {
 
             if (endPoint != null) {
 
-                Picasso.get().load(Uri.parse( endPoint)).placeholder(R.drawable.ic_avatar).fit().into(imageView);
+                Picasso.get().load(Uri.parse( Tags.IMAGE_URL+endPoint)).fit().into(imageView);
             } else {
                 Picasso.get().load(R.drawable.ic_avatar).into(imageView);
 

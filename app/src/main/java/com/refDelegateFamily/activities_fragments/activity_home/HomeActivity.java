@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,7 +22,6 @@ import com.refDelegateFamily.activities_fragments.activity_home.fragments.Fragme
 import com.refDelegateFamily.activities_fragments.activity_home.fragments.Fragment_Setting;
 import com.refDelegateFamily.activities_fragments.activity_home.fragments.Fragment_Profile;
 import com.refDelegateFamily.activities_fragments.activity_notification.NotificationActivity;
-import com.refDelegateFamily.activities_fragments.activity_verification_code.VerificationCodeActivity;
 import com.refDelegateFamily.databinding.ActivityHomeBinding;
 import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.UserModel;
@@ -105,8 +103,11 @@ public class HomeActivity extends AppCompatActivity {
         binding.switchBtn.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-
-                updateStatus();
+                if (isChecked) {
+                    updateStatus("on");
+                } else {
+                    updateStatus("off");
+                }
             }
         });
 
@@ -336,14 +337,19 @@ public class HomeActivity extends AppCompatActivity {
         back();
     }
 
-    private void updateStatus() {
+    private void updateStatus(String off) {
         Api.getService(Tags.base_url)
-                .updateStatus(userModel.getData().getToken(), userModel.getData().getId(), "on")
+                .updateStatus("Bearer " + userModel.getData().getToken(), userModel.getData().getId(), off)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            Toast.makeText(HomeActivity.this, "good", Toast.LENGTH_SHORT).show();
+                            if(off.equals("off")){
+                            Toast.makeText(HomeActivity.this, getResources().getString(R.string.notifications)+"   "+getResources().getString(R.string.off), Toast.LENGTH_SHORT).show();}
+                            else {
+                                Toast.makeText(HomeActivity.this, getResources().getString(R.string.notifications)+"  "+getResources().getString(R.string.on), Toast.LENGTH_SHORT).show();}
+
+
                         } else {
                             try {
                                 Log.e("mmmmmmmmmm", response.errorBody().string());
@@ -389,4 +395,11 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(fragment_orders!=null&&fragment_orders.isVisible()){
+            fragment_orders.getOrders();
+        }
+    }
 }
