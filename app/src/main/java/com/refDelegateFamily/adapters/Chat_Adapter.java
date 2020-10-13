@@ -1,6 +1,7 @@
 package com.refDelegateFamily.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -154,7 +155,7 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public int getItemViewType(int position) {
         MessageModel messageModel = messageModelList.get(position);
-
+        Log.e("lsllsl", current_user_id + " " + messageModel.getTo_user_id());
         if (messageModel.getTo_user_id().equals(current_user_id + "")) {
             //  Log.e("type",messageModel.getType());
             if (messageModel.getType().equals("text")) {

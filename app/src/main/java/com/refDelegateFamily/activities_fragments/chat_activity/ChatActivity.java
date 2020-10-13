@@ -185,7 +185,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                                 preferences.create_update_ChatUserData(ChatActivity.this, chatUserModel);
 
                                 messagedatalist.clear();
-                                messagedatalist.addAll(response.body().getMessages().getData());
+                                messagedatalist.addAll(response.body().getData());
                                 chat_adapter.notifyDataSetChanged();
                                 scrollToLastPosition();
 

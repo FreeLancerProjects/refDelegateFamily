@@ -7,7 +7,7 @@ public class MessageModel implements Serializable {
     private int id;
     private String to_user_id;
     private String from_user_id;
-    private String type;
+    private String message_kind;
     private String message;
     private String image;
     private String voice;
@@ -30,7 +30,7 @@ public class MessageModel implements Serializable {
     }
 
     public String getType() {
-        return type;
+        return message_kind;
     }
 
     public String getMessage() {

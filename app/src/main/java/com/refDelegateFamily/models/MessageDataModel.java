@@ -6,15 +6,12 @@ import java.util.List;
 public class MessageDataModel implements Serializable {
 
 
-    private Messages messages;
 private RoomData room;
     public RoomData getRoom() {
         return room;
     }
 
-    public Messages getMessages() {
-        return messages;
-    }
+
 
     public class RoomData implements Serializable
     {
@@ -50,8 +47,7 @@ private RoomData room;
         }
     }
 
-    public class Messages implements Serializable
-    {
+
         private int current_page;
         private List<MessageModel> data;
 
@@ -62,5 +58,5 @@ private RoomData room;
         public List<MessageModel> getData() {
             return data;
         }
-    }
+
 }
