@@ -70,12 +70,15 @@ public class OrderStepsActivity extends AppCompatActivity {
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
         binding.tvOrderReady.setOnClickListener(view -> {
-
+            ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+            dialog.setCancelable(false);
+            dialog.show();
 
             Api.getService(Tags.base_url).driverchangeOrderstatus("Bearer " + userModel.getData().getToken(),
                     orderModel.getId(), "driver_finished_collect_order").enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    dialog.dismiss();
                     if (response.isSuccessful() && response.body() != null) {
                         //        Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
                         getOrderDetials();
@@ -91,6 +94,7 @@ public class OrderStepsActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    dialog.dismiss();
                     Log.e("onFailure:", t.getMessage());
                 }
             });
@@ -99,11 +103,14 @@ public class OrderStepsActivity extends AppCompatActivity {
         });
         binding.tvOrderReady2.setOnClickListener(view -> {
 
-
+            ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+            dialog.setCancelable(false);
+            dialog.show();
             Api.getService(Tags.base_url).driverchangeOrderstatus("Bearer " + userModel.getData().getToken(),
                     orderModel.getId(), "driver_in_way").enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    dialog.dismiss();
                     if (response.isSuccessful() && response.body() != null) {
                         // Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
                         getOrderDetials();
@@ -119,6 +126,7 @@ public class OrderStepsActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    dialog.dismiss();
                     Log.e("onFailure:", t.getMessage());
                 }
             });
@@ -152,11 +160,14 @@ public class OrderStepsActivity extends AppCompatActivity {
         });
         binding.tvOrderReady3.setOnClickListener(view -> {
 
-
+            ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+            dialog.setCancelable(false);
+            dialog.show();
             Api.getService(Tags.base_url).driverchangeOrderstatus("Bearer " + userModel.getData().getToken(),
                     orderModel.getId(), "driver_give_order_to_client").enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    dialog.dismiss();
                     if (response.isSuccessful() && response.body() != null) {
                         //    Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
                         getOrderDetials();
@@ -172,6 +183,7 @@ public class OrderStepsActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    dialog.dismiss();
                     Log.e("onFailure:", t.getMessage());
                 }
             });
@@ -242,6 +254,7 @@ public class OrderStepsActivity extends AppCompatActivity {
     }
 
     private void updatedata(OrderModel body) {
+        binding.setModel(body.getOrder());
         if (body.getOrder().getStatus().equals("driver_accepted_order")) {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.tvOrderReady.setVisibility(View.VISIBLE);

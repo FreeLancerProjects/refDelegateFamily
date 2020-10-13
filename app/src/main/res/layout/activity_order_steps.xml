@@ -11,6 +11,9 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="backListener"
+            type="com.refDelegateFamily.interfaces.Listeners.BackListener" />
 
         <variable
             name="model"
@@ -43,12 +46,15 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->backListener.back()}"
+
+                    >
 
                     <ImageView
                         android:id="@+id/back"
                         android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:src='@{lang.equals("ar")?@drawable/ic_right_arrow:@drawable/ic_left_arrow}'

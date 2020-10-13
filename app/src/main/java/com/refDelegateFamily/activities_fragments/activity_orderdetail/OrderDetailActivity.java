@@ -1,9 +1,11 @@
 package com.refDelegateFamily.activities_fragments.activity_orderdetail;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_chat.ChatActivity;
 import com.refDelegateFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
@@ -29,6 +32,7 @@ import com.refDelegateFamily.models.ProductModel;
 import com.refDelegateFamily.models.UserModel;
 import com.refDelegateFamily.preferences.Preferences;
 import com.refDelegateFamily.remote.Api;
+import com.refDelegateFamily.share.Common;
 import com.refDelegateFamily.tags.Tags;
 
 import java.io.IOException;
@@ -53,6 +57,8 @@ public class OrderDetailActivity extends AppCompatActivity {
     private Image_Adapter image_adapter;
     private Intent intent;
     private static final int REQUEST_PHONE_CALL = 1;
+    ImagePopup imagePopup;
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(Language_Helper.updateResources(base, Language_Helper.getLanguage(base)));
@@ -67,6 +73,12 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        imagePopup = new ImagePopup(this);
+        imagePopup.setFullScreen(true);
+        imagePopup.setBackgroundColor(Color.BLACK);  // Optional
+        imagePopup.setFullScreen(true); // Optional
+        imagePopup.setHideCloseIcon(false);
+        imagePopup.setImageOnClickClose(true);
         imageModels = new ArrayList<>();
 
         Paper.init(this);
@@ -77,7 +89,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         userModel = preferences.getUserData(this);
         if (orderModel.getOrder_images() != null) {
             imageModels.addAll(orderModel.getOrder_images());
-            Log.e("lsllsls", orderModel.getOrder_images().get(0).getImage());
+         //   Log.e("lsllsls", orderModel.getOrder_images().get(0).getImage());
         }
         image_adapter = new Image_Adapter(imageModels, this);
 
@@ -127,13 +139,16 @@ public class OrderDetailActivity extends AppCompatActivity {
         });
 
         binding.acceptBtn.setOnClickListener(view -> {
-
+            ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+            dialog.setCancelable(false);
+            dialog.show();
 
             Api.getService(Tags.base_url).familyAcceptOrder("Bearer " + userModel.getData().getToken(), orderModel.getClient_id(),
                     orderModel.getId(), userModel.getData().getId()).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.isSuccessful() && response.body() != null) {
+                        dialog.dismiss();
                         Toast.makeText(OrderDetailActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(OrderDetailActivity.this, OrderStepsActivity.class);
                         intent.putExtra("data", orderModel);
@@ -150,6 +165,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    dialog.dismiss();
                     Log.e("onFailure:", t.getMessage());
                 }
             });
@@ -208,7 +224,9 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     }
 
-    public void showimage(int layoutPosition) {
+    public void showimage(String layoutPosition) {
+        imagePopup.initiatePopupWithPicasso(Tags.IMAGE_URL+layoutPosition);
+        imagePopup.viewPopup();
     }
     @Override
     public void onRequestPermissionsResult(int requestCode,

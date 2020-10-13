@@ -52,13 +52,13 @@ public class Image_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         EventHolder eventHolder = (EventHolder) holder;
-
+        eventHolder.binding.setModel(orderlist.get(position));
         eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (context instanceof OrderDetailActivity) {
                     OrderDetailActivity auctionDetialsActivity = (OrderDetailActivity) context;
-                    auctionDetialsActivity.showimage(eventHolder.getLayoutPosition());
+                    auctionDetialsActivity.showimage(orderlist.get(position).getImage());
                 }
             }
         });

@@ -197,8 +197,8 @@
     <string name="off">تم اغلاقها</string>
     <string name="on">تم فتحها</string>
     <string name="hours_num">عدد الساعات : </string>
-    <string name="compiled">Compiled</string>
-    <string name="received">Received</string>
-    <string name="sent_delivered_handed">sent delivered handed</string>
+    <string name="compiled">تم التجميع</string>
+    <string name="received">تم الاستلام</string>
+    <string name="sent_delivered_handed">تم التسليم</string>
 
 </resources>
