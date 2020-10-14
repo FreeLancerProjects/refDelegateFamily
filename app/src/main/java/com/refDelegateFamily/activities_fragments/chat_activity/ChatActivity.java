@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.adapters.Chat_Adapter;
@@ -74,6 +76,8 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     private final int IMG_REQ1 = 3, IMG_REQ2 = 2;
     private Uri url = null;
     private ChatUserModel chatUserModel;
+    private int current_page = 1;
+    private boolean isLoading = false;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -122,7 +126,26 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         });
 
         binding.imagePhoto.setOnClickListener(view -> CreateImageAlertDialog());
+        binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy < 0) {
+                    int lastItemPos = manager.findLastCompletelyVisibleItemPosition();
+                    int total_items = chat_adapter.getItemCount();
 
+                    if (lastItemPos <= (total_items - 2) && !isLoading) {
+                        isLoading = true;
+                        messagedatalist.add(0, null);
+                        chat_adapter.notifyItemInserted(0);
+                        int next_page = current_page + 1;
+                        loadMore(next_page);
+
+
+                    }
+                }
+            }
+        });
     }
 
 
@@ -175,13 +198,13 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
 
 
             Api.getService(Tags.base_url)
-                    .getRoomMessages("Bearer " + userModel.getData().getToken(), chatUserModel.getRoom_id(), "off")
+                    .getRoomMessages("Bearer " + userModel.getData().getToken(), chatUserModel.getRoom_id(), 1)
                     .enqueue(new Callback<MessageDataModel>() {
                         @Override
                         public void onResponse(Call<MessageDataModel> call, Response<MessageDataModel> response) {
                             binding.progBar.setVisibility(View.GONE);
                             if (response.isSuccessful() && response.body() != null) {
-                               // chatUserModel = new ChatUserModel(response.body().getRoom().getOther_user_name(), response.body().getRoom().getOther_user_avatar(), response.body().getRoom().getSecond_user_id() + "", response.body().getRoom().getId());
+                                // chatUserModel = new ChatUserModel(response.body().getRoom().getOther_user_name(), response.body().getRoom().getOther_user_avatar(), response.body().getRoom().getSecond_user_id() + "", response.body().getRoom().getId());
                                 preferences.create_update_ChatUserData(ChatActivity.this, chatUserModel);
 
                                 messagedatalist.clear();
@@ -235,68 +258,68 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         }
     }
 
-//    private void loadMore(int next_page) {
-//        try {
-//
-//            Api.getService(Tags.base_url)
-//                    .getRoomMessages(userModel.getId(), chatUserModel.getRoom_id(), next_page)
-//                    .enqueue(new Callback<MessageDataModel>() {
-//                        @Override
-//                        public void onResponse(Call<MessageDataModel> call, Response<MessageDataModel> response) {
-//                            isLoading = false;
-//                            messagedatalist.remove(0);
-//                            chat_adapter.notifyItemRemoved(0);
-//                            if (response.isSuccessful() && response.body() != null) {
-//
-//                                current_page = response.body().getMessages().getCurrent_page();
-//                                messagedatalist.addAll(0, response.body().getMessages().getData());
-//                                chat_adapter.notifyItemRangeInserted(0, response.body().getMessages().getData().size());
-//
-//
-//                            } else {
-//
-//                                if (response.code() == 500) {
-//                                    Toast.makeText(ChatActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
-//
-//                                } else {
-//                                    Toast.makeText(ChatActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-//
-//                                    try {
-//
-//                                        Log.e("error", response.code() + "_" + response.errorBody().string());
-//                                    } catch (IOException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<MessageDataModel> call, Throwable t) {
-//                            try {
-//                                isLoading = false;
-//
-//                                if (messagedatalist.get(0) == null) {
-//                                    messagedatalist.remove(0);
-//                                    chat_adapter.notifyItemRemoved(0);
-//                                }
-//                                if (t.getMessage() != null) {
-//                                    Log.e("error", t.getMessage());
-//                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-//                                        Toast.makeText(ChatActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
-//                                    } else {
-//                                        Toast.makeText(ChatActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//
-//                            } catch (Exception e) {
-//                            }
-//                        }
-//                    });
-//        } catch (Exception e) {
-//
-//        }
-//    }
+    private void loadMore(int next_page) {
+        try {
+
+            Api.getService(Tags.base_url)
+                    .getRoomMessages("Bearer " + userModel.getData().getToken(), chatUserModel.getRoom_id(), next_page)
+                    .enqueue(new Callback<MessageDataModel>() {
+                        @Override
+                        public void onResponse(Call<MessageDataModel> call, Response<MessageDataModel> response) {
+                            isLoading = false;
+                            messagedatalist.remove(0);
+                            chat_adapter.notifyItemRemoved(0);
+                            if (response.isSuccessful() && response.body() != null) {
+
+                                current_page = response.body().getCurrent_page();
+                                messagedatalist.addAll(0, response.body().getData());
+                                chat_adapter.notifyItemRangeInserted(0, response.body().getData().size());
+
+
+                            } else {
+
+                                if (response.code() == 500) {
+                                    Toast.makeText(ChatActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+
+                                } else {
+                                    Toast.makeText(ChatActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+                                    try {
+
+                                        Log.e("error", response.code() + "_" + response.errorBody().string());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<MessageDataModel> call, Throwable t) {
+                            try {
+                                isLoading = false;
+
+                                if (messagedatalist.get(0) == null) {
+                                    messagedatalist.remove(0);
+                                    chat_adapter.notifyItemRemoved(0);
+                                }
+                                if (t.getMessage() != null) {
+                                    Log.e("error", t.getMessage());
+                                    if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                        Toast.makeText(ChatActivity.this, R.string.something, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(ChatActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+
+        }
+    }
 
 
     private void sendmessageimage() {
@@ -321,7 +344,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                         if (response.isSuccessful() && response.body() != null) {
                             //listener.onSuccess(response.body());
 
-                            messagedatalist.add(response.body());
+                            messagedatalist.add(response.body().getData());
                             chat_adapter.notifyDataSetChanged();
                             scrollToLastPosition();
                         } else {
@@ -365,7 +388,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
 
                         Log.e("llll", response.toString());
 
-                        messagedatalist.add(response.body());
+                        messagedatalist.add(response.body().getData());
                         chat_adapter.notifyDataSetChanged();
                         scrollToLastPosition();
                     } else {

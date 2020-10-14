@@ -3,7 +3,7 @@ package com.refDelegateFamily.models;
 import java.io.Serializable;
 
 public class MessageModel implements Serializable {
-
+    private MessageModel data;
     private int id;
     private String to_user_id;
     private String from_user_id;
@@ -16,6 +16,9 @@ public class MessageModel implements Serializable {
     private long date;
     private User from_user;
 
+    public MessageModel getData() {
+        return data;
+    }
 
     public int getId() {
         return id;

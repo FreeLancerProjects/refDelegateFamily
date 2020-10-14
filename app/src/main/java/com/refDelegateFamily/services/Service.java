@@ -178,7 +178,7 @@ public interface Service {
             @Header("Authorization") String user_token,
 
             @Query("room_id") int room_id,
-            @Query("pagination_status") String pagination_status
+            @Query("page") int pagination_status
     );
 
 

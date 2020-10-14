@@ -7,6 +7,7 @@ public class MessageDataModel implements Serializable {
 
 
 private RoomData room;
+
     public RoomData getRoom() {
         return room;
     }
