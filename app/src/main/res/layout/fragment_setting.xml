@@ -18,13 +18,13 @@
         android:fitsSystemWindows="true"
         android:fillViewport="true"
         android:scrollbars="none"
+        android:background="@color/white"
         >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@color/gray10"
-
             >
 
             <LinearLayout
@@ -39,6 +39,7 @@
                     android:layout_height="45dp"
                     android:orientation="horizontal"
                     android:paddingStart="15dp"
+                    android:visibility="gone"
                     android:paddingEnd="15dp"
                     android:gravity="center_vertical"
                     android:onClick="@{()->actions.onProfile()}"

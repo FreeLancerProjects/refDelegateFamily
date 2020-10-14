@@ -24,16 +24,9 @@ public class UserModel implements Serializable {
         private String phone;
         private String image;
         private String logo;
-        private String card_image;
-        private String licence_image;
-        private String front_car_image;
-        private String back_car_image;
         private String account_bank_number;
         private String ipad_number;
         private String nationality_title;
-        private String car_type;
-        private String car_model;
-        private String year_of_manufacture;
         private String card_id;
         private String address_registered_for_bank_account;
         private String token;
@@ -43,6 +36,7 @@ public class UserModel implements Serializable {
         private String details;
         private String fireBaseToken;
         private Tracker tracker_fk;
+        private Car car_fk;
 
         public User() {
         }
@@ -93,8 +87,6 @@ public class UserModel implements Serializable {
         }
 
 
-
-
         public String getType() {
             return user_type;
         }
@@ -117,13 +109,6 @@ public class UserModel implements Serializable {
         }
 
 
-        public String getCar_type() {
-            return car_type;
-        }
-
-        public String getCar_model() {
-            return car_model;
-        }
 
         public String getUser_type() {
             return user_type;
@@ -133,29 +118,11 @@ public class UserModel implements Serializable {
             return details;
         }
 
-        public String getCard_image() {
-            return card_image;
-        }
-
-        public String getLicence_image() {
-            return licence_image;
-        }
-
-        public String getFront_car_image() {
-            return front_car_image;
-        }
-
-        public String getBack_car_image() {
-            return back_car_image;
-        }
-
         public String getNationality_title() {
             return nationality_title;
         }
 
-        public String getYear_of_manufacture() {
-            return year_of_manufacture;
-        }
+
 
         public String getCard_id() {
             return card_id;
@@ -171,6 +138,10 @@ public class UserModel implements Serializable {
 
         public Tracker getTracker_fk() {
             return tracker_fk;
+        }
+
+        public Car getCar_fk() {
+            return car_fk;
         }
 
         public class Tracker implements Serializable {
@@ -191,5 +162,68 @@ public class UserModel implements Serializable {
                 return address;
             }
         }
+
+        public class Car implements Serializable {
+            private int id;
+            private int car_type_id;
+            private String car_model;
+            private String year_of_manufacture;
+            private String licence_image;
+            private String back_car_image;
+            private String front_car_image;
+            private CarType car_type_fk;
+
+            public int getId() {
+                return id;
+            }
+
+            public String getCar_model() {
+                return car_model;
+            }
+
+            public String getYear_of_manufacture() {
+                return year_of_manufacture;
+            }
+
+            public String getLicence_image() {
+                return licence_image;
+            }
+
+            public int getCar_type_id() {
+                return car_type_id;
+            }
+
+            public String getBack_car_image() {
+                return back_car_image;
+            }
+
+            public String getFront_car_image() {
+                return front_car_image;
+            }
+
+            public CarType getCar_type_fk() {
+                return car_type_fk;
+            }
+
+            public class CarType implements Serializable {
+                private int id;
+                private String title;
+                private String image;
+
+                public int getId() {
+                    return id;
+                }
+
+                public String getTitle() {
+                    return title;
+                }
+
+                public String getImage() {
+                    return image;
+                }
+            }
+
+        }
+
     }
 }

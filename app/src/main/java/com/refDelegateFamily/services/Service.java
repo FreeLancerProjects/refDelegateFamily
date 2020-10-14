@@ -119,6 +119,51 @@ public interface Service {
             @Part("address_registered_for_bank_account") RequestBody address_registered_for_bank_account
     );
 
+
+    @Multipart
+    @POST("api/update_drive_register")
+    Call<UserModel> updateProfileWithImage(
+                                           @Header("Authorization") String user_token,
+                                           @Part("id") RequestBody id,
+                                           @Part MultipartBody.Part logo,
+                                           @Part("name") RequestBody name,
+                                           @Part("email") RequestBody email,
+                                           @Part("phone_code") RequestBody phone_code,
+                                           @Part("phone") RequestBody phone,
+                                           @Part("address") RequestBody address,
+                                           @Part("user_type") RequestBody user_type,
+                                           @Part("software_type") RequestBody software_type,
+                                           @Part("account_bank_number") RequestBody account_bank_number,
+                                           @Part("ipad_number") RequestBody ipad_number,
+                                           @Part("nationality_title") RequestBody nationality_title,
+                                           @Part("card_id") RequestBody card_id,
+                                           @Part("latitude") RequestBody latitude,
+                                           @Part("longitude") RequestBody longitude,
+                                           @Part("address_registered_for_bank_account") RequestBody address_registered_for_bank_account
+    );
+
+    @FormUrlEncoded
+    @POST("api/update_drive_register")
+    Call<UserModel> updateProfileWithoutImage(
+            @Header("Authorization") String user_token,
+            @Field("id") int id,
+            @Field("name") String name,
+            @Field("email") String email,
+            @Field("phone_code") String phone_code,
+            @Field("phone") String phone,
+            @Field("address") String address,
+            @Field("user_type") String user_type,
+            @Field("software_type") String software_type,
+            @Field("account_bank_number") String account_bank_number,
+            @Field("ipad_number") String ipad_number,
+            @Field("nationality_title") String nationality_title,
+            @Field("card_id") String card_id,
+            @Field("latitude") String latitude,
+            @Field("longitude") String longitude,
+            @Field("address_registered_for_bank_account") String address_registered_for_bank_account
+
+    );
+
     @FormUrlEncoded
     @POST("api/update-notifications-status")
     Call<ResponseBody> updateStatus(@Header("Authorization") String user_token,

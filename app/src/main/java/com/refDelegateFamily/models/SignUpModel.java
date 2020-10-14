@@ -255,6 +255,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
         setCar_model("");
         setCar_type("");
         setCard_image("");
+        setUser_type("driver");
         setBack_car_image("");
         setFront_car_image("");
         setLicence_image("");

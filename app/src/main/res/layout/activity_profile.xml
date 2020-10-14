@@ -12,6 +12,11 @@
             name="lang"
             type="String" />
 
+
+        <variable
+            name="model"
+            type="com.refDelegateFamily.models.UserModel" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -115,6 +120,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="100dp"
                     android:elevation="5dp"
+                    user_image="@{model.data.logo}"
                     android:src="@drawable/chef"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -123,7 +129,7 @@
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/user_name_test"
+                    android:text="@{model.data.name}"
                     app:layout_constraintStart_toEndOf="@id/user_image"
                     app:layout_constraintTop_toBottomOf="@id/cardSlider"
                     android:layout_margin="16dp"
@@ -149,7 +155,7 @@
                     android:id="@+id/email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="email@email.com"
+                    android:text="@{model.data.email}"
                     app:layout_constraintStart_toEndOf="@id/ic_mail"
                     app:layout_constraintTop_toTopOf="@id/ic_mail"
                     app:layout_constraintBottom_toBottomOf="@id/ic_mail"
@@ -173,7 +179,7 @@
                     android:id="@+id/phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+996 123456789"
+                    android:text='@{model.data.email}'
                     app:layout_constraintStart_toEndOf="@id/ic_phone"
                     app:layout_constraintTop_toTopOf="@id/ic_phone"
                     app:layout_constraintBottom_toBottomOf="@id/ic_phone"
@@ -196,7 +202,7 @@
                     android:id="@+id/location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="الرياض شارع الجامعة"
+                    android:text="@{model.data.tracker_fk.address}"
                     app:layout_constraintStart_toEndOf="@id/ic_locaiton"
                     app:layout_constraintTop_toTopOf="@id/ic_locaiton"
                     app:layout_constraintBottom_toBottomOf="@id/ic_locaiton"

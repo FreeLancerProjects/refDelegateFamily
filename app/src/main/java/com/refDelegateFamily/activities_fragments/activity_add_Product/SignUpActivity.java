@@ -62,7 +62,6 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         initView();
-        getDataFromIntent();
 
         if (savedInstanceState == null) {
             displayFragmentStep1(signUpModel);
@@ -73,17 +72,18 @@ public class SignUpActivity extends AppCompatActivity {
     private void initView() {
         fragmentManager = getSupportFragmentManager();
         preferences = preferences.newInstance();
+        userModel = preferences.getUserData(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_offer);
         Paper.init(this);
         lang = Paper.book().read("lang", "ar");
         binding.setLang(lang);
-        Intent intent1 = getIntent();
-        if (intent1 != null) {
-            signUpModel = (SignUpModel) intent1.getSerializableExtra(TAG);
-        }
+
+
         if (signUpModel == null) {
             signUpModel = new SignUpModel();
         }
+        getDataFromIntent();
+
         binding.nextBtn.setOnClickListener(view -> {
             if (step == 1) {
                 if (fragment_signUpStep1 != null && fragment_signUpStep1.isAdded()) {
@@ -106,8 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 if (signUpModel.step3(this)) {
                     if (fragment_signUpStep3.terms == 1) {
-
-                        SignUp();
+                            SignUp();
                     } else {
                         Toast.makeText(SignUpActivity.this, getResources().getString(R.string.accept_terms), Toast.LENGTH_LONG).show();
                     }
@@ -128,11 +127,22 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    private void update() {
+
+
+
+
+    }
+
+
     private void SignUp() {
 
         Log.e("phone:", signUpModel.getPhone());
         Log.e("phone code:", signUpModel.getPhone_code());
         Log.e("Address:", signUpModel.getAddress());
+        Log.e("car model:", signUpModel.getCar_model());
+        Log.e("car type:", signUpModel.getCar_type());
+        Log.e("year:", signUpModel.getYear_of_manufacture());
 
 
         ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
@@ -232,8 +242,10 @@ public class SignUpActivity extends AppCompatActivity {
                 signUpModel.setPhone_code(phone_code);
                 signUpModel.setPhone(phone);
             }
+
+            }
         }
-    }
+
 
     private void back() {
         finish();

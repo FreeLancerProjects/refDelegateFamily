@@ -16,6 +16,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_about_app.AboutAppActivity;
+import com.refDelegateFamily.activities_fragments.activity_add_Product.SignUpActivity;
 import com.refDelegateFamily.activities_fragments.activity_language.LanguageActivity;
 import com.refDelegateFamily.activities_fragments.activity_login.LoginActivity;
 import com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpaaaActivity;
@@ -86,7 +87,7 @@ public class SettingsActivity extends AppCompatActivity implements Listeners.Set
 
     @Override
     public void onEditProfile() {
-        Intent intent = new Intent(this, SignUpaaaActivity.class);
+        Intent intent = new Intent(this, SignUpActivity.class);
         intent.putExtra("data",preferences.getUserData(this));
         startActivityForResult(intent,2);
     }

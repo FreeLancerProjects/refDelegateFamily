@@ -23,9 +23,11 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_about_app.AboutAppActivity;
+import com.refDelegateFamily.activities_fragments.activity_add_Product.SignUpActivity;
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
 import com.refDelegateFamily.activities_fragments.activity_language.LanguageActivity;
 import com.refDelegateFamily.activities_fragments.activity_login.LoginActivity;
+import com.refDelegateFamily.activities_fragments.activity_profile.UpdateProfileActivity;
 import com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpaaaActivity;
 import com.refDelegateFamily.activities_fragments.activity_subscription.SubscriptionActivity;
 import com.refDelegateFamily.databinding.FragmentSettingBinding;
@@ -125,8 +127,8 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
 
     @Override
     public void onEditProfile() {
-        Intent intent = new Intent(activity, SignUpaaaActivity.class);
-        intent.putExtra("data",preferences.getUserData(activity));
+        Intent intent = new Intent(activity, UpdateProfileActivity.class);
+        intent.putExtra("type","update");
         startActivityForResult(intent,2);
     }
 
