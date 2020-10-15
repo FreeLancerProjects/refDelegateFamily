@@ -10,11 +10,12 @@ import android.os.Bundle;
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.adapters.NotificationAdapter;
 import com.refDelegateFamily.databinding.ActivityNotificationBinding;
+import com.refDelegateFamily.interfaces.Listeners;
 import com.refDelegateFamily.language.Language_Helper;
 
 import io.paperdb.Paper;
 
-public class NotificationActivity extends AppCompatActivity {
+public class NotificationActivity extends AppCompatActivity implements Listeners.BackListener {
 
     private ActivityNotificationBinding binding;
     private String lang;
@@ -39,10 +40,15 @@ public class NotificationActivity extends AppCompatActivity {
         Paper.init(this);
         lang = Paper.book().read("lang", "ar");
         binding.setLang(lang);
-
+        binding.setBackListener(this);
         binding.recViewNotifications.setAdapter(new NotificationAdapter(this));
         binding.recViewNotifications.setLayoutManager(new LinearLayoutManager(this));
 
 
+    }
+
+    @Override
+    public void back() {
+        finish();
     }
 }

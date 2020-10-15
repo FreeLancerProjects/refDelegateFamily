@@ -52,6 +52,7 @@ import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
 import com.refDelegateFamily.activities_fragments.activity_sign_up.FragmentMapTouchListener;
 import com.refDelegateFamily.databinding.ActivityUpdateProfileBinding;
 import com.refDelegateFamily.databinding.DialogSelectImageBinding;
+import com.refDelegateFamily.interfaces.Listeners;
 import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.PlaceGeocodeData;
 import com.refDelegateFamily.models.PlaceMapDetailsData;
@@ -63,12 +64,8 @@ import com.refDelegateFamily.share.Common;
 import com.refDelegateFamily.tags.Tags;
 import com.squareup.picasso.Picasso;
 
-import org.androidannotations.annotations.sharedpreferences.Pref;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
@@ -78,7 +75,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UpdateProfileActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class UpdateProfileActivity extends AppCompatActivity implements Listeners.BackListener,OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private static final String TAG = "DATA";
     private ActivityUpdateProfileBinding binding;
@@ -122,6 +119,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements OnMapRea
         binding.setLang(lang);
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
+        binding.setBackListener(this);
         signUpModel = new SignUpModel();
         setDataModel();
         binding.setModel(signUpModel);
@@ -732,4 +730,8 @@ public class UpdateProfileActivity extends AppCompatActivity implements OnMapRea
         }
     }
 
+    @Override
+    public void back() {
+        finish();
+    }
 }

@@ -1,4 +1,4 @@
-package com.refDelegateFamily.activities_fragments.activity_add_Product;
+package com.refDelegateFamily.activities_fragments.activity_sign_up;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -14,21 +14,18 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.fragments.Fragment_SignUpStep1;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.fragments.Fragment_SignUpStep2;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.fragments.Fragment_SignUpStep3;
+import com.refDelegateFamily.activities_fragments.activity_sign_up.fragments.Fragment_SignUpStep1;
+import com.refDelegateFamily.activities_fragments.activity_sign_up.fragments.Fragment_SignUpStep2;
+import com.refDelegateFamily.activities_fragments.activity_sign_up.fragments.Fragment_SignUpStep3;
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
-import com.refDelegateFamily.databinding.ActivityAddOfferBinding;
+import com.refDelegateFamily.databinding.ActivitySignUpBinding;
 import com.refDelegateFamily.language.Language_Helper;
-import com.refDelegateFamily.models.AddProductModel;
 import com.refDelegateFamily.models.SignUpModel;
 import com.refDelegateFamily.models.UserModel;
 import com.refDelegateFamily.preferences.Preferences;
 import com.refDelegateFamily.remote.Api;
 import com.refDelegateFamily.share.Common;
 import com.refDelegateFamily.tags.Tags;
-
-import java.io.IOException;
 
 import io.paperdb.Paper;
 import okhttp3.MultipartBody;
@@ -40,7 +37,7 @@ import retrofit2.Response;
 public class SignUpActivity extends AppCompatActivity {
 
     private static final String TAG = "DATA";
-    private ActivityAddOfferBinding binding;
+    private ActivitySignUpBinding binding;
     private FragmentManager fragmentManager;
     private String lang;
     private int step = 1;
@@ -73,7 +70,7 @@ public class SignUpActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         preferences = preferences.newInstance();
         userModel = preferences.getUserData(this);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_offer);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
         Paper.init(this);
         lang = Paper.book().read("lang", "ar");
         binding.setLang(lang);

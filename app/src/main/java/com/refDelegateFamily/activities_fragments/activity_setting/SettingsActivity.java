@@ -16,10 +16,9 @@ import androidx.databinding.DataBindingUtil;
 
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_about_app.AboutAppActivity;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.SignUpActivity;
+import com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpActivity;
 import com.refDelegateFamily.activities_fragments.activity_language.LanguageActivity;
 import com.refDelegateFamily.activities_fragments.activity_login.LoginActivity;
-import com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpaaaActivity;
 import com.refDelegateFamily.databinding.ActivitySettingsBinding;
 import com.refDelegateFamily.interfaces.Listeners;
 import com.refDelegateFamily.language.Language_Helper;
@@ -32,7 +31,7 @@ import java.util.Locale;
 import io.paperdb.BuildConfig;
 import io.paperdb.Paper;
 
-public class SettingsActivity extends AppCompatActivity implements Listeners.SettingAction {
+public class SettingsActivity extends AppCompatActivity implements Listeners.SettingAction, Listeners.BackListener {
     private ActivitySettingsBinding binding;
     private String lang;
     private Preferences preferences;
@@ -58,6 +57,7 @@ public class SettingsActivity extends AppCompatActivity implements Listeners.Set
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         binding.setActions(this);
+        binding.setBackListener(this);
         binding.close.setOnClickListener(v -> finish());
         binding.tvVersion.setText(BuildConfig.VERSION_NAME);
 
@@ -207,5 +207,10 @@ public class SettingsActivity extends AppCompatActivity implements Listeners.Set
             setResult(RESULT_OK);
             finish();
         }
+    }
+
+    @Override
+    public void back() {
+        finish();
     }
 }

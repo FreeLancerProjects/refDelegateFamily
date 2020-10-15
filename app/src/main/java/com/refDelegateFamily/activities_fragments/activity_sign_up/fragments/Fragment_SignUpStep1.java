@@ -1,4 +1,4 @@
-package com.refDelegateFamily.activities_fragments.activity_add_Product.fragments;
+package com.refDelegateFamily.activities_fragments.activity_sign_up.fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -49,7 +49,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.SignUpActivity;
+import com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpActivity;
 import com.refDelegateFamily.activities_fragments.activity_sign_up.FragmentMapTouchListener;
 import com.refDelegateFamily.databinding.DialogSelectImageBinding;
 import com.refDelegateFamily.databinding.FragmentSignupStep1Binding;

@@ -21,6 +21,7 @@ import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
 import com.refDelegateFamily.activities_fragments.chat_activity.ChatActivity;
 import com.refDelegateFamily.databinding.ActivityOrderStepsBinding;
+import com.refDelegateFamily.interfaces.Listeners;
 import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.ChatUserModel;
 import com.refDelegateFamily.models.OrderModel;
@@ -38,7 +39,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderStepsActivity extends AppCompatActivity {
+public class OrderStepsActivity extends AppCompatActivity implements Listeners.BackListener {
 
     private ActivityOrderStepsBinding binding;
     private String lang;
@@ -69,6 +70,7 @@ public class OrderStepsActivity extends AppCompatActivity {
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         preferences = Preferences.newInstance();
+        binding.setBackListener(this);
         userModel = preferences.getUserData(this);
         binding.tvOrderReady.setOnClickListener(view -> {
             ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
@@ -136,15 +138,15 @@ public class OrderStepsActivity extends AppCompatActivity {
         });
         binding.imgChat.setOnClickListener(view -> {
 
-            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(),orderModel.getClient().getLogo(),orderModel.getClient().getId()+"",orderModel.getDriver_chat().getId());
+            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(), orderModel.getClient().getLogo(), orderModel.getClient().getId() + "", orderModel.getDriver_chat().getId());
             Intent intent = new Intent(this, ChatActivity.class);
-            intent.putExtra("chat_user_data",chatUserModel);
-            startActivityForResult(intent,1000);
+            intent.putExtra("chat_user_data", chatUserModel);
+            startActivityForResult(intent, 1000);
         });
 
         binding.imgCall.setOnClickListener(view -> {
-            Log.e("lldldll",orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
-            intent = new Intent(Intent.ACTION_DIAL,  Uri.fromParts("tel" , orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone(),null));
+            Log.e("lldldll", orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
+            intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone(), null));
 
             if (intent != null) {
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -313,6 +315,7 @@ public class OrderStepsActivity extends AppCompatActivity {
 
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -339,5 +342,10 @@ public class OrderStepsActivity extends AppCompatActivity {
                 return;
             }
         }
+    }
+
+    @Override
+    public void back() {
+        finish();
     }
 }

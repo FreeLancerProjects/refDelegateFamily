@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_sign_up.FragmentMapTouchListener;
 import com.refDelegateFamily.databinding.ActivityProfileBinding;
+import com.refDelegateFamily.interfaces.Listeners;
 import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.UserModel;
 import com.refDelegateFamily.preferences.Preferences;
@@ -17,7 +18,7 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class ProfileActivity extends AppCompatActivity implements FragmentMapTouchListener.OnTouchListener {
+public class ProfileActivity extends AppCompatActivity implements FragmentMapTouchListener.OnTouchListener, Listeners.BackListener {
 
     private ActivityProfileBinding binding;
     private String lang;
@@ -45,8 +46,8 @@ public class ProfileActivity extends AppCompatActivity implements FragmentMapTou
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         preferences = Preferences.newInstance();
-        userModel =  preferences.getUserData(this);
-
+        userModel = preferences.getUserData(this);
+        binding.setBackListener(this);
         fragmentMapTouchListener.setListener(this);
 
 
@@ -55,5 +56,10 @@ public class ProfileActivity extends AppCompatActivity implements FragmentMapTou
     @Override
     public void onTouch() {
 
+    }
+
+    @Override
+    public void back() {
+        finish();
     }
 }

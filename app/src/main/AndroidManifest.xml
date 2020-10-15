@@ -30,7 +30,7 @@
         <activity android:name="com.refDelegateFamily.activities_fragments.activity_notification.NotificationActivity" />
         <activity android:name="com.refDelegateFamily.activities_fragments.activity_orderdetail.OrderDetailActivity" />
         <activity
-            android:name="com.refDelegateFamily.activities_fragments.activity_add_Product.SignUpActivity"
+            android:name="com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
@@ -39,10 +39,6 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name="com.refDelegateFamily.activities_fragments.activity_login.LoginActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name="com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpaaaActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity

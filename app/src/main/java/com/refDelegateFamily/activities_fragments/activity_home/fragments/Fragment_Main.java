@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.SignUpActivity;
+import com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpActivity;
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
 import com.refDelegateFamily.adapters.CategoryAdapter;
 import com.refDelegateFamily.adapters.ProductAdapter;

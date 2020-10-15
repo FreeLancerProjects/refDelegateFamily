@@ -19,6 +19,7 @@ import com.refDelegateFamily.activities_fragments.activity_about_app.AboutAppAct
 import com.refDelegateFamily.activities_fragments.activity_web_view.WebViewActivity;
 import com.refDelegateFamily.adapters.SubscriptionAdapter;
 import com.refDelegateFamily.databinding.ActivitySubscriptionBinding;
+import com.refDelegateFamily.interfaces.Listeners;
 import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.PackageResponse;
 import com.refDelegateFamily.models.SettingModel;
@@ -42,7 +43,7 @@ import retrofit2.Response;
 
 import static com.refDelegateFamily.tags.Tags.base_url;
 
-public class SubscriptionActivity extends AppCompatActivity {
+public class SubscriptionActivity extends AppCompatActivity implements Listeners.BackListener {
 
 
     private ActivitySubscriptionBinding binding;
@@ -72,13 +73,12 @@ public class SubscriptionActivity extends AppCompatActivity {
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
-
-        adapter = new SubscriptionAdapter(subscriptionModelList,this);
+        binding.setBackListener(this);
+        adapter = new SubscriptionAdapter(subscriptionModelList, this);
         binding.recView.setLayoutManager(new LinearLayoutManager(this));
         binding.recView.setAdapter(adapter);
         binding.back.setOnClickListener(view -> {
 
-            back();
         });
 
         getPackage();
@@ -94,10 +94,10 @@ public class SubscriptionActivity extends AppCompatActivity {
                             if (response.body() != null) {
                                 subscriptionModelList.clear();
                                 subscriptionModelList.addAll(response.body().getData());
-                                if (subscriptionModelList.size()>0){
+                                if (subscriptionModelList.size() > 0) {
                                     binding.tvNoData.setVisibility(View.GONE);
                                     adapter.notifyDataSetChanged();
-                                }else {
+                                } else {
                                     binding.tvNoData.setVisibility(View.VISIBLE);
 
                                 }
@@ -139,9 +139,6 @@ public class SubscriptionActivity extends AppCompatActivity {
                 });
     }
 
-    private void back() {
-        finish();
-    }
 
     public void buyPackage(SubscriptionModel model) {
 
@@ -150,15 +147,15 @@ public class SubscriptionActivity extends AppCompatActivity {
         dialog.show();
 
         Api.getService(Tags.base_url)
-                .buyPackage(model.getId(),userModel.getData().getId(),model.getPrice())
+                .buyPackage(model.getId(), userModel.getData().getId(), model.getPrice())
                 .enqueue(new Callback<PackageResponse>() {
                     @Override
                     public void onResponse(Call<PackageResponse> call, Response<PackageResponse> response) {
                         dialog.dismiss();
                         if (response.isSuccessful() && response.body() != null) {
                             Intent intent = new Intent(SubscriptionActivity.this, WebViewActivity.class);
-                            intent.putExtra("data",response.body());
-                            startActivityForResult(intent,100);
+                            intent.putExtra("data", response.body());
+                            startActivityForResult(intent, 100);
                         } else {
                             if (response.code() == 500) {
                                 Toast.makeText(SubscriptionActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
@@ -195,13 +192,18 @@ public class SubscriptionActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==100){
-            if (resultCode==RESULT_OK){
+        if (requestCode == 100) {
+            if (resultCode == RESULT_OK) {
                 Toast.makeText(this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
-            }else if (resultCode==RESULT_CANCELED){
+            } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, R.string.canceled, Toast.LENGTH_SHORT).show();
 
             }
         }
+    }
+
+    @Override
+    public void back() {
+        finish();
     }
 }

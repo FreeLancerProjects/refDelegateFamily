@@ -8,13 +8,14 @@ import android.os.Bundle;
 
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.databinding.ActivityPaymentBinding;
+import com.refDelegateFamily.interfaces.Listeners;
 import com.refDelegateFamily.language.Language_Helper;
 
 import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class PaymentActivity extends AppCompatActivity {
+public class PaymentActivity extends AppCompatActivity implements Listeners.BackListener {
 
     private ActivityPaymentBinding binding;
     private String lang;
@@ -38,6 +39,11 @@ public class PaymentActivity extends AppCompatActivity {
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
+        binding.setBackListener(this);
+    }
 
+    @Override
+    public void back() {
+        finish();
     }
 }

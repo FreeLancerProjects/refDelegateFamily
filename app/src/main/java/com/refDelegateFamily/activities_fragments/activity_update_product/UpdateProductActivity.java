@@ -9,9 +9,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.SignUpActivity;
+import com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpActivity;
 import com.refDelegateFamily.adapters.SliderAdapter;
 import com.refDelegateFamily.databinding.ActivityUpdateProductBinding;
+import com.refDelegateFamily.interfaces.Listeners;
 import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.AddProductModel;
 import com.refDelegateFamily.models.SliderModel;
@@ -25,7 +26,7 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class UpdateProductActivity extends AppCompatActivity {
+public class UpdateProductActivity extends AppCompatActivity implements Listeners.BackListener {
 
     private static final String TAG = "DATA";
     private ActivityUpdateProductBinding binding;
@@ -55,11 +56,7 @@ public class UpdateProductActivity extends AppCompatActivity {
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         sliderModelList = new ArrayList<>();
-
-        binding.back.setOnClickListener(view -> {
-
-            back();
-        });
+        binding.setBackListener(this);
 
         binding.updateBtn.setOnClickListener(view -> {
 
@@ -73,9 +70,7 @@ public class UpdateProductActivity extends AppCompatActivity {
 
     }
 
-    private void back() {
-        finish();
-    }
+
 
     //initiate slider ui
     private void sliderInit() {
@@ -99,4 +94,8 @@ public class UpdateProductActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void back() {
+        finish();
+    }
 }

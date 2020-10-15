@@ -25,6 +25,7 @@ import com.refDelegateFamily.activities_fragments.activity_order_steps.OrderStep
 import com.refDelegateFamily.activities_fragments.chat_activity.ChatActivity;
 import com.refDelegateFamily.adapters.Image_Adapter;
 import com.refDelegateFamily.databinding.ActivityOrderDetailBinding;
+import com.refDelegateFamily.interfaces.Listeners;
 import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.ChatUserModel;
 import com.refDelegateFamily.models.OrderModel;
@@ -46,7 +47,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderDetailActivity extends AppCompatActivity {
+public class OrderDetailActivity extends AppCompatActivity implements Listeners.BackListener {
 
     private ActivityOrderDetailBinding binding;
     private String lang;
@@ -81,11 +82,13 @@ public class OrderDetailActivity extends AppCompatActivity {
         imagePopup.setHideCloseIcon(false);
         imagePopup.setImageOnClickClose(true);
         imageModels = new ArrayList<>();
+        binding.setBackListener(this);
 
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         //  binding.setModel(orderModel);
+        binding.setBackListener(this);
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
         if (orderModel.getOrder_images() != null) {
@@ -111,10 +114,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             binding.viewStatusBtn.setVisibility(View.VISIBLE);
         }
 
-//        binding.back.setOnClickListener(view -> {
-//
-//            back();
-//        });
+
         binding.imgChat.setOnClickListener(view -> {
 
 
@@ -213,9 +213,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void back() {
-        finish();
-    }
+
 
     private void getDataFromIntent() {
         Intent intent = getIntent();
@@ -314,5 +312,10 @@ public class OrderDetailActivity extends AppCompatActivity {
     private void updatedata(OrderModel body) {
         this.orderModel=body.getOrder();
         binding.setModel(body.getOrder());
+    }
+
+    @Override
+    public void back() {
+        finish();
     }
 }

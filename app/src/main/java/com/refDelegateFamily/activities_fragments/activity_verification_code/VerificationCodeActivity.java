@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.refDelegateFamily.R;
-import com.refDelegateFamily.activities_fragments.activity_add_Product.SignUpActivity;
+import com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpActivity;
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
 import com.refDelegateFamily.databinding.ActivityVerificationCodeBinding;
 import com.refDelegateFamily.language.Language_Helper;

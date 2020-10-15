@@ -10,7 +10,9 @@
         <variable
             name="actions"
             type="com.refDelegateFamily.interfaces.Listeners.SettingAction" />
-
+        <variable
+            name="backListener"
+            type="com.refDelegateFamily.interfaces.Listeners.BackListener" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -60,6 +62,7 @@
                             android:layout_height="30dp"
                             android:src="@drawable/ic_next"
                             android:padding="8dp"
+                            android:onClick="@{()->backListener.back()}"
                             android:tint="@color/color4"
                             android:layout_gravity="center"
                             android:rotation='@{lang.equals("ar")?180:0}'
