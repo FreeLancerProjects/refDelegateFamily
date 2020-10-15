@@ -15,6 +15,7 @@ import com.refDelegateFamily.databinding.ChatImageLeftRowBinding;
 import com.refDelegateFamily.databinding.ChatImageRightRowBinding;
 import com.refDelegateFamily.databinding.ChatMessageLeftRowBinding;
 import com.refDelegateFamily.databinding.ChatMessageRightRowBinding;
+import com.refDelegateFamily.databinding.LoadMoreBinding;
 import com.refDelegateFamily.models.MessageModel;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final int ITEM_MESSAGE_RIGHT = 2;
     private final int ITEM_image_LEFT = 3;
     private final int ITEM_image_RIGHT = 4;
+    private final int ITEM_LOADMORE = 5;
 
     private final String lang;
 
@@ -63,9 +65,14 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ChatImageLeftRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.chat_image_left_row, parent, false);
             return new LeftImageEventHolder(binding);
 
-        } else {
+        } else if (viewType == ITEM_image_RIGHT) {
             ChatImageRightRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.chat_image_right_row, parent, false);
             return new RightImageEventHolder(binding);
+
+        } else {
+
+            LoadMoreBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.load_more, parent, false);
+            return new LoadMoreHolder(binding);
 
         }
     }
@@ -101,14 +108,29 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             eventHolder.binding.setLang(lang);
 
 
-        }
+        } else if (holder instanceof LoadMoreHolder) {
+            LoadMoreHolder typingHolder = (LoadMoreHolder) holder;
 
+
+        }
 
     }
 
     @Override
     public int getItemCount() {
         return messageModelList.size();
+    }
+
+    public class LoadMoreHolder extends RecyclerView.ViewHolder {
+
+        private LoadMoreBinding binding;
+
+        public LoadMoreHolder(LoadMoreBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+
     }
 
     public class RightMessageEventHolder extends RecyclerView.ViewHolder {
@@ -156,7 +178,11 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public int getItemViewType(int position) {
         MessageModel messageModel = messageModelList.get(position);
         Log.e("lsllsl", current_user_id + " " + messageModel.getTo_user_id());
-        if (messageModel.getTo_user_id().equals(current_user_id + "")) {
+        if (messageModel == null) {
+
+            return ITEM_LOADMORE;
+
+        } else if (messageModel.getTo_user_id().equals(current_user_id + "")) {
             //  Log.e("type",messageModel.getType());
             if (messageModel.getType().equals("text")) {
                 return ITEM_MESSAGE_LEFT;
@@ -172,7 +198,8 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
         }
-
-
     }
+
+
 }
+
