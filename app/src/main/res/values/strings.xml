@@ -203,5 +203,7 @@
     <string name="suc">success</string>
     <string name="buy">Buy</string>
     <string name="canceled">Canceled</string>
+    <string name="Previous">Back</string>
+    <string name="Next">Next</string>
 
 </resources>

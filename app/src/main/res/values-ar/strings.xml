@@ -203,4 +203,6 @@
     <string name="suc">تم بنجاح</string>
     <string name="buy">إشترك</string>
     <string name="canceled">تم الإلغاء</string>
+    <string name="Previous">السابق</string>
+    <string name="Next">القادم</string>
 </resources>
