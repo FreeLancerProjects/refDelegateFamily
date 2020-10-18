@@ -1,6 +1,7 @@
 package com.refDelegateFamily.activities_fragments.activity_home.activity_previous_order;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.refDelegateFamily.R;
+import com.refDelegateFamily.activities_fragments.activity_subscription.SubscriptionActivity;
 import com.refDelegateFamily.adapters.OrderAdapter;
 import com.refDelegateFamily.databinding.ActivityPreviousOrderBinding;
 import com.refDelegateFamily.language.Language_Helper;
@@ -59,10 +61,22 @@ public class PreviousOrderActivity extends AppCompatActivity {
         dataList = new ArrayList<>();
         orderAdapter = new OrderAdapter(dataList, this);
         Paper.init(this);
-        lang = Paper.book().read("lang",  Locale.getDefault().getLanguage());
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
+        if (userModel != null && userModel.getData().getPackage_finished_at() == null) {
+            binding.tvsubscribe.setVisibility(View.VISIBLE);
+        }
+
+        binding.tvsubscribe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PreviousOrderActivity.this, SubscriptionActivity.class);
+                intent.putExtra("data", preferences.getUserData(PreviousOrderActivity.this));
+                startActivity(intent);
+            }
+        });
         binding.recViewOrders.setLayoutManager(new LinearLayoutManager(this));
         binding.recViewOrders.setAdapter(orderAdapter);
         getOrder();

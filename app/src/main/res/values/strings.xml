@@ -203,5 +203,6 @@
     <string name="suc">success</string>
     <string name="buy">Buy</string>
     <string name="canceled">Canceled</string>
+    <string name="you_must_subscribe_to_get_orders">You Must Subscribe To Get Orders</string>
 
 </resources>

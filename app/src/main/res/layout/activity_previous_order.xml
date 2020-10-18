@@ -102,6 +102,16 @@
                     android:visibility="gone"
                     android:textColor="@color/gray12"
                     />
+                <TextView
+                    android:id="@+id/tvsubscribe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/no_data_to_view"
+                    android:textSize="22sp"
+                    android:visibility="gone"
+                    android:textColor="@color/gray12"
+                    />
 
                 <ProgressBar
                     android:layout_width="wrap_content"
