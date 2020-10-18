@@ -31,7 +31,7 @@ public class UserModel implements Serializable {
         private String card_id;
         private String address_registered_for_bank_account;
         private String token;
-
+        private String notification_status;
         private String user_type;
         private String software_type;
         private String details;
@@ -112,7 +112,13 @@ public class UserModel implements Serializable {
             return ipad_number;
         }
 
+        public void setNotification_status(String notification_status) {
+            this.notification_status = notification_status;
+        }
 
+        public String getNotification_status() {
+            return notification_status;
+        }
 
         public String getUser_type() {
             return user_type;
