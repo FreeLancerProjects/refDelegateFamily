@@ -136,5 +136,30 @@ public class Preferences {
         return new Gson().fromJson(userDataGson, ChatUserModel.class);
     }
 
+    public void clearorder(Context context) {
+        SharedPreferences preferences1 = context.getSharedPreferences("order", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor1 = preferences1.edit();
+        editor1.clear();
+        editor1.apply();
 
+        SharedPreferences preferences2 = context.getSharedPreferences("order", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = preferences2.edit();
+        editor2.clear();
+        editor2.apply();
+
+    }
+
+    public void create_update_orderUserData(Context context, String Orderid) {
+        SharedPreferences preferences = context.getSharedPreferences("order", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        editor.putString("order", Orderid);
+        editor.apply();
+    }
+
+    public String getordrUserData(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("order", Context.MODE_PRIVATE);
+        String order = preferences.getString("order", "");
+        return order;
+    }
 }

@@ -19,6 +19,7 @@ public class UserModel implements Serializable {
         private int id;
         private String name;
         private String email;
+        private String notification_status;
         private String city;
         private String phone_code;
         private String phone;
@@ -60,6 +61,9 @@ public class UserModel implements Serializable {
 
         public String getEmail() {
             return email;
+        }
+        public String getNotification_status() {
+            return notification_status;
         }
 
         public String getCity() {

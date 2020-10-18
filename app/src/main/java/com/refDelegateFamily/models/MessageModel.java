@@ -15,6 +15,17 @@ public class MessageModel implements Serializable {
     private String is_read;
     private long date;
     private User from_user;
+    public MessageModel(int id, String to_user_id, String from_user_id, String message_kind, String message, String image,  String room_id, String is_read) {
+        this.id = id;
+        this.to_user_id = to_user_id;
+        this.from_user_id = from_user_id;
+        this.message_kind = message_kind;
+        this.message = message;
+        this.image = image;
+        this.room_id = room_id;
+        this.is_read = is_read;
+
+    }
 
     public MessageModel getData() {
         return data;

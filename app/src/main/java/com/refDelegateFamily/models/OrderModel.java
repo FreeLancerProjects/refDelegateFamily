@@ -53,6 +53,10 @@ public class OrderModel implements Serializable {
             return id;
         }
 
+        public void setId(int id) {
+            this.id = id;
+        }
+
         public int getClient_id() {
             return client_id;
         }

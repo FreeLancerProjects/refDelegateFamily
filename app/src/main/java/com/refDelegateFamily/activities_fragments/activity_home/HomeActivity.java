@@ -76,7 +76,11 @@ public class HomeActivity extends AppCompatActivity {
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
-
+        if (userModel!=null&&userModel.getData().getNotification_status().equals("on")) {
+            binding.switchBtn.setChecked(true);
+        } else {
+            binding.switchBtn.setChecked(false);
+        }
         binding.bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
