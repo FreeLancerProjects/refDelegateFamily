@@ -21,7 +21,7 @@ public class UserModel implements Serializable {
         private String email;
         private String notification_status;
         private String city;
-       private String package_finished_at;
+        private String package_finished_at;
         private String phone_code;
         private String phone;
         private String image;
@@ -133,7 +133,6 @@ public class UserModel implements Serializable {
         public String getNationality_title() {
             return nationality_title;
         }
-
 
 
         public String getCard_id() {

@@ -2,6 +2,7 @@ package com.refDelegateFamily.activities_fragments.activity_sign_up.fragments;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -17,18 +18,33 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.refDelegateFamily.R;
+import com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpActivity;
+import com.refDelegateFamily.adapters.CateegoryAdapter;
 import com.refDelegateFamily.databinding.DialogSelectImageBinding;
 import com.refDelegateFamily.databinding.FragmentSignupStep2Binding;
+import com.refDelegateFamily.models.MainCategoryModel;
 import com.refDelegateFamily.models.SignUpModel;
+import com.refDelegateFamily.remote.Api;
+import com.refDelegateFamily.share.Common;
+import com.refDelegateFamily.tags.Tags;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Fragment_SignUpStep2 extends Fragment {
     private static final String TAG = "DATA";
@@ -39,7 +55,9 @@ public class Fragment_SignUpStep2 extends Fragment {
     private final String camera_permission = Manifest.permission.CAMERA;
     private final int IMG_REQ1 = 3, IMG_REQ2 = 2;
     private Uri url, uri = null;
-
+    private MainCategoryModel.Data categoryModel;
+    private List<MainCategoryModel.Data> categoryList = new ArrayList<>();
+    private CateegoryAdapter cateegoryAdapter;
 
     public static Fragment_SignUpStep2 newInstance(SignUpModel signUpModel) {
         Bundle bundle = new Bundle();
@@ -67,11 +85,103 @@ public class Fragment_SignUpStep2 extends Fragment {
         binding.setModel(signUpModel);
 
 
-
         binding.imgIdentity.setOnClickListener(view -> {
 
             CreateImageAlertDialog();
 
+        });
+        cateegoryAdapter = new CateegoryAdapter(categoryList, getActivity());
+        binding.spinnerCategory.setAdapter(cateegoryAdapter);
+
+        categoryModel = new MainCategoryModel.Data();
+        categoryModel.setId(0);
+        categoryModel.setCar_model(getString(R.string.Choose));
+        categoryList.add(categoryModel);
+
+        binding.spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    signUpModel.setCar_type("-1");
+                } else {
+                    signUpModel.setCar_type(categoryList.get(position).getId() + "");
+
+                }
+                binding.setModel(signUpModel);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        getCategoryData();
+
+    }
+
+    private void getCategoryData() {
+
+        ProgressDialog dialog = Common.createProgressDialog(getActivity(), getString(R.string.wait));
+        dialog.show();
+
+        Api.getService(Tags.base_url).getMainCategory("off").enqueue(new Callback<MainCategoryModel>() {
+            @Override
+            public void onResponse(Call<MainCategoryModel> call, Response<MainCategoryModel> response) {
+                dialog.dismiss();
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().getData().size() > 0) {
+                        categoryList.clear();
+                        categoryList.add(categoryModel);
+                        categoryList.addAll(response.body().getData());
+                        Log.e("data", categoryList.size() + "__");
+                        getActivity().runOnUiThread(() -> {
+                            cateegoryAdapter.notifyDataSetChanged();
+                        });
+                    } else {
+                        try {
+
+                            Log.e("error", response.code() + "_" + response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (response.code() == 500) {
+                            Toast.makeText(getActivity(), "Server Error", Toast.LENGTH_SHORT).show();
+
+
+                        } else {
+                            Toast.makeText(getActivity(), getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+
+                        }
+                    }
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<MainCategoryModel> call, Throwable t) {
+                dialog.dismiss();
+                try {
+                    dialog.dismiss();
+                    if (t.getMessage() != null) {
+                        Log.e("error", t.getMessage());
+                        if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                            Toast.makeText(getActivity(), R.string.something, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Log.e("error:", t.getMessage());
+                        }
+                    }
+
+                } catch (Exception e) {
+                }
+
+            }
         });
 
 
@@ -172,7 +282,6 @@ public class Fragment_SignUpStep2 extends Fragment {
             Picasso.get().load(url).into(binding.imgIdentity);
         }
     }
-
 
 
     private Uri getUriFromBitmap(Bitmap bitmap) {

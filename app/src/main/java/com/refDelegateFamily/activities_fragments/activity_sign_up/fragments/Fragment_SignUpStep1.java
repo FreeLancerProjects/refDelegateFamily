@@ -319,18 +319,23 @@ public class Fragment_SignUpStep1 extends Fragment implements OnMapReadyCallback
 
     private void getGeoData(double lat, double lng) {
 
-        Log.e("adadadada","adada");
+       // Log.e("adadadada","adada"+"  "+lat+"  "+lng);
         String location = lat + "," + lng;
         Api.getService("https://maps.googleapis.com/maps/api/")
                 .getGeoData(location, "ar", getString(R.string.map_api_key))
                 .enqueue(new Callback<PlaceGeocodeData>() {
                     @Override
                     public void onResponse(Call<PlaceGeocodeData> call, Response<PlaceGeocodeData> response) {
+                       // Log.e("address22:", response.body().getResults().size()+"");
+
                         if (response.isSuccessful() && response.body() != null) {
 
 
                             if (response.body().getResults().size() > 0) {
+                                Log.e("address22:", response.body().getResults().get(0).getFormatted_address());
+
                                 String address = response.body().getResults().get(0).getFormatted_address().replace("Unnamed Road,", "");
+                                binding.edtAddress.setText(signUpModel.getAddress());
                                 signUpModel.setAddress(address);
                                 Log.e("address22:", signUpModel.getAddress());
                                 binding.setModel(signUpModel);
@@ -351,6 +356,7 @@ public class Fragment_SignUpStep1 extends Fragment implements OnMapReadyCallback
 
                     @Override
                     public void onFailure(Call<PlaceGeocodeData> call, Throwable t) {
+                        Log.e("l;lllll",t.toString());
                         try {
 
 

@@ -169,10 +169,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
                 Toast.makeText(context, context.getResources().getString(R.string.ch_national_image), Toast.LENGTH_LONG).show();
             }
             if (car_type.trim().isEmpty()) {
-                error_car_type.set(context.getString(R.string.field_required));
-
-            } else {
-                error_car_type.set(null);
+                Toast.makeText(context, context.getResources().getString(R.string.ch_car_type), Toast.LENGTH_LONG).show();
 
             }
             if (car_model.trim().isEmpty()) {
