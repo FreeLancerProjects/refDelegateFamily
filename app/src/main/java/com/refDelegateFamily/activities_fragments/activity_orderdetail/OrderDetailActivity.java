@@ -75,7 +75,6 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_order_detail);
         getDataFromIntent();
-        preferences.create_update_orderUserData(this, orderModel.getId() + "");
 
         initView();
         getOrderDetials();
@@ -99,6 +98,8 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         //  binding.setModel(orderModel);
         binding.setBackListener(this);
         preferences = Preferences.newInstance();
+        preferences.create_update_orderUserData(this, orderModel.getId() + "");
+
         userModel = preferences.getUserData(this);
         if (orderModel.getOrder_images() != null) {
             imageModels.addAll(orderModel.getOrder_images());

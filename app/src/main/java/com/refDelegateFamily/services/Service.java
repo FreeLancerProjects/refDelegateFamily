@@ -281,4 +281,14 @@ public interface Service {
     @GET("api/Get-cars")
     Call<MainCategoryModel> getMainCategory(@Query("pagination_status")String pagination_status);
 
+    @FormUrlEncoded
+    @POST("api/firebase-tokens")
+    Call<ResponseBody> updateToken(
+            @Header("Authorization") String user_token,
+            @Field("user_id") int user_id,
+            @Field("phone_token") String phone_token,
+            @Field("software_type") String software_type
+    );
+
+
 }

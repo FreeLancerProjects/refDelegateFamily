@@ -12,7 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_home.NewOrderActivity.NewOrderActivity;
 import com.refDelegateFamily.activities_fragments.activity_home.activity_previous_order.PreviousOrderActivity;
@@ -82,7 +86,9 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             binding.switchBtn.setChecked(false);
         }
-
+        if (userModel != null) {
+            updateToken();
+        }
 //        Log.e("ddfff",userModel.getData().getName());
 //        if (userModel.getData().getNotification_status().equals("on")) {
 //            binding.switchBtn.setChecked(true);
@@ -207,6 +213,51 @@ public class HomeActivity extends AppCompatActivity {
         } catch (Exception e) {
         }
 
+    }
+    private void updateToken() {
+        FirebaseInstanceId.getInstance()
+                .getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (task.isSuccessful()) {
+                            String token = task.getResult().getToken();
+                            task.getResult().getId();
+                            Log.e("sssssss", token);
+                            Api.getService(Tags.base_url)
+                                    .updateToken("Bearer " + userModel.getData().getToken(), userModel.getData().getId(), token, "android ")
+                                    .enqueue(new Callback<ResponseBody>() {
+                                        @Override
+                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                                            if (response.isSuccessful()) {
+                                                try {
+                                                    Log.e("Success", "token updated");
+                                                } catch (Exception e) {
+                                                    //  e.printStackTrace();
+                                                }
+                                            } else {
+                                                try {
+                                                    Log.e("error", response.code() + "_" + response.errorBody().string());
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+
+
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                            try {
+                                                Log.e("Error", t.getMessage());
+                                            } catch (Exception e) {
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
     }
 
     public void displayFragmentOrder() {

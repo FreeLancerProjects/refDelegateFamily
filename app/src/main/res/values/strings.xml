@@ -208,5 +208,6 @@
     <string name="you_must_subscribe_to_get_orders">You Must Subscribe To Get Orders</string>
     <string name="ch_car_type">Choose Car Type</string>
     <string name="Choose">choose</string>
+    <string name="subscribe_now">Subscribe Now</string>
 
 </resources>
