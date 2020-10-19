@@ -102,8 +102,10 @@ public class PreviousOrderActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     dataList.addAll(response.body().getData());
                     orderAdapter.notifyDataSetChanged();
-                    if (dataList.size() == 0) {
-                        binding.tvNoData.setVisibility(View.VISIBLE);
+                    if (dataList.size() == 0){
+                        binding.linearNoData.setVisibility(View.VISIBLE);
+                    }else {
+                        binding.linearNoData.setVisibility(View.GONE);
                     }
                 }
             }

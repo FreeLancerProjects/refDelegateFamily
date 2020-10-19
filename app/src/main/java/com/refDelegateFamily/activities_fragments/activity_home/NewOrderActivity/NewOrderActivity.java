@@ -92,7 +92,9 @@ public class NewOrderActivity extends AppCompatActivity {
                     dataList.addAll(response.body().getData());
                     orderAdapter.notifyDataSetChanged();
                     if (dataList.size() == 0) {
-                        binding.tvNoData.setVisibility(View.VISIBLE);
+                        binding.linearNoData.setVisibility(View.VISIBLE);
+                    }else {
+                            binding.linearNoData.setVisibility(View.GONE);
                     }
                 }
             }

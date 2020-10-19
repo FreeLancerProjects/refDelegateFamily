@@ -92,16 +92,35 @@
                     android:layout_height="match_parent"
                     android:id="@+id/recViewOrders"
                     />
-                <TextView
-                    android:id="@+id/tv_no_data"
+                <LinearLayout
+                    android:id="@+id/linear_no_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:layout_gravity="center"
-                    android:text="@string/no_data_to_view"
-                    android:textSize="22sp"
                     android:visibility="gone"
-                    android:textColor="@color/gray12"
-                    />
+                    >
+
+                    <ImageView
+                        android:id="@+id/iv_no_data"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/no_orders"
+                        android:scaleType="centerCrop"
+                        android:textColor="@color/gray12"
+                        android:textSize="22sp"
+                        android:visibility="visible" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/no_data_to_view"
+                        android:textColor="@color/gray12"
+                        android:textSize="22sp"
+                        />
+
+                </LinearLayout>
                 <TextView
                     android:id="@+id/tvsubscribe"
                     android:layout_width="wrap_content"

@@ -5,6 +5,7 @@ import com.refDelegateFamily.models.MainCategoryModel;
 import com.refDelegateFamily.models.MessageDataModel;
 import com.refDelegateFamily.models.MessageModel;
 import com.refDelegateFamily.models.NearbyStoreDataModel;
+import com.refDelegateFamily.models.NotificationModel;
 import com.refDelegateFamily.models.OrderModel;
 import com.refDelegateFamily.models.PackageResponse;
 import com.refDelegateFamily.models.PlaceGeocodeData;
@@ -71,6 +72,10 @@ public interface Service {
     Call<ResponseBody> logout(@Header("Authorization") String user_token,
                               @Field("phone_token") String phone_token
     );
+
+    Call<NotificationModel> getNotification(@Header("Authorization") String user_token,
+                                            @Query("user_id") int user_id);
+
 
     @FormUrlEncoded
     @POST("api/drive_register")
