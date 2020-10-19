@@ -19,7 +19,9 @@ public class UserModel implements Serializable {
         private int id;
         private String name;
         private String email;
+        private String notification_status;
         private String city;
+       private String package_finished_at;
         private String phone_code;
         private String phone;
         private String image;
@@ -30,7 +32,6 @@ public class UserModel implements Serializable {
         private String card_id;
         private String address_registered_for_bank_account;
         private String token;
-
         private String user_type;
         private String software_type;
         private String details;
@@ -61,6 +62,7 @@ public class UserModel implements Serializable {
         public String getEmail() {
             return email;
         }
+
 
         public String getCity() {
             return city;
@@ -108,7 +110,17 @@ public class UserModel implements Serializable {
             return ipad_number;
         }
 
+        public void setNotification_status(String notification_status) {
+            this.notification_status = notification_status;
+        }
 
+        public String getNotification_status() {
+            return notification_status;
+        }
+
+        public String getPackage_finished_at() {
+            return package_finished_at;
+        }
 
         public String getUser_type() {
             return user_type;

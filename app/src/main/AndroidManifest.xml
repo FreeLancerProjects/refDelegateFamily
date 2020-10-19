@@ -21,11 +21,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+        <service
+            android:name=".notification.FireBaseMessaging"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <activity android:name="com.refDelegateFamily.activities_fragments.activity_subscription.SubscriptionActivity"></activity>
         <activity android:name="com.refDelegateFamily.activities_fragments.activity_order_steps.OrderStepsActivity" />
         <activity android:name="com.refDelegateFamily.activities_fragments.activity_payment.PaymentActivity" />
         <activity android:name="com.refDelegateFamily.activities_fragments.activity_profile.UpdateProfileActivity" />
         <activity android:name="com.refDelegateFamily.activities_fragments.activity_profile.ProfileActivity" />
+        <activity android:name="com.refDelegateFamily.activities_fragments.activity_web_view.WebViewActivity" />
         <activity android:name="com.refDelegateFamily.activities_fragments.activity_update_product.UpdateProductActivity" />
         <activity android:name="com.refDelegateFamily.activities_fragments.activity_notification.NotificationActivity" />
         <activity android:name="com.refDelegateFamily.activities_fragments.activity_orderdetail.OrderDetailActivity" />

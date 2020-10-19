@@ -1,0 +1,170 @@
+Index: app/src/main/java/com/refDelegateFamily/adapters/Chat_Adapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.refDelegateFamily.adapters;\r\n\r\nimport android.content.Context;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.ViewGroup;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.databinding.DataBindingUtil;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.refDelegateFamily.R;\r\nimport com.refDelegateFamily.activities_fragments.chat_activity.ChatActivity;\r\nimport com.refDelegateFamily.databinding.ChatImageLeftRowBinding;\r\nimport com.refDelegateFamily.databinding.ChatImageRightRowBinding;\r\nimport com.refDelegateFamily.databinding.ChatMessageLeftRowBinding;\r\nimport com.refDelegateFamily.databinding.ChatMessageRightRowBinding;\r\nimport com.refDelegateFamily.models.MessageModel;\r\n\r\nimport java.util.List;\r\nimport java.util.Locale;\r\n\r\nimport io.paperdb.Paper;\r\n\r\npublic class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {\r\n    private final int ITEM_MESSAGE_LEFT = 1;\r\n    private final int ITEM_MESSAGE_RIGHT = 2;\r\n    private final int ITEM_image_LEFT = 3;\r\n    private final int ITEM_image_RIGHT = 4;\r\n\r\n    private final String lang;\r\n\r\n\r\n    private List<MessageModel> messageModelList;\r\n    private int current_user_id;\r\n    private Context context;\r\n    private LayoutInflater inflater;\r\n    private ChatActivity activity;\r\n\r\n    public Chat_Adapter(List<MessageModel> messageModelList, int current_user_id, Context context) {\r\n        this.messageModelList = messageModelList;\r\n        this.current_user_id = current_user_id;\r\n        this.context = context;\r\n        inflater = LayoutInflater.from(context);\r\n        Paper.init(context);\r\n        activity = (ChatActivity) context;\r\n        lang = Paper.book().read(\"lang\", Locale.getDefault().getLanguage());\r\n\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {\r\n        if (viewType == ITEM_MESSAGE_RIGHT) {\r\n            ChatMessageRightRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.chat_message_right_row, parent, false);\r\n            return new RightMessageEventHolder(binding);\r\n\r\n        } else if (viewType == ITEM_MESSAGE_LEFT) {\r\n            ChatMessageLeftRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.chat_message_left_row, parent, false);\r\n            return new LeftMessageEventHolder(binding);\r\n\r\n        } else if (viewType == ITEM_image_LEFT) {\r\n            ChatImageLeftRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.chat_image_left_row, parent, false);\r\n            return new LeftImageEventHolder(binding);\r\n\r\n        } else {\r\n            ChatImageRightRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.chat_image_right_row, parent, false);\r\n            return new RightImageEventHolder(binding);\r\n\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {\r\n        MessageModel messageModel = messageModelList.get(position);\r\n        if (holder instanceof RightImageEventHolder) {\r\n            RightImageEventHolder eventHolder = (RightImageEventHolder) holder;\r\n\r\n            eventHolder.binding.setMessagemodel(messageModel);\r\n            eventHolder.binding.setLang(lang);\r\n\r\n\r\n        } else if (holder instanceof LeftImageEventHolder) {\r\n            LeftImageEventHolder eventHolder = (LeftImageEventHolder) holder;\r\n\r\n            eventHolder.binding.setMessagemodel(messageModel);\r\n            eventHolder.binding.setLang(lang);\r\n\r\n\r\n        } else if (holder instanceof RightMessageEventHolder) {\r\n            RightMessageEventHolder eventHolder = (RightMessageEventHolder) holder;\r\n\r\n            eventHolder.binding.setMessagemodel(messageModel);\r\n            eventHolder.binding.setLang(lang);\r\n\r\n\r\n        } else if (holder instanceof LeftMessageEventHolder) {\r\n            LeftMessageEventHolder eventHolder = (LeftMessageEventHolder) holder;\r\n\r\n            eventHolder.binding.setMessagemodel(messageModel);\r\n            eventHolder.binding.setLang(lang);\r\n\r\n\r\n        }\r\n\r\n\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return messageModelList.size();\r\n    }\r\n\r\n    public class RightMessageEventHolder extends RecyclerView.ViewHolder {\r\n        public ChatMessageRightRowBinding binding;\r\n\r\n        public RightMessageEventHolder(@NonNull ChatMessageRightRowBinding binding) {\r\n            super(binding.getRoot());\r\n            this.binding = binding;\r\n\r\n        }\r\n    }\r\n\r\n    public class LeftMessageEventHolder extends RecyclerView.ViewHolder {\r\n        public ChatMessageLeftRowBinding binding;\r\n\r\n        public LeftMessageEventHolder(@NonNull ChatMessageLeftRowBinding binding) {\r\n            super(binding.getRoot());\r\n            this.binding = binding;\r\n\r\n        }\r\n    }\r\n\r\n    public class LeftImageEventHolder extends RecyclerView.ViewHolder {\r\n        public ChatImageLeftRowBinding binding;\r\n\r\n        public LeftImageEventHolder(@NonNull ChatImageLeftRowBinding binding) {\r\n            super(binding.getRoot());\r\n            this.binding = binding;\r\n\r\n        }\r\n    }\r\n\r\n    public class RightImageEventHolder extends RecyclerView.ViewHolder {\r\n        public ChatImageRightRowBinding binding;\r\n\r\n        public RightImageEventHolder(@NonNull ChatImageRightRowBinding binding) {\r\n            super(binding.getRoot());\r\n            this.binding = binding;\r\n\r\n        }\r\n    }\r\n\r\n\r\n    @Override\r\n    public int getItemViewType(int position) {\r\n        MessageModel messageModel = messageModelList.get(position);\r\n        Log.e(\"lsllsl\", current_user_id + \" \" + messageModel.getTo_user_id());\r\n        if (messageModel.getTo_user_id().equals(current_user_id + \"\")) {\r\n            //  Log.e(\"type\",messageModel.getType());\r\n            if (messageModel.getType().equals(\"text\")) {\r\n                return ITEM_MESSAGE_LEFT;\r\n            } else {\r\n                return ITEM_image_LEFT;\r\n            }\r\n        } else {\r\n            if (messageModel.getType().equals(\"text\")) {\r\n                return ITEM_MESSAGE_RIGHT;\r\n            } else {\r\n                return ITEM_image_RIGHT;\r\n            }\r\n\r\n\r\n        }\r\n\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/refDelegateFamily/adapters/Chat_Adapter.java	(revision e8e7e9bb5dfccc05a757ff25fa71be417473dc44)
++++ app/src/main/java/com/refDelegateFamily/adapters/Chat_Adapter.java	(date 1602751841466)
+@@ -15,6 +15,7 @@
+ import com.refDelegateFamily.databinding.ChatImageRightRowBinding;
+ import com.refDelegateFamily.databinding.ChatMessageLeftRowBinding;
+ import com.refDelegateFamily.databinding.ChatMessageRightRowBinding;
++import com.refDelegateFamily.databinding.LoadMoreBinding;
+ import com.refDelegateFamily.models.MessageModel;
+ 
+ import java.util.List;
+@@ -27,6 +28,7 @@
+     private final int ITEM_MESSAGE_RIGHT = 2;
+     private final int ITEM_image_LEFT = 3;
+     private final int ITEM_image_RIGHT = 4;
++    private final int ITEM_LOADMORE = 5;
+ 
+     private final String lang;
+ 
+@@ -63,10 +65,15 @@
+             ChatImageLeftRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.chat_image_left_row, parent, false);
+             return new LeftImageEventHolder(binding);
+ 
+-        } else {
++        } else if (viewType == ITEM_image_RIGHT) {
+             ChatImageRightRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.chat_image_right_row, parent, false);
+             return new RightImageEventHolder(binding);
+ 
++        } else {
++
++            LoadMoreBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.load_more, parent, false);
++            return new LoadMoreHolder(binding);
++
+         }
+     }
+ 
+@@ -101,8 +108,11 @@
+             eventHolder.binding.setLang(lang);
+ 
+ 
++        } else if (holder instanceof LoadMoreHolder) {
++            LoadMoreHolder typingHolder = (LoadMoreHolder) holder;
++
++
+         }
+-
+ 
+     }
+ 
+@@ -111,6 +121,18 @@
+         return messageModelList.size();
+     }
+ 
++    public class LoadMoreHolder extends RecyclerView.ViewHolder {
++
++        private LoadMoreBinding binding;
++
++        public LoadMoreHolder(LoadMoreBinding binding) {
++            super(binding.getRoot());
++            this.binding = binding;
++        }
++
++
++    }
++
+     public class RightMessageEventHolder extends RecyclerView.ViewHolder {
+         public ChatMessageRightRowBinding binding;
+ 
+@@ -156,7 +178,11 @@
+     public int getItemViewType(int position) {
+         MessageModel messageModel = messageModelList.get(position);
+         Log.e("lsllsl", current_user_id + " " + messageModel.getTo_user_id());
+-        if (messageModel.getTo_user_id().equals(current_user_id + "")) {
++        if (messageModel == null) {
++
++            return ITEM_LOADMORE;
++
++        } else if (messageModel.getTo_user_id().equals(current_user_id + "")) {
+             //  Log.e("type",messageModel.getType());
+             if (messageModel.getType().equals("text")) {
+                 return ITEM_MESSAGE_LEFT;
+@@ -172,7 +198,8 @@
+ 
+ 
+         }
++    }
+ 
+ 
+-    }
+ }
++
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"PLATFORM\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"1.8\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/gradle.xml	(revision e8e7e9bb5dfccc05a757ff25fa71be417473dc44)
++++ .idea/gradle.xml	(date 1602751710042)
+@@ -15,6 +15,7 @@
+           </set>
+         </option>
+         <option name="resolveModulePerSourceSet" value="false" />
++        <option name="useQualifiedModuleNames" value="true" />
+       </GradleProjectSettings>
+     </option>
+   </component>
+Index: app/src/main/res/layout/load_more.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/load_more.xml	(date 1601194248807)
++++ app/src/main/res/layout/load_more.xml	(date 1601194248807)
+@@ -0,0 +1,16 @@
++<?xml version="1.0" encoding="utf-8"?>
++<layout
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    >
++    <FrameLayout
++        android:layout_width="match_parent"
++        android:layout_height="45dp">
++        <ProgressBar
++            android:id="@+id/progBar"
++            android:layout_width="35dp"
++            android:layout_height="35dp"
++            android:layout_gravity="center"
++            />
++    </FrameLayout>
++</layout>
++
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/compiler.xml	(date 1602751710026)
++++ .idea/compiler.xml	(date 1602751710026)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <bytecodeTargetLevel target="1.8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_8\" project-jdk-name=\"JDK\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision e8e7e9bb5dfccc05a757ff25fa71be417473dc44)
++++ .idea/misc.xml	(date 1602751709948)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="JDK" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">

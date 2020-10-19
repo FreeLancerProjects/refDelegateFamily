@@ -205,5 +205,6 @@
     <string name="canceled">Canceled</string>
     <string name="Previous">Back</string>
     <string name="Next">Next</string>
+    <string name="you_must_subscribe_to_get_orders">You Must Subscribe To Get Orders</string>
 
 </resources>

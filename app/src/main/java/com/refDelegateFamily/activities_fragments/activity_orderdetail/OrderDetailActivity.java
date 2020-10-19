@@ -28,6 +28,7 @@ import com.refDelegateFamily.databinding.ActivityOrderDetailBinding;
 import com.refDelegateFamily.interfaces.Listeners;
 import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.ChatUserModel;
+import com.refDelegateFamily.models.NotFireModel;
 import com.refDelegateFamily.models.OrderModel;
 import com.refDelegateFamily.models.ProductModel;
 import com.refDelegateFamily.models.UserModel;
@@ -35,6 +36,10 @@ import com.refDelegateFamily.preferences.Preferences;
 import com.refDelegateFamily.remote.Api;
 import com.refDelegateFamily.share.Common;
 import com.refDelegateFamily.tags.Tags;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -70,11 +75,15 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_order_detail);
         getDataFromIntent();
+        preferences.create_update_orderUserData(this, orderModel.getId() + "");
+
         initView();
         getOrderDetials();
     }
 
     private void initView() {
+        EventBus.getDefault().register(this);
+
         imagePopup = new ImagePopup(this);
         imagePopup.setFullScreen(true);
         imagePopup.setBackgroundColor(Color.BLACK);  // Optional
@@ -317,5 +326,18 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
     @Override
     public void back() {
         finish();
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void listenToNewMessage(NotFireModel notFireModel) {
+        getOrderDetials();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+        preferences.clearorder(this);
     }
 }

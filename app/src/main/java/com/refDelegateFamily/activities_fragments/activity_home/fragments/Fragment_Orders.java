@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
+import com.refDelegateFamily.activities_fragments.activity_home.activity_previous_order.PreviousOrderActivity;
+import com.refDelegateFamily.activities_fragments.activity_subscription.SubscriptionActivity;
 import com.refDelegateFamily.adapters.OrderAdapter;
 import com.refDelegateFamily.databinding.FragmentOrdersBinding;
 import com.refDelegateFamily.models.OrderModel;
@@ -41,6 +43,7 @@ public class Fragment_Orders extends Fragment {
     private OrderAdapter orderAdapter;
     private List<OrderModel.Data> oDataList;
     private UserModel userModel;
+
     public static Fragment_Orders newInstance() {
         return new Fragment_Orders();
     }
@@ -60,13 +63,24 @@ public class Fragment_Orders extends Fragment {
     }
 
     private void initView() {
-        oDataList=new ArrayList<>();
+        oDataList = new ArrayList<>();
         activity = (HomeActivity) getActivity();
         preferences = Preferences.newInstance();
-        userModel=preferences.getUserData(activity);
+        userModel = preferences.getUserData(activity);
+        if (userModel != null && userModel.getData().getPackage_finished_at() == null) {
+            binding.tvNoData.setVisibility(View.VISIBLE);
+        }
+        binding.tvNoData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, SubscriptionActivity.class);
+                intent.putExtra("data", preferences.getUserData(activity));
+                startActivity(intent);
+            }
+        });
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        orderAdapter=new OrderAdapter(oDataList,activity);
+        orderAdapter = new OrderAdapter(oDataList, activity);
         binding.recViewOrders.setAdapter(orderAdapter);
         binding.recViewOrders.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
@@ -92,7 +106,7 @@ public class Fragment_Orders extends Fragment {
             @Override
             public void onFailure(Call<OrderModel> call, Throwable t) {
                 binding.progBarOrders.setVisibility(View.GONE);
-                Log.e("Fragment_Orders: ",t.getMessage());
+                Log.e("Fragment_Orders: ", t.getMessage());
             }
         });
 
