@@ -71,7 +71,9 @@ public class HomeActivity extends AppCompatActivity {
             displayFragmentOrder();
         }
 
+
     }
+
 
     private void initView() {
         fragmentManager = getSupportFragmentManager();
@@ -81,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
 
-        if (userModel!=null&&userModel.getData().getNotification_status().equals("on")) {
+        if (userModel != null && userModel.getData().getNotification_status().equals("on")) {
             binding.switchBtn.setChecked(true);
         } else {
             binding.switchBtn.setChecked(false);
@@ -405,10 +407,11 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            if(off.equals("off")){
-                            Toast.makeText(HomeActivity.this, getResources().getString(R.string.notifications)+"   "+getResources().getString(R.string.off), Toast.LENGTH_SHORT).show();}
-                            else {
-                                Toast.makeText(HomeActivity.this, getResources().getString(R.string.notifications)+"  "+getResources().getString(R.string.on), Toast.LENGTH_SHORT).show();}
+                            if (off.equals("off")) {
+                                Toast.makeText(HomeActivity.this, getResources().getString(R.string.notifications) + "   " + getResources().getString(R.string.off), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(HomeActivity.this, getResources().getString(R.string.notifications) + "  " + getResources().getString(R.string.on), Toast.LENGTH_SHORT).show();
+                            }
 
 
                         } else {
@@ -459,7 +462,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        if(fragment_orders!=null&&fragment_orders.isVisible()){
+        if (fragment_orders != null && fragment_orders.isVisible()) {
             fragment_orders.getOrders();
         }
     }

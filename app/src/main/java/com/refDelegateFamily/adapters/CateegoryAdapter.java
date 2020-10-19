@@ -51,7 +51,7 @@ public class CateegoryAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         @SuppressLint("ViewHolder") SpinnerCategoryRowBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.spinner_category_row,viewGroup,false);
 
-       binding.setData(data.get(i).getCar_model());
+       binding.setData(data.get(i).getTitle());
 
         return binding.getRoot();
     }

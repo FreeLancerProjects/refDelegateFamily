@@ -12,22 +12,22 @@ public class MainCategoryModel implements Serializable {
 
     public static class Data implements Serializable {
         private int id;
-        private String car_model;
+        private String title;
 
         public int getId() {
             return id;
         }
 
-        public String getCar_model() {
-            return car_model;
+        public String getTitle() {
+            return title;
         }
 
         public void setId(int id) {
             this.id = id;
         }
 
-        public void setCar_model(String car_model) {
-            this.car_model = car_model;
+        public void setTitle(String title) {
+            this.title = title;
         }
     }
 

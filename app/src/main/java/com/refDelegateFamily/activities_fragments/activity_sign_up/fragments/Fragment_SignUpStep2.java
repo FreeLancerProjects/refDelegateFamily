@@ -95,7 +95,7 @@ public class Fragment_SignUpStep2 extends Fragment {
 
         categoryModel = new MainCategoryModel.Data();
         categoryModel.setId(0);
-        categoryModel.setCar_model(getString(R.string.Choose));
+        categoryModel.setTitle(getString(R.string.Choose));
         categoryList.add(categoryModel);
 
         binding.spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
