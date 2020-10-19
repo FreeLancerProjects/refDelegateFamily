@@ -10,6 +10,7 @@ public class PlaceGeocodeData implements Serializable {
     public List<Geocode> getResults() {
         return results;
     }
+
     public class Geocode implements Serializable
     {
         private String formatted_address;

@@ -204,4 +204,6 @@
     <string name="buy">إشترك</string>
     <string name="canceled">تم الإلغاء</string>
     <string name="you_must_subscribe_to_get_orders">يجب ان تشترك لياتيك الطلبات</string>
+    <string name="ch_car_type">اختر نوع السياره</string>
+    <string name="Choose">اختر</string>
 </resources>

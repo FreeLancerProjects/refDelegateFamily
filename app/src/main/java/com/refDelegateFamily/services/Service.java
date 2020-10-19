@@ -1,6 +1,7 @@
 package com.refDelegateFamily.services;
 
 
+import com.refDelegateFamily.models.MainCategoryModel;
 import com.refDelegateFamily.models.MessageDataModel;
 import com.refDelegateFamily.models.MessageModel;
 import com.refDelegateFamily.models.NearbyStoreDataModel;
@@ -272,4 +273,7 @@ public interface Service {
 
 
     );
+    @GET("api/Get-cars")
+    Call<MainCategoryModel> getMainCategory(@Query("pagination_status")String pagination_status);
+
 }
