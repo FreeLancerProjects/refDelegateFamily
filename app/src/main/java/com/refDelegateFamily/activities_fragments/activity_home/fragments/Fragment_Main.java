@@ -60,7 +60,6 @@ public class Fragment_Main extends Fragment {
 
 
         binding.addBtn.setOnClickListener(View -> {
-
             NavigateToAddOfferACtivity();
         });
 
