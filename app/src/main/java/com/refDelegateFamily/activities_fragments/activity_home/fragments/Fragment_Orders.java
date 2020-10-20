@@ -113,16 +113,16 @@ public class Fragment_Orders extends Fragment {
 
 
     }
-public void ChangeStauts(){
-    userModel = preferences.getUserData(activity);
-    if (userModel != null && userModel.getData().getPackage_finished_at() == null) {
-        binding.tvNoData.setVisibility(View.VISIBLE);
-        binding.btnBuy.setVisibility(View.VISIBLE);
 
+    public void ChangeStauts() {
+        userModel = preferences.getUserData(activity);
+        if (userModel != null && userModel.getData().getPackage_finished_at() == null) {
+            binding.tvNoData.setVisibility(View.VISIBLE);
+            binding.btnBuy.setVisibility(View.VISIBLE);
+
+        } else {
+            binding.tvNoData.setVisibility(View.GONE);
+        }
     }
-    else {
-        binding.tvNoData.setVisibility(View.GONE);
-    }
-}
 
 }
