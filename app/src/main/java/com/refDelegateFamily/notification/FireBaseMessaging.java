@@ -57,7 +57,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
         }
 
         if (getSession().equals(Tags.session_login)) {
-            //   Log.e("sllslslls", "lslslsls");
+               Log.e("sllslslls", "lslslsls");
             if (map.get("to_user_id") != null) {
                 //     Log.e("sllslslls", "lslslsls");
 
@@ -67,7 +67,8 @@ public class FireBaseMessaging extends FirebaseMessagingService {
 
                     manageNotification(map);
                 }
-            } else {
+            }
+            else {
                 manageNotification(map);
             }
         }
@@ -136,7 +137,8 @@ public class FireBaseMessaging extends FirebaseMessagingService {
 
             }
 
-        } else if (not_type.equals("general_notification")) {
+        }
+        else if (not_type.equals("driver_status")) {
 
             String title = map.get("title");
             String body = map.get("body");
@@ -237,7 +239,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
         Intent intent = null;
 
         intent = new Intent(this, OrderDetailActivity.class);
-        OrderModel.Data orderModel=new OrderModel.Data();
+        OrderModel.Data orderModel = new OrderModel.Data();
         orderModel.setId(Integer.parseInt(order_id));
 
         intent.putExtra("DATA", orderModel);
@@ -409,7 +411,8 @@ public class FireBaseMessaging extends FirebaseMessagingService {
 
             }
 
-        } else if (not_type.equals("general_notification")) {
+        }
+        else if (not_type.equals("driver_status")) {
 
             String title = map.get("title");
             String body = map.get("body");
@@ -462,7 +465,8 @@ public class FireBaseMessaging extends FirebaseMessagingService {
             }
 
 
-        } else if (not_type.equals("order")) {
+        }
+        else if (not_type.equals("order")) {
 
             String title = map.get("title");
             String body = map.get("message");
@@ -517,7 +521,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
         Intent intent = null;
 
         intent = new Intent(this, OrderDetailActivity.class);
-        OrderModel.Data orderModel=new OrderModel.Data();
+        OrderModel.Data orderModel = new OrderModel.Data();
         orderModel.setId(Integer.parseInt(order_id));
 
         intent.putExtra("DATA", orderModel);

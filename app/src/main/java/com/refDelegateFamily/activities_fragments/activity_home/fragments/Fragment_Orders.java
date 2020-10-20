@@ -69,8 +69,9 @@ public class Fragment_Orders extends Fragment {
         userModel = preferences.getUserData(activity);
         if (userModel != null && userModel.getData().getPackage_finished_at() == null) {
             binding.tvNoData.setVisibility(View.VISIBLE);
+            binding.btnBuy.setVisibility(View.VISIBLE);
         }
-        binding.tvNoData.setOnClickListener(new View.OnClickListener() {
+        binding.btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, SubscriptionActivity.class);
@@ -112,6 +113,16 @@ public class Fragment_Orders extends Fragment {
 
 
     }
+public void ChangeStauts(){
+    userModel = preferences.getUserData(activity);
+    if (userModel != null && userModel.getData().getPackage_finished_at() == null) {
+        binding.tvNoData.setVisibility(View.VISIBLE);
+        binding.btnBuy.setVisibility(View.VISIBLE);
 
+    }
+    else {
+        binding.tvNoData.setVisibility(View.GONE);
+    }
+}
 
 }

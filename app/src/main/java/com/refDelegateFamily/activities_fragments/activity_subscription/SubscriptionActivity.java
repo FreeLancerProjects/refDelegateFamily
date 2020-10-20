@@ -196,7 +196,7 @@ public class SubscriptionActivity extends AppCompatActivity implements Listeners
             if (resultCode == RESULT_OK) {
                 Toast.makeText(this, getString(R.string.suc), Toast.LENGTH_SHORT).show();
             } else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, R.string.canceled, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, R.string.canceled, Toast.LENGTH_SHORT).show();
 
             }
         }

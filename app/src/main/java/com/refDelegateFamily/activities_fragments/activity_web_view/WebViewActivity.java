@@ -15,12 +15,18 @@ import androidx.databinding.DataBindingUtil;
 
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.databinding.ActivityWebViewBinding;
+import com.refDelegateFamily.interfaces.Listeners;
 import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.PackageResponse;
 
-public class WebViewActivity extends AppCompatActivity {
+import java.util.Locale;
+
+import io.paperdb.Paper;
+
+public class WebViewActivity extends AppCompatActivity implements Listeners.BackListener {
     private ActivityWebViewBinding binding;
     private PackageResponse response;
+    private String lang;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -41,6 +47,10 @@ public class WebViewActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        Paper.init(this);
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        binding.setLang(lang);
+        binding.setBackListener(this);
         binding.webView.getSettings().setBuiltInZoomControls(false);
         binding.webView.getSettings().setSupportZoom(false);
         binding.webView.getSettings().setJavaScriptEnabled(true);
@@ -79,4 +89,14 @@ public class WebViewActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void back() {
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        back();
+    }
 }

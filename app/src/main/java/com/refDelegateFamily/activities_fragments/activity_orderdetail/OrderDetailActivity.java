@@ -111,18 +111,7 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         binding.recview.setAdapter(image_adapter);
 
         // Log.e("statussss:", orderModel.getStatus());
-        if (orderModel.getStatus().equals("new") || orderModel.getStatus().equals("family_end_prepare_order")) {
 
-            binding.imgChat.setVisibility(View.VISIBLE);
-            binding.imgCall.setVisibility(View.VISIBLE);
-            binding.linearBtn.setVisibility(View.VISIBLE);
-            binding.viewStatusBtn.setVisibility(View.GONE);
-        } else {
-            binding.imgChat.setVisibility(View.GONE);
-            binding.imgCall.setVisibility(View.GONE);
-            binding.linearBtn.setVisibility(View.GONE);
-            binding.viewStatusBtn.setVisibility(View.VISIBLE);
-        }
 
 
         binding.imgChat.setOnClickListener(view -> {
@@ -322,6 +311,18 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
     private void updatedata(OrderModel body) {
         this.orderModel=body.getOrder();
         binding.setModel(body.getOrder());
+        if (orderModel.getStatus().equals("new") || orderModel.getStatus().equals("family_end_prepare_order")) {
+
+            binding.imgChat.setVisibility(View.VISIBLE);
+            binding.imgCall.setVisibility(View.VISIBLE);
+            binding.linearBtn.setVisibility(View.VISIBLE);
+            binding.viewStatusBtn.setVisibility(View.GONE);
+        } else {
+            binding.imgChat.setVisibility(View.GONE);
+            binding.imgCall.setVisibility(View.GONE);
+            binding.linearBtn.setVisibility(View.GONE);
+            binding.viewStatusBtn.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

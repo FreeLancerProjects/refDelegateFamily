@@ -285,11 +285,12 @@ public class Fragment_SignUpStep1 extends Fragment implements OnMapReadyCallback
             CheckPermission();
 
             mMap.setOnMapClickListener(latLng -> {
+                if(marker!=null){
                 marker.setPosition(latLng);
                 lat = latLng.latitude;
                 lng = latLng.longitude;
                 getGeoData(lat, lng);
-            });
+            }});
 
             fragmentMapTouchListener.setListener(() -> binding.nested.requestDisallowInterceptTouchEvent(true));
 

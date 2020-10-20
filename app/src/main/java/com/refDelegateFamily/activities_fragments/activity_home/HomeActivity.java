@@ -1,5 +1,6 @@
 package com.refDelegateFamily.activities_fragments.activity_home;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.UserModel;
 import com.refDelegateFamily.preferences.Preferences;
 import com.refDelegateFamily.remote.Api;
+import com.refDelegateFamily.share.Common;
 import com.refDelegateFamily.tags.Tags;
 import com.suke.widget.SwitchButton;
 
@@ -216,6 +218,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
+
     private void updateToken() {
         FirebaseInstanceId.getInstance()
                 .getInstanceId()
@@ -413,7 +416,7 @@ public class HomeActivity extends AppCompatActivity {
                                 Toast.makeText(HomeActivity.this, getResources().getString(R.string.notifications) + "  " + getResources().getString(R.string.on), Toast.LENGTH_SHORT).show();
                             }
 
-
+                            getProfile();
                         } else {
                             try {
                                 Log.e("mmmmmmmmmm", response.errorBody().string());
@@ -462,8 +465,55 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+        getProfile();
+
         if (fragment_orders != null && fragment_orders.isVisible()) {
+            fragment_orders.ChangeStauts();
             fragment_orders.getOrders();
         }
+    }
+
+
+    private void getProfile() {
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+
+        Api.getService(Tags.base_url).getProfile("Bearer " + userModel.getData().getToken(), userModel.getData().getId())
+                .enqueue(new Callback<UserModel>() {
+                    @Override
+                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful() && response.body() != null) {
+                            preferences.create_update_userdata(HomeActivity.this, response.body());
+
+                            // binding.setModel(userModel);
+                        } else {
+
+                            try {
+                                Log.e("sllslslsl",response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            if (response.code() == 500) {
+                                Toast.makeText(HomeActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            } else if (response.code() == 401) {
+                                try {
+                                    Log.e("errorCode:", response.code() + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                Toast.makeText(HomeActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserModel> call, Throwable t) {
+                        dialog.dismiss();
+                        Log.e("error Profile", t.getMessage());
+                    }
+                });
     }
 }
