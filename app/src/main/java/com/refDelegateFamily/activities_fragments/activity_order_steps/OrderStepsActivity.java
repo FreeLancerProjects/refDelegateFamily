@@ -268,7 +268,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
         binding.setModel(body.getOrder());
         orderModel=body.getOrder();
         if (body.getOrder().getStatus().equals("driver_accepted_order")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.tvOrderReady.setVisibility(View.VISIBLE);
             binding.tvOrderReady2.setVisibility(View.GONE);
             binding.tvOrderReady3.setVisibility(View.GONE);
@@ -277,8 +277,9 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
 
         }
         else if (body.getOrder().getStatus().equals("driver_finished_collect_order")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
+            binding.image2.setColorFilter(getResources().getColor(R.color.white));
+
             binding.tvOrderReady.setVisibility(View.GONE);
             binding.tvOrderReady2.setVisibility(View.VISIBLE);
             binding.tvOrderReady3.setVisibility(View.GONE);
@@ -291,9 +292,10 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
 
         }
         else if (body.getOrder().getStatus().equals("driver_in_way")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
+            binding.image2.setColorFilter(getResources().getColor(R.color.white));
+            binding.image3.setColorFilter(getResources().getColor(R.color.white));
+
             binding.tvOrderReady.setVisibility(View.GONE);
             binding.tvOrderReady2.setVisibility(View.GONE);
             binding.tvOrderReady3.setVisibility(View.VISIBLE);
@@ -307,10 +309,11 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
 
         }
         else if (body.getOrder().getStatus().equals("driver_give_order_to_client")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
+            binding.image2.setColorFilter(getResources().getColor(R.color.white));
+            binding.image3.setColorFilter(getResources().getColor(R.color.white));
+            binding.image5.setColorFilter(getResources().getColor(R.color.white));
+
             binding.tvOrderReady.setVisibility(View.GONE);
             binding.tvOrderReady2.setVisibility(View.GONE);
             binding.tvOrderReady3.setVisibility(View.GONE);
@@ -322,6 +325,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
             binding.tv2.setTextColor(getResources().getColor(R.color.black));
             binding.tv3.setTextColor(getResources().getColor(R.color.black));
             binding.tv5.setTextColor(getResources().getColor(R.color.black));
+            binding.imgChat.setVisibility(View.GONE);
 
         }
 

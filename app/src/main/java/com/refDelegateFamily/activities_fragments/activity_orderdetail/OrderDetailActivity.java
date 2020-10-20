@@ -311,15 +311,15 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
     private void updatedata(OrderModel body) {
         this.orderModel=body.getOrder();
         binding.setModel(body.getOrder());
-        if (orderModel.getStatus().equals("new") || orderModel.getStatus().equals("family_end_prepare_order")) {
+        if (orderModel.getStatus().equals("new") || orderModel.getStatus().equals("driver_give_order_to_client")) {
 
-            binding.imgChat.setVisibility(View.VISIBLE);
-            binding.imgCall.setVisibility(View.VISIBLE);
+            binding.imgChat.setVisibility(View.GONE);
+            binding.imgCall.setVisibility(View.GONE);
             binding.linearBtn.setVisibility(View.VISIBLE);
             binding.viewStatusBtn.setVisibility(View.GONE);
         } else {
-            binding.imgChat.setVisibility(View.GONE);
-            binding.imgCall.setVisibility(View.GONE);
+            binding.imgChat.setVisibility(View.VISIBLE);
+            binding.imgCall.setVisibility(View.VISIBLE);
             binding.linearBtn.setVisibility(View.GONE);
             binding.viewStatusBtn.setVisibility(View.VISIBLE);
         }
