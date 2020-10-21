@@ -73,6 +73,7 @@ public interface Service {
                               @Field("phone_token") String phone_token
     );
 
+    @GET("api/Get-my-notifications")
     Call<NotificationModel> getNotification(@Header("Authorization") String user_token,
                                             @Query("user_id") int user_id);
 
@@ -129,23 +130,23 @@ public interface Service {
     @Multipart
     @POST("api/update_drive_register")
     Call<UserModel> updateProfileWithImage(
-                                           @Header("Authorization") String user_token,
-                                           @Part("id") RequestBody id,
-                                           @Part MultipartBody.Part logo,
-                                           @Part("name") RequestBody name,
-                                           @Part("email") RequestBody email,
-                                           @Part("phone_code") RequestBody phone_code,
-                                           @Part("phone") RequestBody phone,
-                                           @Part("address") RequestBody address,
-                                           @Part("user_type") RequestBody user_type,
-                                           @Part("software_type") RequestBody software_type,
-                                           @Part("account_bank_number") RequestBody account_bank_number,
-                                           @Part("ipad_number") RequestBody ipad_number,
-                                           @Part("nationality_title") RequestBody nationality_title,
-                                           @Part("card_id") RequestBody card_id,
-                                           @Part("latitude") RequestBody latitude,
-                                           @Part("longitude") RequestBody longitude,
-                                           @Part("address_registered_for_bank_account") RequestBody address_registered_for_bank_account
+            @Header("Authorization") String user_token,
+            @Part("id") RequestBody id,
+            @Part MultipartBody.Part logo,
+            @Part("name") RequestBody name,
+            @Part("email") RequestBody email,
+            @Part("phone_code") RequestBody phone_code,
+            @Part("phone") RequestBody phone,
+            @Part("address") RequestBody address,
+            @Part("user_type") RequestBody user_type,
+            @Part("software_type") RequestBody software_type,
+            @Part("account_bank_number") RequestBody account_bank_number,
+            @Part("ipad_number") RequestBody ipad_number,
+            @Part("nationality_title") RequestBody nationality_title,
+            @Part("card_id") RequestBody card_id,
+            @Part("latitude") RequestBody latitude,
+            @Part("longitude") RequestBody longitude,
+            @Part("address_registered_for_bank_account") RequestBody address_registered_for_bank_account
     );
 
     @FormUrlEncoded
@@ -278,8 +279,9 @@ public interface Service {
 
 
     );
+
     @GET("api/Get-cars")
-    Call<MainCategoryModel> getMainCategory(@Query("pagination_status")String pagination_status);
+    Call<MainCategoryModel> getMainCategory(@Query("pagination_status") String pagination_status);
 
     @FormUrlEncoded
     @POST("api/firebase-tokens")
