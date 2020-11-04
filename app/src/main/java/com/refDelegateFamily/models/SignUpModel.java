@@ -244,8 +244,8 @@ public class SignUpModel extends BaseObservable implements Serializable {
         setIpad_number("");
         setSoftware_type("android");
         setUser_type("driver");
-        setLatitude("0.0");
-        setLongitude("0.0");
+      //  setLatitude("0.0");
+        //setLongitude("0.0");
         setYear_of_manufacture("");
         setCard_id("");
         setNationality_title("");
