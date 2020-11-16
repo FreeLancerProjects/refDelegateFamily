@@ -124,6 +124,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements Listener
         setDataModel();
         binding.setModel(signUpModel);
 
+
         updateUI();
 
 
@@ -133,6 +134,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements Listener
 
         });
 
+        binding.edtIpan.setText(userModel.getData().getIpad_number().substring(2));
         binding.imageSearch.setOnClickListener(view ->
         {
             String address = binding.edtAddress.getText().toString().trim();
@@ -171,7 +173,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements Listener
                 .updateProfileWithoutImage("Bearer " + userModel.getData().getToken(), userModel.getData().getId(), signUpModel.getName(),
                         signUpModel.getEmail(), signUpModel.getPhone_code(), signUpModel.getPhone(),
                         signUpModel.getAddress(), "driver", "android", signUpModel.getAccount_bank_number(),
-                        signUpModel.getIpad_number(), signUpModel.getNationality_title(), signUpModel.getCard_id(), signUpModel.getLatitude(), signUpModel.getLongitude(), signUpModel.getAddress())
+                        userModel.getData().getIpad_number().substring(2), signUpModel.getNationality_title(), signUpModel.getCard_id(), signUpModel.getLatitude(), signUpModel.getLongitude(), signUpModel.getAddress())
                 .enqueue(new Callback<UserModel>() {
                     @Override
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -255,7 +257,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements Listener
         RequestBody user_type = Common.getRequestBodyText(signUpModel.getUser_type());
         RequestBody software_type = Common.getRequestBodyText(signUpModel.getSoftware_type());
         RequestBody account_bank_number = Common.getRequestBodyText(signUpModel.getAccount_bank_number());
-        RequestBody ipad_number = Common.getRequestBodyText(signUpModel.getIpad_number());
+        RequestBody ipad_number = Common.getRequestBodyText(userModel.getData().getIpad_number().substring(2));
         RequestBody nationality_title = Common.getRequestBodyText(signUpModel.getNationality_title());
         RequestBody card_id = Common.getRequestBodyText(signUpModel.getCard_id());
         RequestBody latitude = Common.getRequestBodyText(signUpModel.getLatitude());

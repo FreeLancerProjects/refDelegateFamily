@@ -200,8 +200,12 @@ public class VerificationCodeActivity extends AppCompatActivity {
                         dialog.dismiss();
                         if (response.isSuccessful() && response.body() != null) {
                             Log.e("eeeeee", response.body().getData().getName());
-                            preferences.create_update_userdata(VerificationCodeActivity.this, response.body());
-                            navigateToHomeActivity();
+                            if (response.body().getData().getUser_type().equals("driver")){
+                                preferences.create_update_userdata(VerificationCodeActivity.this, response.body());
+                                navigateToHomeActivity();
+                            }else {
+                               // Toast.makeText(VerificationCodeActivity.this, getString(R.string.user_type_account_error)+response.body().getData().getUser_type(), Toast.LENGTH_SHORT).show();
+                            }
                         } else {
                             try {
                                 Log.e("mmmmmmmmmm", response.errorBody().string());

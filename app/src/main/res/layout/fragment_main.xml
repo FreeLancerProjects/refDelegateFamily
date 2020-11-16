@@ -38,7 +38,9 @@
                 android:scaleType="center"
                 android:src="@drawable/ic_add_2"
                 android:tint="@color/white"
-                ></com.google.android.material.floatingactionbutton.FloatingActionButton>
+                >
+
+            </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/nested"

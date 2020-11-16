@@ -161,6 +161,7 @@ public class SubscriptionActivity extends AppCompatActivity implements Listeners
                                 Toast.makeText(SubscriptionActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
                             } else {
                                 Log.e("ERROR", response.message() + "");
+                                Log.e("ERROR", response.code() + "");
 
                                 Toast.makeText(SubscriptionActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             }
