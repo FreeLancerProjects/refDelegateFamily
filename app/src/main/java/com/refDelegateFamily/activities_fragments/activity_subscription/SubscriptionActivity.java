@@ -85,7 +85,7 @@ public class SubscriptionActivity extends AppCompatActivity implements Listeners
     }
 
     private void getPackage() {
-        Api.getService(base_url).getSubscription()
+        Api.getService(base_url).getSubscription("driver")
                 .enqueue(new Callback<SubscriptionDataModel>() {
                     @Override
                     public void onResponse(Call<SubscriptionDataModel> call, Response<SubscriptionDataModel> response) {

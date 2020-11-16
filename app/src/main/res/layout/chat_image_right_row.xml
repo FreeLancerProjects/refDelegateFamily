@@ -44,13 +44,15 @@
 
                 <ImageView
                     android:id="@+id/tv_message_content"
-                    image="@{messagemodel.image}"
+                    image="@{messagemodel.file_link}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
 
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
+                    android:minHeight="100dp"
+                    android:minWidth="100dp"
                     android:maxWidth="200dp"
                     android:maxHeight="200dp" />
 

@@ -268,7 +268,7 @@ public interface Service {
             );
 
     @GET("api/Get-Packages")
-    Call<SubscriptionDataModel> getSubscription();
+    Call<SubscriptionDataModel> getSubscription(@Query("type") String type);
 
 
     @FormUrlEncoded
