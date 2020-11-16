@@ -18,6 +18,9 @@
 
     </data>
 
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
@@ -49,7 +52,7 @@
                 android:layout_gravity="end|bottom"
                 android:background="@drawable/circle_bg"
                 android:elevation="10dp"
-
+                android:visibility="gone"
                 android:padding="10dp"
                 android:src="@drawable/ic_edit"
                 android:tint="@color/white" />
@@ -164,5 +167,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+</ScrollView>
 
 </layout>

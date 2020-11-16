@@ -110,6 +110,7 @@
                                 android:layout_width="130dp"
                                 android:layout_height="130dp"
                                 android:elevation="5dp"
+                                image="@{model.logo}"
                                 android:src="@drawable/chef" />
 
                             <ImageView
@@ -216,6 +217,7 @@
 
 
                             <EditText
+                                android:id="@+id/edtIpan"
                                 error="@{model.error_ipad_number}"
                                 android:layout_width="match_parent"
                                 android:layout_height="45dp"
@@ -226,7 +228,6 @@
                                 android:maxLength="22"
                                 android:paddingEnd="10dp"
                                 android:singleLine="true"
-                                android:text="@={model.ipad_number}"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/gray6"
                                 android:textSize="15sp" />

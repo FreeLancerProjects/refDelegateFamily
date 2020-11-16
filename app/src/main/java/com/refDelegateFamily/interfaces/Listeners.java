@@ -48,6 +48,8 @@ public interface Listeners {
         void onTone();
         void about();
         void logout();
+        void share();
+
 
     }
 }

@@ -261,6 +261,14 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
         }
     }
 
+    @Override
+    public void share() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT,"https://play.google.com/store/apps/details?id="+activity.getPackageName());
+        startActivity(intent);
+    }
+
     private void navigateToSignInActivity() {
 
         Intent intent = new Intent(activity, LoginActivity.class);

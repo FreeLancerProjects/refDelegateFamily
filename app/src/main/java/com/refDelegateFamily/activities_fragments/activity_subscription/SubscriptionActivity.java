@@ -85,7 +85,7 @@ public class SubscriptionActivity extends AppCompatActivity implements Listeners
     }
 
     private void getPackage() {
-        Api.getService(base_url).getSubscription()
+        Api.getService(base_url).getSubscription("driver")
                 .enqueue(new Callback<SubscriptionDataModel>() {
                     @Override
                     public void onResponse(Call<SubscriptionDataModel> call, Response<SubscriptionDataModel> response) {
@@ -161,6 +161,7 @@ public class SubscriptionActivity extends AppCompatActivity implements Listeners
                                 Toast.makeText(SubscriptionActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
                             } else {
                                 Log.e("ERROR", response.message() + "");
+                                Log.e("ERROR", response.code() + "");
 
                                 Toast.makeText(SubscriptionActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             }
