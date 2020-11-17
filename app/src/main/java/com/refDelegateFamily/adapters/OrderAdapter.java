@@ -64,7 +64,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
 
         holder.itemView.setOnClickListener(view -> {
             if (context instanceof HomeActivity || context instanceof NewOrderActivity) {
+
                 Intent intent = new Intent(context, OrderDetailActivity.class);
+                if(context instanceof HomeActivity){
+                    HomeActivity homeActivity=(HomeActivity)context;
+                    intent.putExtra("lat",homeActivity.user_lat);
+                    intent.putExtra("lng",homeActivity.user_lng);
+                }
                 intent.putExtra("DATA", orderlist.get(position));
                 context.startActivity(intent);
                 //  ((AppCompatActivity) context).finish();}

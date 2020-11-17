@@ -23,6 +23,8 @@ public class UserModel implements Serializable {
         private String city;
         private String package_finished_at;
         private String phone_code;
+        private String show_phone_status;
+
         private String phone;
         private String image;
         private String logo;
@@ -70,6 +72,10 @@ public class UserModel implements Serializable {
 
         public String getPhone_code() {
             return phone_code;
+        }
+
+        public String getShow_phone_status() {
+            return show_phone_status;
         }
 
         public String getPhone() {

@@ -33,6 +33,8 @@ public class OrderModel implements Serializable {
         private String from_address;
         private String from_latitude;
         private String from_longitude;
+        private String to_latitude;
+        private String to_longitude;
         private String to_address;
         private String to_name;
         private String order_description;
@@ -111,6 +113,14 @@ public class OrderModel implements Serializable {
 
         public String getFrom_longitude() {
             return from_longitude;
+        }
+
+        public String getTo_latitude() {
+            return to_latitude;
+        }
+
+        public String getTo_longitude() {
+            return to_longitude;
         }
 
         public String getTo_address() {

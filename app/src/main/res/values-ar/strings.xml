@@ -209,4 +209,17 @@
     <string name="ch_car_type">اختر نوع السياره</string>
     <string name="Choose">اختر</string>
     <string name="subscribe_now">أشترك الأن</string>
+    <string name="getting_location">تحديد موقعك...</string>
+    <string name="distance_between_me_and_the_shipping_site">المسافة بينى وموقع الشحن</string>
+    <string name="the_distance_between_me_and_the_delivery_site">المسافة بينى وموقع التسليم</string>
+    <string name="km">كم</string>
+    <string name="contact_us">اتصل بنا</string>
+    <string name="users_feedback">ملاحظات المستخدمين</string>
+    <string name="subject">الموضوع</string>
+    <string name="message">الرسالة</string>
+    <string name="contactus">إتصل بنا</string>
+    <string name="no_feedback_to_show">لا يوجد تعليقات لعرضها</string>
+    <string name="show_phone_number">إظهار رقم الجوال</string>
+    <string name="send">ارسال</string>
+
 </resources>

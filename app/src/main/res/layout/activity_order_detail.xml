@@ -12,6 +12,7 @@
         <variable
             name="lang"
             type="String" />
+
         <variable
             name="backListener"
             type="com.refDelegateFamily.interfaces.Listeners.BackListener" />
@@ -347,6 +348,65 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="10dp"
+                                android:text="@string/distance_between_me_and_the_shipping_site"
+                                android:textColor="@color/gray12"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tvlocationship"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
+
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/white"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:text="@string/the_distance_between_me_and_the_delivery_site"
+                                android:textColor="@color/gray12"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tvlocationarrive"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/white"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
                                 android:text="@string/hours_num"
                                 android:textColor="@color/gray12"
                                 android:textSize="14sp" />
@@ -366,12 +426,11 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
                             android:layout_marginEnd="10dp"
                             android:text="@{model.order_description}"
                             android:textColor="@color/gray12"
-                            android:textSize="14sp"
-                            android:layout_margin="5dp"
-                            />
+                            android:textSize="14sp" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recview"
@@ -379,6 +438,7 @@
                             android:layout_height="wrap_content">
 
                         </androidx.recyclerview.widget.RecyclerView>
+
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -421,10 +481,10 @@
                     android:background="@color/colorPrimary"
                     android:text="@string/view_status"
                     android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@+id/ll"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll"
 
 
                     />

@@ -166,6 +166,11 @@ public class SettingsActivity extends AppCompatActivity implements Listeners.Set
     }
 
     @Override
+    public void onFeedback() {
+
+    }
+
+    @Override
     public void logout() {
         if(preferences.getUserData(this)!=null){
             Intent intent=new Intent(SettingsActivity.this, LoginActivity.class);
@@ -181,6 +186,11 @@ public class SettingsActivity extends AppCompatActivity implements Listeners.Set
 
     @Override
     public void share() {
+
+    }
+
+    @Override
+    public void contactus() {
 
     }
 

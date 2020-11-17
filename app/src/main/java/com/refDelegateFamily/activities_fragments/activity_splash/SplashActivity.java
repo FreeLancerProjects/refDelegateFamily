@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
 import com.refDelegateFamily.activities_fragments.activity_login.LoginActivity;
+import com.refDelegateFamily.activities_fragments.activity_splash_loading.SplashLoadingActivity;
 import com.refDelegateFamily.databinding.ActivitySplashBinding;
 import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.UserModel;
@@ -60,7 +61,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
                     if (userModel!=null) {
-                        Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                        Intent intent = new Intent(SplashActivity.this, SplashLoadingActivity.class);
                         startActivity(intent);
                         finish();
                     } else {

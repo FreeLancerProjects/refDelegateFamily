@@ -57,6 +57,7 @@ public class HomeActivity extends AppCompatActivity {
     private UserModel userModel;
     private String lang;
     private String token;
+    public double user_lat = 0.0, user_lng = 0.0;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -68,6 +69,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        getDataFromIntent();
         initView();
         if (savedInstanceState == null) {
             displayFragmentOrder();
@@ -75,7 +77,12 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        user_lat = intent.getDoubleExtra("lat", 0.0);
+        user_lng = intent.getDoubleExtra("lng", 0.0);
 
+    }
 
     private void initView() {
         fragmentManager = getSupportFragmentManager();

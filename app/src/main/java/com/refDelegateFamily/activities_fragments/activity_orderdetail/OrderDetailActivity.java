@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -20,6 +22,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ceylonlabs.imageviewpopup.ImagePopup;
+import com.google.android.gms.common.util.MapUtils;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
 import com.refDelegateFamily.activities_fragments.chat_activity.ChatActivity;
@@ -64,6 +68,8 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
     private Intent intent;
     private static final int REQUEST_PHONE_CALL = 1;
     ImagePopup imagePopup;
+    public double user_lat = 0.0, user_lng = 0.0;
+
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -113,14 +119,13 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         // Log.e("statussss:", orderModel.getStatus());
 
 
-
         binding.imgChat.setOnClickListener(view -> {
 
 
-            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(),orderModel.getClient().getLogo(),orderModel.getClient().getId()+"",orderModel.getDriver_chat().getId());
+            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(), orderModel.getClient().getLogo(), orderModel.getClient().getId() + "", orderModel.getDriver_chat().getId());
             Intent intent = new Intent(this, ChatActivity.class);
-            intent.putExtra("chat_user_data",chatUserModel);
-            startActivityForResult(intent,1000);
+            intent.putExtra("chat_user_data", chatUserModel);
+            startActivityForResult(intent, 1000);
         });
 
         binding.imgCall.setOnClickListener(view -> {
@@ -213,11 +218,12 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
     }
 
 
-
     private void getDataFromIntent() {
         Intent intent = getIntent();
         if (intent != null) {
             orderModel = (OrderModel.Data) getIntent().getSerializableExtra("DATA");
+            user_lat = intent.getDoubleExtra("lat", 0.0);
+            user_lng = intent.getDoubleExtra("lng", 0.0);
         }
 
 
@@ -309,8 +315,16 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
     }
 
     private void updatedata(OrderModel body) {
-        this.orderModel=body.getOrder();
+        this.orderModel = body.getOrder();
         binding.setModel(body.getOrder());
+        float[] results = new float[1];
+        Location.distanceBetween(user_lat, user_lng,
+                Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()), results);
+        binding.tvlocationship.setText(results[0] + getResources().getString(R.string.km));
+        Location.distanceBetween(user_lat, user_lng,
+                Double.parseDouble(orderModel.getTo_latitude()), Double.parseDouble(orderModel.getTo_longitude()), results);
+        binding.tvlocationarrive.setText(results[0] + getResources().getString(R.string.km));
+
         if (orderModel.getStatus().equals("new") || orderModel.getStatus().equals("driver_give_order_to_client")) {
 
             binding.imgChat.setVisibility(View.GONE);
@@ -329,6 +343,7 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
     public void back() {
         finish();
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void listenToNewMessage(NotFireModel notFireModel) {
         getOrderDetials();

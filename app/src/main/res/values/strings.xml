@@ -209,5 +209,17 @@
     <string name="ch_car_type">Choose Car Type</string>
     <string name="Choose">choose</string>
     <string name="subscribe_now">Subscribe Now</string>
+    <string name="getting_location">Getting Location...</string>
+    <string name="distance_between_me_and_the_shipping_site">distance  me and  shipping :</string>
+    <string name="the_distance_between_me_and_the_delivery_site">distance  me and  delivery : </string>
+    <string name="km">Km</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="users_feedback">Users Feedback</string>
+    <string name="subject">Subject</string>
+    <string name="message">Message</string>
+    <string name="contactus">ContactUs</string>
+    <string name="no_feedback_to_show">No Feedback to show</string>
+    <string name="show_phone_number">Show Phone Number</string>
+    <string name="send">send</string>
 
 </resources>

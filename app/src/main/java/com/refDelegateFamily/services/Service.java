@@ -1,6 +1,7 @@
 package com.refDelegateFamily.services;
 
 
+import com.refDelegateFamily.models.FeedbackDataModel;
 import com.refDelegateFamily.models.MainCategoryModel;
 import com.refDelegateFamily.models.MessageDataModel;
 import com.refDelegateFamily.models.MessageModel;
@@ -296,5 +297,31 @@ public interface Service {
     @POST("api/drive_profile")
     Call<UserModel> getProfile(@Header("Authorization") String user_token,
                                @Field("id") int id
+    );
+    @FormUrlEncoded
+    @POST("api/contact-us")
+    Call<ResponseBody> contactUs(@Field("name") String name,
+                                 @Field("email") String email,
+                                 @Field("phone") String phone,
+                                 @Field("subject") String subject,
+                                 @Field("message") String message
+
+
+    );
+    @GET("api/get-rates")
+    Call<FeedbackDataModel> getFeedback(@Header("Authorization") String user_token,
+                                        @Query("user_id") int user_id,
+                                        @Query("page") int page,
+                                        @Query("pagination") String pagination,
+                                        @Query("limit_per_page") int limit_per_page
+
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/update-show-phone-status")
+    Call<UserModel> updatePhoneStatus(@Header("Authorization") String user_token,
+                                      @Field("user_id") int user_id,
+                                      @Field("show_phone_status") String status
     );
 }

@@ -10,7 +10,9 @@
         <variable
             name="actions"
             type="com.refDelegateFamily.interfaces.Listeners.SettingAction" />
-
+        <variable
+            name="model"
+            type="com.refDelegateFamily.models.UserModel" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -33,6 +35,43 @@
                 android:background="@color/white"
                 android:orientation="vertical"
                 >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:gravity="center_vertical"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:textSize="14sp"
+                        android:textColor="@color/gray11"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/show_phone_number"
+                        android:clickable="false"
+                        android:longClickable="false"
+
+                        />
+                    <Switch
+                        android:id="@+id/switchBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked='@{model.data.show_phone_status.equals("show")?true:false,default=true}'
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@drawable/small_rounded_stroke_gray"
+                    android:layerType="software" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -243,7 +282,82 @@
                     android:background="@drawable/small_rounded_stroke_gray"
                     android:layerType="software" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->actions.contactus()}"
 
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:textSize="14sp"
+                        android:textColor="@color/gray11"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/contact_us"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        />
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_right_arrow"
+                        android:tint="@color/gray5"
+                        android:padding="3dp"
+                        android:rotation='@{lang.equals("ar")?180:0}'
+                        />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/small_rounded_stroke_gray"
+                    android:layerType="software" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:gravity="center_vertical"
+                    android:onClick="@{()->actions.onFeedback()}"
+
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:textSize="14sp"
+                        android:textColor="@color/gray11"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/users_feedback"
+                        android:clickable="false"
+                        android:longClickable="false"
+                        />
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_right_arrow"
+                        android:tint="@color/gray5"
+                        android:padding="3dp"
+                        android:rotation='@{lang.equals("ar")?180:0}'
+                        />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@drawable/small_rounded_stroke_gray"
+                    android:layerType="software" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

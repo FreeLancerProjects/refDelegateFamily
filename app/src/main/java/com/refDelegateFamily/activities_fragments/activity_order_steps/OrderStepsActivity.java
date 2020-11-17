@@ -267,6 +267,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
     private void updatedata(OrderModel body) {
         binding.setModel(body.getOrder());
         orderModel=body.getOrder();
+        Log.e("dlldldl",orderModel.getStatus()+userModel.getData().getId()+" "+orderModel.getClient().getId());
         if (body.getOrder().getStatus().equals("driver_accepted_order")) {
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.tvOrderReady.setVisibility(View.VISIBLE);

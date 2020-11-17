@@ -3,53 +3,73 @@ package com.refDelegateFamily.interfaces;
 
 public interface Listeners {
 
-    interface SignUpListener{
+    interface SignUpListener {
 
         void openSheet();
+
         void closeSheet();
+
         void checkDataValid();
+
         void checkReadPermission();
+
         void checkCameraPermission();
 
     }
-    interface SkipListener
-    {
+
+    interface SkipListener {
         void skip();
     }
-    interface CreateAccountListener
-    {
+
+    interface CreateAccountListener {
         void createNewAccount();
     }
 
-    interface ShowCountryDialogListener
-    {
+    interface ShowCountryDialogListener {
         void showDialog();
     }
-    interface BackListener
-    {
+
+    interface BackListener {
         void back();
     }
-    interface LoginListener{
+
+    interface LoginListener {
         void validate();
+
         void showCountryDialog();
+
         void costumerApp();
+
         void familyApp();
     }
 
 
-    interface SettingAction{
+    interface SettingAction {
         void onSubscriptions();
+
         void onProfile();
+
         void onEditProfile();
+
         void onLanguageSetting();
+
         void onTerms();
+
         void onPrivacy();
+
         void onRate();
+
         void onTone();
+
         void about();
+
+        void onFeedback();
+
         void logout();
+
         void share();
 
+        void contactus();
 
     }
 }
