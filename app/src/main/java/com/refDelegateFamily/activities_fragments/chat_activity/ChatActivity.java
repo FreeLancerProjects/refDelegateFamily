@@ -18,6 +18,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,19 +42,23 @@ import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.ChatUserModel;
 import com.refDelegateFamily.models.MessageDataModel;
 import com.refDelegateFamily.models.MessageModel;
+import com.refDelegateFamily.models.OrderModel;
 import com.refDelegateFamily.models.UserModel;
 import com.refDelegateFamily.preferences.Preferences;
 import com.refDelegateFamily.remote.Api;
 import com.refDelegateFamily.share.Common;
 import com.refDelegateFamily.tags.Tags;
+import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 
@@ -78,6 +85,8 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     private ChatUserModel chatUserModel;
     private int current_page = 1;
     private boolean isLoading = false;
+    private int which_image_upload_selected;
+    private OrderModel orderModel;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -89,7 +98,9 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat);
         initView();
+        getOrder();
         getChatMessages();
+
 
     }
 
@@ -125,7 +136,10 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
             }
         });
 
-        binding.imagePhoto.setOnClickListener(view -> CreateImageAlertDialog());
+        binding.imagePhoto.setOnClickListener(view -> {
+            which_image_upload_selected = 0;
+            CreateImageAlertDialog();
+        });
         binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -146,6 +160,14 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                 }
             }
         });
+        binding.llBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                which_image_upload_selected = 1;
+                CreateImageAlertDialog();
+
+            }
+        });
     }
 
 
@@ -159,6 +181,116 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         }
     }
 
+    private void getOrder() {
+
+        final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .getorderdetials("Bearer " + userModel.getData().getToken(), chatUserModel.getOrder_id())
+                .enqueue(new Callback<OrderModel>() {
+                    @Override
+                    public void onResponse(Call<OrderModel> call, Response<OrderModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful() && response.body() != null) {
+                            update(response.body());
+
+
+                        } else {
+                            dialog.dismiss();
+                            try {
+                                Log.e("error_code", response.code() + "" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<OrderModel> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            Log.e("Error", t.getMessage());
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+
+    }
+
+    private void update(OrderModel body) {
+        this.orderModel = orderModel;
+        if (body.getOrder().getBill_step().equals("not_attach")) {
+            binding.llBill.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void Sendbiilattach(String msg) {
+        RequestBody from_user_id_part = Common.getRequestBodyText(userModel.getData().getId()+"");
+        RequestBody to_user_id_part = Common.getRequestBodyText(chatUserModel.getId());
+
+        RequestBody user_msg_part = Common.getRequestBodyText(msg);
+
+        RequestBody order_type_part = Common.getRequestBodyText(chatUserModel.getOrder_id()+"");
+
+        MultipartBody.Part image_part = Common.getMultiPart(this, url, "bill_image");
+
+        Api.getService(Tags.base_url)
+                .sendbillWithImage("Bearer " + userModel.getData().getToken(), from_user_id_part, to_user_id_part, user_msg_part, order_type_part, image_part)
+                .enqueue(new Callback<MessageModel>() {
+                    @Override
+                    public void onResponse(Call<MessageModel> call, Response<MessageModel> response) {
+
+                        Log.e("datttaa", response.body() + "_");
+                        binding.progBar.setVisibility(View.GONE);
+                        if (response.isSuccessful()) {
+                            binding.llBill.setVisibility(View.GONE);
+                            // chatUserModel.setBill_step("bill_attach");
+                            if (chat_adapter == null) {
+                                messagedatalist.add(response.body());
+                                chat_adapter = new Chat_Adapter(messagedatalist, userModel.getData().getId(), ChatActivity.this);
+                                binding.recView.setAdapter(chat_adapter);
+                                chat_adapter.notifyDataSetChanged();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        binding.recView.scrollToPosition(messagedatalist.size() - 1);
+
+                                    }
+                                }, 100);
+                            } else {
+                                messagedatalist.add(response.body());
+                                chat_adapter.notifyItemInserted(messagedatalist.size() - 1);
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        binding.recView.scrollToPosition(messagedatalist.size() - 1);
+
+                                    }
+                                }, 100);
+                            }
+                            getOrder();
+                        } else {
+
+                            try {
+                                Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<MessageModel> call, Throwable t) {
+                        try {
+                            Log.e("Error", t.getMessage());
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+
+    }
 
     private void checkdata() {
         String message = binding.edtMsgContent.getText().toString();
@@ -338,7 +470,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                 .enqueue(new Callback<MessageModel>() {
                     @Override
                     public void onResponse(Call<MessageModel> call, Response<MessageModel> response) {
-       //                 dialog.dismiss();
+                        //                 dialog.dismiss();
                         if (response.isSuccessful() && response.body() != null) {
                             //listener.onSuccess(response.body());
 
@@ -361,7 +493,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                     @Override
                     public void onFailure(Call<MessageModel> call, Throwable t) {
                         try {
-         //                   dialog.dismiss();
+                            //                   dialog.dismiss();
                             Toast.makeText(ChatActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
 
                         } catch (Exception e) {
@@ -381,7 +513,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                     .sendmessagetext("Bearer " + userModel.getData().getToken(), userModel.getData().getId() + "", chatUserModel.getId(), "text", chatUserModel.getRoom_id() + "", message).enqueue(new Callback<MessageModel>() {
                 @Override
                 public void onResponse(Call<MessageModel> call, Response<MessageModel> response) {
-        //            dialog.dismiss();
+                    //            dialog.dismiss();
                     if (response.isSuccessful()) {
 
                         Log.e("llll", response.toString());
@@ -403,7 +535,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
 
                 @Override
                 public void onFailure(Call<MessageModel> call, Throwable t) {
-          //          dialog.dismiss();
+                    //          dialog.dismiss();
                     try {
                         Toast.makeText(ChatActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                         Log.e("Error", t.getMessage());
@@ -432,17 +564,65 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
 
             url = getUriFromBitmap(bitmap);
-            sendmessageimage();
+            if (which_image_upload_selected == 1) {
+                CreateBillAlertDialog(url);
+
+            } else {
+                sendmessageimage();
+            }
 
 
         } else if (requestCode == IMG_REQ1 && resultCode == Activity.RESULT_OK && data != null) {
 
             url = data.getData();
-            sendmessageimage();
+            if (which_image_upload_selected == 1) {
+                CreateBillAlertDialog(url);
 
+            } else {
+                sendmessageimage();
 
+            }
         }
 
+    }
+    public void CreateBillAlertDialog(Uri uri) {
+        final android.app.AlertDialog dialog = new android.app.AlertDialog.Builder(this)
+                .setCancelable(true)
+                .create();
+
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_bill_photo, null);
+        ImageView image = view.findViewById(R.id.image);
+        final EditText edt_order_cost = view.findViewById(R.id.edt_order_cost);
+
+        File file = new File(Common.getImagePath(this, uri));
+        Picasso.get().load(file).fit().into(image);
+
+        Button btn_upload = view.findViewById(R.id.btn_upload);
+        btn_upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cost = edt_order_cost.getText().toString().trim();
+              //  Currency currency = Currency.getInstance(new Locale(lang, userModel.getData().ge()));
+                if (!TextUtils.isEmpty(cost)) {
+                    dialog.dismiss();
+                    Common.CloseKeyBoard(ChatActivity.this, edt_order_cost);
+
+                  //  double total = Double.parseDouble(cost) + Double.parseDouble(chatUserModel.getOffer_cost());
+                  //  network_per_totla=(total*network_per)/100;
+//                    //   total+=network_per_totla;
+                    String msg =getResources().getString(R.string.order_value)+cost;
+                  //  bill_amount=total+"";
+                    Sendbiilattach(msg);
+
+                }
+            }
+        });
+
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+        dialog.setCanceledOnTouchOutside(false);
+       // dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+        dialog.setView(view);
+        dialog.show();
     }
 
     private void CreateImageAlertDialog() {

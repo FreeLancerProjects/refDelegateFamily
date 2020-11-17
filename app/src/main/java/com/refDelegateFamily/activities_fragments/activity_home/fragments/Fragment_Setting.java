@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_about_app.AboutAppActivity;
+import com.refDelegateFamily.activities_fragments.activity_adjustment.AdjustmnetActivity;
 import com.refDelegateFamily.activities_fragments.activity_contact_us.ContactUsActivity;
 import com.refDelegateFamily.activities_fragments.activity_feedback.FeedbackActivity;
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
@@ -34,6 +35,7 @@ import com.refDelegateFamily.databinding.FragmentSettingBinding;
 import com.refDelegateFamily.interfaces.Listeners;
 import com.refDelegateFamily.models.DefaultSettings;
 import com.refDelegateFamily.models.MarketCatogryModel;
+import com.refDelegateFamily.models.UserBalance;
 import com.refDelegateFamily.models.UserModel;
 import com.refDelegateFamily.preferences.Preferences;
 import com.refDelegateFamily.activities_fragments.activity_profile.ProfileActivity;
@@ -63,6 +65,7 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
     private Preferences preferences;
     private DefaultSettings defaultSettings;
     private UserModel userModel;
+    private double balance;
 
 
     public static Fragment_Setting newInstance() {
@@ -74,7 +77,7 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false);
         initView();
-
+        getBalance();
 
         return binding.getRoot();
     }
@@ -91,18 +94,50 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
         binding.setActions(this);
 
 
-        if (defaultSettings!=null){
-            if (defaultSettings.getRingToneName()!=null&&!defaultSettings.getRingToneName().isEmpty()){
+        if (defaultSettings != null) {
+            if (defaultSettings.getRingToneName() != null && !defaultSettings.getRingToneName().isEmpty()) {
                 binding.tvRingtoneName.setText(defaultSettings.getRingToneName());
-            }else {
+            } else {
                 binding.tvRingtoneName.setText(getString(R.string.default1));
             }
-        }else {
+        } else {
             binding.tvRingtoneName.setText(getString(R.string.default1));
 
         }
     }
 
+    private void getBalance() {
+        ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .getBalance("Bearer " + userModel.getData().getToken(), userModel.getData().getId())
+                .enqueue(new Callback<UserBalance>() {
+                    @Override
+                    public void onResponse(Call<UserBalance> call, Response<UserBalance> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful() && response.body() != null) {
+                            binding.setBalance(response.body());
+                        } else {
+
+                            Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            try {
+                                Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UserBalance> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            Log.e("error", t.getMessage());
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+    }
 
 
     @Override
@@ -114,42 +149,42 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
     @Override
     public void onSubscriptions() {
         Intent intent = new Intent(activity, SubscriptionActivity.class);
-        intent.putExtra("data",preferences.getUserData(activity));
+        intent.putExtra("data", preferences.getUserData(activity));
         startActivity(intent);
     }
 
     @Override
     public void onProfile() {
         Intent intent = new Intent(activity, ProfileActivity.class);
-        intent.putExtra("data",preferences.getUserData(activity));
+        intent.putExtra("data", preferences.getUserData(activity));
         startActivity(intent);
     }
 
     @Override
     public void onEditProfile() {
         Intent intent = new Intent(activity, UpdateProfileActivity.class);
-        intent.putExtra("type","update");
-        startActivityForResult(intent,2);
+        intent.putExtra("type", "update");
+        startActivityForResult(intent, 2);
     }
 
     @Override
     public void onLanguageSetting() {
         Intent intent = new Intent(activity, LanguageActivity.class);
-        intent.putExtra("type",1);
+        intent.putExtra("type", 1);
         startActivity(intent);
     }
 
     @Override
     public void onTerms() {
-        Intent intent=new Intent(activity, AboutAppActivity.class);
-        intent.putExtra("type",1);
+        Intent intent = new Intent(activity, AboutAppActivity.class);
+        intent.putExtra("type", 1);
         startActivity(intent);
     }
 
     @Override
     public void onPrivacy() {
-        Intent intent=new Intent(activity, AboutAppActivity.class);
-        intent.putExtra("type",3);
+        Intent intent = new Intent(activity, AboutAppActivity.class);
+        intent.putExtra("type", 3);
         startActivity(intent);
     }
 
@@ -204,16 +239,25 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
         intent.putExtra("type", 2);
         startActivity(intent);
     }
+
     @Override
     public void onFeedback() {
         Intent intent = new Intent(activity, FeedbackActivity.class);
         startActivity(intent);
     }
+
     @Override
     public void contactus() {
         Intent intent = new Intent(activity, ContactUsActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void adjust() {
+        Intent intent = new Intent(activity, AdjustmnetActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void logout() {
         if (userModel != null) {
@@ -276,7 +320,7 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
     public void share() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT,"https://play.google.com/store/apps/details?id="+activity.getPackageName());
+        intent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=" + activity.getPackageName());
         startActivity(intent);
     }
 
@@ -296,33 +340,34 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
 
 
             if (uri != null) {
-                Ringtone ringtone = RingtoneManager.getRingtone(activity,uri);
+                Ringtone ringtone = RingtoneManager.getRingtone(activity, uri);
                 String name = ringtone.getTitle(activity);
                 binding.tvRingtoneName.setText(name);
 
-                if (defaultSettings==null){
+                if (defaultSettings == null) {
                     defaultSettings = new DefaultSettings();
                 }
 
                 defaultSettings.setRingToneUri(uri.toString());
                 defaultSettings.setRingToneName(name);
-                preferences.createUpdateAppSetting(activity,defaultSettings);
+                preferences.createUpdateAppSetting(activity, defaultSettings);
 
 
             }
-        } else if (requestCode == 200 && resultCode == RESULT_OK ) {
+        } else if (requestCode == 200 && resultCode == RESULT_OK) {
 
             activity.setResult(RESULT_OK);
             activity.finish();
         }
     }
-    public void updatePhoneStatus(String status){
-        Log.e("status",status);
+
+    public void updatePhoneStatus(String status) {
+        Log.e("status", status);
         ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
 
-        Api.getService(Tags.base_url).updatePhoneStatus("Bearer " + userModel.getData().getToken(), userModel.getData().getId(),status)
+        Api.getService(Tags.base_url).updatePhoneStatus("Bearer " + userModel.getData().getToken(), userModel.getData().getId(), status)
                 .enqueue(new Callback<UserModel>() {
                     @Override
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -333,9 +378,9 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
                             binding.setModel(response.body());
                         } else {
 
-                            if (status.equals("show")){
+                            if (status.equals("show")) {
                                 binding.switchBtn.setChecked(false);
-                            }else {
+                            } else {
                                 binding.switchBtn.setChecked(true);
                             }
 
@@ -356,9 +401,9 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
                     @Override
                     public void onFailure(Call<UserModel> call, Throwable t) {
                         dialog.dismiss();
-                        if (status.equals("show")){
+                        if (status.equals("show")) {
                             binding.switchBtn.setChecked(false);
-                        }else {
+                        } else {
                             binding.switchBtn.setChecked(true);
                         }
                         Log.e("error Profile", t.getMessage());

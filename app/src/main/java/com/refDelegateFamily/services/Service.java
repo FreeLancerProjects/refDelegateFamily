@@ -1,6 +1,7 @@
 package com.refDelegateFamily.services;
 
 
+import com.refDelegateFamily.models.BankModel;
 import com.refDelegateFamily.models.FeedbackDataModel;
 import com.refDelegateFamily.models.MainCategoryModel;
 import com.refDelegateFamily.models.MessageDataModel;
@@ -13,6 +14,7 @@ import com.refDelegateFamily.models.PlaceGeocodeData;
 import com.refDelegateFamily.models.PlaceMapDetailsData;
 import com.refDelegateFamily.models.SettingModel;
 import com.refDelegateFamily.models.SubscriptionDataModel;
+import com.refDelegateFamily.models.UserBalance;
 import com.refDelegateFamily.models.UserModel;
 
 import java.util.List;
@@ -268,6 +270,19 @@ public interface Service {
 //
             );
 
+    @Multipart
+    @POST("/api/attachBill")
+    Call<MessageModel> sendbillWithImage(
+            @Header("Authorization") String user_token,
+            @Part("driver_id") RequestBody driver_id,
+            @Part("client_id") RequestBody client_id,
+            @Part("message") RequestBody message,
+            @Part("order_id") RequestBody order_id,
+            @Part MultipartBody.Part messagefile_type
+
+
+    );
+
     @GET("api/Get-Packages")
     Call<SubscriptionDataModel> getSubscription(@Query("type") String type);
 
@@ -298,6 +313,7 @@ public interface Service {
     Call<UserModel> getProfile(@Header("Authorization") String user_token,
                                @Field("id") int id
     );
+
     @FormUrlEncoded
     @POST("api/contact-us")
     Call<ResponseBody> contactUs(@Field("name") String name,
@@ -308,6 +324,7 @@ public interface Service {
 
 
     );
+
     @GET("api/get-rates")
     Call<FeedbackDataModel> getFeedback(@Header("Authorization") String user_token,
                                         @Query("user_id") int user_id,
@@ -317,11 +334,29 @@ public interface Service {
 
 
     );
+    @GET("api/banks")
+    Call<BankModel> getBanks(
 
+
+    );
     @FormUrlEncoded
     @POST("api/update-show-phone-status")
     Call<UserModel> updatePhoneStatus(@Header("Authorization") String user_token,
                                       @Field("user_id") int user_id,
                                       @Field("show_phone_status") String status
     );
+
+    @FormUrlEncoded
+    @POST("api/get-user-balance")
+    Call<UserBalance> getBalance(@Header("Authorization") String user_token,
+                                 @Field("user_id") int user_id
+    );
+    @FormUrlEncoded
+    @POST("api/make-settlement")
+    Call<ResponseBody> sendadjust(@Header("Authorization") String user_token,
+                                 @Field("bank_id")int bank_id,
+                                 @Field("user_id") int user_id,
+                                 @Field("balance") double balance
+    );
+
 }

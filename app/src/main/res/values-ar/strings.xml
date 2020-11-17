@@ -221,5 +221,13 @@
     <string name="no_feedback_to_show">لا يوجد تعليقات لعرضها</string>
     <string name="show_phone_number">إظهار رقم الجوال</string>
     <string name="send">ارسال</string>
-
+    <string name="balance">رصيد الحساب</string>
+    <string name="total_delivery_fee">اجمالى رسوم التوصيل</string>
+    <string name="adjustments">التسويات</string>
+    <string name="adjust">تسويه</string>
+    <string name="create_bill">اصدار فاتوره</string>
+    <string name="order_value">قيمة الطلب </string>
+    <string name="upload_bill_image">رفع صورة الفاتورة</string>
+    <string name="upload">رفع الصورة</string>
+    <string name="order_cost">قيمة الطلب</string>
 </resources>

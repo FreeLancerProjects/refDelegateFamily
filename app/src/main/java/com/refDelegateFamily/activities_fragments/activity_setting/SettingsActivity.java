@@ -194,6 +194,11 @@ public class SettingsActivity extends AppCompatActivity implements Listeners.Set
 
     }
 
+    @Override
+    public void adjust() {
+
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

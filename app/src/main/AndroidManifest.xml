@@ -50,6 +50,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
+            android:name=".activities_fragments.activity_adjustment.AdjustmnetActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
             android:name=".activities_fragments.activity_contact_us.ContactUsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />

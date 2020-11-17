@@ -70,6 +70,7 @@ public interface Listeners {
         void share();
 
         void contactus();
+        void adjust();
 
     }
 }

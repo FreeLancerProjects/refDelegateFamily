@@ -221,5 +221,13 @@
     <string name="no_feedback_to_show">No Feedback to show</string>
     <string name="show_phone_number">Show Phone Number</string>
     <string name="send">send</string>
-
+    <string name="balance">Balance</string>
+    <string name="total_delivery_fee">Total delivery fee</string>
+    <string name="adjustments">Adjustments</string>
+    <string name="adjust">Adjust</string>
+    <string name="create_bill">Create Bill</string>
+    <string name="order_value">Order Value</string>
+    <string name="upload_bill_image">Upload bill image</string>
+    <string name="upload">Upload</string>
+    <string name="order_cost">Order Cost</string>
 </resources>
