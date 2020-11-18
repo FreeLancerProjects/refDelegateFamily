@@ -199,7 +199,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/small_rounded_stroke_gray"
                     android:layerType="software" />
 
@@ -238,7 +238,7 @@
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/small_rounded_stroke_gray"
                     android:layerType="software" />
                 <LinearLayout
@@ -289,7 +289,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/small_rounded_stroke_gray"
                     android:layerType="software" />
 
@@ -328,7 +328,7 @@
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/small_rounded_stroke_gray"
                     android:layerType="software" />
 
@@ -367,7 +367,7 @@
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/small_rounded_stroke_gray"
                     android:layerType="software" />
 
@@ -404,9 +404,10 @@
                         android:rotation='@{lang.equals("ar")?180:0}'
                         />
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/small_rounded_stroke_gray"
                     android:layerType="software" />
                 <LinearLayout
@@ -444,7 +445,7 @@
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/small_rounded_stroke_gray"
                     android:layerType="software" />
                 <LinearLayout
@@ -482,7 +483,7 @@
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/small_rounded_stroke_gray"
                     android:layerType="software" />
                 <LinearLayout
@@ -520,7 +521,7 @@
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/small_rounded_stroke_gray"
                     android:layerType="software" />
 
@@ -559,7 +560,7 @@
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/small_rounded_stroke_gray"
                     android:layerType="software" />
                 <LinearLayout
@@ -597,7 +598,7 @@
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/small_rounded_stroke_gray"
                     android:layerType="software" />
 
@@ -636,7 +637,7 @@
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/small_rounded_stroke_gray"
                     android:layerType="software" />
                 <LinearLayout
@@ -674,7 +675,7 @@
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="4dp"
                     android:background="@drawable/small_rounded_stroke_gray"
                     android:layerType="software" />
 

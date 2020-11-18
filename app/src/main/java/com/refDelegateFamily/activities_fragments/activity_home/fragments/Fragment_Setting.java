@@ -104,6 +104,14 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
             binding.tvRingtoneName.setText(getString(R.string.default1));
 
         }
+        binding.switchBtn.setOnClickListener(view -> {
+            if (binding.switchBtn.isChecked()){
+                updatePhoneStatus("show");
+            }else {
+                updatePhoneStatus("hidden");
+
+            }
+        });
     }
 
     private void getBalance() {
