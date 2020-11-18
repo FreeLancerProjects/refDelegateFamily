@@ -201,10 +201,11 @@ public class VerificationCodeActivity extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null) {
                             Log.e("eeeeee", response.body().getData().getName());
                             if (response.body().getData().getUser_type().equals("driver")){
+
                                 preferences.create_update_userdata(VerificationCodeActivity.this, response.body());
                                 navigateToHomeActivity();
                             }else {
-                               // Toast.makeText(VerificationCodeActivity.this, getString(R.string.user_type_account_error)+response.body().getData().getUser_type(), Toast.LENGTH_SHORT).show();
+                               Toast.makeText(VerificationCodeActivity.this, getString(R.string.not_found)+response.body().getData().getUser_type(), Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             try {

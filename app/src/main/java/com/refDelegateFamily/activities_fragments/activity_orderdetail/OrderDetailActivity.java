@@ -24,6 +24,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.google.android.gms.common.util.MapUtils;
 import com.google.android.gms.maps.GoogleMapOptions;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.SphericalUtil;
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
 import com.refDelegateFamily.activities_fragments.chat_activity.ChatActivity;
@@ -317,13 +319,16 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
     private void updatedata(OrderModel body) {
         this.orderModel = body.getOrder();
         binding.setModel(body.getOrder());
-        float[] results = new float[1];
-        Location.distanceBetween(user_lat, user_lng,
-                Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()), results);
-        binding.tvlocationship.setText(results[0] + getResources().getString(R.string.km));
-        Location.distanceBetween(user_lat, user_lng,
-                Double.parseDouble(orderModel.getTo_latitude()), Double.parseDouble(orderModel.getTo_longitude()), results);
-        binding.tvlocationarrive.setText(results[0] + getResources().getString(R.string.km));
+    String ship =String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(  Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()))) / 1000)), getString(R.string.km));
+        String arrivew =String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(   Double.parseDouble(orderModel.getTo_latitude()), Double.parseDouble(orderModel.getTo_longitude()))) / 1000)), getString(R.string.km));
+
+    //        float[] results = new float[1];
+//        Location.distanceBetween(user_lat, user_lng,
+//                Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()), results);
+        binding.tvlocationship.setText(ship);
+//        Location.distanceBetween(user_lat, user_lng,
+//                Double.parseDouble(orderModel.getTo_latitude()), Double.parseDouble(orderModel.getTo_longitude()), results);
+        binding.tvlocationarrive.setText(arrivew);
 
         if (orderModel.getStatus().equals("new") || orderModel.getStatus().equals("driver_give_order_to_client")) {
 
