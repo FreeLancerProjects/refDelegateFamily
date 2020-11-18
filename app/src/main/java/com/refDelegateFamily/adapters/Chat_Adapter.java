@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.chat_activity.ChatActivity;
+import com.refDelegateFamily.databinding.ChatBillRightRowBinding;
 import com.refDelegateFamily.databinding.ChatImageLeftRowBinding;
 import com.refDelegateFamily.databinding.ChatImageRightRowBinding;
 import com.refDelegateFamily.databinding.ChatMessageLeftRowBinding;
@@ -29,7 +30,7 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final int ITEM_image_LEFT = 3;
     private final int ITEM_image_RIGHT = 4;
     private final int ITEM_LOADMORE = 5;
-
+    private final int itembill = 6;
     private final String lang;
 
 
@@ -69,7 +70,13 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ChatImageRightRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.chat_image_right_row, parent, false);
             return new RightImageEventHolder(binding);
 
-        } else {
+        }
+        else if (viewType == itembill) {
+            ChatBillRightRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.chat_bill_right_row, parent, false);
+            return new BillEventHolder(binding);
+
+        }
+        else {
 
             LoadMoreBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.load_more, parent, false);
             return new LoadMoreHolder(binding);
@@ -108,7 +115,17 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             eventHolder.binding.setLang(lang);
 
 
-        } else if (holder instanceof LoadMoreHolder) {
+        }
+
+        else if (holder instanceof BillEventHolder) {
+            BillEventHolder eventHolder = (BillEventHolder) holder;
+
+            eventHolder.binding.setMessagemodel(messageModel);
+            eventHolder.binding.setLang(lang);
+
+
+        }
+        else if (holder instanceof LoadMoreHolder) {
             LoadMoreHolder typingHolder = (LoadMoreHolder) holder;
 
 
@@ -172,12 +189,20 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         }
     }
+    public class BillEventHolder extends RecyclerView.ViewHolder {
+        public ChatBillRightRowBinding binding;
 
+        public BillEventHolder(@NonNull ChatBillRightRowBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+
+        }
+    }
 
     @Override
     public int getItemViewType(int position) {
         MessageModel messageModel = messageModelList.get(position);
-      //  Log.e("lsllsl", current_user_id + " " + messageModel.getTo_user_id());
+        //  Log.e("lsllsl", current_user_id + " " + messageModel.getTo_user_id());
         if (messageModel == null) {
 
             return ITEM_LOADMORE;
@@ -186,13 +211,19 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             //  Log.e("type",messageModel.getType());
             if (messageModel.getType().equals("text")) {
                 return ITEM_MESSAGE_LEFT;
-            } else {
+            }
+
+            else {
                 return ITEM_image_LEFT;
             }
         } else {
             if (messageModel.getType().equals("text")) {
                 return ITEM_MESSAGE_RIGHT;
-            } else {
+            }
+            else  if (messageModel.getType().equals("text_file")) {
+                return itembill;
+            }
+            else {
                 return ITEM_image_RIGHT;
             }
 

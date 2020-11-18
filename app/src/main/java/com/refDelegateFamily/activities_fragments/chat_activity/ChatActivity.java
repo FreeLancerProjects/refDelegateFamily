@@ -219,35 +219,36 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     }
 
     private void update(OrderModel body) {
-        this.orderModel = orderModel;
+        this.orderModel = body;
         if (body.getOrder().getBill_step().equals("not_attach")) {
             binding.llBill.setVisibility(View.VISIBLE);
         }
     }
 
-    private void Sendbiilattach(String msg) {
+    private void Sendbiilattach(String msg, String cost) {
         RequestBody from_user_id_part = Common.getRequestBodyText(userModel.getData().getId()+"");
         RequestBody to_user_id_part = Common.getRequestBodyText(chatUserModel.getId());
 
         RequestBody user_msg_part = Common.getRequestBodyText(msg);
+        RequestBody bill_cost_part = Common.getRequestBodyText(cost);
 
         RequestBody order_type_part = Common.getRequestBodyText(chatUserModel.getOrder_id()+"");
 
         MultipartBody.Part image_part = Common.getMultiPart(this, url, "bill_image");
 
         Api.getService(Tags.base_url)
-                .sendbillWithImage("Bearer " + userModel.getData().getToken(), from_user_id_part, to_user_id_part, user_msg_part, order_type_part, image_part)
+                .sendbillWithImage("Bearer " + userModel.getData().getToken(), from_user_id_part, to_user_id_part, user_msg_part, order_type_part,bill_cost_part, image_part)
                 .enqueue(new Callback<MessageModel>() {
                     @Override
                     public void onResponse(Call<MessageModel> call, Response<MessageModel> response) {
 
-                        Log.e("datttaa", response.body() + "_");
+                     //   Log.e("datttaa", response.body() + "_");
                         binding.progBar.setVisibility(View.GONE);
                         if (response.isSuccessful()) {
                             binding.llBill.setVisibility(View.GONE);
                             // chatUserModel.setBill_step("bill_attach");
                             if (chat_adapter == null) {
-                                messagedatalist.add(response.body());
+                                messagedatalist.add(response.body().getData());
                                 chat_adapter = new Chat_Adapter(messagedatalist, userModel.getData().getId(), ChatActivity.this);
                                 binding.recView.setAdapter(chat_adapter);
                                 chat_adapter.notifyDataSetChanged();
@@ -259,7 +260,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                                     }
                                 }, 100);
                             } else {
-                                messagedatalist.add(response.body());
+                                messagedatalist.add(response.body().getData());
                                 chat_adapter.notifyItemInserted(messagedatalist.size() - 1);
 
                                 new Handler().postDelayed(new Runnable() {
@@ -612,7 +613,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
 //                    //   total+=network_per_totla;
                     String msg =getResources().getString(R.string.order_value)+cost;
                   //  bill_amount=total+"";
-                    Sendbiilattach(msg);
+                    Sendbiilattach(msg,cost);
 
                 }
             }

@@ -271,13 +271,15 @@ public interface Service {
             );
 
     @Multipart
-    @POST("/api/attachBill")
+    @POST("api/bill-attach")
     Call<MessageModel> sendbillWithImage(
             @Header("Authorization") String user_token,
             @Part("driver_id") RequestBody driver_id,
             @Part("client_id") RequestBody client_id,
             @Part("message") RequestBody message,
             @Part("order_id") RequestBody order_id,
+            @Part("bill_cost") RequestBody bill_cost,
+
             @Part MultipartBody.Part messagefile_type
 
 

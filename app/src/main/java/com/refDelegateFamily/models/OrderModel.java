@@ -211,6 +211,7 @@ public class OrderModel implements Serializable {
             private String forget_password_code;
             private String email_verified_at;
             private String deleted_at;
+            private String show_phone_status;
 
             public int getId() {
                 return id;
@@ -319,6 +320,10 @@ public class OrderModel implements Serializable {
 
             public String getDeleted_at() {
                 return deleted_at;
+            }
+
+            public String getShow_phone_status() {
+                return show_phone_status;
             }
         }
 
