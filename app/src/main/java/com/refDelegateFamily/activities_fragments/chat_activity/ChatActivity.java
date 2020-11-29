@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
@@ -33,6 +34,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.adapters.Chat_Adapter;
 import com.refDelegateFamily.databinding.ActivityChatBinding;
@@ -87,7 +89,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     private boolean isLoading = false;
     private int which_image_upload_selected;
     private OrderModel orderModel;
-
+    ImagePopup imagePopup;
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
         super.attachBaseContext(Language_Helper.updateResources(newBase, Language_Helper.getLanguage(newBase)));
@@ -105,6 +107,12 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     }
 
     private void initView() {
+        imagePopup = new ImagePopup(this);
+        imagePopup.setFullScreen(true);
+        imagePopup.setBackgroundColor(Color.BLACK);  // Optional
+        imagePopup.setFullScreen(true); // Optional
+        imagePopup.setHideCloseIcon(false);
+        imagePopup.setImageOnClickClose(true);  // Optional
         EventBus.getDefault().register(this);
 
         getDataFromIntent();
@@ -723,6 +731,10 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         }
         return null;
     }
+    public void showimage(String image) {
+        imagePopup.initiatePopupWithPicasso(Tags.IMAGE_URL+image);
+        imagePopup.viewPopup();
 
+    }
 
 }

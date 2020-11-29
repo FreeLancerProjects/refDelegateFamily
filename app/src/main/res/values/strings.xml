@@ -230,4 +230,11 @@
     <string name="upload_bill_image">Upload bill image</string>
     <string name="upload">Upload</string>
     <string name="order_cost">Order Cost</string>
+    <string name="banks">Banks For Adjustments</string>
+    <string name="number_of_trips">Number of trips</string>
+    <string name="delivary_value">Delivary Value : </string>
+    <string name="family">Family</string>
+    <string name="delegete">Delegete</string>
+    <string name="customer">Customer</string>
+    <string name="market">Market</string>
 </resources>

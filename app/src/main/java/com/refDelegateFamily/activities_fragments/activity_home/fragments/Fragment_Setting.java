@@ -367,6 +367,9 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
             activity.setResult(RESULT_OK);
             activity.finish();
         }
+        else if(requestCode==2){
+            activity.displayFragmentProfile();
+        }
     }
 
     public void updatePhoneStatus(String status) {

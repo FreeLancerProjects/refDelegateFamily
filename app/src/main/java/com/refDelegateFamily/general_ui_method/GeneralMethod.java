@@ -1,6 +1,7 @@
 package com.refDelegateFamily.general_ui_method;
 
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -74,6 +75,7 @@ public class GeneralMethod {
 
     @BindingAdapter("user_image")
     public static void user_image(View view, String endPoint) {
+        Log.e("skskks",Tags.IMAGE_URL+endPoint);
         if (view instanceof CircleImageView) {
             CircleImageView imageView = (CircleImageView) view;
             if (endPoint != null) {

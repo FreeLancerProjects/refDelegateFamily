@@ -300,6 +300,7 @@ public class HomeActivity extends AppCompatActivity {
 
             }
 
+
         } catch (Exception e) {
         }
 
@@ -332,7 +333,6 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_setting, "fragment_setting").addToBackStack("fragment_setting").commit();
 
             }
-
         } catch (Exception e) {
         }
 
@@ -365,6 +365,7 @@ public class HomeActivity extends AppCompatActivity {
                 fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_profile, "fragment_profile").addToBackStack("fragment_profile").commit();
 
             }
+
 
         } catch (Exception e) {
         }

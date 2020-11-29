@@ -88,7 +88,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements Listener
     private final String camera_permission = Manifest.permission.CAMERA;
     private final int IMG_REQ1 = 3, IMG_REQ2 = 2;
     private final int READ_REQ = 1, CAMERA_REQ = 2;
-    private Uri url, uri = null;
+    private Uri url;
     private GoogleApiClient googleApiClient;
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
@@ -156,7 +156,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements Listener
     }
 
     private void update() {
-        if (uri == null) {
+        if (url == null) {
             updateProfileWithoutImage();
         } else {
             updateProfileWithImage();
@@ -331,8 +331,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements Listener
     }
 
     private void navigateToHomeActivity() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
+
         finish();
     }
 

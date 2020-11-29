@@ -50,6 +50,7 @@ public class OrderModel implements Serializable {
         private User client;
         private User driver;
         private DriverChat driver_chat;
+        private double delivery_cost;
 
         public int getId() {
             return id;
@@ -181,6 +182,10 @@ public class OrderModel implements Serializable {
 
         public DriverChat getDriver_chat() {
             return driver_chat;
+        }
+
+        public double getDelivery_cost() {
+            return delivery_cost;
         }
 
         public static class User implements Serializable {

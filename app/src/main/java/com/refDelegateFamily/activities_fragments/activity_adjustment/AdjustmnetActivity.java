@@ -117,6 +117,10 @@ public class AdjustmnetActivity extends AppCompatActivity {
     }
 
     public void sendadust(BankModel.Data baData) {
+        if(getIntent().getStringExtra("type")!=null){
+
+        }
+        else {
         ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
@@ -147,7 +151,7 @@ public class AdjustmnetActivity extends AppCompatActivity {
                         } catch (Exception e) {
                         }
                     }
-                });
+                });}
     }
 
 

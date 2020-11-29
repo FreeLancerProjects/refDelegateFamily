@@ -230,4 +230,11 @@
     <string name="upload_bill_image">رفع صورة الفاتورة</string>
     <string name="upload">رفع الصورة</string>
     <string name="order_cost">قيمة الطلب</string>
+    <string name="banks">بنوك التسويه</string>
+    <string name="number_of_trips">عدد المشاوير</string>
+    <string name="delivary_value">قيمة التوصيل : </string>
+    <string name="family">اسرة</string>
+    <string name="delegete">مندوب</string>
+    <string name="customer">عميل</string>
+    <string name="market">متجر</string>
 </resources>

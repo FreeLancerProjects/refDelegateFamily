@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_about_app.AboutAppActivity;
+import com.refDelegateFamily.activities_fragments.activity_adjustment.AdjustmnetActivity;
 import com.refDelegateFamily.databinding.DialogSelectImageBinding;
 import com.refDelegateFamily.databinding.FragmentSignupStep3Binding;
 import com.refDelegateFamily.models.SignUpModel;
@@ -105,6 +106,14 @@ public class Fragment_SignUpStep3 extends Fragment {
                 terms=0;
 //                signUpModel.setAccept(false);
 
+            }
+        });
+        binding.tvBanks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), AdjustmnetActivity.class);;
+                intent.putExtra("type","1");
+                startActivity(intent);
             }
         });
     }
