@@ -80,17 +80,21 @@
                 android:layout_height="1dp"
                 android:background="@color/gray4"
                 app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:fillViewport="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/toolbar">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/fragment_app_container"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toolbar">
+                >
 
 
                 <androidx.cardview.widget.CardView
@@ -215,6 +219,7 @@
                             app:layout_constraintTop_toBottomOf="@id/tv_desc" />
 
                         <TextView
+                            android:id="@+id/tvfromaddres"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
@@ -238,6 +243,7 @@
                             app:layout_constraintTop_toBottomOf="@id/start_loc_img" />
 
                         <TextView
+                            android:id="@+id/tvtoaddres"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
@@ -338,15 +344,39 @@
                                 android:text='@{model.delivery_cost +" "+ @string/sar}'
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="14sp" />
-
                             <View
                                 android:layout_width="0dp"
                                 android:layout_height="1dp"
                                 android:layout_weight="1" />
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:text="@string/delivery_cost_tax"
+                                android:textColor="@color/gray12"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{model.delivery_cost_tax}"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
+
 
                         </LinearLayout>
-
+                        <ImageView
+                            android:id="@+id/image"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="20dp"
+                            android:padding="4dp"
+                            image="@{model.bill_image}"
+                            android:scaleType="fitXY"
+                            android:tint="@color/colorPrimary"
+                            app:layout_constraintTop_toBottomOf="@+id/linearvalue" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -493,6 +523,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    android:visibility="visible"
                     app:layout_constraintTop_toBottomOf="@+id/ll">
 
                     <Button
@@ -525,13 +556,14 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ll"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_btn"
 
 
                     />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

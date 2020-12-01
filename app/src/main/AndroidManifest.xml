@@ -46,6 +46,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
+            android:name=".activities_fragments.activity_map.MapActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
             android:name="com.refDelegateFamily.activities_fragments.activity_language.LanguageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />

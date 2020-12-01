@@ -37,6 +37,7 @@ public class OrderModel implements Serializable {
         private String to_longitude;
         private String to_address;
         private String to_name;
+        private String delivery_cost_tax;
         private String order_description;
         private String order_nots;
         private String end_shipping_time;
@@ -186,6 +187,10 @@ public class OrderModel implements Serializable {
 
         public double getDelivery_cost() {
             return delivery_cost;
+        }
+
+        public String getDelivery_cost_tax() {
+            return delivery_cost_tax;
         }
 
         public static class User implements Serializable {

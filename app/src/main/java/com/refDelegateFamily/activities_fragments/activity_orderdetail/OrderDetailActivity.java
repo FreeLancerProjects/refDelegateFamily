@@ -27,6 +27,7 @@ import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.SphericalUtil;
 import com.refDelegateFamily.R;
+import com.refDelegateFamily.activities_fragments.activity_map.MapActivity;
 import com.refDelegateFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
 import com.refDelegateFamily.activities_fragments.chat_activity.ChatActivity;
 import com.refDelegateFamily.adapters.Image_Adapter;
@@ -144,6 +145,26 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
                     startActivity(intent);
                 }
             }
+        });
+        binding.tvfromaddres.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MapActivity.class);
+            intent.putExtra("lat",Double.parseDouble(orderModel.getFrom_latitude()));
+            intent.putExtra("lng",Double.parseDouble(orderModel.getFrom_longitude()));
+            intent.putExtra("address",orderModel.getFrom_address());
+            intent.putExtra("type","from");
+
+            startActivity(intent);
+
+        });
+        binding.tvtoaddres.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MapActivity.class);
+            intent.putExtra("lat",Double.parseDouble(orderModel.getTo_latitude()));
+            intent.putExtra("lng",Double.parseDouble(orderModel.getTo_longitude()));
+            intent.putExtra("address",orderModel.getTo_address());
+            intent.putExtra("type","to");
+
+            startActivity(intent);
+
         });
 
         binding.acceptBtn.setOnClickListener(view -> {
@@ -318,6 +339,9 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
 
     private void updatedata(OrderModel body) {
         this.orderModel = body.getOrder();
+        if(orderModel.getBill_image()==null){
+            binding.image.setVisibility(View.GONE);
+        }
         binding.setModel(body.getOrder());
         if(!orderModel.getOrder_type().equals("family")){
             binding.tv1.setText(getResources().getString(R.string.market));
@@ -332,13 +356,19 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
 //        Location.distanceBetween(user_lat, user_lng,
 //                Double.parseDouble(orderModel.getTo_latitude()), Double.parseDouble(orderModel.getTo_longitude()), results);
         binding.tvlocationarrive.setText(arrivew);
-
-        if (orderModel.getStatus().equals("new") || orderModel.getStatus().equals("driver_give_order_to_client")) {
+Log.e("llll",orderModel.getStatus());
+        if (orderModel.getStatus().equals("new") || orderModel.getStatus().equals("driver_accepted_order")) {
 
             binding.imgChat.setVisibility(View.GONE);
             binding.imgCall.setVisibility(View.GONE);
             binding.linearBtn.setVisibility(View.VISIBLE);
             binding.viewStatusBtn.setVisibility(View.GONE);
+            if( orderModel.getStatus().equals("driver_accepted_order")){
+                binding.acceptBtn.setVisibility(View.GONE);
+                binding.viewStatusBtn.setVisibility(View.VISIBLE);
+
+            }
+
         } else {
             binding.imgChat.setVisibility(View.VISIBLE);
             binding.imgCall.setVisibility(View.VISIBLE);
