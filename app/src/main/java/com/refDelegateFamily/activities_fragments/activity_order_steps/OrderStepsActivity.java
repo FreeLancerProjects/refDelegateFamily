@@ -330,7 +330,25 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
 
         }
 
+else {
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
+            binding.image2.setColorFilter(getResources().getColor(R.color.white));
+            binding.image3.setColorFilter(getResources().getColor(R.color.white));
+            binding.image5.setColorFilter(getResources().getColor(R.color.white));
 
+            binding.tvOrderReady.setVisibility(View.GONE);
+            binding.tvOrderReady2.setVisibility(View.GONE);
+            binding.tvOrderReady3.setVisibility(View.GONE);
+            binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image3.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image5.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.tv1.setTextColor(getResources().getColor(R.color.black));
+            binding.tv2.setTextColor(getResources().getColor(R.color.black));
+            binding.tv3.setTextColor(getResources().getColor(R.color.black));
+            binding.tv5.setTextColor(getResources().getColor(R.color.black));
+            binding.imgChat.setVisibility(View.GONE);
+        }
     }
 
     @Override
