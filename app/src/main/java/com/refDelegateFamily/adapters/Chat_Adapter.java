@@ -136,7 +136,13 @@ eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
 
             eventHolder.binding.setMessagemodel(messageModel);
             eventHolder.binding.setLang(lang);
-
+            eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ChatActivity chatActivity=(ChatActivity)context;
+                    chatActivity.showimage(messageModel.getFile_link());
+                }
+            });
 
         }
         else if (holder instanceof LoadMoreHolder) {

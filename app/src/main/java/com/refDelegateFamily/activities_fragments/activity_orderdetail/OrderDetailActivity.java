@@ -209,7 +209,7 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        Toast.makeText(OrderDetailActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OrderDetailActivity.this, getResources().getString(R.string.ord_refused), Toast.LENGTH_SHORT).show();
 
                         finish();
                     } else {
@@ -237,6 +237,12 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
             startActivity(intent);
 
 
+        });
+        binding.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showimage2(orderModel.getBill_image());
+            }
         });
     }
 
@@ -342,6 +348,10 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         if (orderModel.getBill_image() == null) {
             binding.image.setVisibility(View.GONE);
         }
+        else {
+            binding.image.setVisibility(View.VISIBLE);
+
+        }
         binding.setModel(body.getOrder());
         if (!orderModel.getOrder_type().equals("family")) {
             binding.tv1.setText(getResources().getString(R.string.market));
@@ -394,5 +404,16 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
             EventBus.getDefault().unregister(this);
         }
         preferences.clearorder(this);
+    }
+    public void showimage2(String image) {
+        imagePopup.initiatePopupWithPicasso(Tags.IMAGE_URL+image);
+        imagePopup.viewPopup();
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        getOrderDetials();
     }
 }

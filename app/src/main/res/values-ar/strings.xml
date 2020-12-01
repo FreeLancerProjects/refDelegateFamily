@@ -46,7 +46,7 @@
 
     <string name="invite">دعوة</string>
     <string name="back">رجوع</string>
-    <string name="refuse">رفض</string>
+    <string name="refuse">الغاء</string>
     <string name="no_requests">لا توجد طلبات</string>
     <string name="req_refused">تم رفض طلبك</string>
     <string name="req_accepted">تم قبول طلبك</string>
@@ -238,4 +238,5 @@
     <string name="customer">عميل</string>
     <string name="market">متجر</string>
     <string name="delivery_cost_tax">ضريبة القيمه المضافة : </string>
+    <string name="ord_refused">تم رفض الطلب </string>
 </resources>
