@@ -264,22 +264,14 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case REQUEST_PHONE_CALL: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (this.checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                            // TODO: Consider calling
-                            //    Activity#requestPermissions
-                            // here to request the missing permissions, and then overriding
-                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                            //                                          int[] grantResults)
-                            // to handle the case where the user grants the permission. See the documentation
-                            // for Activity#requestPermissions for more details.
-                            return;
+                               return;
                         }
                     }
                     startActivity(intent);
@@ -300,23 +292,10 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
                 .enqueue(new Callback<OrderModel>() {
                     @Override
                     public void onResponse(Call<OrderModel> call, Response<OrderModel> response) {
-                        //  binding.progBar.setVisibility(View.GONE);
                         dialog.dismiss();
                         if (response.isSuccessful() && response.body() != null) {
                             updatedata(response.body());
-                            // orderDetails.addAll(response.body().getOrderDetails());
-//                            if (response.body().getOrderDetails().size() > 0) {
-//                                // rec_sent.setVisibility(View.VISIBLE);
-//
-//                                binding.llNoStore.setVisibility(View.GONE);
-//                                order_detials_adapter.notifyDataSetChanged();
-//                                // updatestatus(response.body());
-//                                //   total_page = response.body().getMeta().getLast_page();
-//
-//                            } else {
-//                                binding.llNoStore.setVisibility(View.VISIBLE);
-//
-//                            }
+
                         } else {
 
                             Toast.makeText(OrderDetailActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
