@@ -311,7 +311,7 @@ public interface Service {
     );
 
     @FormUrlEncoded
-    @POST("api/drive_profile")
+    @POST("api/profile")
     Call<UserModel> getProfile(@Header("Authorization") String user_token,
                                @Field("id") int id
     );

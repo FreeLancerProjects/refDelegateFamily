@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil;
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_sign_up.SignUpActivity;
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
+import com.refDelegateFamily.activities_fragments.activity_splash_loading.SplashLoadingActivity;
 import com.refDelegateFamily.databinding.ActivityVerificationCodeBinding;
 import com.refDelegateFamily.language.Language_Helper;
 import com.refDelegateFamily.models.UserModel;
@@ -250,7 +251,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
 
 
     private void navigateToHomeActivity() {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, SplashLoadingActivity.class);
         startActivity(intent);
         finish();
     }
