@@ -52,7 +52,7 @@
                         android:layout_height="25dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:src='@{lang.equals("ar")?@drawable/ic_right_arrow:@drawable/ic_left_arrow}'
+                        android:src='@{lang.equals("en")?@drawable/ic_right_arrow:@drawable/ic_left_arrow}'
                         android:tint="@color/colorPrimary" />
 
                     <TextView

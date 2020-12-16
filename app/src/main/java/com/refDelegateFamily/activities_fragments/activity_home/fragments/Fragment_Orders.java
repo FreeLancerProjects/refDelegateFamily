@@ -89,6 +89,7 @@ public class Fragment_Orders extends Fragment {
     }
 
     public void getOrders() {
+
         binding.progBarOrders.setVisibility(View.VISIBLE);
         oDataList.clear();
         orderAdapter.notifyDataSetChanged();
@@ -125,4 +126,9 @@ public class Fragment_Orders extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getOrders();
+    }
 }

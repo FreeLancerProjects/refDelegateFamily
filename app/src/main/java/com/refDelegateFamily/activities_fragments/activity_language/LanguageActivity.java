@@ -8,12 +8,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 import com.refDelegateFamily.R;
 import com.refDelegateFamily.activities_fragments.activity_home.HomeActivity;
 import com.refDelegateFamily.databinding.ActivityLanguageBinding;
 import com.refDelegateFamily.language.Language_Helper;
+
+import java.util.Locale;
 
 import io.paperdb.Paper;
 
@@ -39,7 +42,8 @@ public class LanguageActivity extends AppCompatActivity {
 
     private void initView() {
         Paper.init(this);
-        lang = Paper.book().read("lang", "ar");
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+
         selectedLang = lang;
 
         binding.setLang(lang);
