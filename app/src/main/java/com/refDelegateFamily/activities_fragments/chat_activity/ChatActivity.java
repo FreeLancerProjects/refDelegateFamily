@@ -152,6 +152,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+                Log.e("ldldll",dy+"");
                 if (dy < 0) {
                     int lastItemPos = manager.findLastCompletelyVisibleItemPosition();
                     int total_items = chat_adapter.getItemCount();
@@ -339,7 +340,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
 
 
             Api.getService(Tags.base_url)
-                    .getRoomMessages("Bearer " + userModel.getData().getToken(), chatUserModel.getRoom_id(), 1)
+                    .getRoomMessages("Bearer " + userModel.getData().getToken(),"on", chatUserModel.getRoom_id(), 1)
                     .enqueue(new Callback<MessageDataModel>() {
                         @Override
                         public void onResponse(Call<MessageDataModel> call, Response<MessageDataModel> response) {
@@ -401,9 +402,9 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
 
     private void loadMore(int next_page) {
         try {
-
+Log.e("ddddddd",next_page+"");
             Api.getService(Tags.base_url)
-                    .getRoomMessages("Bearer " + userModel.getData().getToken(), chatUserModel.getRoom_id(), next_page)
+                    .getRoomMessages("Bearer " + userModel.getData().getToken(),"on", chatUserModel.getRoom_id(), next_page)
                     .enqueue(new Callback<MessageDataModel>() {
                         @Override
                         public void onResponse(Call<MessageDataModel> call, Response<MessageDataModel> response) {

@@ -231,9 +231,9 @@ public interface Service {
     @GET("api/Get-chat-messages-by-roomID")
     Call<MessageDataModel> getRoomMessages(
             @Header("Authorization") String user_token,
-
+            @Query("pagination_status") String pagination_status,
             @Query("room_id") int room_id,
-            @Query("page") int pagination_status
+            @Query("page") int page
     );
 
 
@@ -336,11 +336,13 @@ public interface Service {
 
 
     );
+
     @GET("api/banks")
     Call<BankModel> getBanks(
 
 
     );
+
     @FormUrlEncoded
     @POST("api/update-show-phone-status")
     Call<UserModel> updatePhoneStatus(@Header("Authorization") String user_token,
@@ -353,12 +355,13 @@ public interface Service {
     Call<UserBalance> getBalance(@Header("Authorization") String user_token,
                                  @Field("user_id") int user_id
     );
+
     @FormUrlEncoded
     @POST("api/make-settlement")
     Call<ResponseBody> sendadjust(@Header("Authorization") String user_token,
-                                 @Field("bank_id")int bank_id,
-                                 @Field("user_id") int user_id,
-                                 @Field("balance") double balance
+                                  @Field("bank_id") int bank_id,
+                                  @Field("user_id") int user_id,
+                                  @Field("balance") double balance
     );
 
 }

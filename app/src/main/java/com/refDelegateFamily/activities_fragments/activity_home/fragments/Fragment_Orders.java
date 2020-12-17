@@ -126,9 +126,5 @@ public class Fragment_Orders extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        getOrders();
-    }
+
 }

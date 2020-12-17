@@ -202,6 +202,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null) {
                             Log.e("eeeeee", response.body().getData().getName());
                             if (response.body().getData().getUser_type().equals("driver")){
+                                preferences.createSession(VerificationCodeActivity.this, Tags.session_login);
 
                                 preferences.create_update_userdata(VerificationCodeActivity.this, response.body());
                                 navigateToHomeActivity();

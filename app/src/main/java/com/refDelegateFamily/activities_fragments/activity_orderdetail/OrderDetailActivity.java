@@ -335,6 +335,14 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         if (!orderModel.getOrder_type().equals("family")) {
             binding.tv1.setText(getResources().getString(R.string.market));
         }
+        Log.e("usuusu",user_lat+"  "+user_lng+ "  "+orderModel.getFrom_latitude()+" "+orderModel.getFrom_longitude()+" "+orderModel.getTo_latitude()+" "+orderModel.getTo_longitude());
+      if(user_lng==0.0){
+          user_lat=Double.parseDouble(userModel.getData().getTracker_fk().getLatitude());
+          user_lng=Double.parseDouble(userModel.getData().getTracker_fk().getLongitude());
+
+      }
+        Log.e("ssssss",user_lat+"  "+user_lng+ "  "+orderModel.getFrom_latitude()+" "+orderModel.getFrom_longitude()+" "+orderModel.getTo_latitude()+" "+orderModel.getTo_longitude());
+
         String ship = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()))) / 1000)), getString(R.string.km));
         String arrivew = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(Double.parseDouble(orderModel.getTo_latitude()), Double.parseDouble(orderModel.getTo_longitude()))) / 1000)), getString(R.string.km));
 
@@ -346,7 +354,7 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
 //                Double.parseDouble(orderModel.getTo_latitude()), Double.parseDouble(orderModel.getTo_longitude()), results);
         binding.tvlocationarrive.setText(arrivew);
         Log.e("llll", orderModel.getStatus());
-        if (orderModel.getStatus().equals("new") || orderModel.getStatus().equals("driver_accepted_order")) {
+        if (orderModel.getStatus().equals("new") || orderModel.getStatus().equals("driver_accepted_order")|| orderModel.getStatus().equals("family_end_prepare_order")) {
 
             binding.imgChat.setVisibility(View.GONE);
             binding.imgCall.setVisibility(View.GONE);
