@@ -115,6 +115,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
                 });
             }
 else{
+    Toast.makeText(this,"يجب على الاسره تسليم الطلب اولا",Toast.LENGTH_LONG).show();
 
             }
         });
