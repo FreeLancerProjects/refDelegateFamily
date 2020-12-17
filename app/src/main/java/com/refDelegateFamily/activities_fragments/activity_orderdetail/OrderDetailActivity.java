@@ -184,7 +184,7 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(OrderDetailActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OrderDetailActivity.this, getResources().getString(R.string.AnotherDriverAccepted), Toast.LENGTH_SHORT).show();
                         try {
                             Log.e("llllll", response.errorBody().string());
                         } catch (Exception e) {
@@ -271,7 +271,7 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (this.checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                               return;
+                            return;
                         }
                     }
                     startActivity(intent);
@@ -326,8 +326,7 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         this.orderModel = body.getOrder();
         if (orderModel.getBill_image() == null) {
             binding.image.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             binding.image.setVisibility(View.VISIBLE);
 
         }
@@ -335,13 +334,13 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         if (!orderModel.getOrder_type().equals("family")) {
             binding.tv1.setText(getResources().getString(R.string.market));
         }
-        Log.e("usuusu",user_lat+"  "+user_lng+ "  "+orderModel.getFrom_latitude()+" "+orderModel.getFrom_longitude()+" "+orderModel.getTo_latitude()+" "+orderModel.getTo_longitude());
-      if(user_lng==0.0){
-          user_lat=Double.parseDouble(userModel.getData().getTracker_fk().getLatitude());
-          user_lng=Double.parseDouble(userModel.getData().getTracker_fk().getLongitude());
+        Log.e("usuusu", user_lat + "  " + user_lng + "  " + orderModel.getFrom_latitude() + " " + orderModel.getFrom_longitude() + " " + orderModel.getTo_latitude() + " " + orderModel.getTo_longitude());
+        if (user_lng == 0.0) {
+            user_lat = Double.parseDouble(userModel.getData().getTracker_fk().getLatitude());
+            user_lng = Double.parseDouble(userModel.getData().getTracker_fk().getLongitude());
 
-      }
-        Log.e("ssssss",user_lat+"  "+user_lng+ "  "+orderModel.getFrom_latitude()+" "+orderModel.getFrom_longitude()+" "+orderModel.getTo_latitude()+" "+orderModel.getTo_longitude());
+        }
+        Log.e("ssssss", user_lat + "  " + user_lng + "  " + orderModel.getFrom_latitude() + " " + orderModel.getFrom_longitude() + " " + orderModel.getTo_latitude() + " " + orderModel.getTo_longitude());
 
         String ship = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()))) / 1000)), getString(R.string.km));
         String arrivew = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(Double.parseDouble(orderModel.getTo_latitude()), Double.parseDouble(orderModel.getTo_longitude()))) / 1000)), getString(R.string.km));
@@ -354,7 +353,7 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
 //                Double.parseDouble(orderModel.getTo_latitude()), Double.parseDouble(orderModel.getTo_longitude()), results);
         binding.tvlocationarrive.setText(arrivew);
         Log.e("llll", orderModel.getStatus());
-        if (orderModel.getStatus().equals("new") || orderModel.getStatus().equals("driver_accepted_order")|| orderModel.getStatus().equals("family_end_prepare_order")) {
+        if (orderModel.getStatus().equals("new") || orderModel.getStatus().equals("driver_accepted_order") || orderModel.getStatus().equals("family_end_prepare_order")) {
 
             binding.imgChat.setVisibility(View.GONE);
             binding.imgCall.setVisibility(View.GONE);
@@ -363,6 +362,8 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
             if (orderModel.getStatus().equals("driver_accepted_order")) {
                 binding.acceptBtn.setVisibility(View.GONE);
                 binding.viewStatusBtn.setVisibility(View.VISIBLE);
+                binding.imgChat.setVisibility(View.VISIBLE);
+                binding.imgCall.setVisibility(View.VISIBLE);
 
             }
 
@@ -392,8 +393,9 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         }
         preferences.clearorder(this);
     }
+
     public void showimage2(String image) {
-        imagePopup.initiatePopupWithPicasso(Tags.IMAGE_URL+image);
+        imagePopup.initiatePopupWithPicasso(Tags.IMAGE_URL + image);
         imagePopup.viewPopup();
 
     }

@@ -239,4 +239,5 @@
     <string name="market">Market</string>
     <string name="delivery_cost_tax">delivery cost tax:</string>
     <string name="ord_refused">order refused</string>
+    <string name="AnotherDriverAccepted">Another Driver Accepted</string>
 </resources>

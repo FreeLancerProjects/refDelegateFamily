@@ -81,72 +81,79 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
         binding.setBackListener(this);
         userModel = preferences.getUserData(this);
         binding.tvOrderReady.setOnClickListener(view -> {
-            ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
-            dialog.setCancelable(false);
-            dialog.show();
+            Log.e("e;ldlld", orderModel.getStatus());
 
-            Api.getService(Tags.base_url).driverchangeOrderstatus("Bearer " + userModel.getData().getToken(),
-                    orderModel.getId(), "driver_finished_collect_order").enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    dialog.dismiss();
-                    if (response.isSuccessful() && response.body() != null) {
-                        //        Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
-                        getOrderDetials();
-                        // finish();
-                    } else {
-                        Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                        try {
-                            Log.e("llllll", response.errorBody().string());
-                        } catch (Exception e) {
+            if (orderModel.getStatus().equals("family_give_order_to_driver")) {
+
+                ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+                dialog.setCancelable(false);
+                dialog.show();
+
+                Api.getService(Tags.base_url).driverchangeOrderstatus("Bearer " + userModel.getData().getToken(),
+                        orderModel.getId(), "driver_finished_collect_order").enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful() && response.body() != null) {
+                            //        Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
+                            getOrderDetials();
+                            // finish();
+                        } else {
+                            Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            try {
+                                Log.e("llllll", response.errorBody().string());
+                            } catch (Exception e) {
+                            }
                         }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    dialog.dismiss();
-                    Log.e("onFailure:", t.getMessage());
-                }
-            });
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        dialog.dismiss();
+                        Log.e("onFailure:", t.getMessage());
+                    }
+                });
+            }
+else{
 
-
+            }
         });
         binding.tvOrderReady2.setOnClickListener(view -> {
-
-            ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
-            dialog.setCancelable(false);
-            dialog.show();
-            Api.getService(Tags.base_url).driverchangeOrderstatus("Bearer " + userModel.getData().getToken(),
-                    orderModel.getId(), "driver_in_way").enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    dialog.dismiss();
-                    if (response.isSuccessful() && response.body() != null) {
-                        // Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
-                        getOrderDetials();
-                        // finish();
-                    } else {
-                        Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                        try {
-                            Log.e("llllll", response.errorBody().string());
-                        } catch (Exception e) {
+            Log.e("e;ldlld", orderModel.getStatus());
+                ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+                dialog.setCancelable(false);
+                dialog.show();
+                Api.getService(Tags.base_url).driverchangeOrderstatus("Bearer " + userModel.getData().getToken(),
+                        orderModel.getId(), "driver_in_way").enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful() && response.body() != null) {
+                            // Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.order_accepted), Toast.LENGTH_SHORT).show();
+                            getOrderDetials();
+                            // finish();
+                        } else {
+                            Toast.makeText(OrderStepsActivity.this, getResources().getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            try {
+                                Log.e("llllll", response.errorBody().string());
+                            } catch (Exception e) {
+                            }
                         }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    dialog.dismiss();
-                    Log.e("onFailure:", t.getMessage());
-                }
-            });
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        dialog.dismiss();
+                        Log.e("onFailure:", t.getMessage());
+                    }
+                });
+
 
 
         });
         binding.imgChat.setOnClickListener(view -> {
 
-            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(), orderModel.getClient().getLogo(), orderModel.getClient().getId() + "", orderModel.getDriver_chat().getId(),orderModel.getId());
+            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(), orderModel.getClient().getLogo(), orderModel.getClient().getId() + "", orderModel.getDriver_chat().getId(), orderModel.getId());
             Intent intent = new Intent(this, ChatActivity.class);
             intent.putExtra("chat_user_data", chatUserModel);
             startActivityForResult(intent, 1000);
@@ -266,9 +273,9 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
 
     private void updatedata(OrderModel body) {
         binding.setModel(body.getOrder());
-        orderModel=body.getOrder();
-        Log.e("dlldldl",orderModel.getStatus()+userModel.getData().getId()+" "+orderModel.getClient().getId());
-        if (body.getOrder().getStatus().equals("driver_accepted_order")) {
+        orderModel = body.getOrder();
+        Log.e("dlldldl", orderModel.getStatus() + userModel.getData().getId() + " " + orderModel.getClient().getId());
+        if (body.getOrder().getStatus().equals("driver_accepted_order")||body.getOrder().getStatus().equals("family_give_order_to_driver")) {
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.tvOrderReady.setVisibility(View.VISIBLE);
             binding.tvOrderReady2.setVisibility(View.GONE);
@@ -328,9 +335,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
             binding.tv5.setTextColor(getResources().getColor(R.color.black));
             binding.imgChat.setVisibility(View.GONE);
 
-        }
-
-else {
+        } else {
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.image2.setColorFilter(getResources().getColor(R.color.white));
             binding.image3.setColorFilter(getResources().getColor(R.color.white));
@@ -378,10 +383,12 @@ else {
             }
         }
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void listenToNewMessage(NotFireModel notFireModel) {
         getOrderDetials();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -390,6 +397,7 @@ else {
         }
         preferences.clearorder(this);
     }
+
     @Override
     public void back() {
         finish();
