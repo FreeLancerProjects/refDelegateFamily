@@ -57,7 +57,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
         }
 
         if (getSession().equals(Tags.session_login)) {
-               Log.e("sllslslls", "lslslsls");
+            Log.e("sllslslls", "lslslsls");
             if (map.get("to_user_id") != null) {
                 //     Log.e("sllslslls", "lslslsls");
 
@@ -67,8 +67,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
 
                     manageNotification(map);
                 }
-            }
-            else {
+            } else {
                 manageNotification(map);
             }
         }
@@ -125,20 +124,19 @@ public class FireBaseMessaging extends FirebaseMessagingService {
                 if (chat_user_id.equals(from_user_id + "")) {
                     EventBus.getDefault().post(messageModel);
                 } else {
-                    LoadChatImage(messageModel,order_id, from_user_name, sound_Path, 1);
+                    LoadChatImage(messageModel, order_id, from_user_name, sound_Path, 1);
                 }
 
 
             } else {
 
                 EventBus.getDefault().post(messageModel);
-                LoadChatImage(messageModel,order_id, from_user_name, sound_Path, 1);
+                LoadChatImage(messageModel, order_id, from_user_name, sound_Path, 1);
 
 
             }
 
-        }
-        else if (not_type.equals("driver_status")) {
+        } else if (not_type.equals("driver_status")) {
 
             String title = map.get("title");
             String body = map.get("body");
@@ -314,7 +312,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
 
     }
 
-    private void LoadChatImage(MessageModel messageModel,int order_id, String fromusername, String sound_path, int type) {
+    private void LoadChatImage(MessageModel messageModel, int order_id, String fromusername, String sound_path, int type) {
 
 
         Target target = new Target() {
@@ -323,10 +321,10 @@ public class FireBaseMessaging extends FirebaseMessagingService {
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
 
                 if (type == 1) {
-                    sendChatNotification_VersionNew(messageModel,order_id, fromusername, sound_path, bitmap);
+                    sendChatNotification_VersionNew(messageModel, order_id, fromusername, sound_path, bitmap);
 
                 } else {
-                    sendChatNotification_VersionOld(messageModel,order_id, fromusername, sound_path, bitmap);
+                    sendChatNotification_VersionOld(messageModel, order_id, fromusername, sound_path, bitmap);
 
                 }
             }
@@ -340,10 +338,10 @@ public class FireBaseMessaging extends FirebaseMessagingService {
                 Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_nav_notification);
 
                 if (type == 1) {
-                    sendChatNotification_VersionNew(messageModel,order_id, fromusername, sound_path, bitmap);
+                    sendChatNotification_VersionNew(messageModel, order_id, fromusername, sound_path, bitmap);
 
                 } else {
-                    sendChatNotification_VersionOld(messageModel,order_id, fromusername, sound_path, bitmap);
+                    sendChatNotification_VersionOld(messageModel, order_id, fromusername, sound_path, bitmap);
 
                 }
 
@@ -398,7 +396,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
                 if (chat_user_id.equals(from_user_id + "")) {
                     EventBus.getDefault().post(messageModel);
                 } else {
-                    LoadChatImage(messageModel,order_id, from_user_name, sound_Path, 0);
+                    LoadChatImage(messageModel, order_id, from_user_name, sound_Path, 0);
                 }
 
 
@@ -406,13 +404,12 @@ public class FireBaseMessaging extends FirebaseMessagingService {
 
 
                 EventBus.getDefault().post(messageModel);
-                LoadChatImage(messageModel,order_id, from_user_name, sound_Path, 0);
+                LoadChatImage(messageModel, order_id, from_user_name, sound_Path, 0);
 
 
             }
 
-        }
-        else if (not_type.equals("driver_status")) {
+        } else if (not_type.equals("driver_status")) {
 
             String title = map.get("title");
             String body = map.get("body");
@@ -465,8 +462,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
             }
 
 
-        }
-        else if (not_type.equals("order")) {
+        } else if (not_type.equals("order")) {
 
             String title = map.get("title");
             String body = map.get("message");
@@ -598,7 +594,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void sendChatNotification_VersionNew(MessageModel messageModel,int ordeid, String fromusername, String sound_path, Bitmap bitmap) {
+    private void sendChatNotification_VersionNew(MessageModel messageModel, int ordeid, String fromusername, String sound_path, Bitmap bitmap) {
 
 
         String CHANNEL_ID = "my_channel_02";
@@ -620,7 +616,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
         builder.setContentTitle(fromusername);
         builder.setLargeIcon(bitmap);
         Intent intent = new Intent(this, ChatActivity.class);
-        ChatUserModel chatUserModel = new ChatUserModel(fromusername, null, messageModel.getFrom_user_id() + "", Integer.parseInt(messageModel.getRoom_id()),ordeid);
+        ChatUserModel chatUserModel = new ChatUserModel(fromusername, null, messageModel.getFrom_user_id() + "", Integer.parseInt(messageModel.getRoom_id()), ordeid);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("chat_user_data", chatUserModel);
         intent.putExtra("from_fire", true);
@@ -645,7 +641,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
 
     }
 
-    private void sendChatNotification_VersionOld(MessageModel messageModel,int order_id, String fromusername, String sound_path, Bitmap bitmap) {
+    private void sendChatNotification_VersionOld(MessageModel messageModel, int order_id, String fromusername, String sound_path, Bitmap bitmap) {
 
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setSound(Uri.parse(sound_path), AudioManager.STREAM_NOTIFICATION);
@@ -653,7 +649,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
         builder.setContentTitle(fromusername);
 
         Intent intent = new Intent(this, ChatActivity.class);
-        ChatUserModel chatUserModel = new ChatUserModel(fromusername, null, messageModel.getFrom_user_id() + "", Integer.parseInt(messageModel.getRoom_id()),order_id);
+        ChatUserModel chatUserModel = new ChatUserModel(fromusername, null, messageModel.getFrom_user_id() + "", Integer.parseInt(messageModel.getRoom_id()), order_id);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("chat_user_data", chatUserModel);
         intent.putExtra("from_fire", true);
