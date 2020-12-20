@@ -240,4 +240,6 @@
     <string name="delivery_cost_tax">ضريبة القيمه المضافة : </string>
     <string name="ord_refused">تم رفض الطلب </string>
     <string name="AnotherDriverAccepted">تم الموافقه على الطلب من قبل سائق اخر</string>
+    <string name="total_products">اجمالى قيمة المنتجات :</string>
+
 </resources>

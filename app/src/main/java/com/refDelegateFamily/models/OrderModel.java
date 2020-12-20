@@ -23,7 +23,7 @@ public class OrderModel implements Serializable {
         private int driver_id;
         private int family_id;
         private int coupon_id;
-        private int bill_cost;
+        private double bill_cost;
         private String order_type;
         private String status;
         private String google_place_id;
@@ -37,7 +37,7 @@ public class OrderModel implements Serializable {
         private String to_longitude;
         private String to_address;
         private String to_name;
-        private String delivery_cost_tax;
+        private double delivery_cost_tax;
         private String order_description;
         private String order_nots;
         private String end_shipping_time;
@@ -77,7 +77,7 @@ public class OrderModel implements Serializable {
             return coupon_id;
         }
 
-        public int getBill_cost() {
+        public double getBill_cost() {
             return bill_cost;
         }
 
@@ -189,7 +189,7 @@ public class OrderModel implements Serializable {
             return delivery_cost;
         }
 
-        public String getDelivery_cost_tax() {
+        public double getDelivery_cost_tax() {
             return delivery_cost_tax;
         }
 

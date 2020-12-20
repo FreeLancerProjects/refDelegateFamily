@@ -229,7 +229,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
 
     private void update(OrderModel body) {
         this.orderModel = body;
-        if (body.getOrder().getBill_step().equals("not_attach")) {
+        if (body.getOrder().getBill_step().equals("not_attach")&&!body.getOrder().getOrder_type().equals("family")) {
             binding.llBill.setVisibility(View.VISIBLE);
         }
     }

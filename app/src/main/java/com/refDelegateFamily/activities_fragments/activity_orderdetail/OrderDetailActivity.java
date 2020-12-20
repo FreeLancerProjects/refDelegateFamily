@@ -334,7 +334,7 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         if (!orderModel.getOrder_type().equals("family")) {
             binding.tv1.setText(getResources().getString(R.string.market));
         }
-        Log.e("usuusu", user_lat + "  " + user_lng + "  " + orderModel.getFrom_latitude() + " " + orderModel.getFrom_longitude() + " " + orderModel.getTo_latitude() + " " + orderModel.getTo_longitude());
+     //   Log.e("usuusu", user_lat + "  " + user_lng + "  " + orderModel.getFrom_latitude() + " " + orderModel.getFrom_longitude() + " " + orderModel.getTo_latitude() + " " + orderModel.getTo_longitude());
         if (user_lng == 0.0) {
             user_lat = Double.parseDouble(userModel.getData().getTracker_fk().getLatitude());
             user_lng = Double.parseDouble(userModel.getData().getTracker_fk().getLongitude());
